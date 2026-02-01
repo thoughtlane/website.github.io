@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI-Powered Education Platform - Pitch Deck</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Calibri', 'Segoe UI', Tahoma, sans-serif;
+            background: #f8fafc;
+            overflow-x: hidden;
+        }
+        
+        .presentation-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .slide {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 40px;
+            scroll-margin-top: 0;
+        }
+        
+        .slide-number {
+            position: absolute;
+            bottom: 20px;
+            right: 40px;
+            color: rgba(255,255,255,0.6);
+            font-size: 14px;
+        }
+        
+        /* Slide 1: Title */
+        .slide-1 {
+            background: linear-gradient(135deg, #028090 0%, #00A896 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .slide-1 h1 {
+            font-size: 56px;
+            font-weight: bold;
+            margin-bottom: 30px;
+            line-height: 1.2;
+        }
+        
+        .slide-1 .subtitle {
+            font-size: 28px;
+            color: #02C39A;
+            margin-bottom: 60px;
+        }
+        
+        .slide-1 .products {
+            font-size: 18px;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        /* Slide 2: Problem */
+        .slide-2 {
+            background: #f8fafc;
+        }
+        
+        .slide-title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #1E293B;
+            margin-bottom: 40px;
+        }
+        
+        .problem-card {
+            background: white;
+            border-left: 6px solid #00A896;
+            padding: 25px 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .problem-card:hover {
+            transform: translateX(10px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+        }
+        
+        .problem-card h3 {
+            font-size: 24px;
+            color: #028090;
+            margin-bottom: 10px;
+        }
+        
+        .problem-card p {
+            font-size: 16px;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        /* Slide 3: Solution Overview */
+        .slide-3 {
+            background: #f8fafc;
+        }
+        
+        .solutions-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 40px;
+        }
+        
+        .solution-box {
+            padding: 40px 30px;
+            border-radius: 8px;
+            color: white;
+            min-height: 350px;
+        }
+        
+        .solution-box.math {
+            background: linear-gradient(135deg, #028090 0%, #006B7D 100%);
+        }
+        
+        .solution-box.editor {
+            background: linear-gradient(135deg, #00A896 0%, #008B7D 100%);
+        }
+        
+        .solution-box h3 {
+            font-size: 28px;
+            margin-bottom: 25px;
+        }
+        
+        .solution-box ul {
+            list-style: none;
+        }
+        
+        .solution-box li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .solution-box li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            color: #02C39A;
+        }
+        
+        /* Slide 4 & 5: Deep Dives */
+        .slide-4, .slide-5 {
+            background: #f8fafc;
+        }
+        
+        .slide-subtitle {
+            font-size: 22px;
+            color: #334155;
+            font-style: italic;
+            margin-bottom: 40px;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+            gap: 20px;
+        }
+        
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: #02C39A;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .feature-content h3 {
+            font-size: 22px;
+            color: #1E293B;
+            margin-bottom: 8px;
+        }
+        
+        .feature-content p {
+            font-size: 16px;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        /* Slide 6: Market */
+        .market-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin: 40px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border: 3px solid #028090;
+            padding: 30px;
+            text-align: center;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+        
+        .stat-card:hover {
+            transform: translateY(-10px);
+        }
+        
+        .stat-value {
+            font-size: 48px;
+            font-weight: bold;
+            color: #028090;
+            margin-bottom: 15px;
+        }
+        
+        .stat-label {
+            font-size: 15px;
+            color: #334155;
+            line-height: 1.4;
+        }
+        
+        .target-segments {
+            margin-top: 40px;
+        }
+        
+        .target-segments h3 {
+            font-size: 26px;
+            color: #1E293B;
+            margin-bottom: 20px;
+        }
+        
+        .target-segments ul {
+            list-style: none;
+        }
+        
+        .target-segments li {
+            padding: 12px 0;
+            padding-left: 30px;
+            position: relative;
+            font-size: 16px;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        .target-segments li:before {
+            content: "▶";
+            position: absolute;
+            left: 0;
+            color: #028090;
+        }
+        
+        /* Slide 7: Why Now */
+        .urgency-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 40px;
+            gap: 25px;
+        }
+        
+        .urgency-number {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .urgency-number.one { background: #028090; }
+        .urgency-number.two { background: #00A896; }
+        .urgency-number.three { background: #02C39A; }
+        
+        .urgency-content h3 {
+            font-size: 22px;
+            color: #1E293B;
+            margin-bottom: 10px;
+        }
+        
+        .urgency-content p {
+            font-size: 16px;
+            color: #334155;
+            line-height: 1.6;
+        }
+        
+        /* Slide 8: CTA */
+        .slide-8 {
+            background: linear-gradient(135deg, #028090 0%, #00A896 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .slide-8 h2 {
+            font-size: 52px;
+            font-weight: bold;
+            margin-bottom: 30px;
+        }
+        
+        .slide-8 .tagline {
+            font-size: 24px;
+            color: #02C39A;
+            margin-bottom: 50px;
+            line-height: 1.6;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: #02C39A;
+            color: #1E293B;
+            padding: 20px 50px;
+            font-size: 22px;
+            font-weight: bold;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 24px rgba(0,0,0,0.3);
+        }
+        
+        /* Navigation */
+        .nav-controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 1000;
+            background: rgba(30, 41, 59, 0.9);
+            padding: 15px 25px;
+            border-radius: 50px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+        }
+        
+        .nav-btn {
+            background: #028090;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-btn:hover {
+            background: #02C39A;
+            transform: scale(1.05);
+        }
+        
+        .nav-btn:disabled {
+            background: #64748B;
+            cursor: not-allowed;
+            opacity: 0.5;
+        }
+        
+        .slide-counter {
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slide-1 h1 { font-size: 36px; }
+            .slide-1 .subtitle { font-size: 20px; }
+            .slide-title { font-size: 32px; }
+            .solutions-grid { grid-template-columns: 1fr; }
+            .market-stats { grid-template-columns: 1fr; }
+            .nav-controls { 
+                bottom: 10px;
+                padding: 10px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation-container">
+        <!-- Slide 1: Title -->
+        <section class="slide slide-1" id="slide-1">
+            <h1>AI-Powered Education Platform</h1>
+            <div class="subtitle">Transforming Teaching with Intelligent Automation</div>
+            <div class="products">Math Solver & Generator | Scientific Editor</div>
+        </section>
+
+        <!-- Slide 2: Problem -->
+        <section class="slide slide-2" id="slide-2">
+            <h2 class="slide-title">The Challenge Educators Face</h2>
+            
+            <div class="problem-card">
+                <h3>70% of teacher time</h3>
+                <p>spent on administrative tasks and grading</p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>Limited one-on-one</h3>
+                <p>Less than 15 minutes per student per week</p>
+            </div>
+            
+            <div class="problem-card">
+                <h3>Manual question creation</h3>
+                <p>Hours wasted on repetitive test preparation</p>
+            </div>
+        </section>
+
+        <!-- Slide 3: Solution Overview -->
+        <section class="slide slide-3" id="slide-3">
+            <h2 class="slide-title">Our Solution: Two Powerful Tools</h2>
+            
+            <div class="solutions-grid">
+                <div class="solution-box math">
+                    <h3>Math Solver & Generator</h3>
+                    <ul>
+                        <li>AI-powered question generation</li>
+                        <li>Automatic grading & feedback</li>
+                        <li>Personalized learning paths</li>
+                        <li>Step-by-step solutions</li>
+                    </ul>
+                </div>
+                
+                <div class="solution-box editor">
+                    <h3>Scientific Editor</h3>
+                    <ul>
+                        <li>Real-time collaboration</li>
+                        <li>Version control & tracking</li>
+                        <li>Question bank management</li>
+                        <li>Multi-format export</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 4: Math Solver Deep Dive -->
+        <section class="slide slide-4" id="slide-4">
+            <h2 class="slide-title" style="color: #028090;">Math Solver & Generator</h2>
+            <p class="slide-subtitle">Automate the grunt work, focus on teaching</p>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <h3>Instant Question Generation</h3>
+                    <p>Create unlimited practice problems across difficulty levels in seconds</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <h3>Smart Auto-Grading</h3>
+                    <p>Evaluate student work automatically with detailed feedback and explanations</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">✓</div>
+                <div class="feature-content">
+                    <h3>Free Up 15+ Hours/Week</h3>
+                    <p>Redirect saved time to personalized student interaction and lesson planning</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 5: Scientific Editor Deep Dive -->
+        <section class="slide slide-5" id="slide-5">
+            <h2 class="slide-title" style="color: #00A896;">Scientific Editor</h2>
+            <p class="slide-subtitle">Modern collaboration for exam preparation</p>
+            
+            <div class="feature-item">
+                <div class="feature-icon">⚡</div>
+                <div class="feature-content">
+                    <h3>Web-Based & Cloud Native</h3>
+                    <p>Access from anywhere, automatic saves, no software installation required</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">👥</div>
+                <div class="feature-content">
+                    <h3>Multi-User Collaboration</h3>
+                    <p>Teachers, coordinators, and reviewers work together in real-time</p>
+                </div>
+            </div>
+            
+            <div class="feature-item">
+                <div class="feature-icon">📚</div>
+                <div class="feature-content">
+                    <h3>Centralized Question Bank</h3>
+                    <p>Search, reuse, and organize questions across subjects and grade levels</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 6: Market Opportunity -->
+        <section class="slide slide-6" id="slide-6">
+            <h2 class="slide-title">Market Opportunity</h2>
+            
+            <div class="market-stats">
+                <div class="stat-card">
+                    <div class="stat-value">$404B</div>
+                    <div class="stat-label">Global EdTech Market by 2025</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">18.3%</div>
+                    <div class="stat-label">Expected CAGR (2020-2025)</div>
+                </div>
+                
+                <div class="stat-card">
+                    <div class="stat-value">50M+</div>
+                    <div class="stat-label">K-12 Teachers Worldwide</div>
+                </div>
+            </div>
+            
+            <div class="target-segments">
+                <h3>Target Segments</h3>
+                <ul>
+                    <li>K-12 Schools & Districts (Primary): 130,000+ schools in US alone</li>
+                    <li>Test Prep Companies: Growing $12B market segment</li>
+                    <li>Private Tutoring Centers: Expanding 15% annually</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Slide 7: Why Now -->
+        <section class="slide slide-7" id="slide-7">
+            <h2 class="slide-title">Why This Matters Now</h2>
+            
+            <div class="urgency-item">
+                <div class="urgency-number one">1</div>
+                <div class="urgency-content">
+                    <h3>Teacher Shortage Crisis</h3>
+                    <p>300,000+ teacher vacancies in US. AI tools help existing teachers do more with less.</p>
+                </div>
+            </div>
+            
+            <div class="urgency-item">
+                <div class="urgency-number two">2</div>
+                <div class="urgency-content">
+                    <h3>Post-Pandemic Learning Gaps</h3>
+                    <p>Students need personalized attention to catch up. Teachers need tools to scale 1:1 support.</p>
+                </div>
+            </div>
+            
+            <div class="urgency-item">
+                <div class="urgency-number three">3</div>
+                <div class="urgency-content">
+                    <h3>AI Integration Wave</h3>
+                    <p>Schools are actively seeking AI solutions. First movers will establish market leadership.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Slide 8: Call to Action -->
+        <section class="slide slide-8" id="slide-8">
+            <h2>Transform Education Together</h2>
+            <div class="tagline">Empower teachers to spend more time teaching,<br>less time on administrative work</div>
+            <a href="#contact" class="cta-button">Let's discuss how we can help your institution</a>
+        </section>
+    </div>
+
+    <!-- Navigation Controls -->
+    <div class="nav-controls">
+        <button class="nav-btn" id="prevBtn" onclick="prevSlide()">← Previous</button>
+        <span class="slide-counter">
+            <span id="currentSlide">1</span> / <span id="totalSlides">8</span>
+        </span>
+        <button class="nav-btn" id="nextBtn" onclick="nextSlide()">Next →</button>
+    </div>
+
+    <script>
+        let currentSlideNum = 1;
+        const totalSlides = 8;
+
+        function updateSlide() {
+            document.getElementById('currentSlide').textContent = currentSlideNum;
+            
+            // Scroll to slide
+            const slide = document.getElementById(`slide-${currentSlideNum}`);
+            slide.scrollIntoView({ behavior: 'smooth' });
+            
+            // Update button states
+            document.getElementById('prevBtn').disabled = currentSlideNum === 1;
+            document.getElementById('nextBtn').disabled = currentSlideNum === totalSlides;
+        }
+
+        function nextSlide() {
+            if (currentSlideNum < totalSlides) {
+                currentSlideNum++;
+                updateSlide();
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlideNum > 1) {
+                currentSlideNum--;
+                updateSlide();
+            }
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+                nextSlide();
+            } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        document.getElementById('totalSlides').textContent = totalSlides;
+        updateSlide();
+    </script>
+</body>
+</html>
