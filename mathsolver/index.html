@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Solver – AI-Powered Step-by-Step Math from Images &amp; PDFs</title>
+  <meta name="description" content="Turn math worksheets and PDFs into solved, step-by-step solutions. Multi-agent AI with coordinator for reliable answers. Built for educators, publishers, and EdTech." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <a href="#" class="logo">Math Solver</a>
+      <nav class="nav">
+        <a href="#how-it-works">How it works</a>
+        <a href="#features">Features</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#technology">Technology</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>From worksheet to solution in minutes</h1>
+        <p class="hero-lead">Upload a math sheet—image or PDF—and get structured questions plus step-by-step solutions. Multi-agent AI and a coordinator ensure consistent, explainable answers you can trust.</p>
+        <div class="hero-cta">
+          <a href="#how-it-works" class="btn btn-primary">See how it works</a>
+          <a href="#features" class="btn btn-secondary">Features</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro" id="what-it-is">
+      <div class="wrap">
+        <h2>What is Math Solver?</h2>
+        <p class="intro-text">Math Solver is an AI-powered pipeline for education and content teams. It takes raw input—photos of handwritten or printed math, or PDF question papers—and returns:</p>
+        <ul class="intro-list">
+          <li><strong>Extracted questions</strong> in structured form (LaTeX, multiple choice, labels)</li>
+          <li><strong>Step-by-step solutions</strong> for each question, with a final answer</li>
+          <li><strong>Consensus-based results</strong> from multiple AI agents, compared by a coordinator</li>
+          <li><strong>Similar questions</strong> generated on demand for practice or assessment</li>
+        </ul>
+        <p class="intro-note">All calculations go through a dedicated math utility—no “mental math” from the model—so numeric answers are precise and auditable.</p>
+      </div>
+    </section>
+
+    <section class="pipeline" id="how-it-works">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="section-lead">A single upload kicks off a clear pipeline: minimize for cost, extract with vision AI, then solve with multiple agents and a coordinator.</p>
+        <div class="pipeline-steps">
+          <div class="step">
+            <span class="step-num">1</span>
+            <h3>Upload</h3>
+            <p>Upload an image (JPEG, PNG, WebP) or PDF of a math question sheet. Use the Solver page or the Dashboard to organize files by topic, grade, or test.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">2</span>
+            <h3>Minimize</h3>
+            <p>Images are resized and compressed to cut token usage while keeping content readable. PDFs are rendered to images per page.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">3</span>
+            <h3>Extract</h3>
+            <p>Vision AI (Claude) reads the sheet and returns a list of questions: LaTeX for the problem, optional multiple-choice options and labels, and flags like <code>expectDecimal</code>.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">4</span>
+            <h3>Solve (multi-agent)</h3>
+            <p>Each question is solved by <em>N</em> agents in parallel. Each agent produces step-by-step reasoning and a final answer. All numeric work is done by a math utility—no model arithmetic.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">5</span>
+            <h3>Coordinator</h3>
+            <p>A coordinator compares agent answers and step counts. If they agree, the result is accepted. If not, extra rounds (configurable) can run. All agent and coordinator outputs are stored for audit and display.</p>
+          </div>
+          <div class="step">
+            <span class="step-num">6</span>
+            <h3>Results &amp; export</h3>
+            <p>View solutions per question and in a Results summary. Export to PDF or DOCX. Reopen any job later—results and steps load from storage so you don’t re-solve.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="wrap">
+        <h2>Features</h2>
+        <p class="section-lead">Built for reliability, transparency, and integration into your workflow.</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Image &amp; PDF input</h3>
+            <p>Support for JPEG, PNG, WebP, and PDF. Handwritten or printed; single page or multi-page. Optional folder structure (e.g. Topic/Grade/Month) for organizing uploads and jobs.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Structured extraction</h3>
+            <p>Questions are stored as JSON with LaTeX, optional choices and choice labels, and metadata. Same structure whether you upload from the Solver page or the Dashboard.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Multi-agent solver</h3>
+            <p>Configurable number of agents per question. Each agent uses the same math tool; the coordinator only accepts consensus, reducing single-model errors.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Step-by-step solutions</h3>
+            <p>Every solution includes numbered steps and a final answer. Steps are parsed and displayed in the UI and in exports (PDF/DOCX). Human-readable fractions and symbols, not raw LaTeX.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Similar questions</h3>
+            <p>Generate similar questions for any extracted item. Useful for practice sets, alternate forms, or item banks. Stored per job and viewable in the app.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Dashboard &amp; jobs</h3>
+            <p>Dashboard for uploads, jobs (questions), and steps. Filter jobs by source file, rename files/folders with automatic relinking of jobs. Delete jobs or files with cascade cleanup.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Export</h3>
+            <p>Download results as PDF (from rendered UI) or as editable DOCX. LaTeX in content is converted to readable text (e.g. 1/3, ×, √) in exports.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Configurable models</h3>
+            <p>Use different models for extraction vs. solving (e.g. Opus for vision extraction, Sonnet for solving). Prompts are externalized in YAML for tuning without code changes.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="use-cases" id="use-cases">
+      <div class="wrap">
+        <h2>Use cases</h2>
+        <p class="section-lead">From classroom materials to item banks and platform integrations.</p>
+        <div class="use-case-grid">
+          <div class="use-case">
+            <h3>Educators &amp; tutors</h3>
+            <p>Turn existing worksheets or past papers into solved keys with steps. Share solutions or similar questions for practice without reworking content by hand.</p>
+          </div>
+          <div class="use-case">
+            <h3>Publishers &amp; content teams</h3>
+            <p>Scale solution authoring for textbooks and digital products. Keep LaTeX and structure; generate solutions and variants from scans or PDFs.</p>
+          </div>
+          <div class="use-case">
+            <h3>EdTech platforms</h3>
+            <p>Integrate via API: upload → extract → solve. Use job IDs and stored results to show solutions in your own UI or to power adaptive practice.</p>
+          </div>
+          <div class="use-case">
+            <h3>Assessment &amp; item banks</h3>
+            <p>Maintain question banks with structured data. Generate similar items and solution keys; export to DOCX or PDF for print or LMS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="technology" id="technology">
+      <div class="wrap">
+        <h2>Technology</h2>
+        <p class="section-lead">Designed for accuracy, auditability, and deployment.</p>
+        <ul class="tech-list">
+          <li><strong>Vision &amp; language</strong> — Claude (Anthropic) for image extraction and for agent reasoning. Optional split: e.g. Opus for extraction, Sonnet for solving.</li>
+          <li><strong>Math utility</strong> — All numeric calculations (arithmetic, fractions, roots, trig) run in a dedicated math utility. The model only reasons and calls the tool; no mental arithmetic.</li>
+          <li><strong>Multi-agent + coordinator</strong> — N agents per question; coordinator compares answers and step counts. Configurable rounds and agent count.</li>
+          <li><strong>Storage</strong> — Questions, steps, and similar-question data stored on disk (or bind-mounted in Docker). Folder structure mirrors uploads for easy organization.</li>
+          <li><strong>API &amp; real-time</strong> — REST API for upload, solve, results, usage. Socket.IO for live progress (minimize, extract, solve, agent/coordinator updates).</li>
+          <li><strong>Deployment</strong> — Node.js server; Vite frontend. Dockerfile and docker-compose for single-image deployment with client build included.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="cta">
+      <div class="wrap">
+        <h2>Get started</h2>
+        <p>Math Solver is open for integration and customization. Run it locally, in Docker, or embed the pipeline into your own stack.</p>
+        <p class="cta-links">
+          <a href="../Readme.md" class="btn btn-primary">Read the docs</a>
+          <a href="../docs/ARCHITECTURE.md" class="btn btn-secondary">Architecture</a>
+          <a href="../client/" class="btn btn-secondary">Try the app</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>Math Solver – AI-powered step-by-step math from images and PDFs. Built for educators, publishers, and EdTech.</p>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Scientific Editor — A Google Docs–like editor with inline math equations, instant solve, and export. Write and simplify math in one place." />
+  <title>Scientific Editor — Write, Solve & Share Math</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a href="#" class="logo">
+        <span class="logo-icon">∑</span>
+        <span class="logo-text">Scientific Editor</span>
+      </a>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#how-it-works">How it works</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#try" class="btn btn-primary">Try it free</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Write, solve, and share math in one place</h1>
+        <p class="hero-subtitle">A Google Docs–like editor built for STEM. Insert equations inline, simplify them instantly with one click, and export to PDF — no plugins, no switching apps.</p>
+        <div class="hero-cta">
+          <a href="#try" class="btn btn-primary btn-lg">Try Scientific Editor</a>
+          <a href="#features" class="btn btn-secondary btn-lg">See features</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section problem-solution">
+      <div class="container">
+        <h2 class="section-title">Why Scientific Editor?</h2>
+        <p class="section-lead">Students and educators juggle word processors, equation editors, and calculators. Scientific Editor brings <strong>text + math + solve + export</strong> into a single, familiar document experience.</p>
+        <div class="two-col">
+          <div class="card card-muted">
+            <h3>Without Scientific Editor</h3>
+            <ul>
+              <li>Type in Word, paste equations from another tool</li>
+              <li>Copy expressions into a calculator or CAS to solve</li>
+              <li>Re-export or screenshot for PDF handouts</li>
+            </ul>
+          </div>
+          <div class="card card-highlight">
+            <h3>With Scientific Editor</h3>
+            <ul>
+              <li>Write prose and equations in the same document</li>
+              <li>Click <strong>Solve</strong> to simplify or evaluate any equation</li>
+              <li>Export to PDF or image with one click</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section features">
+      <div class="container">
+        <h2 class="section-title">Features in detail</h2>
+        <p class="section-lead">Everything you need to create, edit, and share scientific documents.</p>
+
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">∑</div>
+            <h3>Math and text in one document</h3>
+            <p>Insert LaTeX-style equations inline with your text. No separate equation editor window — equations live right where you write, just like in Google Docs.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⌨</div>
+            <h3>Math virtual keyboard</h3>
+            <p>Click any equation to edit it. A built-in math keyboard appears so you can type symbols, fractions, roots, and more without memorizing LaTeX.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">=</div>
+            <h3>Instant solve & simplify</h3>
+            <p>Focus an equation and click <strong>Solve</strong> (or press F9). The editor uses the MathLive Compute Engine to simplify, evaluate, and show the result in a popover — ideal for homework and step-checking.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">B I U</div>
+            <h3>Rich text editing</h3>
+            <p>Font family, size, bold, italic, underline, text color, and highlight. Format your document the way you want, with full keyboard shortcuts (e.g. ⌘B, ⌘I, ⌘U).</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📄</div>
+            <h3>Export to PDF & image</h3>
+            <p>Export your document as a multi-page PDF (one page per editor page) or as a single PNG image. Perfect for submissions, handouts, and sharing.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">📁</div>
+            <h3>Files & folders</h3>
+            <p>Save and open documents from the sidebar. Organize with folders, search files by name, and switch between list and tile views. Your work stays organized.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">🌓</div>
+            <h3>Light, dark & sepia</h3>
+            <p>Choose a theme that fits your environment. Light for daytime, dark for late-night work, sepia for a softer look. Your preference is remembered.</p>
+          </article>
+
+          <article class="feature-card">
+            <div class="feature-icon">⌘</div>
+            <h3>Keyboard shortcuts</h3>
+            <p>New page (⌘⇧N), insert equation (Alt+=), solve (F9), export PDF (⌘⇧P), export image (⌘⇧E), save (⌘S). Work faster without leaving the keyboard.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works" class="section how-it-works">
+      <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <ol class="steps">
+          <li><strong>Create or open a document</strong> — Start from the sidebar or open an existing file.</li>
+          <li><strong>Write text and insert equations</strong> — Use the ∑ Math button or Alt+= to add an equation; edit with the math keyboard.</li>
+          <li><strong>Solve when you need it</strong> — Click inside an equation and press Solve (or F9) to simplify or evaluate.</li>
+          <li><strong>Export or save</strong> — Save to your library, or export to PDF/image for sharing.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section id="use-cases" class="section use-cases">
+      <div class="container">
+        <h2 class="section-title">Built for</h2>
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <h3>Students</h3>
+            <p>Write homework and reports with inline math, check answers with Solve, and export clean PDFs for submission.</p>
+          </div>
+          <div class="use-case-card">
+            <h3>Teachers</h3>
+            <p>Prepare worksheets and notes in one document, simplify expressions for keys, and export handouts or slides as PDF or images.</p>
+          </div>
+          <div class="use-case-card">
+            <h3>Researchers & professionals</h3>
+            <p>Draft technical notes and reports with equations and rich text, then export for sharing or printing.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section tech">
+      <div class="container">
+        <h2 class="section-title">Powered by</h2>
+        <p class="section-lead">Scientific Editor is built on <a href="https://mathlive.io/" target="_blank" rel="noopener">MathLive</a> for the math field and virtual keyboard, and the <a href="https://mathlive.io/compute-engine/" target="_blank" rel="noopener">MathLive Compute Engine</a> for symbolic simplification and evaluation. No proprietary lock-in — standard LaTeX and open tooling.</p>
+      </div>
+    </section>
+
+    <section id="try" class="section cta-section">
+      <div class="container">
+        <h2 class="section-title">Ready to try?</h2>
+        <p class="section-lead">Run Scientific Editor locally or host it yourself. No account required.</p>
+        <div class="cta-box">
+          <pre class="code-block"><code>npm install
+npm start</code></pre>
+          <p>Then open <strong>http://localhost:3000</strong> in your browser.</p>
+          <a href="/" id="editor-link" class="btn btn-primary btn-lg">Open the editor</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Scientific Editor — Google Docs–like editor with math equations and solve support.</p>
+      <p class="footer-links">
+        <a href="https://mathlive.io/" target="_blank" rel="noopener">MathLive</a>
+        <a href="https://mathlive.io/compute-engine/" target="_blank" rel="noopener">Compute Engine</a>
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
