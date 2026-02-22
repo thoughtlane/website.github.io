@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thoughtlane — Investor Pitch Deck</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0d6b8a;
+      --accent: #0ea88c;
+      --accent-light: #2dd4bf;
+      --dark: #0f172a;
+      --muted: #94a3b8;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'DM Sans', sans-serif;
+      background: var(--dark);
+      color: #f1f5f9;
+    }
+    h1, h2, .slide-title { font-family: 'Fraunces', serif; }
+
+    .deck { position: relative; width: 100%; height: 100%; }
+    .slide {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: clamp(2rem, 5vw, 4rem) clamp(2.5rem, 6vw, 6rem);
+      visibility: hidden;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .slide.active {
+      visibility: visible;
+      opacity: 1;
+      pointer-events: auto;
+      z-index: 1;
+    }
+
+    .slide.transition-in { animation: slideIn 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+    .slide.transition-out { animation: slideOut 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateX(80px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideOut {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(-60px); }
+    }
+    .slide.transition-in.prev { animation: slideInFromLeft 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards; }
+    .slide.transition-out.prev { animation: slideOutToRight 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards; }
+    @keyframes slideInFromLeft {
+      from { opacity: 0; transform: translateX(-80px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes slideOutToRight {
+      from { opacity: 1; transform: translateX(0); }
+      to { opacity: 0; transform: translateX(60px); }
+    }
+    .slide.fade-in { animation: fadeIn 0.5s ease forwards; }
+    .slide.fade-out { animation: fadeOut 0.4s ease forwards; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
+
+    /* Full-page content: fill viewport */
+    .slide-inner {
+      width: 100%;
+      max-width: 1100px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    .slide-inner.left { align-items: flex-start; text-align: left; }
+    .slide-inner.tight { max-width: 900px; }
+
+    /* Airbnb/Uber style: one big title per slide */
+    .slide-title {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      color: #fff;
+      margin-bottom: 0.5em;
+    }
+    .slide-sub {
+      font-size: clamp(1.25rem, 2.5vw, 1.85rem);
+      line-height: 1.5;
+      color: var(--muted);
+      max-width: 720px;
+    }
+    .slide-sub.accent { color: var(--accent-light); }
+
+    /* List slides */
+    .slide ul {
+      margin: 1.25em 0 0 1.5em;
+      padding: 0;
+      list-style: none;
+      font-size: clamp(1.1rem, 2vw, 1.5rem);
+      line-height: 1.8;
+      color: var(--muted);
+    }
+    .slide ul li { position: relative; padding-left: 1em; margin-bottom: 0.6em; }
+    .slide ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-light); }
+
+    /* Stats / market */
+    .stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: clamp(1.5rem, 3vw, 2.5rem);
+      margin-top: clamp(1.5rem, 4vw, 3rem);
+      width: 100%;
+      max-width: 900px;
+    }
+    .stat-box {
+      text-align: center;
+      padding: 1.25rem;
+    }
+    .stat-value {
+      font-family: Fraunces, serif;
+      font-size: clamp(2.25rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      color: var(--accent-light);
+      line-height: 1.1;
+    }
+    .stat-label { font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--muted); margin-top: 0.35rem; }
+
+    /* Differentiators */
+    .diff-list { width: 100%; max-width: 700px; margin-top: 1.5rem; }
+    .diff-item {
+      background: rgba(255,255,255,0.05);
+      border-left: 4px solid var(--accent-light);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1rem;
+      border-radius: 0 12px 12px 0;
+      font-size: clamp(1.1rem, 2vw, 1.4rem);
+      color: #e2e8f0;
+      line-height: 1.5;
+    }
+    .diff-item strong { color: #fff; }
+
+    /* Products grid */
+    .product-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.25rem;
+      margin-top: 1.5rem;
+      width: 100%;
+      max-width: 960px;
+    }
+    .product-card {
+      background: rgba(255,255,255,0.06);
+      border-radius: 12px;
+      padding: 1.25rem 1.5rem;
+      border-left: 4px solid var(--accent);
+      text-align: left;
+    }
+    .product-card h4 { font-size: clamp(1.1rem, 1.8vw, 1.35rem); margin-bottom: 0.4rem; color: #fff; }
+    .product-card p { font-size: clamp(0.95rem, 1.4vw, 1.1rem); margin: 0; color: var(--muted); line-height: 1.5; }
+
+    /* Pills */
+    .pills { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; }
+    .pill {
+      background: rgba(14,168,140,0.2);
+      color: var(--accent-light);
+      padding: 0.6rem 1.25rem;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: clamp(1rem, 1.5vw, 1.25rem);
+    }
+
+    /* Contact / CTA */
+    .cta-link { color: var(--accent-light); text-decoration: none; font-weight: 600; font-size: clamp(1.2rem, 2vw, 1.5rem); }
+    .cta-link:hover { text-decoration: underline; }
+
+    .slide-num { position: fixed; top: 1.25rem; right: 1.5rem; font-size: 0.9rem; color: var(--muted); z-index: 10; }
+    .progress-dots {
+      position: fixed; bottom: 1.25rem; left: 50%; transform: translateX(-50%);
+      display: flex; gap: 0.5rem; z-index: 10;
+    }
+    .progress-dots span {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(255,255,255,0.25);
+      transition: background 0.3s, transform 0.3s;
+    }
+    .progress-dots span.active { background: var(--accent-light); transform: scale(1.3); }
+    .nav-hint { position: fixed; bottom: 1.25rem; right: 1.5rem; font-size: 0.8rem; color: var(--muted); z-index: 10; }
+
+    .citation { font-size: clamp(0.85rem, 1.2vw, 1rem); color: var(--muted); margin-top: 1.5rem; }
+  </style>
+</head>
+<body>
+  <div class="deck" id="deck">
+
+    <!-- 1: Title (Airbnb style: logo + one line) -->
+    <section class="slide active" data-slide="1">
+      <div class="slide-inner">
+        <img src="thoughtlanelogo.png" alt="Thoughtlane" style="max-width: clamp(160px, 18vw, 220px); margin-bottom: 1.5rem;">
+        <h1 class="slide-title">Thoughtlane</h1>
+        <p class="slide-sub accent">AI-Ready EdTech for the Future of Learning</p>
+        <p class="slide-sub" style="margin-top: 1.5rem; font-size: 1rem;">Pitch for Investors & Incubators</p>
+      </div>
+    </section>
+
+    <!-- 2: Problem (big headline) -->
+    <section class="slide" data-slide="2">
+      <div class="slide-inner left tight">
+        <h2 class="slide-title">The Problem</h2>
+        <p class="slide-sub" style="margin-bottom: 1rem;">Education is not ready for the AI era.</p>
+        <ul>
+          <li>LLMs are probabilistic — wrong answers break trust in EdTech.</li>
+          <li>Students need reliable practice and evaluation, not guesswork.</li>
+          <li>Math and science content is hard to create, collaborate on, and keep accurate.</li>
+          <li>Educators need tools that scale without sacrificing quality.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 3: Solution -->
+    <section class="slide" data-slide="3">
+      <div class="slide-inner">
+        <h2 class="slide-title">Our Solution</h2>
+        <p class="slide-sub">We build AI-ready EdTech that is reliable, accurate, and built for the entire education industry — from tutors to universities.</p>
+      </div>
+    </section>
+
+    <!-- 4: Why Now -->
+    <section class="slide" data-slide="4">
+      <div class="slide-inner">
+        <h2 class="slide-title">Why Now</h2>
+        <p class="slide-sub">Humanity is going through a paradigm shift with AI. This is the time to get students ready for the AI era so they can fare better in the future.</p>
+      </div>
+    </section>
+
+    <!-- 5: Market Size & Opportunity -->
+    <section class="slide" data-slide="5">
+      <div class="slide-inner">
+        <h2 class="slide-title">Market Size & Opportunity</h2>
+        <p class="slide-sub">North America leads global EdTech adoption. The opportunity is large and growing.</p>
+        <div class="stat-grid">
+          <div class="stat-box">
+            <div class="stat-value">$108B+</div>
+            <div class="stat-label">Global EdTech 2024</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">14.3%</div>
+            <div class="stat-label">CAGR to 2034</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">$411B</div>
+            <div class="stat-label">Projected 2034</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">$74B</div>
+            <div class="stat-label">USA market 2024</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">12.6%</div>
+            <div class="stat-label">USA CAGR</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">35–37%</div>
+            <div class="stat-label">North America share</div>
+          </div>
+        </div>
+        <p class="citation">Sources: Future Market Insights, IMARC Group, Technavio</p>
+      </div>
+    </section>
+
+    <!-- 6: Key Differentiators -->
+    <section class="slide" data-slide="6">
+      <div class="slide-inner left tight">
+        <h2 class="slide-title">Key Differentiators</h2>
+        <p class="slide-sub" style="margin-bottom: 0.5rem;">What sets us apart from existing AI solutions.</p>
+        <div class="diff-list">
+          <div class="diff-item">
+            <strong>We guarantee solution correctness.</strong> None of the existing AI solutions can guarantee this. Our question/solution generator delivers accurate answers reliably — no probabilistic guesswork.
+          </div>
+          <div class="diff-item">
+            <strong>Easier collaboration with an advanced scientific editor on the web.</strong> We enable teams to create, edit, and maintain math and scientific content together in one place — no more juggling documents and equation tools.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7: Products -->
+    <section class="slide" data-slide="7">
+      <div class="slide-inner left">
+        <h2 class="slide-title">Products</h2>
+        <p class="slide-sub" style="margin-bottom: 0.5rem;">AI-ready tools for the full learning lifecycle.</p>
+        <div class="product-grid">
+          <div class="product-card">
+            <h4>Question/Solution Generator</h4>
+            <p>Reliable question papers with guaranteed accurate solutions — no LLM guesswork.</p>
+          </div>
+          <div class="product-card">
+            <h4>Evaluation & Correction</h4>
+            <p>Correct and evaluate student submissions with precision.</p>
+          </div>
+          <div class="product-card">
+            <h4>CognitiveBooster</h4>
+            <p>Step-by-step learning so students understand, not just get answers.</p>
+          </div>
+          <div class="product-card">
+            <h4>ScientificEditor</h4>
+            <p>Web-based editor for math and scientific content. Collaborate and maintain easily.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 8: Target Market -->
+    <section class="slide" data-slide="8">
+      <div class="slide-inner">
+        <h2 class="slide-title">Target Market</h2>
+        <p class="slide-sub">The entire education industry</p>
+        <div class="pills">
+          <span class="pill">Individual Tutors</span>
+          <span class="pill">Math Institutes</span>
+          <span class="pill">Schools</span>
+          <span class="pill">Colleges</span>
+          <span class="pill">Universities</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9: Ask -->
+    <section class="slide" data-slide="9">
+      <div class="slide-inner">
+        <h2 class="slide-title">What We're Looking For</h2>
+        <p class="slide-sub" style="margin-bottom: 1.5rem;">Customers who want to use our products. Investors who want to partner with us.</p>
+        <div class="stat-grid" style="max-width: 600px;">
+          <div class="stat-box">
+            <div class="stat-value" style="font-size: clamp(1.75rem, 3vw, 2.25rem);">Customers</div>
+            <div class="stat-label">Educators & institutions</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value" style="font-size: clamp(1.75rem, 3vw, 2.25rem);">Investors</div>
+            <div class="stat-label">Partners in the future of education</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10: Contact -->
+    <section class="slide" data-slide="10">
+      <div class="slide-inner">
+        <h2 class="slide-title">Let's Talk</h2>
+        <p class="slide-sub" style="margin-top: 1rem;"><a href="mailto:info@thoughtlane.com" class="cta-link">info@thoughtlane.com</a></p>
+        <p style="margin-top: 2rem;"><a href="index.html" class="cta-link">← Back to Thoughtlane</a></p>
+      </div>
+    </section>
+  </div>
+
+  <div class="slide-num" id="slideNum">1 / 10</div>
+  <div class="progress-dots" id="dots"></div>
+  <div class="nav-hint">← → or Space</div>
+
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    const total = slides.length;
+    let current = 0;
+    let transitioning = false;
+    const dotsEl = document.getElementById('dots');
+    const slideNumEl = document.getElementById('slideNum');
+
+    for (let i = 0; i < total; i++) {
+      const dot = document.createElement('span');
+      dot.setAttribute('data-index', i);
+      dot.classList.toggle('active', i === 0);
+      dot.addEventListener('click', () => goTo(i));
+      dotsEl.appendChild(dot);
+    }
+
+    function updateUI() {
+      slides.forEach((s) => s.classList.remove('active'));
+      slides[current].classList.add('active');
+      document.querySelectorAll('.progress-dots span').forEach((d, i) => d.classList.toggle('active', i === current));
+      slideNumEl.textContent = (current + 1) + ' / ' + total;
+    }
+
+    function transitionTo(nextIndex, dir) {
+      if (transitioning || nextIndex === current || nextIndex < 0 || nextIndex >= total) return;
+      transitioning = true;
+      const outSlide = slides[current];
+      const inSlide = slides[nextIndex];
+      const useFade = (current === 0 || nextIndex === 0);
+      const goingPrev = dir === -1;
+
+      if (useFade) outSlide.classList.add('fade-out');
+      else { outSlide.classList.add('transition-out'); if (goingPrev) outSlide.classList.add('prev'); }
+      const outDuration = useFade ? 400 : 500;
+
+      setTimeout(() => {
+        outSlide.classList.remove('active', 'transition-out', 'fade-out', 'prev');
+        current = nextIndex;
+        inSlide.classList.add('active');
+        if (useFade) inSlide.classList.add('fade-in');
+        else { inSlide.classList.add('transition-in'); if (goingPrev) inSlide.classList.add('prev'); }
+        const inDuration = useFade ? 500 : 600;
+        setTimeout(() => {
+          inSlide.classList.remove('transition-in', 'fade-in', 'prev');
+          transitioning = false;
+        }, inDuration);
+        updateUI();
+      }, outDuration);
+    }
+
+    function goTo(index) {
+      if (index < 0 || index >= total) return;
+      transitionTo(index, index > current ? 1 : -1);
+    }
+
+    function next() { if (current < total - 1) transitionTo(current + 1, 1); }
+    function prev() { if (current > 0) transitionTo(current - 1, -1); }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') { e.preventDefault(); next(); }
+      if (e.key === 'ArrowLeft' || e.key === 'PageUp') { e.preventDefault(); prev(); }
+    });
+
+    document.getElementById('deck').addEventListener('click', (e) => {
+      if (e.target.closest('.progress-dots') || e.target.closest('.cta-link')) return;
+      const w = window.innerWidth;
+      if (e.clientX > w * 0.6) next();
+      else if (e.clientX < w * 0.4) prev();
+    });
+
+    updateUI();
+  </script>
+</body>
+</html>

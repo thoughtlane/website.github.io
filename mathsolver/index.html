@@ -165,28 +165,10 @@
       <div class="wrap">
         <h2>Technology</h2>
         <p class="section-lead">Designed for accuracy, auditability, and deployment.</p>
-        <ul class="tech-list">
-          <li><strong>Vision &amp; language</strong> — Claude (Anthropic) for image extraction and for agent reasoning. Optional split: e.g. Opus for extraction, Sonnet for solving.</li>
-          <li><strong>Math utility</strong> — All numeric calculations (arithmetic, fractions, roots, trig) run in a dedicated math utility. The model only reasons and calls the tool; no mental arithmetic.</li>
-          <li><strong>Multi-agent + coordinator</strong> — N agents per question; coordinator compares answers and step counts. Configurable rounds and agent count.</li>
-          <li><strong>Storage</strong> — Questions, steps, and similar-question data stored on disk (or bind-mounted in Docker). Folder structure mirrors uploads for easy organization.</li>
-          <li><strong>API &amp; real-time</strong> — REST API for upload, solve, results, usage. Socket.IO for live progress (minimize, extract, solve, agent/coordinator updates).</li>
-          <li><strong>Deployment</strong> — Node.js server; Vite frontend. Dockerfile and docker-compose for single-image deployment with client build included.</li>
-        </ul>
       </div>
     </section>
 
-    <section class="cta">
-      <div class="wrap">
-        <h2>Get started</h2>
-        <p>Math Solver is open for integration and customization. Run it locally, in Docker, or embed the pipeline into your own stack.</p>
-        <p class="cta-links">
-          <a href="../Readme.md" class="btn btn-primary">Read the docs</a>
-          <a href="../docs/ARCHITECTURE.md" class="btn btn-secondary">Architecture</a>
-          <a href="../client/" class="btn btn-secondary">Try the app</a>
-        </p>
-      </div>
-    </section>
+
   </main>
 
   <footer class="site-footer">
