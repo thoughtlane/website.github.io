@@ -27,6 +27,30 @@ Company is a company that builds products for varioud industries with edtech as 
 
 
 My logo has white background.. It needs to have transparent background.. Can you change that.. 
-Also 
+Also navigate Question/Solution generator to ashwebsite/mathsolver/index.html.
+Also navigate ScientificEditor to ashwebsite/matheditor/index.html.
+Please modify respective child pages to have same theme as main index page..
+Please add smooth glass transisions.
+
 
 Store generated website in ashwebsite folder.. Logo is ashwebsite/thoughtlanelogo.png
+
+
+
+I need to add one more product ( Building groundup on AI)
+
+FileManager/Question Answering system: This is like a CMS that can allow customers to ( Maybe come up with better name for this)
+
+1. Upload Files ( Any format)
+2. Manage folders or get suggestions from AI on organizing
+3. Ask questions and get answers at any hierarchy.. ( Helps gets answers from known KB..).
+4. Allows Integrations with external systems like Google Classroom, BrightSpace..
+5. Allows integrations with external storage providers like Wasabi, Google Buckets, Azure Block Storage, Amazon S3..etc...
+6. Allows customers to also store URL's rather than just document management...
+
+Please add this to webpage...
+
+
+Also on main webpage .. Say We are edtech company building ground up on AI to enable future generations to be AI Ready.. TO Give back time to educators to spend quality time wuth students.. To remove wasted time in searching for solutions and improve cognitive ability to students..
+
+
