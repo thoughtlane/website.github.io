@@ -54,3 +54,23 @@ Please add this to webpage...
 Also on main webpage .. Say We are edtech company building ground up on AI to enable future generations to be AI Ready.. TO Give back time to educators to spend quality time wuth students.. To remove wasted time in searching for solutions and improve cognitive ability to students..
 
 
+
+
+Also is there a way you can add our MOTO..
+We want to revolutanize education sector with AI in
+1. Education Content creation/ Authoring
+2. Content Storing
+3. Content reteival and questioning and searching and getting answers
+4. Content Generation
+5. Evaluation
+6. Finally cognitive boosting for students and removing rote tasks for educators
+
+please make sure to fix any grammer and make it professional.. I just gave you idea..Don't take literal text
+
+**Implemented (Our Mission section):** “We are transforming the education sector with AI across the full learning lifecycle” with six pillars:
+1. Content creation & authoring
+2. Content storage & organization
+3. Retrieval, search & question-answering
+4. Content generation
+5. Assessment & evaluation
+6. Cognitive development for students; less rote work for educators
