@@ -3,566 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Thoughtlane - AI-Powered Process Automation</title>
+    <title>Thoughtlane — AI-Ready EdTech Solutions</title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary-color: #3498db;
-            --secondary-color: #2ecc71;
-            --dark-bg: #121212;
-            --dark-text: #f5f5f5;
-            --light-bg: #ffffff;
-            --light-text: #333333;
+            --primary: #0d6b8a;
+            --primary-light: #1493b8;
+            --accent: #0ea88c;
+            --accent-light: #2dd4bf;
+            --dark: #0f172a;
+            --dark-soft: #1e293b;
+            --light: #f8fafc;
+            --muted: #64748b;
+        }
+        
+        * {
+            font-family: 'DM Sans', sans-serif;
+        }
+        
+        h1, h2, h3, h4, .display-4, .display-5 {
+            font-family: 'Fraunces', serif;
         }
         
         body {
-            transition: background-color 0.3s, color 0.3s;
+            background-color: var(--light);
+            color: var(--dark);
             scroll-behavior: smooth;
+            transition: background-color 0.4s ease, color 0.4s ease;
         }
         
-        body.light-mode {
-            background-color: var(--light-bg);
-            color: var(--light-text);
-        }
-        
-        body.dark-mode {
-            background-color: var(--dark-bg);
-            color: var(--dark-text);
-        }
-        
-        .dark-mode .bg-light {
-            background-color: #1e1e1e !important;
-        }
-        
-        .dark-mode .card {
-            background-color: #1e1e1e;
-            color: var(--dark-text);
-        }
-        
-        .dark-mode .navbar {
-            background-color: #1a1a1a !important;
-            color: var(--dark-text);
-        }
-        
-        .dark-mode .navbar-light .navbar-nav .nav-link {
-            color: var(--dark-text);
-        }
-        
-        .dark-mode .navbar-light .navbar-toggler-icon {
-            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255, 255, 255, 0.8)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
-        }
-        
-        .dark-mode .navbar-light .navbar-brand {
-            color: var(--dark-text);
-        }
-        
-        .dark-mode h1, .dark-mode h2, .dark-mode h3, .dark-mode h4, .dark-mode h5, .dark-mode h6 {
-            color: var(--dark-text);
-        }
-        
-        .dark-mode .footer {
-            background-color: #1a1a1a;
-        }
-        
-        .dark-mode .btn-outline-primary {
-            color: var(--dark-text);
-            border-color: var(--primary-color);
+        .navbar {
+            background: rgba(248, 250, 252, 0.72) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
+            transition: background 0.4s ease, border-color 0.4s ease;
         }
         
         .navbar-brand img {
-            max-height: 40px;
+            height: 84px;
+            width: auto;
         }
         
         .hero {
-            min-height: 80vh;
+            min-height: 85vh;
             display: flex;
             align-items: center;
+            background: linear-gradient(135deg, rgba(13, 107, 138, 0.04) 0%, rgba(14, 168, 140, 0.06) 100%);
         }
         
-        .feature-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--primary-color);
+        .hero h1 {
+            color: var(--dark);
+            font-weight: 700;
+            letter-spacing: -0.02em;
         }
         
-        .card {
-            transition: transform 0.3s, box-shadow 0.3s;
-            border: none;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        .hero .lead {
+            color: var(--muted);
+            font-size: 1.2rem;
         }
         
         .btn-primary {
-            background-color: var(--primary-color);
-            border-color: var(--primary-color);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+            border: none;
+            padding: 0.75rem 1.75rem;
+            font-weight: 600;
         }
         
-        .btn-secondary {
-            background-color: var(--secondary-color);
-            border-color: var(--secondary-color);
+        .btn-primary:hover {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
+            transform: translateY(-1px);
+        }
+        
+        .btn-outline-primary {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .section-title {
+            color: var(--dark);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+        }
+        
+        .card {
+            border: none;
+            border-radius: 16px;
+            overflow: hidden;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, background 0.4s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(13, 107, 138, 0.12);
+        }
+        
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+        
+        .market-stat {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            font-family: 'Fraunces', serif;
+        }
+        
+        .citation {
+            font-size: 0.8rem;
+            color: var(--muted);
+        }
+        
+        .citation a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .citation a:hover {
+            text-decoration: underline;
+        }
+        
+        .product-card {
+            border-left: 4px solid var(--primary);
         }
         
         .contact-section {
-            background-color: rgba(52, 152, 219, 0.1);
+            background: linear-gradient(135deg, rgba(13, 107, 138, 0.06) 0%, rgba(14, 168, 140, 0.08) 100%);
         }
         
-        .dark-mode .contact-section {
-            background-color: rgba(52, 152, 219, 0.05);
+        .inquiry-form .form-control {
+            border-radius: 10px;
+            border: 1px solid rgba(15, 23, 42, 0.12);
+        }
+        
+        .inquiry-form .form-control:focus {
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(13, 107, 138, 0.15);
         }
         
         .footer {
-            background-color: #f8f9fa;
-            padding: 2rem 0;
+            background: var(--dark);
+            color: rgba(255, 255, 255, 0.8);
         }
         
-        .theme-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 34px;
+        .footer a {
+            color: rgba(255, 255, 255, 0.9);
         }
         
-        .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
+        .footer a:hover {
+            color: var(--accent-light);
         }
         
-        .slider {
-            position: absolute;
+        .nav-link {
+            font-weight: 500;
+            color: var(--dark-soft) !important;
+        }
+        
+        .nav-link:hover {
+            color: var(--primary) !important;
+        }
+        
+        .badge-market {
+            background: rgba(13, 107, 138, 0.12);
+            color: var(--primary);
+            font-weight: 600;
+        }
+        
+        /* Dark theme */
+        body.dark-theme {
+            background-color: #0c1222;
+            color: #e2e8f0;
+        }
+        
+        body.dark-theme .navbar {
+            background: rgba(12, 18, 34, 0.75) !important;
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border-bottom-color: rgba(255, 255, 255, 0.06);
+        }
+        
+        body.dark-theme .navbar-brand span {
+            color: #f1f5f9 !important;
+        }
+        
+        body.dark-theme .navbar-toggler {
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        body.dark-theme .navbar-toggler-icon {
+            filter: invert(1);
+        }
+        
+        body.dark-theme .nav-link {
+            color: rgba(226, 232, 240, 0.85) !important;
+        }
+        
+        body.dark-theme .nav-link:hover {
+            color: var(--accent-light) !important;
+        }
+        
+        body.dark-theme .hero {
+            background: linear-gradient(135deg, rgba(13, 107, 138, 0.08) 0%, rgba(14, 168, 140, 0.06) 50%, rgba(12, 18, 34, 0.4) 100%);
+        }
+        
+        body.dark-theme .hero h1 {
+            color: #f1f5f9;
+        }
+        
+        body.dark-theme .hero .lead {
+            color: #94a3b8;
+        }
+        
+        body.dark-theme .section-title {
+            color: #f1f5f9;
+        }
+        
+        body.dark-theme .card {
+            background: rgba(21, 29, 46, 0.6);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        body.dark-theme .card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+        
+        body.dark-theme .card h4,
+        body.dark-theme .card .fw-bold {
+            color: #f1f5f9;
+        }
+        
+        body.dark-theme .card .text-muted,
+        body.dark-theme p.text-muted {
+            color: #94a3b8 !important;
+        }
+        
+        body.dark-theme .card .lead,
+        body.dark-theme #about .lead,
+        body.dark-theme #why-now .lead {
+            color: #94a3b8 !important;
+        }
+        
+        body.dark-theme .market-stat {
+            color: var(--accent-light);
+        }
+        
+        body.dark-theme .citation {
+            color: #64748b;
+        }
+        
+        body.dark-theme .citation a {
+            color: var(--accent-light);
+        }
+        
+        body.dark-theme .badge-market {
+            background: rgba(14, 168, 140, 0.2);
+            color: var(--accent-light);
+        }
+        
+        body.dark-theme .product-card {
+            border-left-color: var(--accent);
+        }
+        
+        body.dark-theme section.bg-white {
+            background-color: #0f1729 !important;
+        }
+        
+        body.dark-theme .badge.rounded-pill {
+            background: rgba(14, 168, 140, 0.2) !important;
+            color: var(--accent-light) !important;
+        }
+        
+        body.dark-theme .contact-section {
+            background: linear-gradient(135deg, rgba(13, 107, 138, 0.1) 0%, rgba(14, 168, 140, 0.08) 100%);
+        }
+        
+        body.dark-theme .inquiry-form .form-control,
+        body.dark-theme .inquiry-form .form-select {
+            background: #151d2e;
+            border-color: rgba(255, 255, 255, 0.12);
+            color: #e2e8f0;
+        }
+        
+        body.dark-theme .inquiry-form .form-control::placeholder {
+            color: #64748b;
+        }
+        
+        body.dark-theme .inquiry-form .form-control:focus,
+        body.dark-theme .inquiry-form .form-select:focus {
+            background: #151d2e;
+            border-color: var(--accent);
+            color: #e2e8f0;
+        }
+        
+        body.dark-theme a.text-dark {
+            color: #e2e8f0 !important;
+        }
+        
+        body.dark-theme a.text-dark:hover {
+            color: #f1f5f9 !important;
+        }
+        
+        body.dark-theme #contact a[href^="mailto"] {
+            color: var(--accent-light) !important;
+        }
+        
+        body.dark-theme .footer {
+            background: #080d18;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+        
+        .theme-toggle {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            border: 1px solid rgba(15, 23, 42, 0.15);
+            background: rgba(13, 107, 138, 0.08);
+            color: var(--primary);
             cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 34px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.2s ease;
         }
         
-        .slider:before {
-            position: absolute;
-            content: "";
-            height: 26px;
-            width: 26px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
+        body.dark-theme .theme-toggle {
+            border-color: rgba(255, 255, 255, 0.1);
+            background: rgba(14, 168, 140, 0.15);
+            color: var(--accent-light);
         }
         
-        input:checked + .slider {
-            background-color: var(--primary-color);
+        .theme-toggle:hover {
+            background: rgba(13, 107, 138, 0.15);
         }
         
-        input:checked + .slider:before {
-            transform: translateX(26px);
-        }
-        
-        .logo-container {
-            width: 80px;
-            height: 80px;
-            margin-right: 15px;
-        }
-        
-        .benefits-list li {
-            margin-bottom: 1rem;
-        }
-        
-        .human-bot-animation {
-            max-width: 100%;
-            height: auto;
+        body.dark-theme .theme-toggle:hover {
+            background: rgba(14, 168, 140, 0.25);
         }
         
         @media (max-width: 768px) {
             .hero {
                 text-align: center;
-                padding: 2rem 0;
-            }
-            
-            .hero-image {
-                margin-top: 2rem;
             }
         }
     </style>
 </head>
-<body class="light-mode">
+<body class="dark-theme">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top" id="main-navbar">
+    <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
             <a class="navbar-brand d-flex align-items-center" href="#">
-                <svg class="logo-container" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-                    <circle cx="50" cy="50" r="45" fill="#3498db" />
-                    <circle cx="50" cy="50" r="35" fill="#2ecc71" />
-                    <path d="M30,40 Q50,20 70,40" stroke="#fff" stroke-width="5" fill="none" />
-                    <path d="M30,60 Q50,80 70,60" stroke="#fff" stroke-width="5" fill="none" />
-                    <circle cx="35" cy="50" r="5" fill="#fff" />
-                    <circle cx="65" cy="50" r="5" fill="#fff" />
-                </svg>
-                <span class="ms-2 fw-bold">Thoughtlane</span>
+                <img src="thoughtlanelogo.png" alt="Thoughtlane" class="me-2" width="1024" height="1024">
+                <span class="fw-bold">Thoughtlane</span>
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="#home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#about">About</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#services">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="#contact">Contact</a>
-                    </li>
-                    <li class="nav-item d-flex align-items-center ms-3">
-                        <label class="theme-switch">
-                            <input type="checkbox" id="theme-toggle">
-                            <span class="slider"></span>
-                        </label>
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#market">Market</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">What We Do</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#why-now">Why Now</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#partners">Partners</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item ms-3 d-flex align-items-center">
+                        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">☀️</button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero -->
     <section id="home" class="hero">
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h1 class="display-4 fw-bold mb-4">AI-Powered Process Automation</h1>
-                    <p class="lead mb-4">Thoughtlane revolutionizes manual processes with cutting-edge AI technology, empowering human workers and enabling efficient onshoring.</p>
-                    <div class="d-flex flex-wrap gap-2">
-                        <a href="#contact" class="btn btn-primary btn-lg">Get Started</a>
-                        <a href="#about" class="btn btn-outline-primary btn-lg">Learn More</a>
+                <div class="col-lg-7">
+                    <h1 class="display-4 fw-bold mb-4">Pioneers in AI-Ready EdTech</h1>
+                    <p class="lead mb-4">We build products for the education industry—AI-powered solutions that prepare students for the future. From individual tutors to universities, we help educators deliver reliable, accurate, and engaging learning experiences.</p>
+                    <div class="d-flex flex-wrap gap-3">
+                        <a href="#contact" class="btn btn-primary btn-lg">Get in Touch</a>
+                        <a href="#products" class="btn btn-outline-primary btn-lg">Explore Products</a>
                     </div>
                 </div>
-                <div class="col-lg-6 hero-image">
-                    <svg class="human-bot-animation" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
-                        <!-- Factory background -->
-                        <rect x="0" y="400" width="800" height="200" fill="#e0e0e0" />
-                        <rect x="100" y="250" width="600" height="150" fill="#f0f0f0" />
-                        
-                        <!-- Conveyor belt -->
-                        <rect x="150" y="380" width="500" height="20" fill="#555" />
-                        <circle cx="150" cy="390" r="20" fill="#777" />
-                        <circle cx="650" cy="390" r="20" fill="#777" />
-                        
-                        <!-- Products on belt - these will be animated -->
-                        <rect class="product" x="200" y="360" width="30" height="20" fill="#3498db">
-                            <animate attributeName="x" from="200" to="600" dur="10s" repeatCount="indefinite" />
-                        </rect>
-                        <rect class="product" x="300" y="360" width="30" height="20" fill="#2ecc71">
-                            <animate attributeName="x" from="300" to="700" dur="10s" repeatCount="indefinite" />
-                        </rect>
-                        <rect class="product" x="100" y="360" width="30" height="20" fill="#e74c3c">
-                            <animate attributeName="x" from="100" to="500" dur="10s" repeatCount="indefinite" />
-                        </rect>
-                        
-                        <!-- Robot 1 -->
-                        <g class="robot">
-                            <rect x="250" y="280" width="50" height="70" fill="#3498db" />
-                            <circle cx="275" cy="260" r="20" fill="#3498db" />
-                            <rect x="260" y="255" width="30" height="10" fill="#222" />
-                            <circle cx="265" cy="260" r="3" fill="#e74c3c">
-                                <animate attributeName="fill" values="#e74c3c;#f1c40f;#e74c3c" dur="2s" repeatCount="indefinite" />
-                            </circle>
-                            <circle cx="285" cy="260" r="3" fill="#e74c3c">
-                                <animate attributeName="fill" values="#e74c3c;#f1c40f;#e74c3c" dur="2s" repeatCount="indefinite" />
-                            </circle>
-                            <!-- Robot arm -->
-                            <line x1="300" y1="300" x2="330" y2="350" stroke="#3498db" stroke-width="10">
-                                <animate attributeName="x2" values="330;350;330" dur="3s" repeatCount="indefinite" />
-                                <animate attributeName="y2" values="350;365;350" dur="3s" repeatCount="indefinite" />
-                            </line>
-                            <circle cx="330" cy="350" r="10" fill="#2c3e50">
-                                <animate attributeName="cx" values="330;350;330" dur="3s" repeatCount="indefinite" />
-                                <animate attributeName="cy" values="350;365;350" dur="3s" repeatCount="indefinite" />
-                            </circle>
-                        </g>
-                        
-                        <!-- Human worker -->
-                        <g class="human">
-                            <!-- Body -->
-                            <rect x="450" y="280" width="40" height="60" fill="#f39c12" />
-                            <!-- Head -->
-                            <circle cx="470" cy="260" r="20" fill="#ffeece" />
-                            <!-- Eyes -->
-                            <circle cx="463" cy="255" r="3" fill="#2c3e50" />
-                            <circle cx="477" cy="255" r="3" fill="#2c3e50" />
-                            <!-- Mouth -->
-                            <path d="M460,270 Q470,275 480,270" stroke="#2c3e50" stroke-width="2" fill="none" />
-                            <!-- Arms -->
-                            <line x1="450" y1="290" x2="420" y2="320" stroke="#f39c12" stroke-width="10">
-                                <animate attributeName="x2" values="420;410;420" dur="4s" repeatCount="indefinite" />
-                                <animate attributeName="y2" values="320;340;320" dur="4s" repeatCount="indefinite" />
-                            </line>
-                            <line x1="490" y1="290" x2="520" y2="320" stroke="#f39c12" stroke-width="10">
-                                <animate attributeName="x2" values="520;530;520" dur="4s" repeatCount="indefinite" />
-                                <animate attributeName="y2" values="320;340;320" dur="4s" repeatCount="indefinite" />
-                            </line>
-                            <!-- Legs -->
-                            <line x1="460" y1="340" x2="450" y2="380" stroke="#2c3e50" stroke-width="12" />
-                            <line x1="480" y1="340" x2="490" y2="380" stroke="#2c3e50" stroke-width="12" />
-                        </g>
-                        
-                        <!-- Robot 2 -->
-                        <g class="robot">
-                            <rect x="600" y="280" width="50" height="70" fill="#9b59b6" />
-                            <circle cx="625" cy="260" r="20" fill="#9b59b6" />
-                            <rect x="610" y="255" width="30" height="10" fill="#222" />
-                            <circle cx="615" cy="260" r="3" fill="#e74c3c">
-                                <animate attributeName="fill" values="#e74c3c;#f1c40f;#e74c3c" dur="1.5s" repeatCount="indefinite" />
-                            </circle>
-                            <circle cx="635" cy="260" r="3" fill="#e74c3c">
-                                <animate attributeName="fill" values="#e74c3c;#f1c40f;#e74c3c" dur="1.5s" repeatCount="indefinite" />
-                            </circle>
-                            <!-- Robot arm -->
-                            <line x1="600" y1="300" x2="570" y2="350" stroke="#9b59b6" stroke-width="10">
-                                <animate attributeName="x2" values="570;550;570" dur="2.5s" repeatCount="indefinite" />
-                                <animate attributeName="y2" values="350;365;350" dur="2.5s" repeatCount="indefinite" />
-                            </line>
-                            <circle cx="570" cy="350" r="10" fill="#2c3e50">
-                                <animate attributeName="cx" values="570;550;570" dur="2.5s" repeatCount="indefinite" />
-                                <animate attributeName="cy" values="350;365;350" dur="2.5s" repeatCount="indefinite" />
-                            </circle>
-                        </g>
-                        
-                        <!-- Thought bubbles connecting humans and robots -->
-                        <path d="M300,240 Q350,200 400,220 Q450,240 490,240" stroke="#3498db" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                            <animate attributeName="d" values="M300,240 Q350,200 400,220 Q450,240 490,240;M300,230 Q350,190 400,210 Q450,230 490,230;M300,240 Q350,200 400,220 Q450,240 490,240" dur="5s" repeatCount="indefinite" />
-                        </path>
-                        <path d="M490,240 Q530,220 570,220 Q610,220 625,240" stroke="#9b59b6" stroke-width="2" fill="none" stroke-dasharray="5,5">
-                            <animate attributeName="d" values="M490,240 Q530,220 570,220 Q610,220 625,240;M490,230 Q530,210 570,210 Q610,210 625,230;M490,240 Q530,220 570,220 Q610,220 625,240" dur="5s" repeatCount="indefinite" />
-                        </path>
-                        
-                        <!-- Gears in background -->
-                        <g class="gear" transform="translate(150,180)">
-                            <circle cx="0" cy="0" r="30" fill="#bdc3c7" />
-                            <circle cx="0" cy="0" r="15" fill="#7f8c8d" />
-                            <rect x="-5" y="-40" width="10" height="20" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="-5" y="20" width="10" height="20" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="-40" y="-5" width="20" height="10" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="20" y="-5" width="20" height="10" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="360" dur="10s" repeatCount="indefinite" />
-                            </rect>
-                        </g>
-                        
-                        <g class="gear" transform="translate(700,180)">
-                            <circle cx="0" cy="0" r="25" fill="#bdc3c7" />
-                            <circle cx="0" cy="0" r="12" fill="#7f8c8d" />
-                            <rect x="-4" y="-35" width="8" height="18" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="-360" dur="8s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="-4" y="17" width="8" height="18" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="-360" dur="8s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="-35" y="-4" width="18" height="8" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="-360" dur="8s" repeatCount="indefinite" />
-                            </rect>
-                            <rect x="17" y="-4" width="18" height="8" fill="#bdc3c7">
-                                <animateTransform attributeName="transform" attributeType="XML" type="rotate" from="0" to="-360" dur="8s" repeatCount="indefinite" />
-                            </rect>
-                        </g>
-                    </svg>
+                <div class="col-lg-5 mt-5 mt-lg-0 text-center">
+                    <img src="thoughtlanelogo.png" alt="Thoughtlane" class="img-fluid" style="max-width: 560px; opacity: 0.95;" width="1024" height="1024" fetchpriority="high">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="about" class="py-5">
+    <!-- EdTech Market Section -->
+    <section id="market" class="py-5">
         <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-10 text-center">
-                    <h2 class="display-5 fw-bold mb-4">Transforming Manual Processes with AI</h2>
-                    <p class="lead">Thoughtlane is pioneering the future of work by revolutionizing how businesses approach manual processes. Our AI-powered solutions bridge the gap between automation and human expertise.</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-                            <div class="feature-icon">🔄</div>
-                            <h3 class="card-title fw-bold">Process Automation</h3>
-                            <p class="card-text">We identify and transform repetitive manual tasks into streamlined automated workflows, freeing your team to focus on high-value activities.</p>
-                        </div>
+            <h2 class="section-title display-5 text-center mb-5">The EdTech Opportunity</h2>
+            <p class="text-center text-muted mb-5 mx-auto" style="max-width: 700px;">North America leads global EdTech adoption. Here’s the market landscape we serve.</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 p-4">
+                        <span class="badge badge-market mb-3">Global</span>
+                        <div class="market-stat">$108.2B</div>
+                        <p class="text-muted mb-1">2024 market size</p>
+                        <div class="market-stat" style="font-size: 1.25rem;">14.3% CAGR</div>
+                        <p class="text-muted mb-2">→ $411.6B by 2034</p>
+                        <p class="citation"><a href="https://www.globenewswire.com/en/news-release/2024/04/08/2859439/0/en/EdTech-Market-on-Path-to-Reach-US-411-566-Billion-by-2034-with-14-3-CAGR-Future-Market-Insights.html" target="_blank" rel="noopener">Future Market Insights</a></p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-                            <div class="feature-icon">🌐</div>
-                            <h3 class="card-title fw-bold">Onshoring Solutions</h3>
-                            <p class="card-text">Our technology enables businesses to bring operations back onshore while maintaining competitive advantages through enhanced productivity.</p>
-                        </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 p-4">
+                        <span class="badge badge-market mb-3">North America</span>
+                        <div class="market-stat">35–37%</div>
+                        <p class="text-muted mb-1">of global EdTech market</p>
+                        <p class="small text-muted mb-2">Adaptive learning, gamification, AI/ML for personalized learning</p>
+                        <p class="citation"><a href="https://www.technavio.com/report/edtech-market-industry-analysis" target="_blank" rel="noopener">Technavio</a>, <a href="https://market.us/report/edtech-market/" target="_blank" rel="noopener">Market.us</a></p>
                     </div>
                 </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card h-100 shadow-sm">
-                        <div class="card-body text-center">
-                            <div class="feature-icon">🚀</div>
-                            <h3 class="card-title fw-bold">Human Augmentation</h3>
-                            <p class="card-text">We don't replace humans—we empower them. Our AI tools work alongside your team, multiplying their capabilities and impact.</p>
-                        </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 p-4">
+                        <span class="badge badge-market mb-3">United States</span>
+                        <div class="market-stat">$74.3B</div>
+                        <p class="text-muted mb-1">2024 market size</p>
+                        <div class="market-stat" style="font-size: 1.25rem;">12.6% CAGR</div>
+                        <p class="text-muted mb-2">→ $236.1B by 2033</p>
+                        <p class="citation"><a href="https://www.imarcgroup.com/united-states-edtech-market" target="_blank" rel="noopener">IMARC Group</a></p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="card h-100 p-4">
+                        <span class="badge badge-market mb-3">Canada</span>
+                        <div class="market-stat">$5.0B</div>
+                        <p class="text-muted mb-1">2024 market size</p>
+                        <div class="market-stat" style="font-size: 1.25rem;">~12% CAGR</div>
+                        <p class="text-muted mb-2">→ $13.8B+ by 2033</p>
+                        <p class="citation"><a href="https://www.imarcgroup.com/canada-edtech-market" target="_blank" rel="noopener">IMARC Group</a></p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section id="services" class="py-5 bg-light">
+    <!-- What We Do -->
+    <section id="about" class="py-5 bg-white">
         <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-8 text-center">
-                    <h2 class="display-5 fw-bold mb-4">Our Services</h2>
-                    <p class="lead">Comprehensive AI solutions tailored to your business needs</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title fw-bold">Process Assessment & Strategy</h3>
-                            <p class="card-text">We analyze your current workflows to identify automation opportunities and develop a strategic roadmap for implementation.</p>
-                            <ul class="benefits-list ps-4">
-                                <li>Comprehensive workflow analysis</li>
-                                <li>ROI-driven opportunity identification</li>
-                                <li>Custom implementation roadmap</li>
-                                <li>Change management planning</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title fw-bold">Custom AI Solutions</h3>
-                            <p class="card-text">We build bespoke AI tools designed specifically for your unique business challenges and processes.</p>
-                            <ul class="benefits-list ps-4">
-                                <li>Document processing automation</li>
-                                <li>Intelligent decision support systems</li>
-                                <li>Predictive analytics integration</li>
-                                <li>Natural language processing applications</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title fw-bold">Human-AI Collaboration Framework</h3>
-                            <p class="card-text">We create systems where humans and AI work seamlessly together, maximizing the strengths of both.</p>
-                            <ul class="benefits-list ps-4">
-                                <li>AI assistant development</li>
-                                <li>Intelligent task allocation</li>
-                                <li>Human-in-the-loop systems</li>
-                                <li>Adaptive learning interfaces</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 mb-4">
-                    <div class="card h-100">
-                        <div class="card-body">
-                            <h3 class="card-title fw-bold">Implementation & Training</h3>
-                            <p class="card-text">We ensure successful deployment and adoption of our solutions across your organization.</p>
-                            <ul class="benefits-list ps-4">
-                                <li>Seamless system integration</li>
-                                <li>Comprehensive team training</li>
-                                <li>Ongoing technical support</li>
-                                <li>Continuous improvement cycles</li>
-                            </ul>
-                        </div>
-                    </div>
+            <h2 class="section-title display-5 text-center mb-5">What We Do</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8 text-center">
+                    <p class="lead" style="color: var(--dark-soft);">We are pioneers in building products for the education industry—<strong>AI-ready solutions for EdTech</strong>. Our platforms help educators create, deliver, and assess learning with accuracy and reliability.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Results Section -->
-    <section class="py-5">
+    <!-- Why Now -->
+    <section id="why-now" class="py-5">
         <div class="container">
-            <div class="row justify-content-center mb-5">
-                <div class="col-md-8 text-center">
-                    <h2 class="display-5 fw-bold mb-4">Proven Results</h2>
-                    <p class="lead">Our clients experience transformative improvements</p>
-                </div>
-            </div>
-            <div class="row text-center">
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="display-4 fw-bold text-primary">200%</div>
-                    <p>Reduction in processing time</p>
-                </div>
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="display-4 fw-bold text-primary">42%</div>
-                    <p>Cost savings</p>
-                </div>
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="display-4 fw-bold text-primary">87%</div>
-                    <p>Employee satisfaction</p>
-                </div>
-                <div class="col-md-3 col-6 mb-4">
-                    <div class="display-4 fw-bold text-primary">3.5x</div>
-                    <p>Productivity increase</p>
+            <h2 class="section-title display-5 text-center mb-5">Why Now</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="card p-5 border-0 shadow-sm">
+                        <p class="lead mb-0" style="color: var(--dark-soft);">Humanity is going through a paradigm shift with the advent of AI. There are going to be huge disruptions. <strong>This is the time to get students ready for the AI era</strong>—so they can fare better in the future.</p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Contact Section -->
+    <!-- Target Market -->
+    <section class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title display-5 text-center mb-5">Target Market</h2>
+            <p class="text-center text-muted mb-5">We serve the entire education industry</p>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="d-flex flex-wrap justify-content-center gap-3">
+                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">Individual Tutors</span>
+                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">Math Institutes</span>
+                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">Schools</span>
+                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">Colleges</span>
+                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">Universities</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section id="products" class="py-5">
+        <div class="container">
+            <h2 class="section-title display-5 text-center mb-5">Our Products</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <a href="mathsolver/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">📝</div>
+                            <h4 class="fw-bold">Question/Solution Generator</h4>
+                            <p class="text-muted mb-0">Generate question papers with solutions reliably—without the probabilistic nature of typical LLMs. We guarantee solutions are always accurate.</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 product-card p-4">
+                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">✓</div>
+                        <h4 class="fw-bold">Evaluation & Correction</h4>
+                        <p class="text-muted mb-0">Our product corrects and evaluates student submissions with precision, helping educators save time and provide consistent feedback.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 product-card p-4">
+                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">🧠</div>
+                        <h4 class="fw-bold">CognitiveBooster</h4>
+                        <p class="text-muted mb-0">Helps students learn a topic rather than just get answers. Guides learners through every concept step by step for deeper understanding.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <a href="matheditor/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">✏️</div>
+                            <h4 class="fw-bold">ScientificEditor</h4>
+                            <p class="text-muted mb-0">Web-based online editor for math and scientific content. Easier to collaborate and maintain across teams and curricula.</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We're Looking For -->
+    <section id="partners" class="py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title display-5 text-center mb-5">What We're Looking For</h2>
+            <div class="row g-4">
+                <div class="col-md-6">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="card-icon mx-auto mb-3" style="background: rgba(14, 168, 140, 0.15); color: var(--accent);">👥</div>
+                        <h4 class="fw-bold">Customers</h4>
+                        <p class="text-muted mb-0">Educators and institutions who want to use our products—tutors, schools, colleges, and universities ready for AI-ready EdTech.</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="card h-100 p-4 text-center">
+                        <div class="card-icon mx-auto mb-3" style="background: rgba(14, 168, 140, 0.15); color: var(--accent);">🤝</div>
+                        <h4 class="fw-bold">Investors</h4>
+                        <p class="text-muted mb-0">Partners who want to invest in the future of education—building AI-ready solutions that prepare students for what’s next.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
     <section id="contact" class="py-5 contact-section">
         <div class="container">
+            <h2 class="section-title display-5 text-center mb-2">Get in Touch</h2>
+            <p class="text-center text-muted mb-5">Inquiries: <a href="mailto:info@thoughtlane.com" class="fw-semibold" style="color: var(--primary);">info@thoughtlane.com</a></p>
             <div class="row justify-content-center">
-                <div class="col-md-8 text-center mb-5">
-                    <h2 class="display-5 fw-bold mb-4">Get Started</h2>
-                    <p class="lead">Ready to transform your processes? Contact us today.</p>
-                </div>
-            </div>
-            <div class="row justify-content-center">
-                <div class="col-md-8">
-                    <div class="card shadow">
-                        <div class="card-body p-4">
-                            <form>
-                                <div class="row">
-                                    <div class="col-md-6 mb-3">
-                                        <label for="name" class="form-label">Name</label>
-                                        <input type="text" class="form-control" id="name" placeholder="Your name">
+                <div class="col-lg-7">
+                    <div class="card shadow-sm border-0 overflow-hidden">
+                        <div class="card-body p-4 p-md-5">
+                            <form class="inquiry-form" id="inquiry-form">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label for="name" class="form-label fw-semibold">Name</label>
+                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
                                     </div>
-                                    <div class="col-md-6 mb-3">
-                                        <label for="company" class="form-label">Company</label>
-                                        <input type="text" class="form-control" id="company" placeholder="Your company">
+                                    <div class="col-md-6">
+                                        <label for="email" class="form-label fw-semibold">Email</label>
+                                        <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
                                     </div>
-                                </div>
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email</label>
-                                    <input type="email" class="form-control" id="email" placeholder="your.email@example.com">
-                                </div>
-                                <div class="mb-3">
-                                    <label for="message" class="form-label">Message</label>
-                                    <textarea class="form-control" id="message" rows="4" placeholder="Tell us about your process automation needs"></textarea>
-                                </div>
-                                <div class="d-grid">
-                                    <button type="submit" class="btn btn-primary btn-lg">Submit</button>
+                                    <div class="col-12">
+                                        <label for="subject" class="form-label fw-semibold">Subject</label>
+                                        <select class="form-select" id="subject" name="subject">
+                                            <option value="Customer inquiry">Customer inquiry</option>
+                                            <option value="Investor inquiry">Investor inquiry</option>
+                                            <option value="General inquiry">General inquiry</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="message" class="form-label fw-semibold">Message</label>
+                                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Tell us about your needs..." required></textarea>
+                                    </div>
+                                    <div class="col-12">
+                                        <button type="submit" class="btn btn-primary btn-lg w-100">Send Inquiry</button>
+                                    </div>
                                 </div>
                             </form>
+                            <p class="text-muted small mt-3 mb-0 text-center">All inquiries go to <strong>info@thoughtlane.com</strong></p>
                         </div>
                     </div>
                 </div>
@@ -571,129 +617,66 @@
     </section>
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="footer py-5">
         <div class="container">
-            <div class="row">
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <div class="d-flex align-items-center mb-3">
-                        <svg class="logo-container" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" style="width: 40px; height: 40px;">
-                            <circle cx="50" cy="50" r="45" fill="#3498db" />
-                            <circle cx="50" cy="50" r="35" fill="#2ecc71" />
-                            <path d="M30,40 Q50,20 70,40" stroke="#fff" stroke-width="5" fill="none" />
-                            <path d="M30,60 Q50,80 70,60" stroke="#fff" stroke-width="5" fill="none" />
-                            <circle cx="35" cy="50" r="5" fill="#fff" />
-                            <circle cx="65" cy="50" r="5" fill="#fff" />
-                        </svg>
-                        <span class="ms-2 fw-bold">Thoughtlane</span>
+            <div class="row align-items-center">
+                <div class="col-md-6 mb-4 mb-md-0">
+                    <div class="d-flex align-items-center">
+                        <img src="thoughtlanelogo.png" alt="Thoughtlane" style="height: 72px; width: 72px; min-width: 72px; object-fit: contain; filter: brightness(0) invert(1);" class="me-2 flex-shrink-0" width="1024" height="1024">
+                        <span class="fw-bold">Thoughtlane</span>
                     </div>
-                    <p>Enhancing human potential through intelligent automation.</p>
+                    <p class="mt-3 mb-0 opacity-75 small">AI-ready EdTech solutions for the future of education.</p>
                 </div>
-                <div class="col-md-4 mb-4 mb-md-0">
-                    <h5 class="fw-bold mb-3">Quick Links</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2"><a href="#home" class="text-decoration-none">Home</a></li>
-                        <li class="mb-2"><a href="#about" class="text-decoration-none">About</a></li>
-                        <li class="mb-2"><a href="#services" class="text-decoration-none">Services</a></li>
-                        <li class="mb-2"><a href="#contact" class="text-decoration-none">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <h5 class="fw-bold mb-3">Contact Us</h5>
-                    <ul class="list-unstyled">
-                        <li class="mb-2">📍 123 Innovation Lane</li>
-                        <li class="mb-2">📱 (555) 123-4567</li>
-                        <li class="mb-2">✉️ info@thoughtlane.com</li>
-                    </ul>
-                    <div class="d-flex gap-3 mt-3">
-                        <a href="#" class="text-decoration-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-linkedin" viewBox="0 0 16 16">
-                                <path d="M0 1.146C0 .513.526 0 1.175 0h13.65C15.474 0 16 .513 16 1.146v13.708c0 .633-.526 1.146-1.175 1.146H1.175C.526 16 0 15.487 0 14.854V1.146zm4.943 12.248V6.169H2.542v7.225h2.401zm-1.2-8.212c.837 0 1.358-.554 1.358-1.248-.015-.709-.52-1.248-1.342-1.248-.822 0-1.359.54-1.359 1.248 0 .694.521 1.248 1.327 1.248h.016zm4.908 8.212V9.359c0-.216.016-.432.08-.586.173-.431.568-.878 1.232-.878.869 0 1.216.662 1.216 1.634v3.865h2.401V9.25c0-2.22-1.184-3.252-2.764-3.252-1.274 0-1.845.7-2.165 1.193v.025h-.016a5.54 5.54 0 0 1 .016-.025V6.169h-2.4c.03.678 0 7.225 0 7.225h2.4z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="text-decoration-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
-                                <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="text-decoration-none">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
-                                <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
-                            </svg>
-                        </a>
-                    </div>
+                <div class="col-md-6 text-md-end">
+                    <a href="mailto:info@thoughtlane.com" class="text-decoration-none">info@thoughtlane.com</a>
                 </div>
             </div>
-            <hr class="my-4">
+            <hr class="my-4 opacity-25">
             <div class="row">
-                <div class="col-md-6 text-center text-md-start">
-                    <p class="mb-0">© 2025 Thoughtlane. All rights reserved.</p>
-                </div>
-                <div class="col-md-6 text-center text-md-end">
-                    <p class="mb-0">
-                        <a href="#" class="text-decoration-none me-3">Privacy Policy</a>
-                        <a href="#" class="text-decoration-none">Terms of Service</a>
-                    </p>
+                <div class="col-md-6">
+                    <p class="mb-0 small opacity-75">© 2025 Thoughtlane. All rights reserved.</p>
                 </div>
             </div>
         </div>
     </footer>
 
-    <!-- JavaScript Bundle -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
     <script>
-        // Theme toggle functionality
-        const themeToggle = document.getElementById('theme-toggle');
-        const body = document.body;
-        
-        // Check for saved theme preference or respect OS preference
-        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)');
-        const savedTheme = localStorage.getItem('theme');
-        
-        if (savedTheme === 'dark' || (!savedTheme && prefersDarkScheme.matches)) {
-            body.classList.remove('light-mode');
-            body.classList.add('dark-mode');
-            themeToggle.checked = true;
-            document.getElementById('main-navbar').classList.remove('navbar-light');
-            document.getElementById('main-navbar').classList.add('navbar-dark');
-        }
-        
-        // Theme switch event listener
-        themeToggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.remove('light-mode');
-                body.classList.add('dark-mode');
-                localStorage.setItem('theme', 'dark');
-                document.getElementById('main-navbar').classList.remove('navbar-light');
-                document.getElementById('main-navbar').classList.add('navbar-dark');
+        (function() {
+            const saved = localStorage.getItem('thoughtlane-theme');
+            const isDark = saved === 'light' ? false : true;
+            if (isDark) {
+                document.body.classList.add('dark-theme');
+                document.getElementById('theme-toggle').textContent = '☀️';
             } else {
-                body.classList.remove('dark-mode');
-                body.classList.add('light-mode');
-                localStorage.setItem('theme', 'light');
-                document.getElementById('main-navbar').classList.remove('navbar-dark');
-                document.getElementById('main-navbar').classList.add('navbar-light');
+                document.body.classList.remove('dark-theme');
+                document.getElementById('theme-toggle').textContent = '🌙';
             }
-        });
-        
-        // Smooth scrolling for anchor links
+            document.getElementById('theme-toggle').addEventListener('click', function() {
+                const isDarkNow = document.body.classList.toggle('dark-theme');
+                this.textContent = isDarkNow ? '☀️' : '🌙';
+                localStorage.setItem('thoughtlane-theme', isDarkNow ? 'dark' : 'light');
+            });
+        })();
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
                 e.preventDefault();
-                const targetId = this.getAttribute('href');
-                const targetElement = document.querySelector(targetId);
-                
-                if (targetElement) {
-                    window.scrollTo({
-                        top: targetElement.offsetTop - 70, // Adjust for navbar height
-                        behavior: 'smooth'
-                    });
-                    
-                    // Close mobile navbar if open
-                    const navbarCollapse = document.querySelector('.navbar-collapse');
-                    if (navbarCollapse.classList.contains('show')) {
-                        document.querySelector('.navbar-toggler').click();
-                    }
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    document.querySelector('.navbar-collapse').classList.remove('show');
                 }
             });
+        });
+        document.getElementById('inquiry-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
+            const mailto = `mailto:info@thoughtlane.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailto;
         });
     </script>
 </body>

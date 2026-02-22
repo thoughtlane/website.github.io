@@ -3,22 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Math Solver – AI-Powered Step-by-Step Math from Images &amp; PDFs</title>
+  <title>Math Solver – AI-Powered Step-by-Step Math from Images &amp; PDFs | Thoughtlane</title>
   <meta name="description" content="Turn math worksheets and PDFs into solved, step-by-step solutions. Multi-agent AI with coordinator for reliable answers. Built for educators, publishers, and EdTech." />
   <link rel="stylesheet" href="styles.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 </head>
-<body>
+<body class="dark-theme">
   <header class="site-header">
     <div class="wrap">
-      <a href="#" class="logo">Math Solver</a>
+      <div class="header-left">
+        <a href="../index.html" class="logo-back" title="Back to Thoughtlane">
+          <img src="../thoughtlanelogo.png" alt="Thoughtlane" class="logo-img" width="1024" height="1024">
+          <span>← Thoughtlane</span>
+        </a>
+        <a href="#" class="logo">Math Solver</a>
+      </div>
       <nav class="nav">
         <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
         <a href="#use-cases">Use cases</a>
         <a href="#technology">Technology</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀️</button>
       </nav>
     </div>
   </header>
@@ -185,7 +192,25 @@
   <footer class="site-footer">
     <div class="wrap">
       <p>Math Solver – AI-powered step-by-step math from images and PDFs. Built for educators, publishers, and EdTech.</p>
+      <p><a href="../index.html" class="footer-back">← Back to Thoughtlane</a></p>
     </div>
   </footer>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('thoughtlane-theme');
+      const isDark = saved === 'light' ? false : true;
+      if (isDark) document.body.classList.add('dark-theme');
+      else document.body.classList.remove('dark-theme');
+      const btn = document.getElementById('theme-toggle');
+      if (btn) {
+        btn.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        btn.addEventListener('click', function() {
+          const dark = document.body.classList.toggle('dark-theme');
+          this.textContent = dark ? '☀️' : '🌙';
+          localStorage.setItem('thoughtlane-theme', dark ? 'dark' : 'light');
+        });
+      }
+    })();
+  </script>
 </body>
 </html>
