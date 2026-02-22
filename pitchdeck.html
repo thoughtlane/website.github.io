@@ -10,18 +10,21 @@
   <style>
     :root {
       --primary: #0d6b8a;
+      --primary-light: #1493b8;
       --accent: #0ea88c;
       --accent-light: #2dd4bf;
       --dark: #0f172a;
-      --muted: #94a3b8;
+      --dark-soft: #1e293b;
+      --light: #f8fafc;
+      --muted: #64748b;
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html, body {
       height: 100%;
       overflow: hidden;
       font-family: 'DM Sans', sans-serif;
-      background: var(--dark);
-      color: #f1f5f9;
+      background: var(--light);
+      color: var(--dark);
     }
     h1, h2, .slide-title { font-family: 'Fraunces', serif; }
 
@@ -92,7 +95,7 @@
       font-weight: 700;
       line-height: 1.1;
       letter-spacing: -0.03em;
-      color: #fff;
+      color: var(--dark);
       margin-bottom: 0.5em;
     }
     .slide-sub {
@@ -101,7 +104,7 @@
       color: var(--muted);
       max-width: 720px;
     }
-    .slide-sub.accent { color: var(--accent-light); }
+    .slide-sub.accent { color: var(--primary); }
 
     /* List slides */
     .slide ul {
@@ -113,7 +116,7 @@
       color: var(--muted);
     }
     .slide ul li { position: relative; padding-left: 1em; margin-bottom: 0.6em; }
-    .slide ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--accent-light); }
+    .slide ul li::before { content: ''; position: absolute; left: 0; top: 0.55em; width: 5px; height: 5px; border-radius: 50%; background: var(--primary); }
 
     /* Stats / market */
     .stat-grid {
@@ -132,24 +135,66 @@
       font-family: Fraunces, serif;
       font-size: clamp(2.25rem, 4.5vw, 3.5rem);
       font-weight: 700;
-      color: var(--accent-light);
+      color: var(--primary);
       line-height: 1.1;
     }
     .stat-label { font-size: clamp(0.95rem, 1.5vw, 1.15rem); color: var(--muted); margin-top: 0.35rem; }
 
+    /* Market chart */
+    .market-chart {
+      width: 100%;
+      max-width: 560px;
+      margin-top: 1.5rem;
+    }
+    .market-chart-row {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 0.85rem;
+      font-size: clamp(0.9rem, 1.4vw, 1.05rem);
+    }
+    .market-chart-label {
+      flex: 0 0 140px;
+      color: var(--dark-soft);
+      font-weight: 500;
+    }
+    .market-chart-bar-wrap {
+      flex: 1;
+      height: 28px;
+      background: rgba(13, 107, 138, 0.1);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .market-chart-bar {
+      height: 100%;
+      border-radius: 8px;
+      background: linear-gradient(90deg, var(--primary) 0%, var(--primary-light) 100%);
+      min-width: 4px;
+      transition: width 0.6s ease;
+    }
+    .market-chart-value {
+      flex: 0 0 72px;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'Fraunces', serif;
+      text-align: right;
+    }
+    .market-chart-note { font-size: 0.8rem; color: var(--muted); margin-left: 140px; margin-top: -0.35rem; margin-bottom: 0.5rem; }
+
     /* Differentiators */
     .diff-list { width: 100%; max-width: 700px; margin-top: 1.5rem; }
     .diff-item {
-      background: rgba(255,255,255,0.05);
-      border-left: 4px solid var(--accent-light);
-      padding: 1.25rem 1.5rem;
-      margin-bottom: 1rem;
+      background: rgba(255,255,255,0.9);
+      border-left: 4px solid var(--primary);
+      padding: 0.9rem 1.25rem;
+      margin-bottom: 0.75rem;
       border-radius: 0 12px 12px 0;
-      font-size: clamp(1.1rem, 2vw, 1.4rem);
-      color: #e2e8f0;
-      line-height: 1.5;
+      font-size: clamp(0.9rem, 1.5vw, 1.15rem);
+      color: var(--dark-soft);
+      line-height: 1.45;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
     }
-    .diff-item strong { color: #fff; }
+    .diff-item strong { color: var(--dark); }
 
     /* Products grid */
     .product-grid {
@@ -161,20 +206,22 @@
       max-width: 960px;
     }
     .product-card {
-      background: rgba(255,255,255,0.06);
+      background: rgba(255,255,255,0.95);
       border-radius: 12px;
       padding: 1.25rem 1.5rem;
-      border-left: 4px solid var(--accent);
+      border: 1px solid rgba(15, 23, 42, 0.08);
+      border-left: 4px solid var(--primary);
       text-align: left;
+      box-shadow: 0 2px 12px rgba(15, 23, 42, 0.06);
     }
-    .product-card h4 { font-size: clamp(1.1rem, 1.8vw, 1.35rem); margin-bottom: 0.4rem; color: #fff; }
+    .product-card h4 { font-size: clamp(1.1rem, 1.8vw, 1.35rem); margin-bottom: 0.4rem; color: var(--dark); }
     .product-card p { font-size: clamp(0.95rem, 1.4vw, 1.1rem); margin: 0; color: var(--muted); line-height: 1.5; }
 
     /* Pills */
     .pills { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: 1.5rem; }
     .pill {
-      background: rgba(14,168,140,0.2);
-      color: var(--accent-light);
+      background: rgba(13, 107, 138, 0.12);
+      color: var(--primary);
       padding: 0.6rem 1.25rem;
       border-radius: 999px;
       font-weight: 600;
@@ -182,7 +229,7 @@
     }
 
     /* Contact / CTA */
-    .cta-link { color: var(--accent-light); text-decoration: none; font-weight: 600; font-size: clamp(1.2rem, 2vw, 1.5rem); }
+    .cta-link { color: var(--primary); text-decoration: none; font-weight: 600; font-size: clamp(1.2rem, 2vw, 1.5rem); }
     .cta-link:hover { text-decoration: underline; }
 
     .slide-num { position: fixed; top: 1.25rem; right: 1.5rem; font-size: 0.9rem; color: var(--muted); z-index: 10; }
@@ -192,13 +239,15 @@
     }
     .progress-dots span {
       width: 8px; height: 8px; border-radius: 50%;
-      background: rgba(255,255,255,0.25);
+      background: rgba(15, 23, 42, 0.2);
       transition: background 0.3s, transform 0.3s;
     }
-    .progress-dots span.active { background: var(--accent-light); transform: scale(1.3); }
+    .progress-dots span.active { background: var(--primary); transform: scale(1.3); }
     .nav-hint { position: fixed; bottom: 1.25rem; right: 1.5rem; font-size: 0.8rem; color: var(--muted); z-index: 10; }
 
-    .citation { font-size: clamp(0.85rem, 1.2vw, 1rem); color: var(--muted); margin-top: 1.5rem; }
+    .citation { font-size: clamp(0.85rem, 1.2vw, 1rem); color: var(--muted); margin-top: 1rem; }
+    .citation a { color: var(--primary); text-decoration: none; }
+    .citation a:hover { text-decoration: underline; }
   </style>
 </head>
 <body>
@@ -249,33 +298,32 @@
       <div class="slide-inner">
         <h2 class="slide-title">Market Size & Opportunity</h2>
         <p class="slide-sub">North America leads global EdTech adoption. The opportunity is large and growing.</p>
-        <div class="stat-grid">
-          <div class="stat-box">
-            <div class="stat-value">$108B+</div>
-            <div class="stat-label">Global EdTech 2024</div>
+        <div class="market-chart">
+          <div class="market-chart-row">
+            <span class="market-chart-label">Global (2024)</span>
+            <div class="market-chart-bar-wrap"><div class="market-chart-bar" style="width: 26%;"></div></div>
+            <span class="market-chart-value">$108B</span>
           </div>
-          <div class="stat-box">
-            <div class="stat-value">14.3%</div>
-            <div class="stat-label">CAGR to 2034</div>
+          <div class="market-chart-row">
+            <span class="market-chart-label">Global (2034 proj.)</span>
+            <div class="market-chart-bar-wrap"><div class="market-chart-bar" style="width: 100%;"></div></div>
+            <span class="market-chart-value">$411B</span>
           </div>
-          <div class="stat-box">
-            <div class="stat-value">$411B</div>
-            <div class="stat-label">Projected 2034</div>
+          <p class="market-chart-note">14.3% CAGR · <a href="https://www.globenewswire.com/en/news-release/2024/04/08/2859439/0/en/EdTech-Market-on-Path-to-Reach-US-411-566-Billion-by-2034-with-14-3-CAGR-Future-Market-Insights.html" target="_blank" rel="noopener">Future Market Insights</a></p>
+          <div class="market-chart-row">
+            <span class="market-chart-label">USA (2024)</span>
+            <div class="market-chart-bar-wrap"><div class="market-chart-bar" style="width: 18%;"></div></div>
+            <span class="market-chart-value">$74B</span>
           </div>
-          <div class="stat-box">
-            <div class="stat-value">$74B</div>
-            <div class="stat-label">USA market 2024</div>
+          <p class="market-chart-note">12.6% CAGR → $236B by 2033 · <a href="https://www.imarcgroup.com/united-states-edtech-market" target="_blank" rel="noopener">IMARC Group</a></p>
+          <div class="market-chart-row">
+            <span class="market-chart-label">North America share</span>
+            <div class="market-chart-bar-wrap"><div class="market-chart-bar" style="width: 36%;"></div></div>
+            <span class="market-chart-value">35–37%</span>
           </div>
-          <div class="stat-box">
-            <div class="stat-value">12.6%</div>
-            <div class="stat-label">USA CAGR</div>
-          </div>
-          <div class="stat-box">
-            <div class="stat-value">35–37%</div>
-            <div class="stat-label">North America share</div>
-          </div>
+          <p class="market-chart-note"><a href="https://www.technavio.com/report/edtech-market-industry-analysis" target="_blank" rel="noopener">Technavio</a>, <a href="https://market.us/report/edtech-market/" target="_blank" rel="noopener">Market.us</a></p>
         </div>
-        <p class="citation">Sources: Future Market Insights, IMARC Group, Technavio</p>
+        <p class="citation" style="margin-top: 1.25rem;">Sources: <a href="https://www.globenewswire.com/en/news-release/2024/04/08/2859439/0/en/EdTech-Market-on-Path-to-Reach-US-411-566-Billion-by-2034-with-14-3-CAGR-Future-Market-Insights.html" target="_blank" rel="noopener">Future Market Insights</a> (global) · <a href="https://www.imarcgroup.com/united-states-edtech-market" target="_blank" rel="noopener">IMARC Group</a> (USA) · <a href="https://www.technavio.com/report/edtech-market-industry-analysis" target="_blank" rel="noopener">Technavio</a> / <a href="https://market.us/report/edtech-market/" target="_blank" rel="noopener">Market.us</a> (regional)</p>
       </div>
     </section>
 
@@ -286,10 +334,19 @@
         <p class="slide-sub" style="margin-bottom: 0.5rem;">What sets us apart from conventional AI solutions.</p>
         <div class="diff-list">
           <div class="diff-item">
-            <strong>We guarantee solution correctness.</strong> Conventional AI cannot. Our question/solution generator delivers accurate answers reliably—no probabilistic guesswork.
+            <strong>AI-native platform, built ground-up.</strong> We are among the first EdTech platforms built with AI at its core—not by connecting or bolting onto existing systems. That enables a fresh look at every product we create: reliability, accuracy, and workflow are designed in from day one.
           </div>
           <div class="diff-item">
-            <strong>Streamlined collaboration with a web-based scientific editor.</strong> Teams can create, edit, and maintain math and scientific content in one place—without juggling documents and equation tools.
+            <strong>Guaranteed solution correctness.</strong> Our question/solution generator uses multi-agent consensus and a dedicated math utility (no “mental math” from the model). We deliver verified, auditable solutions—no probabilistic guesswork.
+          </div>
+          <div class="diff-item">
+            <strong>Unified scientific authoring.</strong> ScientificEditor brings text, math, solve, and export into one web-based document—streamlined collaboration and maintenance without juggling tools.
+          </div>
+          <div class="diff-item">
+            <strong>Conceptual learning, not just answers.</strong> CognitiveBooster provides step-by-step scaffolding so students build understanding; Evaluation & Correction gives precise, consistent feedback at scale.
+          </div>
+          <div class="diff-item">
+            <strong>Enterprise-ready content & Q&A.</strong> Knowledge Hub: any format, AI-organized, queryable knowledge base; integrations with Google Classroom, Brightspace, and major cloud storage providers.
           </div>
         </div>
       </div>
