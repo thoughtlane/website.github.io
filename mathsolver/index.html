@@ -21,7 +21,6 @@
         <a href="#" class="logo">Math Solver</a>
       </div>
       <nav class="nav">
-        <a href="#how-it-works">How it works</a>
         <a href="#features">Features</a>
         <a href="#use-cases">Use cases</a>
         <a href="#technology">Technology</a>
@@ -53,45 +52,6 @@
           <li><strong>Similar questions</strong> generated on demand for practice or assessment</li>
         </ul>
         <p class="intro-note">All calculations go through a dedicated math utility—no “mental math” from the model—so numeric answers are precise and auditable.</p>
-      </div>
-    </section>
-
-    <section class="pipeline" id="how-it-works">
-      <div class="wrap">
-        <h2>How it works</h2>
-        <p class="section-lead">A single upload kicks off a clear pipeline: minimize for cost, extract with vision AI, then solve with multiple agents and a coordinator.</p>
-        <div class="pipeline-steps">
-          <div class="step">
-            <span class="step-num">1</span>
-            <h3>Upload</h3>
-            <p>Upload an image (JPEG, PNG, WebP) or PDF of a math question sheet. Use the Solver page or the Dashboard to organize files by topic, grade, or test.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">2</span>
-            <h3>Minimize</h3>
-            <p>Images are resized and compressed to cut token usage while keeping content readable. PDFs are rendered to images per page.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">3</span>
-            <h3>Extract</h3>
-            <p>Vision AI (Claude) reads the sheet and returns a list of questions: LaTeX for the problem, optional multiple-choice options and labels, and flags like <code>expectDecimal</code>.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">4</span>
-            <h3>Solve (multi-agent)</h3>
-            <p>Each question is solved by <em>N</em> agents in parallel. Each agent produces step-by-step reasoning and a final answer. All numeric work is done by a math utility—no model arithmetic.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">5</span>
-            <h3>Coordinator</h3>
-            <p>A coordinator compares agent answers and step counts. If they agree, the result is accepted. If not, extra rounds (configurable) can run. All agent and coordinator outputs are stored for audit and display.</p>
-          </div>
-          <div class="step">
-            <span class="step-num">6</span>
-            <h3>Results &amp; export</h3>
-            <p>View solutions per question and in a Results summary. Export to PDF or DOCX. Reopen any job later—results and steps load from storage so you don’t re-solve.</p>
-          </div>
-        </div>
       </div>
     </section>
 
