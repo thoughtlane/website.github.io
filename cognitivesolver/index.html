@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>STEM Solver – STEM Solutions from Images &amp; PDFs | Thoughtlane</title>
+  <meta name="description" content="Turn worksheets and PDFs into verified, step-by-step solutions for math, physics, chemistry, and more. AI-powered pipeline with Solver and Cognitive Helper. Built for educators and EdTech." />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+</head>
+<body class="dark-theme">
+  <header class="site-header">
+    <div class="wrap">
+      <div class="header-left">
+        <a href="../index.html" class="logo-back" title="Back to Thoughtlane">
+          <img src="../thoughtlanelogo.png" alt="Thoughtlane" class="logo-img" width="1024" height="1024">
+          <span>← Thoughtlane</span>
+        </a>
+        <a href="#" class="logo">STEM Solver</a>
+      </div>
+      <nav class="nav">
+        <a href="#features">Features</a>
+        <a href="#use-cases">Use cases</a>
+        <a href="#technology">Technology</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀️</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <h1>From worksheet to verified solution in minutes</h1>
+        <p class="hero-lead">Upload a question sheet—image or PDF—and get structured questions with step-by-step solutions. Built for STEM: we start with math and extend to physics, chemistry, and more. Our AI pipeline delivers consistent, explainable results you can rely on.</p>
+        <div class="hero-cta">
+          <a href="#what-it-is" class="btn btn-primary">See how it works</a>
+          <a href="#features" class="btn btn-secondary">Features</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="intro" id="what-it-is">
+      <div class="wrap">
+        <h2>What is STEM Solver?</h2>
+        <p class="intro-text">STEM Solver is an AI-powered pipeline for education and content teams. Upload photos or PDFs of question sheets (math today; physics, chemistry, and more coming). You get:</p>
+        <ul class="intro-list">
+          <li><strong>Extracted questions</strong> in structured form (LaTeX, multiple choice, labels)</li>
+          <li><strong>Step-by-step solutions</strong> for each question, with a final answer</li>
+          <li><strong>Verified results</strong>—calculations use a dedicated compute layer so numeric answers are precise and auditable</li>
+          <li><strong>Two modes</strong>—<strong>Solver</strong> (see full solutions) or <strong>Cognitive Helper</strong> (solve yourself with hints and step checking)</li>
+          <li><strong>Similar questions</strong> generated on demand for practice or assessment</li>
+        </ul>
+        <p class="intro-note">No need to retype problems; your existing worksheets become the starting point. Export as PDF or editable DOCX.</p>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="wrap">
+        <h2>Features</h2>
+        <p class="section-lead">Built for reliability, transparency, and integration into your workflow.</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <h3>Upload &amp; extract</h3>
+            <p>Add one or more files: images (JPEG, PNG, WebP) or PDFs of question sheets. Optional job ID prefix when uploading. The app extracts individual questions (and answer choices when present) and shows them in a list. Organize uploads in folders (e.g. Topic/Grade/Month).</p>
+          </article>
+          <article class="feature-card">
+            <h3>Structured extraction</h3>
+            <p>Questions are stored as JSON with LaTeX, optional choices and labels, and metadata. Same structure whether you upload from the Solver page or the Dashboard.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Solver — full step-by-step solutions</h3>
+            <p><strong>Solve All</strong> or solve one question at a time. Each question gets a step-by-step solution with a final answer. Expand or collapse sections; use “Minimize all” / “Maximize all.” <strong>Similar questions</strong>: request “Similar” for one item or “Similar (all)” for the set. Export as PDF or editable DOCX. Open in Dashboard to switch to Cognitive Helper or manage files.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Cognitive Helper — guided practice</h3>
+            <p>Students <strong>solve questions themselves</strong> with support. Question list on the left; click to open. <strong>Step editor</strong>: type one step per line (plain text and math via toolbar or math keyboard). <strong>Hints</strong>: “?” suggests the next step only—not the full answer. <strong>Step checking</strong>: when moving to the next line, the previous step can be checked; fix errors before continuing. <strong>Mark as solved</strong> when done. <strong>Chat</strong>: ask follow-up questions; conversation saved per question. <strong>Progress tracking</strong>: hints used, steps wrong/corrected, steps on own, questions solved—saved and restored when you return.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Dashboard</h3>
+            <p><strong>Tabs</strong>: Uploads, Jobs (Questions), Steps. Browse uploads by folder; for each file: <strong>Solve</strong> (extract and open in Solver), <strong>Cognitive Helper</strong>, or <strong>Past jobs</strong>. Jobs tab: open a set in Solver or Cognitive Helper. Steps tab: view past solution runs. Search by name, sort by name or date. Switch between list and tile view. Optional job ID prefix when opening a file.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Export &amp; download</h3>
+            <p>From Solver results: <strong>Download PDF</strong> (all step-by-step solutions in one file) or <strong>Download DOCX</strong> (editable Word-style document). LaTeX is converted to readable text (e.g. 1/3, ×, √) in exports.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Verified solver engine</h3>
+            <p>Every solution is computed via a dedicated compute layer—no “mental math” from the model—so numeric answers are precise and auditable. Configurable for your workflow.</p>
+          </article>
+          <article class="feature-card">
+            <h3>Themes &amp; accessibility</h3>
+            <p>Choose a visual theme (e.g. Paper, Light, Slate, Sepia, Midnight, Ocean, Forest, Sunset) for comfort in different lighting. Responsive layout: question list, step editor, and chat adapt to screen size and scroll when content is long.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="use-cases" id="use-cases">
+      <div class="wrap">
+        <h2>Use cases</h2>
+        <p class="section-lead">From classroom materials to item banks and platform integration.</p>
+        <div class="use-case-grid">
+          <div class="use-case">
+            <h3>Educators &amp; tutors</h3>
+            <p>Turn existing worksheets or past papers into solved keys with steps. Use Cognitive Helper for in-class or homework practice so students work through steps with hints and validation. Share solutions or similar questions without reworking content by hand.</p>
+          </div>
+          <div class="use-case">
+            <h3>Publishers &amp; content teams</h3>
+            <p>Scale solution authoring for textbooks and digital products. Keep LaTeX and structure; generate solutions and variants from scans or PDFs.</p>
+          </div>
+          <div class="use-case">
+            <h3>EdTech platforms</h3>
+            <p>Integrate via API: upload → extract → solve. Use job IDs and stored results to show solutions in your own UI or to power adaptive practice.</p>
+          </div>
+          <div class="use-case">
+            <h3>Assessment &amp; item banks</h3>
+            <p>Maintain question banks with structured data. Generate similar items and solution keys; export to DOCX or PDF for print or LMS.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="technology" id="technology">
+      <div class="wrap">
+        <h2>Technology</h2>
+        <p class="section-lead">Designed for accuracy, auditability, and deployment.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p>STEM Solver – STEM step-by-step solutions from images and PDFs. Math first; physics, chemistry, and more to come. Built for educators, publishers, and EdTech platforms.</p>
+      <p><a href="../index.html" class="footer-back">← Back to Thoughtlane</a></p>
+    </div>
+  </footer>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('thoughtlane-theme');
+      const isDark = saved === 'light' ? false : true;
+      if (isDark) document.body.classList.add('dark-theme');
+      else document.body.classList.remove('dark-theme');
+      const btn = document.getElementById('theme-toggle');
+      if (btn) {
+        btn.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        btn.addEventListener('click', function() {
+          const dark = document.body.classList.toggle('dark-theme');
+          this.textContent = dark ? '☀️' : '🌙';
+          localStorage.setItem('thoughtlane-theme', dark ? 'dark' : 'light');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
