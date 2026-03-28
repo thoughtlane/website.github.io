@@ -457,6 +457,20 @@ body:not(.dark-theme) .use-case {
   text-decoration: underline;
 }
 
+.footer-suite-links {
+  margin-top: 0.75rem !important;
+  font-size: 0.85rem !important;
+}
+
+.footer-suite-links a {
+  color: var(--accent-light);
+  text-decoration: none;
+}
+
+.footer-suite-links a:hover {
+  text-decoration: underline;
+}
+
 /* Responsive */
 @media (max-width: 640px) {
   .site-header .wrap {

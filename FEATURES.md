@@ -1,12 +1,14 @@
-# Math Solver — Features (User Guide)
+# STEM Solver — Features (User Guide)
 
-This document lists what you can do with Math Solver from a user’s perspective. It does not describe internal design or implementation.
+> **Name:** The product is marketed as **STEM Solver** on [thoughtlane.com](https://thoughtlane.com) (GitHub Pages: `cognitivesolver/`). Older docs may say “Math Solver”; behavior is the same.
+
+This document lists what you can do with STEM Solver from a user’s perspective. It does not describe internal design or implementation.
 
 ---
 
 ## Overview
 
-Math Solver lets you:
+STEM Solver lets you:
 
 1. Upload math question sheets (images or PDFs).
 2. Extract questions and work with them in two modes: **Solver** (see full solutions) or **Cognitive Helper** (solve step-by-step yourself with hints and validation).

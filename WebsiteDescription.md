@@ -1,3 +1,7 @@
+> **Note:** Original design brief (historical). For the current static site layout and URLs, see [`Readme.md`](Readme.md) and [`index.html`](index.html).
+
+---
+
 I need you to generate a website for company with name thoughtlane..
 
 

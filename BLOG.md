@@ -1,6 +1,8 @@
-# Math Solver: Building Cognitive Skills Through Step-by-Step Learning
+# STEM Solver: Building Cognitive Skills Through Step-by-Step Learning
 
 **For educators and students who want to understand math, not just get answers.**
+
+> **STEM Solver** is the current product name (see the Thoughtlane site and `cognitivesolver/`). Older posts may refer to “Math Solver.”
 
 ---
 
@@ -8,7 +10,7 @@
 
 Math is more than answers—it's reasoning. When students see only a final result, they miss how to get there. When they work through steps themselves, they build the habits that last: breaking problems down, checking each step, and fixing mistakes as they go.
 
-Math Solver is built around that idea. It helps students and teachers work with real question sheets, get guided step-by-step support, and—when you want it—see full worked solutions. Everything is designed to support **thinking**, not just correctness.
+STEM Solver is built around that idea. It helps students and teachers work with real question sheets, get guided step-by-step support, and—when you want it—see full worked solutions. Everything is designed to support **thinking**, not just correctness.
 
 ---
 
@@ -16,7 +18,7 @@ Math Solver is built around that idea. It helps students and teachers work with 
 
 ### Work With Your Own Materials
 
-Upload a **photo or PDF** of a math sheet—a quiz, homework, or past paper. Math Solver extracts the questions and presents them in a simple list. You can then:
+Upload a **photo or PDF** of a math sheet—a quiz, homework, or past paper. STEM Solver extracts the questions and presents them in a simple list. You can then:
 
 - **Solve** and see full step-by-step solutions for each question.
 - **Practice** with Cognitive Helper: solve each question yourself, one step at a time, with hints and validation.
@@ -70,7 +72,7 @@ The goal is to make practice feel like a **guided workout** for mathematical thi
 
 ## Summary
 
-Math Solver gives you:
+STEM Solver gives you:
 
 - **Upload** — Your sheets (images or PDFs) become the source of questions.
 - **Step-by-step solutions** — When you want to see how a problem is done (Solver).
