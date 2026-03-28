@@ -18,6 +18,10 @@
             --dark-soft: #1e293b;
             --light: #f8fafc;
             --muted: #64748b;
+            --glass-bg: rgba(255, 255, 255, 0.5);
+            --glass-border: rgba(255, 255, 255, 0.55);
+            --glass-highlight: rgba(255, 255, 255, 0.75);
+            --glass-shadow: 0 8px 32px rgba(13, 107, 138, 0.1), 0 1px 0 var(--glass-highlight) inset;
         }
         
         * {
@@ -29,18 +33,68 @@
         }
         
         body {
-            background-color: var(--light);
+            background-color: transparent;
             color: var(--dark);
             scroll-behavior: smooth;
             transition: background-color 0.4s ease, color 0.4s ease;
+            position: relative;
+            overflow-x: hidden;
+            isolation: isolate;
+        }
+        
+        .page-backdrop {
+            position: fixed;
+            inset: 0;
+            z-index: -2;
+            pointer-events: none;
+            background:
+                radial-gradient(ellipse 120% 90% at 8% 15%, rgba(13, 107, 138, 0.18) 0%, transparent 52%),
+                radial-gradient(ellipse 100% 80% at 92% 78%, rgba(14, 168, 140, 0.15) 0%, transparent 48%),
+                radial-gradient(ellipse 70% 60% at 48% 48%, rgba(20, 147, 184, 0.1) 0%, transparent 55%),
+                var(--light);
+        }
+        
+        .parallax-blob {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(72px);
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: -1;
+            will-change: transform;
+        }
+        
+        .parallax-blob.blob-a {
+            width: min(44vw, 500px);
+            height: min(44vw, 500px);
+            top: -6%;
+            left: -10%;
+            background: radial-gradient(circle, rgba(13, 107, 138, 0.5) 0%, transparent 68%);
+        }
+        
+        .parallax-blob.blob-b {
+            width: min(58vw, 640px);
+            height: min(58vw, 640px);
+            bottom: -18%;
+            right: -14%;
+            background: radial-gradient(circle, rgba(14, 168, 140, 0.42) 0%, transparent 62%);
+        }
+        
+        .parallax-blob.blob-c {
+            width: min(36vw, 400px);
+            height: min(36vw, 400px);
+            top: 38%;
+            right: 2%;
+            background: radial-gradient(circle, rgba(20, 147, 184, 0.38) 0%, transparent 65%);
         }
         
         .navbar {
-            background: rgba(248, 250, 252, 0.72) !important;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom: 1px solid rgba(15, 23, 42, 0.06);
-            transition: background 0.4s ease, border-color 0.4s ease;
+            background: rgba(248, 250, 252, 0.55) !important;
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+            box-shadow: 0 4px 24px rgba(13, 107, 138, 0.06);
+            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
         }
         
         .navbar-brand img {
@@ -52,7 +106,72 @@
             min-height: 85vh;
             display: flex;
             align-items: center;
-            background: linear-gradient(135deg, rgba(13, 107, 138, 0.04) 0%, rgba(14, 168, 140, 0.06) 100%);
+            background: linear-gradient(135deg, rgba(13, 107, 138, 0.06) 0%, rgba(14, 168, 140, 0.08) 50%, transparent 100%);
+        }
+        
+        .hero-visual-wrap {
+            position: relative;
+            perspective: 1200px;
+        }
+        
+        .parallax-hero-media {
+            will-change: transform;
+            transition: transform 0.05s linear;
+            filter: drop-shadow(0 24px 48px rgba(13, 107, 138, 0.15));
+        }
+        
+        .section-parallax {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .section-parallax > .container,
+        .section-parallax > .container-fluid {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .parallax-decor {
+            position: absolute;
+            pointer-events: none;
+            z-index: 0;
+            will-change: transform;
+            border-radius: 50%;
+            filter: blur(52px);
+            opacity: 0.38;
+        }
+        
+        body.dark-theme .parallax-decor {
+            opacity: 0.22;
+        }
+        
+        .parallax-decor--teal {
+            width: min(340px, 58vw);
+            height: min(340px, 58vw);
+            background: radial-gradient(circle, rgba(13, 107, 138, 0.5) 0%, transparent 68%);
+        }
+        
+        .parallax-decor--mint {
+            width: min(280px, 48vw);
+            height: min(280px, 48vw);
+            background: radial-gradient(circle, rgba(14, 168, 140, 0.45) 0%, transparent 65%);
+        }
+        
+        .parallax-decor--sky {
+            width: min(220px, 40vw);
+            height: min(220px, 40vw);
+            background: radial-gradient(circle, rgba(20, 147, 184, 0.4) 0%, transparent 62%);
+        }
+        
+        .parallax-decor-pos-tr { top: -12%; right: -6%; }
+        .parallax-decor-pos-bl { bottom: -18%; left: -8%; }
+        .parallax-decor-pos-br { bottom: -10%; right: -4%; }
+        .parallax-decor-pos-tl { top: -8%; left: -5%; }
+        .parallax-decor-pos-mr { top: 35%; right: -12%; }
+        .parallax-decor-pos-ml { top: 50%; left: -10%; }
+        
+        .parallax-hero-copy {
+            will-change: transform;
         }
         
         .hero h1 {
@@ -95,18 +214,20 @@
         }
         
         .card {
-            border: none;
-            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
             overflow: hidden;
-            background: rgba(255, 255, 255, 0.7);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, background 0.4s ease;
+            background: var(--glass-bg);
+            backdrop-filter: blur(28px) saturate(165%);
+            -webkit-backdrop-filter: blur(28px) saturate(165%);
+            box-shadow: var(--glass-shadow);
+            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, background 0.4s ease, border-color 0.35s ease;
         }
         
         .card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 20px 40px rgba(13, 107, 138, 0.12);
+            transform: translateY(-6px);
+            box-shadow: 0 28px 56px rgba(13, 107, 138, 0.14), 0 1px 0 rgba(255, 255, 255, 0.85) inset;
+            border-color: rgba(255, 255, 255, 0.75);
         }
         
         .card-icon {
@@ -145,7 +266,7 @@
         }
         
         .contact-section {
-            background: linear-gradient(135deg, rgba(13, 107, 138, 0.06) 0%, rgba(14, 168, 140, 0.08) 100%);
+            background: linear-gradient(135deg, rgba(13, 107, 138, 0.08) 0%, rgba(14, 168, 140, 0.1) 100%);
         }
         
         .inquiry-form .form-control {
@@ -188,15 +309,28 @@
         
         /* Dark theme */
         body.dark-theme {
+            --glass-bg: rgba(18, 26, 44, 0.45);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --glass-highlight: rgba(255, 255, 255, 0.06);
+            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.06);
             background-color: #0c1222;
             color: #e2e8f0;
         }
         
+        body.dark-theme .page-backdrop {
+            background:
+                radial-gradient(ellipse 120% 90% at 8% 15%, rgba(13, 107, 138, 0.28) 0%, transparent 52%),
+                radial-gradient(ellipse 100% 80% at 92% 78%, rgba(14, 168, 140, 0.2) 0%, transparent 48%),
+                radial-gradient(ellipse 70% 60% at 48% 48%, rgba(20, 147, 184, 0.14) 0%, transparent 55%),
+                #0c1222;
+        }
+        
         body.dark-theme .navbar {
-            background: rgba(12, 18, 34, 0.75) !important;
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
-            border-bottom-color: rgba(255, 255, 255, 0.06);
+            background: rgba(12, 18, 34, 0.55) !important;
+            backdrop-filter: blur(28px) saturate(200%);
+            -webkit-backdrop-filter: blur(28px) saturate(200%);
+            border-bottom-color: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 28px rgba(0, 0, 0, 0.25);
         }
         
         body.dark-theme .navbar-brand span {
@@ -236,14 +370,16 @@
         }
         
         body.dark-theme .card {
-            background: rgba(21, 29, 46, 0.6);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.06);
+            background: var(--glass-bg);
+            backdrop-filter: blur(28px) saturate(165%);
+            -webkit-backdrop-filter: blur(28px) saturate(165%);
+            border: 1px solid var(--glass-border);
+            box-shadow: var(--glass-shadow);
         }
         
         body.dark-theme .card:hover {
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 28px 56px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.14);
         }
         
         body.dark-theme .card h4,
@@ -335,6 +471,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.06);
         }
         
+        
         .theme-toggle {
             width: 44px;
             height: 44px;
@@ -372,6 +509,10 @@
     </style>
 </head>
 <body class="dark-theme">
+    <div class="page-backdrop" aria-hidden="true"></div>
+    <div class="parallax-blob blob-a" aria-hidden="true"></div>
+    <div class="parallax-blob blob-b" aria-hidden="true"></div>
+    <div class="parallax-blob blob-c" aria-hidden="true"></div>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light sticky-top">
         <div class="container">
@@ -389,6 +530,8 @@
                     <li class="nav-item"><a class="nav-link" href="#about">What We Do</a></li>
                     <li class="nav-item"><a class="nav-link" href="#mission">Our Mission</a></li>
                     <li class="nav-item"><a class="nav-link" href="#why-now">Why Now</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#learning-approach">Learning approach</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#platform">Platform</a></li>
                     <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
                     <li class="nav-item"><a class="nav-link" href="#partners">Partners</a></li>
                     <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
@@ -401,10 +544,12 @@
     </nav>
 
     <!-- Hero -->
-    <section id="home" class="hero">
+    <section id="home" class="hero section-parallax">
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tr" data-parallax-speed="0.14" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-ml" data-parallax-speed="0.22" aria-hidden="true"></span>
         <div class="container">
             <div class="row align-items-center">
-                <div class="col-lg-7">
+                <div class="col-lg-7 parallax-hero-copy" data-parallax-speed="0.06">
                     <h1 class="display-4 fw-bold mb-4">EdTech Built Ground Up on AI</h1>
                     <p class="lead mb-4">We build AI-native EdTech to prepare the next generation for an AI-driven world: returning time to educators for meaningful student engagement, reducing time spent searching for solutions, and strengthening student cognition.</p>
                     <div class="d-flex flex-wrap gap-3">
@@ -412,15 +557,18 @@
                         <a href="#products" class="btn btn-outline-primary btn-lg">Explore Products</a>
                     </div>
                 </div>
-                <div class="col-lg-5 mt-5 mt-lg-0 text-center">
-                    <img src="thoughtlanelogo.png" alt="Thoughtlane" class="img-fluid" style="max-width: 560px; opacity: 0.95;" width="1024" height="1024" fetchpriority="high">
+                <div class="col-lg-5 mt-5 mt-lg-0 text-center hero-visual-wrap">
+                    <img src="thoughtlanelogo.png" alt="Thoughtlane" class="img-fluid parallax-hero-media" style="max-width: 560px; opacity: 0.95;" width="1024" height="1024" fetchpriority="high">
                 </div>
             </div>
         </div>
     </section>
 
     <!-- EdTech Market Section -->
-    <section id="market" class="py-5">
+    <section id="market" class="py-5 section-parallax">
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tr" data-parallax-speed="0.11" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-bl" data-parallax-speed="0.18" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-mr" data-parallax-speed="0.25" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-5">The EdTech Opportunity</h2>
             <p class="text-center text-muted mb-5 mx-auto" style="max-width: 700px;">North America leads global EdTech adoption. Below is the market landscape we serve.</p>
@@ -469,7 +617,9 @@
     </section>
 
     <!-- What We Do -->
-    <section id="about" class="py-5 bg-white">
+    <section id="about" class="py-5 bg-white section-parallax">
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tl" data-parallax-speed="0.12" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-br" data-parallax-speed="0.2" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-5">What We Do</h2>
             <div class="row justify-content-center">
@@ -481,7 +631,9 @@
     </section>
 
     <!-- Our Mission -->
-    <section id="mission" class="py-5">
+    <section id="mission" class="py-5 section-parallax">
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tr" data-parallax-speed="0.1" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-bl" data-parallax-speed="0.17" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-4">Our Mission</h2>
             <p class="text-center text-muted mb-4 mx-auto" style="max-width: 680px;">We are transforming the education sector with AI across the full learning lifecycle:</p>
@@ -527,7 +679,9 @@
     </section>
 
     <!-- Why Now -->
-    <section id="why-now" class="py-5">
+    <section id="why-now" class="py-5 section-parallax">
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-mr" data-parallax-speed="0.13" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-ml" data-parallax-speed="0.21" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-5">Why Now</h2>
             <div class="row justify-content-center">
@@ -540,8 +694,64 @@
         </div>
     </section>
 
+    <!-- Learning approach (pedagogy-aligned content; maps to product suite) -->
+    <section id="learning-approach" class="py-5 bg-white section-parallax">
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tr" data-parallax-speed="0.1" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-bl" data-parallax-speed="0.16" aria-hidden="true"></span>
+        <div class="container">
+            <h2 class="section-title display-5 text-center mb-2">How Thoughtlane supports learning</h2>
+            <p class="text-center text-muted mb-5 mx-auto" style="max-width: 720px;">The best-known learning platforms succeed because they combine <strong>explanation</strong>, <strong>deliberate practice</strong>, <strong>feedback</strong>, and <strong>visibility into progress</strong>. Thoughtlane brings that same arc to your institution—grounded in <em>your</em> curriculum and materials.</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 p-4 border-0 product-card">
+                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">📖</div>
+                        <h3 class="h5 fw-bold mb-2">Concepts &amp; clarity first</h3>
+                        <p class="text-muted mb-2 small">Learners need to see <strong>why</strong> before they repeat drills. Trusted explanations and source-linked answers beat anonymous web search.</p>
+                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="knowledge-hub/index.html" class="text-decoration-none" style="color: var(--primary);">Knowledge Hub</a>, <a href="cognitivesolver/index.html" class="text-decoration-none" style="color: var(--primary);">STEM Solver</a> (full solutions when you want a model), <a href="matheditor/index.html" class="text-decoration-none" style="color: var(--primary);">Scientific Editor</a>.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 p-4 border-0 product-card">
+                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">🎯</div>
+                        <h3 class="h5 fw-bold mb-2">Practice at the right level</h3>
+                        <p class="text-muted mb-2 small">Mastery-style practice means enough reps <em>with the right help</em>—hints and steps—not just answer keys. Extra variants when a topic still feels shaky.</p>
+                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="cognitive-booster/index.html" class="text-decoration-none" style="color: var(--primary);">Cognitive Booster</a> (guided mode in STEM Solver), STEM Solver (similar questions).</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 p-4 border-0 product-card">
+                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">🔄</div>
+                        <h3 class="h5 fw-bold mb-2">Feedback that closes the loop</h3>
+                        <p class="text-muted mb-2 small">Improvement happens when students know what to fix <strong>while the work still matters</strong>—not weeks later.</p>
+                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="evaluation/index.html" class="text-decoration-none" style="color: var(--primary);">Evaluation &amp; Correction</a>.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="row g-4 justify-content-center mt-1">
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 p-4 border-0 product-card">
+                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">💡</div>
+                        <h3 class="h5 fw-bold mb-2">Reasoning, not only recall</h3>
+                        <p class="text-muted mb-2 small">Short lectures and quizzes alone rarely build argument skills. Structured dialogue pushes “how” and “why”—especially in STEM and literacy-heavy subjects.</p>
+                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="socratic-dialogue/index.html" class="text-decoration-none" style="color: var(--primary);">Socratic Dialogue</a>.</p>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-4">
+                    <div class="card h-100 p-4 border-0 product-card">
+                        <div class="card-icon mb-3" style="background: rgba(14, 168, 140, 0.15); color: var(--accent);">📈</div>
+                        <h3 class="h5 fw-bold mb-2">Everyone sees progress</h3>
+                        <p class="text-muted mb-2 small">Teachers need class-level signals; leaders need program health. Students benefit when adults share a clear picture of growth.</p>
+                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="platform/index.html" class="text-decoration-none" style="color: var(--primary);">Unified Platform</a> (analytics, KPIs, student progress over time).</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Target Market -->
-    <section class="py-5 bg-white">
+    <section class="py-5 section-parallax">
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-tr" data-parallax-speed="0.11" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-bl" data-parallax-speed="0.19" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-5">Target Market</h2>
             <p class="text-center text-muted mb-5">We serve the full spectrum of the education sector</p>
@@ -559,56 +769,117 @@
         </div>
     </section>
 
-    <!-- Products -->
-    <section id="products" class="py-5">
+    <!-- Platform -->
+    <section id="platform" class="py-5 section-parallax">
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tl" data-parallax-speed="0.1" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-br" data-parallax-speed="0.16" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-mr" data-parallax-speed="0.24" aria-hidden="true"></span>
         <div class="container">
-            <h2 class="section-title display-5 text-center mb-5">Our Products</h2>
-            <div class="row g-4">
-                <div class="col-md-6">
-                    <a href="cognitivesolver/index.html" class="text-decoration-none text-dark d-block h-100">
-                        <div class="card h-100 product-card p-4">
-                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">📝</div>
-                            <h4 class="fw-bold">STEM Solver</h4>
-                            <p class="text-muted mb-0">Upload worksheets or PDFs and get verified step-by-step solutions. Built for STEM—starting with math; physics, chemistry, and more to come. Solver mode for full solutions; Cognitive Helper for guided practice with hints and step checking.</p>
+            <h2 class="section-title display-5 text-center mb-2">Unified Platform</h2>
+            <p class="text-center text-muted mb-5 mx-auto" style="max-width: 760px;">One Thoughtlane experience ties our learning apps together: a single place to sign in, consistent access to your materials, and <strong>analytics</strong> that turn activity into insight—so leaders can monitor <strong>KPIs</strong>, see how tools are used, and follow <strong>student progress</strong> over time.</p>
+            <div class="row g-4 justify-content-center">
+                <div class="col-lg-11 col-xl-10">
+                    <div class="card p-4 p-md-5 border-0 product-card">
+                        <div class="row g-4 align-items-start">
+                            <div class="col-md-auto text-center text-md-start">
+                                <div class="card-icon mx-auto mx-md-0" style="background: rgba(14, 168, 140, 0.15); color: var(--accent);">📊</div>
+                            </div>
+                            <div class="col-md">
+                                <h4 class="fw-bold mb-2">What the platform gives you</h4>
+                                <p class="text-muted mb-3"><strong>Who it’s for:</strong> principals, district leaders, and instructional or technology leads rolling out digital learning across a school or system.</p>
+                                <p class="text-muted mb-3 mb-md-0"><strong>Benefits:</strong> one coherent experience for staff and students across Thoughtlane apps; reporting that helps you see usage and trends; visibility into student progress over time so teachers can support learners earlier; and materials that feel connected instead of scattered across tools.</p>
+                                <p class="mb-0"><a href="platform/index.html" class="fw-semibold" style="color: var(--accent);">Learn more about the platform →</a></p>
+                            </div>
                         </div>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100 product-card p-4">
-                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">✓</div>
-                        <h4 class="fw-bold">Evaluation & Correction</h4>
-                        <p class="text-muted mb-0">Precise correction and evaluation of student submissions, enabling educators to save time and deliver consistent feedback.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100 product-card p-4">
-                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">🧠</div>
-                        <h4 class="fw-bold">CognitiveBooster</h4>
-                        <p class="text-muted mb-0">Guides students toward conceptual understanding rather than answers alone. Step-by-step scaffolding for deeper learning.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <a href="matheditor/index.html" class="text-decoration-none text-dark d-block h-100">
-                        <div class="card h-100 product-card p-4">
-                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">✏️</div>
-                            <h4 class="fw-bold">ScientificEditor</h4>
-                            <p class="text-muted mb-0">Web-based editor for mathematical and scientific content. Streamlined collaboration and maintenance across teams and curricula.</p>
-                        </div>
-                    </a>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100 product-card p-4">
-                        <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">📁</div>
-                        <h4 class="fw-bold">Knowledge Hub</h4>
-                        <p class="text-muted mb-0">Smart content and Q&A: upload files in any format, organize with folders or AI suggestions, and query your knowledge base at any level. Integrates with Google Classroom, Brightspace, and cloud storage (S3, Google Cloud, Azure, Wasabi). Store and manage URLs alongside documents.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
+    <!-- Products -->
+    <section id="products" class="py-5 section-parallax">
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tr" data-parallax-speed="0.12" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-bl" data-parallax-speed="0.18" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-ml" data-parallax-speed="0.23" aria-hidden="true"></span>
+        <div class="container">
+            <h2 class="section-title display-5 text-center mb-2">Our Products</h2>
+            <p class="text-center text-muted mb-5 mx-auto" style="max-width: 680px;">Learning apps and authoring tools that work together on the Thoughtlane platform.</p>
+            <div class="row g-4">
+                <div class="col-md-6 col-xl-4">
+                    <a href="cognitivesolver/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">📝</div>
+                            <h4 class="fw-bold">STEM Solver</h4>
+                            <p class="text-muted small mb-2"><strong>Who it’s for:</strong> teachers, tutors, and content teams working from real worksheets and PDFs in math and STEM.</p>
+                            <p class="text-muted mb-0"><strong>Benefits:</strong> turn paper or PDF problem sets into worked examples and practice in minutes; offer full solutions when you want explanation speed, or guided mode when you want students to think first; create extra practice variants; export for handouts or records.</p>
+                            <p class="mt-3 mb-0 small fw-semibold" style="color: var(--accent);">Learn more →</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <a href="matheditor/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">✏️</div>
+                            <h4 class="fw-bold">ScientificEditor</h4>
+                            <p class="text-muted small mb-2"><strong>Who it’s for:</strong> authors, departments, and publishers creating math- and science-heavy documents together.</p>
+                            <p class="text-muted mb-0"><strong>Benefits:</strong> write narrative and equations in one place; simplify or check expressions without leaving the document; export to PDF—fewer handoffs between Word, equation editors, and calculators.</p>
+                            <p class="mt-3 mb-0 small fw-semibold" style="color: var(--accent);">Learn more →</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <a href="knowledge-hub/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">📁</div>
+                            <h4 class="fw-bold">Knowledge Hub</h4>
+                            <p class="text-muted small mb-2"><strong>Who it’s for:</strong> teachers, office staff, and families tired of hunting through drives and inboxes for official answers.</p>
+                            <p class="text-muted mb-0"><strong>Benefits:</strong> one private search over <em>your</em> school’s documents and links; answers that point back to sources you trust; filters by grade, subject, and class; less duplicate email and confusion about policies and deadlines.</p>
+                            <p class="mt-3 mb-0 small fw-semibold" style="color: var(--accent);">Learn more →</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <a href="socratic-dialogue/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">💬</div>
+                            <h4 class="fw-bold">Socratic Dialogue</h4>
+                            <p class="text-muted small mb-2"><strong>Who it’s for:</strong> teachers, curriculum leads, and coaches who want discussion-rich lessons and faster unit planning.</p>
+                            <p class="text-muted mb-0"><strong>Benefits:</strong> organize planning materials; get ideas for activities and prompts you still approve; run classroom dialogue that stresses reasoning and explanation; complements your knowledge base and STEM practice.</p>
+                            <p class="mt-3 mb-0 small fw-semibold" style="color: var(--accent);">Learn more →</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <a href="evaluation/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">✓</div>
+                            <h4 class="fw-bold">Evaluation &amp; Correction</h4>
+                            <p class="text-muted small mb-2"><strong>Who it’s for:</strong> teachers and programs with high volumes of written or structured work to mark.</p>
+                            <p class="text-muted mb-0"><strong>Benefits:</strong> faster return of work with clear, actionable feedback; fairer consistency across classes; students improve while the task is still fresh; teachers reclaim time for coaching and planning.</p>
+                            <p class="mt-3 mb-0 small fw-semibold" style="color: var(--accent);">Learn more →</p>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-md-6 col-xl-4">
+                    <a href="cognitive-booster/index.html" class="text-decoration-none text-dark d-block h-100">
+                        <div class="card h-100 product-card p-4">
+                            <div class="card-icon mb-3" style="background: rgba(13, 107, 138, 0.12); color: var(--primary);">🧠</div>
+                            <h4 class="fw-bold">Cognitive Booster</h4>
+                            <p class="text-muted small mb-2"><strong>Who it’s for:</strong> students who need support without instant full solutions; teachers extending one-to-one help at scale.</p>
+                            <p class="text-muted mb-0"><strong>Benefits:</strong> hints and step checking build procedural fluency <em>and</em> understanding; progress you can see and discuss; practice resumes across sessions—inside STEM Solver’s guided mode.</p>
+                            <p class="mt-3 mb-0 small fw-semibold" style="color: var(--accent);">Learn more →</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- What We're Looking For -->
-    <section id="partners" class="py-5 bg-white">
+    <section id="partners" class="py-5 bg-white section-parallax">
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-br" data-parallax-speed="0.11" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tl" data-parallax-speed="0.19" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-5">What We Are Looking For</h2>
             <div class="row g-4">
@@ -634,7 +905,10 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-5 contact-section">
+    <section id="contact" class="py-5 contact-section section-parallax">
+        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tr" data-parallax-speed="0.1" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-bl" data-parallax-speed="0.17" aria-hidden="true"></span>
+        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-mr" data-parallax-speed="0.22" aria-hidden="true"></span>
         <div class="container">
             <h2 class="section-title display-5 text-center mb-2">Get in Touch</h2>
             <p class="text-center text-muted mb-5">For inquiries: <a href="mailto:info@thoughtlane.com" class="fw-semibold" style="color: var(--primary);">info@thoughtlane.com</a></p>
@@ -695,7 +969,7 @@
             <hr class="my-4 opacity-25">
             <div class="row">
                 <div class="col-md-6">
-                    <p class="mb-0 small opacity-75">© 2025 Thoughtlane. All rights reserved.</p>
+                    <p class="mb-0 small opacity-75">© 2026 Thoughtlane. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -739,6 +1013,53 @@
             const mailto = `mailto:info@thoughtlane.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             window.location.href = mailto;
         });
+        (function initParallax() {
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+            var blobs = document.querySelectorAll('.parallax-blob');
+            var heroImg = document.querySelector('.parallax-hero-media');
+            var ticking = false;
+            function updateSectionLayers() {
+                var vh = window.innerHeight || 1;
+                document.querySelectorAll('.section-parallax [data-parallax-speed]').forEach(function(el) {
+                    var section = el.closest('.section-parallax');
+                    if (!section) return;
+                    var rect = section.getBoundingClientRect();
+                    if (rect.bottom < -80 || rect.top > vh + 80) {
+                        el.style.transform = '';
+                        return;
+                    }
+                    var progress = (rect.top + rect.height * 0.5 - vh * 0.5) / vh;
+                    var speed = parseFloat(el.getAttribute('data-parallax-speed'));
+                    if (isNaN(speed)) speed = 0.12;
+                    var ty = -progress * 76 * speed;
+                    el.style.transform = 'translate3d(0,' + ty + 'px,0)';
+                });
+            }
+            function update() {
+                var y = window.scrollY || 0;
+                var factors = [0.045, 0.075, 0.055];
+                blobs.forEach(function(el, i) {
+                    var f = factors[i] || 0.05;
+                    el.style.transform = 'translate3d(0,' + (y * f) + 'px,0)';
+                });
+                if (heroImg) {
+                    var scale = 1 + Math.min(y * 0.00012, 0.06);
+                    heroImg.style.transform = 'translate3d(0,' + (y * 0.1) + 'px,0) scale(' + scale + ')';
+                }
+                updateSectionLayers();
+                ticking = false;
+            }
+            window.addEventListener('scroll', function() {
+                if (!ticking) {
+                    window.requestAnimationFrame(update);
+                    ticking = true;
+                }
+            }, { passive: true });
+            window.addEventListener('resize', function() {
+                window.requestAnimationFrame(update);
+            }, { passive: true });
+            update();
+        })();
     </script>
 </body>
 </html>

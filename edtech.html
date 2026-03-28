@@ -116,6 +116,26 @@
             margin-top: 40px;
         }
         
+        .solutions-grid.suite {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 22px;
+        }
+        
+        .solution-box.compact {
+            min-height: 0;
+            padding: 28px 22px;
+        }
+        
+        .solution-box.compact h3 {
+            font-size: 20px;
+            margin-bottom: 14px;
+        }
+        
+        .solution-box.compact li {
+            font-size: 14px;
+            padding: 6px 0;
+        }
+        
         .solution-box {
             padding: 40px 30px;
             border-radius: 8px;
@@ -390,6 +410,7 @@
             .slide-1 .subtitle { font-size: 20px; }
             .slide-title { font-size: 32px; }
             .solutions-grid { grid-template-columns: 1fr; }
+            .solutions-grid.suite { grid-template-columns: 1fr; }
             .market-stats { grid-template-columns: 1fr; }
             .nav-controls { 
                 bottom: 10px;
@@ -404,7 +425,7 @@
         <section class="slide slide-1" id="slide-1">
             <h1>AI-Powered Education Platform</h1>
             <div class="subtitle">Transforming Teaching with Intelligent Automation</div>
-            <div class="products">Math Solver & Generator | Scientific Editor</div>
+            <div class="products">Unified platform · STEM Solver · Scientific Editor · Knowledge Hub · Socratic Dialogue</div>
         </section>
 
         <!-- Slide 2: Problem -->
@@ -429,26 +450,56 @@
 
         <!-- Slide 3: Solution Overview -->
         <section class="slide slide-3" id="slide-3">
-            <h2 class="slide-title">Our Solution: Two Powerful Tools</h2>
+            <h2 class="slide-title">Our Suite: Platform + Learning Apps</h2>
+            <p class="slide-subtitle" style="margin-bottom: 24px;">One platform for sign-in and analytics—KPIs, engagement, and student progress—alongside our teaching and learning apps.</p>
             
-            <div class="solutions-grid">
-                <div class="solution-box math">
-                    <h3>Math Solver & Generator</h3>
+            <div class="solutions-grid suite">
+                <div class="solution-box math compact">
+                    <h3>Unified platform</h3>
                     <ul>
-                        <li>AI-powered question generation</li>
-                        <li>Automatic grading & feedback</li>
-                        <li>Personalized learning paths</li>
-                        <li>Step-by-step solutions</li>
+                        <li>Single sign-on experience</li>
+                        <li>Analytics &amp; reporting</li>
+                        <li>Student progress insight</li>
                     </ul>
                 </div>
-                
-                <div class="solution-box editor">
+                <div class="solution-box math compact">
+                    <h3>STEM Solver</h3>
+                    <ul>
+                        <li>Step-by-step solutions</li>
+                        <li>Cognitive Booster</li>
+                        <li>Practice &amp; export</li>
+                    </ul>
+                </div>
+                <div class="solution-box editor compact">
                     <h3>Scientific Editor</h3>
                     <ul>
-                        <li>Real-time collaboration</li>
-                        <li>Version control & tracking</li>
-                        <li>Question bank management</li>
-                        <li>Multi-format export</li>
+                        <li>Math & science authoring</li>
+                        <li>Collaboration</li>
+                        <li>Question banks</li>
+                    </ul>
+                </div>
+                <div class="solution-box math compact">
+                    <h3>Knowledge Hub</h3>
+                    <ul>
+                        <li>School knowledge search</li>
+                        <li>Classroom &amp; cloud ready</li>
+                        <li>Source-linked answers</li>
+                    </ul>
+                </div>
+                <div class="solution-box editor compact">
+                    <h3>Socratic Dialogue</h3>
+                    <ul>
+                        <li>Curriculum support</li>
+                        <li>Interactive lessons</li>
+                        <li>Guided dialogue</li>
+                    </ul>
+                </div>
+                <div class="solution-box math compact">
+                    <h3>Evaluation</h3>
+                    <ul>
+                        <li>Auto correction</li>
+                        <li>Consistent feedback</li>
+                        <li>Educator time saved</li>
                     </ul>
                 </div>
             </div>

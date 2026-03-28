@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Knowledge Hub by Thoughtlane: your school’s own knowledge base—searchable answers grounded in your documents, for staff and students." />
+  <title>Knowledge Hub — Your School’s Answers, in One Place | Thoughtlane</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/product-landing.css" />
+</head>
+<body class="dark-theme">
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="header-left">
+        <a href="../index.html" class="logo-back" title="Back to Thoughtlane">
+          <img src="../thoughtlanelogo.png" alt="Thoughtlane" class="logo-img" width="1024" height="1024">
+          <span>← Thoughtlane</span>
+        </a>
+        <a href="#" class="logo">
+          <span class="logo-icon">📁</span>
+          <span class="logo-text">Knowledge Hub</span>
+        </a>
+      </div>
+      <nav class="nav">
+        <a href="#customers">Who it’s for</a>
+        <a href="#benefits">Benefits</a>
+        <a href="#suite">Fits with</a>
+        <a href="../index.html#contact" class="btn btn-primary">Contact</a>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">☀️</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1 class="hero-title">Stop reinventing the same answers</h1>
+        <p class="hero-subtitle">Knowledge Hub is your school’s private place to upload handbooks, study guides, past notes, and links—then search and get responses that point back to the original sources. Families and staff get consistent information; students learn to trust what your school publishes, not random search results.</p>
+        <div class="hero-cta">
+          <a href="../index.html#contact" class="btn btn-primary btn-lg">Ask about Knowledge Hub</a>
+          <a href="#benefits" class="btn btn-secondary btn-lg">Benefits</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="customers">
+      <div class="container">
+        <h2 class="section-title">Who it’s for</h2>
+        <p class="section-lead">Anyone who answers “Where do I find…?” more often than they’d like.</p>
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <h3>Teachers &amp; teacher-librarians</h3>
+            <p>You maintain materials across grades and subjects and need one searchable home that respects how you tag and organize content.</p>
+          </div>
+          <div class="use-case-card">
+            <h3>School &amp; district office staff</h3>
+            <p>You field policy questions, deadlines, and forms—Knowledge Hub can reduce repeat emails by surfacing the right page or paragraph.</p>
+          </div>
+          <div class="use-case-card">
+            <h3>Students &amp; families</h3>
+            <p>They get overwhelmed by scattered PDFs and portals; a single, friendly search experience lowers frustration and missed deadlines.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="benefits">
+      <div class="container">
+        <h2 class="section-title">Benefits for your school</h2>
+        <p class="section-lead">What customers tell us they value most—without implementation detail.</p>
+        <div class="feature-grid">
+          <article class="feature-card">
+            <div class="feature-icon">🔍</div>
+            <h3>Find the right answer fast</h3>
+            <p>Search by topic, grade, class, or subject so people see what applies to them—not everything the district ever published.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">📎</div>
+            <h3>Trust, with receipts</h3>
+            <p>Responses tie back to your documents so staff can verify wording and families see official sources.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">⏱</div>
+            <h3>Less time hunting</h3>
+            <p>Fewer trips through shared drives and inboxes means more time for instruction and student support.</p>
+          </article>
+          <article class="feature-card">
+            <div class="feature-icon">🔗</div>
+            <h3>Works with how you already work</h3>
+            <p>Connects with common classroom systems and cloud storage so you’re not starting your file plan from zero.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="suite">
+      <div class="container">
+        <h2 class="section-title">How it fits with Thoughtlane</h2>
+        <p class="section-lead">Knowledge Hub is often the “source of truth” that other products draw on.</p>
+        <div class="use-case-grid">
+          <div class="use-case-card">
+            <h3>With STEM Solver</h3>
+            <p>Students practice problems while staff still point them to syllabus and policy text in one search experience.</p>
+          </div>
+          <div class="use-case-card">
+            <h3>With Socratic Dialogue</h3>
+            <p>Class discussions can reference readings and school materials students can locate themselves.</p>
+          </div>
+          <div class="use-case-card">
+            <h3><a href="../platform/index.html" style="color: inherit;">Unified Platform →</a></h3>
+            <p>Roll out search and practice together with shared sign-in and reporting for leaders.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Knowledge Hub — Thoughtlane.</p>
+      <p><a href="../index.html" class="footer-back">← Back to Thoughtlane</a></p>
+    </div>
+  </footer>
+  <script>
+    (function() {
+      const saved = localStorage.getItem('thoughtlane-theme');
+      const isDark = saved === 'light' ? false : true;
+      if (isDark) document.body.classList.add('dark-theme');
+      else document.body.classList.remove('dark-theme');
+      const btn = document.getElementById('theme-toggle');
+      if (btn) {
+        btn.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        btn.addEventListener('click', function() {
+          const dark = document.body.classList.toggle('dark-theme');
+          this.textContent = dark ? '☀️' : '🌙';
+          localStorage.setItem('thoughtlane-theme', dark ? 'dark' : 'light');
+        });
+      }
+    })();
+  </script>
+</body>
+</html>
