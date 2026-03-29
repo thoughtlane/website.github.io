@@ -8,9 +8,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../shared/site-backdrop.css" />
   <link rel="stylesheet" href="styles.css" />
 </head>
-<body class="dark-theme">
+<body class="tl-has-ambient tl-subpage">
+  <div class="tl-ambient" aria-hidden="true">
+    <div class="tl-liquid-mesh"></div>
+    <div class="tl-page-backdrop"></div>
+  </div>
+  <div class="tl-parallax-blob tl-blob-a" aria-hidden="true"></div>
+  <div class="tl-parallax-blob tl-blob-b" aria-hidden="true"></div>
+  <div class="tl-parallax-blob tl-blob-c" aria-hidden="true"></div>
   <header class="site-header">
     <div class="container header-inner">
       <div class="header-left">
@@ -174,16 +182,16 @@
   <script>
     (function() {
       const saved = localStorage.getItem('thoughtlane-theme');
-      const isDark = saved === 'light' ? false : true;
-      if (isDark) document.body.classList.add('dark-theme');
-      else document.body.classList.remove('dark-theme');
+      const isLight = saved === 'light';
+      if (isLight) document.body.classList.add('light-theme');
+      else document.body.classList.remove('light-theme');
       const btn = document.getElementById('theme-toggle');
       if (btn) {
-        btn.textContent = document.body.classList.contains('dark-theme') ? '☀️' : '🌙';
+        btn.textContent = document.body.classList.contains('light-theme') ? '🌙' : '☀️';
         btn.addEventListener('click', function() {
-          const dark = document.body.classList.toggle('dark-theme');
-          this.textContent = dark ? '☀️' : '🌙';
-          localStorage.setItem('thoughtlane-theme', dark ? 'dark' : 'light');
+          const light = document.body.classList.toggle('light-theme');
+          this.textContent = light ? '🌙' : '☀️';
+          localStorage.setItem('thoughtlane-theme', light ? 'light' : 'dark');
         });
       }
     })();

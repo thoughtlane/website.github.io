@@ -1,16 +1,16 @@
 /* STEM Solver – Thoughtlane theme */
 
 :root {
-  --primary: #0d6b8a;
-  --primary-light: #1493b8;
-  --accent: #0ea88c;
-  --accent-light: #2dd4bf;
-  --bg: #0c1222;
-  --surface: #151d2e;
-  --surface-elevated: #1e293b;
-  --text: #e2e8f0;
-  --text-muted: #94a3b8;
-  --accent-soft: rgba(14, 168, 140, 0.2);
+  --primary: #0d9488;
+  --primary-light: #2dd4bf;
+  --accent: #a78bfa;
+  --accent-light: #c4b5fd;
+  --bg: #0a0f14;
+  --surface: rgba(18, 26, 32, 0.72);
+  --surface-elevated: #152028;
+  --text: #e8eef0;
+  --text-muted: #8fa3a8;
+  --accent-soft: rgba(167, 139, 250, 0.18);
   --border: rgba(255, 255, 255, 0.08);
   --radius: 8px;
   --radius-lg: 12px;
@@ -24,13 +24,13 @@
 }
 
 /* Light theme */
-body:not(.dark-theme) {
-  --bg: #f8fafc;
-  --surface: #ffffff;
-  --surface-elevated: #f1f5f9;
-  --text: #0f172a;
-  --text-muted: #64748b;
-  --border: rgba(15, 23, 42, 0.1);
+body.light-theme {
+  --bg: #eef6f4;
+  --surface: rgba(255, 255, 255, 0.9);
+  --surface-elevated: #e0ebe8;
+  --text: #0e1114;
+  --text-muted: #5c6b6a;
+  --border: rgba(14, 17, 20, 0.1);
 }
 
 *,
@@ -54,6 +54,10 @@ body {
   transition: background 0.4s ease, color 0.4s ease;
 }
 
+body.tl-has-ambient {
+  background: transparent;
+}
+
 h1, h2, h3 {
   font-family: var(--font-serif);
 }
@@ -69,14 +73,14 @@ h1, h2, h3 {
   position: sticky;
   top: 0;
   z-index: 100;
-  background: rgba(12, 18, 34, 0.72);
+  background: rgba(10, 15, 20, 0.78);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-bottom: 1px solid var(--border);
   transition: background 0.4s ease;
 }
 
-body:not(.dark-theme) .site-header {
+body.light-theme .site-header {
   background: rgba(248, 250, 252, 0.72);
 }
 
@@ -335,7 +339,7 @@ h2 {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease;
 }
 
-body:not(.dark-theme) .feature-card {
+body.light-theme .feature-card {
   background: rgba(255, 255, 255, 0.7);
 }
 
@@ -374,7 +378,7 @@ body:not(.dark-theme) .feature-card {
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-body:not(.dark-theme) .use-case {
+body.light-theme .use-case {
   background: rgba(255, 255, 255, 0.7);
 }
 

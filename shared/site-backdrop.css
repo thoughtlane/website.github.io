@@ -1,0 +1,185 @@
+/**
+ * Thoughtlane — shared ambient backdrop + tokens (Marble.studio–style editorial + cool gradient palette)
+ * Include before page-specific CSS. Add <div class="tl-ambient">…</div> right after <body>.
+ */
+:root {
+  --tl-ink: #0e1114;
+  --tl-paper: #eef6f4;
+  --tl-stone: #5c6b6a;
+  --tl-turquoise: #14b8a6;
+  --tl-turquoise-bright: #2dd4bf;
+  --tl-teal-deep: #0d9488;
+  --tl-cyan: #22d3ee;
+  --tl-pink: #e879a9;
+  --tl-pink-soft: #f472b6;
+  --tl-purple: #a78bfa;
+  --tl-purple-deep: #7c3aed;
+  --primary: var(--tl-teal-deep);
+  --primary-light: var(--tl-turquoise-bright);
+  --accent: var(--tl-purple);
+  --accent-light: #c4b5fd;
+  --dark: var(--tl-ink);
+  --dark-soft: #3d4a48;
+  --light: var(--tl-paper);
+  --muted: var(--tl-stone);
+  --wave-fill: var(--tl-paper);
+  --surface-1: rgba(255, 255, 255, 0.72);
+  --surface-2: rgba(255, 255, 255, 0.55);
+  --glass-bg: var(--surface-1);
+  --glass-border: rgba(14, 17, 20, 0.08);
+  --glass-highlight: rgba(255, 255, 255, 0.9);
+  --glass-shadow: 0 8px 32px rgba(14, 17, 20, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
+  --tl-glow-a: rgba(20, 184, 166, 0.35);
+  --tl-glow-b: rgba(167, 139, 250, 0.28);
+  --tl-glow-c: rgba(244, 114, 182, 0.22);
+}
+
+body.tl-has-ambient {
+  background-color: transparent;
+  /* Do not set color here — body.tl-has-ambient would override page `body { color }` and force ink on dark UIs */
+  position: relative;
+  overflow-x: hidden;
+  isolation: isolate;
+}
+
+.tl-ambient {
+  position: fixed;
+  inset: 0;
+  z-index: -4;
+  pointer-events: none;
+}
+
+.tl-liquid-mesh {
+  position: absolute;
+  inset: -15%;
+  background:
+    radial-gradient(ellipse 90% 70% at 12% 22%, rgba(20, 184, 166, 0.12) 0%, transparent 55%),
+    radial-gradient(ellipse 80% 60% at 88% 78%, rgba(167, 139, 250, 0.11) 0%, transparent 52%),
+    radial-gradient(ellipse 55% 45% at 50% 50%, rgba(244, 114, 182, 0.07) 0%, transparent 58%);
+  animation: tlLiquidMeshDrift 28s ease-in-out infinite;
+  will-change: transform;
+}
+
+@keyframes tlLiquidMeshDrift {
+  0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
+  33% { transform: translate(2.5%, -2%) rotate(1.5deg) scale(1.04); }
+  66% { transform: translate(-2%, 2.5%) rotate(-1deg) scale(0.98); }
+}
+
+.tl-page-backdrop {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 120% 90% at 8% 15%, rgba(20, 184, 166, 0.09) 0%, transparent 52%),
+    radial-gradient(ellipse 100% 80% at 92% 78%, rgba(167, 139, 250, 0.1) 0%, transparent 48%),
+    radial-gradient(ellipse 70% 60% at 48% 48%, rgba(14, 17, 20, 0.04) 0%, transparent 55%),
+    var(--light);
+}
+
+body.tl-has-ambient:not(.light-theme) .tl-page-backdrop {
+  background:
+    radial-gradient(ellipse 120% 90% at 8% 15%, rgba(20, 184, 166, 0.12) 0%, transparent 52%),
+    radial-gradient(ellipse 100% 80% at 92% 78%, rgba(167, 139, 250, 0.1) 0%, transparent 48%),
+    radial-gradient(ellipse 70% 60% at 48% 48%, rgba(236, 72, 153, 0.06) 0%, transparent 55%),
+    #0a0f14;
+}
+
+.tl-parallax-blob {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(72px);
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+  will-change: transform;
+}
+
+.tl-parallax-blob.tl-blob-a {
+  width: min(44vw, 500px);
+  height: min(44vw, 500px);
+  top: -6%;
+  left: -10%;
+  background: radial-gradient(circle, var(--tl-glow-a) 0%, transparent 68%);
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+  animation: tlLiquidBlobShape 22s ease-in-out infinite;
+}
+
+.tl-parallax-blob.tl-blob-b {
+  width: min(58vw, 640px);
+  height: min(58vw, 640px);
+  bottom: -18%;
+  right: -14%;
+  background: radial-gradient(circle, var(--tl-glow-b) 0%, transparent 62%);
+  border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
+  animation: tlLiquidBlobShape 26s ease-in-out infinite reverse;
+}
+
+.tl-parallax-blob.tl-blob-c {
+  width: min(36vw, 400px);
+  height: min(36vw, 400px);
+  top: 38%;
+  right: 2%;
+  background: radial-gradient(circle, var(--tl-glow-c) 0%, transparent 65%);
+  border-radius: 45% 55% 35% 65% / 55% 45% 65% 35%;
+  animation: tlLiquidBlobShape 18s ease-in-out infinite;
+}
+
+@keyframes tlLiquidBlobShape {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; filter: blur(72px); }
+  50% { border-radius: 35% 65% 55% 45% / 50% 60% 40% 50%; filter: blur(80px); }
+}
+
+/* Large corner abstract — editorial hero accent (Marble-style visual weight) */
+.tl-corner-abstract {
+  position: fixed;
+  bottom: -8%;
+  right: -6%;
+  width: min(72vmin, 640px);
+  height: min(72vmin, 640px);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+.tl-corner-abstract__svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+  animation: tlCornerMorph 24s ease-in-out infinite;
+}
+
+@keyframes tlCornerMorph {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(2deg) scale(1.03) translate(-1%, 1%); }
+  50% { transform: rotate(-1.5deg) scale(0.98) translate(1%, -0.5%); }
+  75% { transform: rotate(1deg) scale(1.02) translate(-0.5%, -1%); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tl-liquid-mesh,
+  .tl-parallax-blob,
+  .tl-corner-abstract__svg {
+    animation: none;
+  }
+  .tl-parallax-blob.tl-blob-a,
+  .tl-parallax-blob.tl-blob-b,
+  .tl-parallax-blob.tl-blob-c {
+    border-radius: 50%;
+  }
+}
+
+/* Subpages: glass header sits above mesh */
+body.tl-subpage.tl-has-ambient .site-header {
+  background: rgba(238, 246, 244, 0.75) !important;
+  backdrop-filter: blur(28px) saturate(180%);
+  -webkit-backdrop-filter: blur(28px) saturate(180%);
+}
+
+body.tl-subpage.tl-has-ambient:not(.light-theme) .site-header {
+  background: rgba(10, 14, 18, 0.78) !important;
+}
+
+body.tl-subpage.tl-has-ambient main {
+  position: relative;
+  z-index: 1;
+}
