@@ -1,0 +1,1198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI LMS + Document Management Platform Comparison 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Mono:wght@300;400;500&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f8f8fb;
+    --surface: #ffffff;
+    --surface2: #f2f2f7;
+    --border: rgba(0,0,0,0.08);
+    --border-bright: rgba(0,0,0,0.14);
+    --text: #111118;
+    --text-muted: #555568;
+    --text-dim: #9999b0;
+    --accent: #4c44d4;
+    --accent2: #009e7a;
+    --accent3: #d94040;
+    --amber: #c47d00;
+    --green: #1e9e5a;
+    --blue: #1a72cc;
+    --pink: #cc3d8a;
+    --yes-bg: rgba(30,158,90,0.08);
+    --yes-text: #1a7a48;
+    --partial-bg: rgba(196,125,0,0.08);
+    --partial-text: #a06200;
+    --no-bg: rgba(217,64,64,0.08);
+    --no-text: #b02020;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Lora', Georgia, serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* Grid background */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(76,68,212,0.04) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(76,68,212,0.04) 1px, transparent 1px);
+    background-size: 40px 40px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem 4rem;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── Header ── */
+  header {
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 1rem;
+  }
+
+  h1 span {
+    background: linear-gradient(135deg, var(--accent), var(--accent2));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1rem;
+    color: var(--text-muted);
+    font-style: italic;
+    max-width: 600px;
+    line-height: 1.7;
+  }
+
+  .meta-row {
+    display: flex;
+    gap: 2rem;
+    margin-top: 1.5rem;
+    flex-wrap: wrap;
+  }
+
+  .meta-item {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    letter-spacing: 0.05em;
+  }
+
+  .meta-item strong {
+    color: var(--text-muted);
+    font-weight: 500;
+  }
+
+  /* ── Section headers ── */
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .section-title::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── Summary cards ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
+    margin-bottom: 3rem;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  .summary-card {
+    background: var(--surface);
+    padding: 1.5rem;
+    transition: background 0.2s;
+  }
+
+  .summary-card:hover { background: var(--surface2); }
+
+  .summary-label {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.75rem;
+  }
+
+  .summary-platform {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    margin-bottom: 0.25rem;
+  }
+
+  .summary-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1;
+    margin-bottom: 0.3rem;
+  }
+
+  .summary-price-note {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    line-height: 1.4;
+  }
+
+  .summary-verdict {
+    margin-top: 0.75rem;
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--text-muted);
+    line-height: 1.5;
+  }
+
+  .tag {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 4px;
+    margin-bottom: 0.5rem;
+  }
+
+  .tag-lms    { background: rgba(76,68,212,0.1); color: var(--accent); }
+  .tag-doc    { background: rgba(0,158,122,0.1); color: var(--accent2); }
+  .tag-both   { background: rgba(196,125,0,0.1); color: var(--amber); }
+  .tag-best   { background: rgba(30,158,90,0.1); color: var(--green); }
+
+  /* ── Main comparison table ── */
+  .table-wrapper {
+    overflow-x: auto;
+    margin-bottom: 3rem;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    min-width: 900px;
+  }
+
+  thead th {
+    background: #f2f2f7;
+    padding: 1.25rem 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-bright);
+  }
+
+  thead th:first-child {
+    width: 200px;
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    font-weight: 400;
+  }
+
+  .th-platform {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--text);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .th-price {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    display: block;
+    font-weight: 400;
+  }
+
+  .th-type {
+    display: block;
+    margin-top: 4px;
+  }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+  .row-category {
+    background: #ededf5 !important;
+  }
+
+  .row-category td {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    padding: 0.7rem 1rem;
+  }
+
+  td {
+    padding: 0.9rem 1rem;
+    vertical-align: middle;
+    font-size: 0.88rem;
+  }
+
+  td:first-child {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    font-weight: 400;
+  }
+
+  /* Badges */
+  .yes, .no, .partial, .na {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-family: 'DM Mono', monospace;
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-weight: 500;
+    white-space: nowrap;
+  }
+
+  .yes     { background: var(--yes-bg);     color: var(--yes-text); }
+  .partial { background: var(--partial-bg); color: var(--partial-text); }
+  .no      { background: var(--no-bg);      color: var(--no-text); }
+  .na      { background: rgba(255,255,255,0.04); color: var(--text-dim); }
+
+  .yes::before     { content: '✓'; font-weight: 700; }
+  .partial::before { content: '~'; font-weight: 700; }
+  .no::before      { content: '✕'; font-weight: 700; }
+  .na::before      { content: '—'; }
+
+  /* highlight column */
+  .col-highlight { background: rgba(76,68,212,0.04); }
+
+  /* ── Pricing breakdown ── */
+  .pricing-section {
+    margin-bottom: 3rem;
+  }
+
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 16px;
+  }
+
+  .pricing-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s, transform 0.2s;
+    box-shadow: 0 1px 6px rgba(0,0,0,0.04);
+  }
+
+  .pricing-card:hover {
+    border-color: var(--border-bright);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .pricing-card.featured {
+    border-color: rgba(76,68,212,0.35);
+  }
+
+  .pricing-card.featured::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2));
+  }
+
+  .pricing-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1.25rem;
+  }
+
+  .pc-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 3px;
+  }
+
+  .pc-type {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    letter-spacing: 0.06em;
+  }
+
+  .pc-price {
+    text-align: right;
+  }
+
+  .pc-amount {
+    font-family: 'DM Mono', monospace;
+    font-size: 1.4rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1;
+  }
+
+  .pc-period {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    color: var(--text-dim);
+    display: block;
+    margin-top: 3px;
+  }
+
+  .pc-rows {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 1rem;
+  }
+
+  .pc-rows li {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-size: 0.82rem;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .pc-rows li:last-child { border-bottom: none; }
+
+  .pc-rows .item-label { color: var(--text-muted); }
+  .pc-rows .item-val {
+    font-family: 'DM Mono', monospace;
+    font-size: 0.78rem;
+    color: var(--text);
+  }
+
+  .pc-note {
+    font-size: 0.78rem;
+    font-style: italic;
+    color: var(--text-dim);
+    line-height: 1.5;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border);
+  }
+
+  /* ── Recommendation box ── */
+  .recommendation {
+    background: var(--surface);
+    border: 1px solid var(--border-bright);
+    border-radius: 16px;
+    padding: 2rem;
+    margin-bottom: 3rem;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+  }
+
+  .recommendation::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), var(--pink));
+  }
+
+  .rec-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .rec-item {
+    padding: 1.25rem;
+    background: var(--surface2);
+    border-radius: 10px;
+    border: 1px solid var(--border);
+  }
+
+  .rec-scenario {
+    font-family: 'DM Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+  }
+
+  .rec-pick {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+  }
+
+  .rec-reason {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-style: italic;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── Footer ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding-top: 2rem;
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    color: var(--text-dim);
+    line-height: 1.7;
+  }
+
+  /* Accent colors per platform column */
+  .col-cypher .th-platform { color: var(--accent); }
+  .col-sana .th-platform   { color: var(--accent2); }
+  .col-360 .th-platform    { color: var(--amber); }
+  .col-confluence .th-platform { color: var(--blue); }
+  .col-notion .th-platform { color: var(--pink); }
+
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- HEADER -->
+  <header>
+    <p class="eyebrow">Platform Comparison · April 2026 · 100 Users</p>
+    <h1>AI Learning + <span>Document Management</span><br>Full Stack Comparison</h1>
+    <p class="subtitle">How do AI LMS platforms compare against dedicated document management tools like Confluence and Notion — and can any single platform do both well?</p>
+    <div class="meta-row">
+      <span class="meta-item"><strong>Users:</strong> 100</span>
+      <span class="meta-item"><strong>Billing:</strong> Annual assumed</span>
+      <span class="meta-item"><strong>Focus:</strong> AI authoring · Practice tests · AI grading · Doc management · Data residency</span>
+      <span class="meta-item"><strong>Prices:</strong> Estimates — verify with vendors</span>
+    </div>
+  </header>
+
+  <!-- SUMMARY CARDS -->
+  <p class="section-title">At a Glance — 100 Users/Month</p>
+  <div class="summary-grid">
+
+    <div class="summary-card">
+      <p class="summary-label">Best Overall Match</p>
+      <span class="tag tag-lms">LMS + Some Doc</span>
+      <p class="summary-platform">CYPHER Learning</p>
+      <p class="summary-price">~$600<span style="font-size:1rem;color:var(--text-muted)">/mo</span></p>
+      <p class="summary-price-note">Custom pricing · est. $500–900/mo<br>100 users annual</p>
+      <p class="summary-verdict">Deepest AI assessment suite. Has a basic content/resource library but not a full wiki. Best fit if LMS is primary need.</p>
+    </div>
+
+    <div class="summary-card">
+      <p class="summary-label">Most AI-Native</p>
+      <span class="tag tag-lms">LMS + Knowledge Search</span>
+      <p class="summary-platform">Sana Learn</p>
+      <p class="summary-price">$3,900<span style="font-size:1rem;color:var(--text-muted)">/mo</span></p>
+      <p class="summary-price-note">$13/user · min. 300 seats<br>Indexes Confluence, Notion, Drive</p>
+      <p class="summary-verdict">Connects to and searches across your existing doc tools. Closest to a unified LMS + knowledge layer — but pricey at 100 users.</p>
+    </div>
+
+    <div class="summary-card">
+      <p class="summary-label">Collaborative Learning</p>
+      <span class="tag tag-lms">LMS · Weak on Docs</span>
+      <p class="summary-platform">360Learning</p>
+      <p class="summary-price">$800<span style="font-size:1rem;color:var(--text-muted)">/mo</span></p>
+      <p class="summary-price-note">$8/user · 100 users · Team plan<br>No native doc management</p>
+      <p class="summary-verdict">Strong collaborative authoring. No document management — needs Confluence or Notion alongside it.</p>
+    </div>
+
+    <div class="summary-card">
+      <p class="summary-label">Gold Standard Docs</p>
+      <span class="tag tag-doc">Docs Only</span>
+      <p class="summary-platform">Confluence</p>
+      <p class="summary-price">$489<span style="font-size:1rem;color:var(--text-muted)">/mo</span></p>
+      <p class="summary-price-note">$4.89/user Standard · 100 users<br>AI (Rovo) needs Premium: $815/mo</p>
+      <p class="summary-verdict">The benchmark for structured knowledge bases. No LMS, no assessments. Best paired with an LMS.</p>
+    </div>
+
+    <div class="summary-card">
+      <p class="summary-label">Flexible Workspace</p>
+      <span class="tag tag-doc">Docs + Light DB</span>
+      <p class="summary-platform">Notion</p>
+      <p class="summary-price">$1,600<span style="font-size:1rem;color:var(--text-muted)">/mo</span></p>
+      <p class="summary-price-note">$16/user Business · 100 users<br>AI included in Business plan</p>
+      <p class="summary-verdict">Beautifully flexible. Better for creative/cross-functional teams. No assessments or grading.</p>
+    </div>
+
+  </div>
+
+  <!-- SINGLE TENANT WARNING -->
+  <div style="background:#fff8f0;border:1.5px solid #e8a020;border-radius:12px;padding:1.25rem 1.5rem;margin-bottom:2rem;display:flex;gap:1rem;align-items:flex-start;">
+    <div style="font-size:1.4rem;line-height:1;flex-shrink:0;margin-top:2px;">⚠</div>
+    <div>
+      <p style="font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;color:#8a4a00;margin-bottom:0.4rem;">Single-tenant &amp; own-cloud deployment: no LMS platform here supports it</p>
+      <p style="font-size:0.83rem;color:#7a4800;line-height:1.65;">All five LMS platforms reviewed (CYPHER, Sana, 360Learning) are <strong>multi-tenant SaaS only</strong> — you cannot deploy them on your own AWS, Azure, or GCP. Confluence Data Center was the one option allowing self-hosted / own-cloud deployment, but <strong>Atlassian closed new Data Center subscriptions on March 30, 2026</strong> (full EOL: March 2029). If single-tenant or BYOC is a hard requirement, consider open-source alternatives: <strong>Moodle</strong> (LMS, fully self-hostable) + <strong>XWiki</strong> (wiki/docs, Confluence migration tooling available).</p>
+    </div>
+  </div>
+
+  <!-- LEGEND -->
+  <div class="legend">
+    <div class="legend-item"><span class="yes">Full</span> Native, full support included</div>
+    <div class="legend-item"><span class="partial">Partial</span> Limited, add-on, or enterprise-only</div>
+    <div class="legend-item"><span class="no">None</span> Not available</div>
+    <div class="legend-item"><span class="na">N/A</span> Not applicable to platform type</div>
+  </div>
+
+  <!-- MAIN COMPARISON TABLE -->
+  <p class="section-title">Feature-by-Feature Comparison</p>
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Feature / Capability</th>
+          <th class="col-highlight col-cypher">
+            <span class="th-platform">CYPHER Learning</span>
+            <span class="th-price">est. ~$600/mo · 100 users</span>
+            <span class="th-type"><span class="tag tag-lms">AI LMS + LXP</span></span>
+          </th>
+          <th class="col-sana">
+            <span class="th-platform">Sana Learn</span>
+            <span class="th-price">$3,900/mo · min 300 seats</span>
+            <span class="th-type"><span class="tag tag-lms">AI-Native LMS</span></span>
+          </th>
+          <th class="col-360">
+            <span class="th-platform">360Learning</span>
+            <span class="th-price">$800/mo · 100 users</span>
+            <span class="th-type"><span class="tag tag-lms">Collaborative LMS</span></span>
+          </th>
+          <th class="col-confluence">
+            <span class="th-platform">Confluence</span>
+            <span class="th-price">$489–815/mo · 100 users</span>
+            <span class="th-type"><span class="tag tag-doc">Doc Management</span></span>
+          </th>
+          <th class="col-notion">
+            <span class="th-platform">Notion</span>
+            <span class="th-price">$1,600/mo · 100 users</span>
+            <span class="th-type"><span class="tag tag-doc">Flexible Workspace</span></span>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- LMS CORE -->
+        <tr class="row-category">
+          <td colspan="6">LMS Core Features</td>
+        </tr>
+        <tr>
+          <td>Course delivery &amp; learner tracking</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>SCORM / xAPI support</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Learning paths &amp; certifications</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Gamification (badges, leaderboards)</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Adaptive learning paths (AI)</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Blended / live + async delivery</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full — built-in virtual classroom</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+
+        <!-- AI AUTHORING -->
+        <tr class="row-category">
+          <td colspan="6">AI Course Authoring</td>
+        </tr>
+        <tr>
+          <td>Doc / PDF / PPT → course (AI)</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Video → course transcript / content</td>
+          <td class="col-highlight"><span class="partial">Partial</span></td>
+          <td><span class="yes">Full — speech-to-text + index</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>AI content accuracy verification</td>
+          <td class="col-highlight"><span class="yes">Full — AI Crosscheck</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Multi-language AI translation</td>
+          <td class="col-highlight"><span class="yes">50+ languages</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="partial">Partial — manual</span></td>
+          <td><span class="partial">Partial — manual</span></td>
+        </tr>
+        <tr>
+          <td>Unlimited AI usage</td>
+          <td class="col-highlight"><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Rovo credits (Premium+)</span></td>
+          <td><span class="partial">AI credits (Business+)</span></td>
+        </tr>
+
+        <!-- ASSESSMENTS -->
+        <tr class="row-category">
+          <td colspan="6">Assessments, Practice Tests &amp; Grading</td>
+        </tr>
+        <tr>
+          <td>AI-generated quiz / question banks</td>
+          <td class="col-highlight"><span class="yes">Full — CYPHER Agent</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Practice tests with instant feedback</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full — AI tutor per learner</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>AI grading (essays, open-ended)</td>
+          <td class="col-highlight"><span class="yes">Full — rubric + AI grade</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Skills / competency mapping</td>
+          <td class="col-highlight"><span class="yes">Full — deep skills graph</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+        <tr>
+          <td>Gradebook / learner progress reports</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+        </tr>
+
+        <!-- DOCUMENT MANAGEMENT -->
+        <tr class="row-category">
+          <td colspan="6">Document Management (Confluence-style)</td>
+        </tr>
+        <tr>
+          <td>Structured wiki / page hierarchy</td>
+          <td class="col-highlight"><span class="partial">Basic resource library</span></td>
+          <td><span class="partial">Knowledge indexing only</span></td>
+          <td><span class="partial">Channels / boards — limited</span></td>
+          <td><span class="yes">Full — spaces + page trees</span></td>
+          <td><span class="yes">Full — block-based flexible wiki</span></td>
+        </tr>
+        <tr>
+          <td>Real-time collaborative editing</td>
+          <td class="col-highlight"><span class="partial">Course co-authoring only</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full — collaborative authoring</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+        </tr>
+        <tr>
+          <td>Version history &amp; page audit trail</td>
+          <td class="col-highlight"><span class="partial">Course history only</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="yes">Full — indefinite on Standard+</span></td>
+          <td><span class="partial">30–90 days (Enterprise: full)</span></td>
+        </tr>
+        <tr>
+          <td>Granular page permissions</td>
+          <td class="col-highlight"><span class="partial">Course-level only</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="partial">Partial</span></td>
+          <td><span class="yes">Full — space + page level</span></td>
+          <td><span class="yes">Full</span></td>
+        </tr>
+        <tr>
+          <td>AI-powered doc search / Q&amp;A</td>
+          <td class="col-highlight"><span class="partial">Within courses only</span></td>
+          <td><span class="yes">Full — neural search across all tools</span></td>
+          <td><span class="partial">Within platform only</span></td>
+          <td><span class="yes">Rovo AI (Premium tier)</span></td>
+          <td><span class="yes">AI (Business+ tier)</span></td>
+        </tr>
+        <tr>
+          <td>Integrates with / indexes external doc tools</td>
+          <td class="col-highlight"><span class="partial">Drive, SharePoint import</span></td>
+          <td><span class="yes">Full — Confluence, Notion, Drive, Slack, Salesforce</span></td>
+          <td><span class="partial">Slack, Google Workspace</span></td>
+          <td><span class="yes">Jira, 3,000+ Atlassian apps</span></td>
+          <td><span class="yes">Slack, GitHub, Jira, Drive</span></td>
+        </tr>
+        <tr>
+          <td>Embeddable / public knowledge base</td>
+          <td class="col-highlight"><span class="partial">LMS portal only</span></td>
+          <td><span class="partial">Internal focus</span></td>
+          <td><span class="partial">Internal focus</span></td>
+          <td><span class="partial">With add-ons</span></td>
+          <td><span class="yes">Public pages supported</span></td>
+        </tr>
+
+        <!-- DEPLOYMENT -->
+        <tr class="row-category">
+          <td colspan="6">Deployment Architecture — Single Tenant &amp; Own Cloud</td>
+        </tr>
+        <tr>
+          <td>Deployment model</td>
+          <td class="col-highlight"><span class="na">Multi-tenant SaaS (AWS)</span></td>
+          <td><span class="na">Multi-tenant SaaS (AWS/GCP)</span></td>
+          <td><span class="na">Multi-tenant SaaS (AWS)</span></td>
+          <td><span class="na">Cloud or Data Center (self-hosted)</span></td>
+          <td><span class="na">Multi-tenant SaaS only</span></td>
+        </tr>
+        <tr>
+          <td>Single-tenant (dedicated) deployment</td>
+          <td class="col-highlight"><span class="no">Multi-tenant only — logically isolated per tenant, not physically dedicated</span></td>
+          <td><span class="no">Multi-tenant SaaS only</span></td>
+          <td><span class="no">Multi-tenant SaaS only</span></td>
+          <td><span class="yes">Data Center: full dedicated on your infra (⚠ EOL 2029)</span></td>
+          <td><span class="no">No single-tenant option</span></td>
+        </tr>
+        <tr>
+          <td>Deploy on your own cloud (AWS / Azure / GCP)</td>
+          <td class="col-highlight"><span class="no">Not available — hosted on CYPHER's AWS only</span></td>
+          <td><span class="no">Not available — hosted on Sana's infrastructure</span></td>
+          <td><span class="no">Not available — SaaS only</span></td>
+          <td><span class="yes">Data Center: deploy on your own AWS / Azure / GCP (⚠ EOL 2029)</span></td>
+          <td><span class="no">No self-hosted or BYOC option</span></td>
+        </tr>
+        <tr>
+          <td>On-premises / air-gapped deployment</td>
+          <td class="col-highlight"><span class="no">Not supported</span></td>
+          <td><span class="no">Not supported</span></td>
+          <td><span class="no">Not supported</span></td>
+          <td><span class="yes">Data Center: on-prem supported (⚠ EOL 2029)</span></td>
+          <td><span class="no">Not supported</span></td>
+        </tr>
+        <tr>
+          <td>Bring Your Own Cloud (BYOC)</td>
+          <td class="col-highlight"><span class="no">Not offered</span></td>
+          <td><span class="no">Not offered</span></td>
+          <td><span class="no">Not offered</span></td>
+          <td><span class="partial">Via Data Center — you provide infra (⚠ EOL 2029)</span></td>
+          <td><span class="no">Not offered</span></td>
+        </tr>
+        <tr>
+          <td>Logical tenant isolation (data segmentation)</td>
+          <td class="col-highlight"><span class="yes">Full — unique tenant IDs, DB-level segmentation on AWS</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full (Cloud) + physical (Data Center)</span></td>
+          <td><span class="yes">Full</span></td>
+        </tr>
+        <tr>
+          <td>Own cloud deployment — verdict</td>
+          <td class="col-highlight"><span class="no">❌ Not possible</span></td>
+          <td><span class="no">❌ Not possible</span></td>
+          <td><span class="no">❌ Not possible</span></td>
+          <td><span class="partial">⚠ Possible via Data Center — but new subscriptions closed Mar 2026; full EOL Mar 2029</span></td>
+          <td><span class="no">❌ Not possible</span></td>
+        </tr>
+
+        <!-- SECURITY & DATA -->
+        <tr class="row-category">
+          <td colspan="6">Security, Data Residency &amp; Compliance</td>
+        </tr>
+        <tr>
+          <td>SOC 2 Type II</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+        </tr>
+        <tr>
+          <td>ISO 27001</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="partial">Enterprise only</span></td>
+        </tr>
+        <tr>
+          <td>GDPR compliance</td>
+          <td class="col-highlight"><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+          <td><span class="yes">Full</span></td>
+        </tr>
+        <tr>
+          <td>Data residency (choose region)</td>
+          <td class="col-highlight"><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Enterprise tier</span></td>
+          <td><span class="yes">Full — Standard+</span></td>
+          <td><span class="partial">Enterprise only</span></td>
+        </tr>
+        <tr>
+          <td>SSO (SAML / OIDC)</td>
+          <td class="col-highlight"><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Enterprise tier</span></td>
+          <td><span class="partial">Enterprise tier</span></td>
+          <td><span class="yes">Standard+</span></td>
+          <td><span class="yes">Business+</span></td>
+        </tr>
+
+        <!-- PRICING MODEL -->
+        <tr class="row-category">
+          <td colspan="6">Pricing Model</td>
+        </tr>
+        <tr>
+          <td>Pricing model</td>
+          <td class="col-highlight"><span class="na">Custom / per org</span></td>
+          <td><span class="na">Per license, 300-seat min</span></td>
+          <td><span class="na">Per user/month</span></td>
+          <td><span class="na">Per user/month tiers</span></td>
+          <td><span class="na">Per user/month tiers</span></td>
+        </tr>
+        <tr>
+          <td>Est. cost · 100 users/month</td>
+          <td class="col-highlight"><span style="font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--accent)">~$500–900/mo</span></td>
+          <td><span style="font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--accent2)">$3,900/mo (300 min)</span></td>
+          <td><span style="font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--amber)">$800/mo</span></td>
+          <td><span style="font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--blue)">$489–815/mo</span></td>
+          <td><span style="font-family:'DM Mono',monospace;font-size:0.8rem;color:var(--pink)">$1,600/mo</span></td>
+        </tr>
+        <tr>
+          <td>Free tier available</td>
+          <td class="col-highlight"><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="no">None</span></td>
+          <td><span class="yes">Up to 10 users</span></td>
+          <td><span class="partial">1 user free</span></td>
+        </tr>
+        <tr>
+          <td>Min commitment / contract</td>
+          <td class="col-highlight"><span class="na">Annual, custom</span></td>
+          <td><span class="na">Annual, 300 seat min</span></td>
+          <td><span class="na">Monthly or annual</span></td>
+          <td><span class="na">Monthly or annual</span></td>
+          <td><span class="na">Monthly or annual</span></td>
+        </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+  <!-- PRICING BREAKDOWN -->
+  <p class="section-title">Estimated Monthly Cost — 100 Users</p>
+  <div class="pricing-section">
+    <div class="pricing-grid">
+
+      <div class="pricing-card featured">
+        <div class="pricing-card-header">
+          <div>
+            <p class="pc-name">CYPHER Learning</p>
+            <p class="pc-type">AI LMS + LXP + authoring</p>
+          </div>
+          <div class="pc-price">
+            <p class="pc-amount">~$600</p>
+            <span class="pc-period">per month est.</span>
+          </div>
+        </div>
+        <ul class="pc-rows">
+          <li><span class="item-label">LMS + AI authoring</span><span class="item-val">included</span></li>
+          <li><span class="item-label">AI practice tests + grading</span><span class="item-val">included</span></li>
+          <li><span class="item-label">Skills / competency mapping</span><span class="item-val">included</span></li>
+          <li><span class="item-label">Document management</span><span class="item-val">basic only</span></li>
+          <li><span class="item-label">Data residency</span><span class="item-val">enterprise add-on</span></li>
+        </ul>
+        <p class="pc-note">Best single-tool value if LMS + AI assessment is primary need. Add Confluence Standard ($489/mo) for full document management. Total stack: ~$1,100/mo.</p>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <div>
+            <p class="pc-name">Sana Learn</p>
+            <p class="pc-type">AI-native LMS + knowledge indexing</p>
+          </div>
+          <div class="pc-price">
+            <p class="pc-amount">$3,900</p>
+            <span class="pc-period">per month (300 seat min)</span>
+          </div>
+        </div>
+        <ul class="pc-rows">
+          <li><span class="item-label">LMS + AI authoring</span><span class="item-val">included</span></li>
+          <li><span class="item-label">AI tutor per learner</span><span class="item-val">included</span></li>
+          <li><span class="item-label">Neural search (Confluence, Notion, Slack…)</span><span class="item-val">included</span></li>
+          <li><span class="item-label">Virtual classroom</span><span class="item-val">included</span></li>
+          <li><span class="item-label">Data residency / SSO</span><span class="item-val">enterprise</span></li>
+        </ul>
+        <p class="pc-note">Minimum 300 licences at $13/user means you pay $3,900/mo even with 100 users. Most advanced AI architecture. Indexes external docs but doesn't replace a wiki. Overpowered (and over-budget) for most 100-user orgs.</p>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <div>
+            <p class="pc-name">360Learning</p>
+            <p class="pc-type">Collaborative LMS</p>
+          </div>
+          <div class="pc-price">
+            <p class="pc-amount">$800</p>
+            <span class="pc-period">per month · Team plan</span>
+          </div>
+        </div>
+        <ul class="pc-rows">
+          <li><span class="item-label">LMS + collaborative authoring</span><span class="item-val">included</span></li>
+          <li><span class="item-label">AI quiz generation</span><span class="item-val">included</span></li>
+          <li><span class="item-label">AI grading</span><span class="item-val">limited</span></li>
+          <li><span class="item-label">Document management</span><span class="item-val">not included</span></li>
+          <li><span class="item-label">Data residency</span><span class="item-val">enterprise only</span></li>
+        </ul>
+        <p class="pc-note">Needs a doc tool alongside it. Cheapest credible LMS here. Add Confluence Standard ($489/mo) → total ~$1,289/mo. Or Notion Business ($1,600/mo) → total ~$2,400/mo.</p>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <div>
+            <p class="pc-name">Confluence</p>
+            <p class="pc-type">Document management wiki</p>
+          </div>
+          <div class="pc-price">
+            <p class="pc-amount">$489</p>
+            <span class="pc-period">Standard · $815 Premium (AI)</span>
+          </div>
+        </div>
+        <ul class="pc-rows">
+          <li><span class="item-label">Wiki / page hierarchy</span><span class="item-val">full</span></li>
+          <li><span class="item-label">Jira integration</span><span class="item-val">native</span></li>
+          <li><span class="item-label">AI search (Rovo)</span><span class="item-val">Premium: +$326/mo</span></li>
+          <li><span class="item-label">Data residency</span><span class="item-val">Standard+</span></li>
+          <li><span class="item-label">LMS / assessments</span><span class="item-val">not included</span></li>
+        </ul>
+        <p class="pc-note">Best pure document management at this scale. Needs an LMS alongside. CYPHER + Confluence Standard = ~$1,100/mo is the recommended full stack pairing.</p>
+      </div>
+
+      <div class="pricing-card">
+        <div class="pricing-card-header">
+          <div>
+            <p class="pc-name">Notion</p>
+            <p class="pc-type">Flexible workspace</p>
+          </div>
+          <div class="pc-price">
+            <p class="pc-amount">$1,600</p>
+            <span class="pc-period">Business · AI included</span>
+          </div>
+        </div>
+        <ul class="pc-rows">
+          <li><span class="item-label">Flexible wiki / database</span><span class="item-val">full</span></li>
+          <li><span class="item-label">AI (GPT-4 + Claude)</span><span class="item-val">included Business+</span></li>
+          <li><span class="item-label">Project / task management</span><span class="item-val">built-in</span></li>
+          <li><span class="item-label">Data residency</span><span class="item-val">Enterprise only</span></li>
+          <li><span class="item-label">LMS / assessments</span><span class="item-val">not included</span></li>
+        </ul>
+        <p class="pc-note">More expensive than Confluence for 100 users. Better if team wants a combined workspace (docs + project management + notes). Not suited for structured technical documentation.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- RECOMMENDED STACKS -->
+  <div class="recommendation">
+    <p class="section-title" style="margin-bottom:0.5rem">Recommended Stacks by Priority</p>
+    <p style="font-size:0.88rem;color:var(--text-muted);font-style:italic">No single platform covers everything perfectly. Here's the best pairing for each scenario.</p>
+    <div class="rec-grid">
+
+      <div class="rec-item">
+        <p class="rec-scenario" style="color:var(--accent)">Priority: AI Learning + Deep Assessments</p>
+        <p class="rec-pick">CYPHER Learning + Confluence Standard</p>
+        <p class="rec-reason">~$1,100/mo total. Best AI assessment and grading with a proper wiki. CYPHER handles all LMS/AI authoring/grading; Confluence handles structured docs, SOPs, and internal knowledge base. Data residency covered in Confluence Standard.</p>
+      </div>
+
+      <div class="rec-item">
+        <p class="rec-scenario" style="color:var(--accent2)">Priority: Unified AI Platform (Future-Proof)</p>
+        <p class="rec-pick">Sana Learn (Enterprise)</p>
+        <p class="rec-reason">$3,900+/mo. The only platform that genuinely bridges LMS + knowledge indexing, connecting to Confluence, Notion, Slack, and Google Drive in one AI-powered layer. Over-budget for 100 users today, but worth evaluating if you're planning to scale to 300+.</p>
+      </div>
+
+      <div class="rec-item">
+        <p class="rec-scenario" style="color:var(--amber)">Priority: Budget + Flexibility</p>
+        <p class="rec-pick">360Learning + Confluence Standard</p>
+        <p class="rec-reason">~$1,289/mo. Most cost-effective full stack. 360Learning's collaborative authoring + Confluence's wiki depth. Trade-off: AI grading is limited; data residency needs enterprise upgrade on 360Learning side.</p>
+      </div>
+
+      <div class="rec-item">
+        <p class="rec-scenario" style="color:var(--blue)">Priority: Already on Atlassian / Jira</p>
+        <p class="rec-pick">CYPHER Learning + Confluence Premium</p>
+        <p class="rec-reason">~$1,415/mo. If you're already in the Atlassian ecosystem, upgrading to Confluence Premium adds Rovo AI (conversational search across all your docs) and removes AI token limits. Pairs with CYPHER's deep assessment suite.</p>
+      </div>
+
+      <div class="rec-item">
+        <p class="rec-scenario" style="color:var(--pink)">Priority: Creative / Cross-Functional Teams</p>
+        <p class="rec-pick">CYPHER Learning + Notion Business</p>
+        <p class="rec-reason">~$2,200/mo. Best for teams that don't want the rigid Confluence structure — Notion's flexibility works well for non-technical orgs. Higher cost, but covers docs + project management + notes in one workspace.</p>
+      </div>
+
+      <div class="rec-item" style="border-color:rgba(196,125,0,0.35);background:#fffaf2;">
+        <p class="rec-scenario" style="color:#a06200;">⚠ Priority: Single-Tenant / Own-Cloud Deployment</p>
+        <p class="rec-pick" style="color:#7a4000;">Moodle (LMS) + XWiki (Docs)</p>
+        <p class="rec-reason" style="color:#6a3800;">Both open-source and fully self-hostable on your own AWS, Azure, or GCP. Moodle supports AI plugins, SCORM, assessments, gradebooks. XWiki provides Confluence-style structured wikis with dedicated Confluence migration tooling. Platform licenses are free; you pay for infrastructure, hosting, and internal IT/DevOps support. None of the commercial SaaS platforms (CYPHER, Sana, 360Learning, Notion) support own-cloud deployment.</p>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- KEY INSIGHT -->
+  <div style="background:#ffffff;border:1px solid rgba(0,0,0,0.1);border-radius:14px;padding:1.5rem 2rem;margin-bottom:3rem;box-shadow:0 2px 10px rgba(0,0,0,0.04)">
+    <p class="section-title">The Bottom Line</p>
+    <p style="font-size:0.92rem;line-height:1.8;color:var(--text-muted);">
+      <strong style="color:var(--text)">⚠ Critical finding on single-tenant / own-cloud deployment:</strong> None of the LMS platforms (CYPHER, Sana, 360Learning) support single-tenant or own-cloud deployment. All are multi-tenant SaaS products hosted on the vendor's infrastructure. They offer logical tenant isolation (your data is segmented), but you cannot deploy them on your own AWS, Azure, or GCP account. If single-tenant or BYOC is a hard requirement, none of these platforms qualify as-is — you would need to explore open-source alternatives like <strong style="color:var(--text)">Moodle</strong> (fully self-hostable, with AI plugins) or open-source LXP options.
+      <br><br>
+      <strong style="color:var(--text)">Confluence Data Center was the only option here</strong> — it allowed full self-hosted deployment on your own infrastructure — but <strong style="color:var(--text)">Atlassian closed new Data Center subscriptions on March 30, 2026</strong>, and all licenses expire in 2029. If you were planning to use Confluence Data Center on your own cloud, that path is now closed to new customers. Alternatives for self-hosted wikis include <strong style="color:var(--text)">XWiki</strong> (open-source, Confluence migration tooling available) and <strong style="color:var(--text)">BookStack</strong>.
+      <br><br>
+      <strong style="color:var(--text)">None of the LMS platforms are a true Confluence replacement.</strong> CYPHER Learning has a resource/content library; Sana indexes external docs but doesn't author them; 360Learning has collaborative channels. None offer the structured page hierarchy, granular permissions, and deep version history of a proper wiki. The honest answer is that for 100 users needing both, a <strong style="color:var(--text)">two-tool stack (~$1,100–1,400/mo)</strong> delivers more capability than any single platform.
+      <br><br>
+      <strong style="color:var(--text)">If data residency is non-negotiable today</strong>, Confluence Standard already delivers it on the Standard tier ($489/mo). CYPHER, Sana, and 360Learning all push data residency to enterprise tiers — expect a custom quote conversation.
+      <br><br>
+      <strong style="color:var(--text)">Watch Sana for 2026–2027</strong> if you plan to scale beyond 300 users. Its ability to semantically search across Confluence, Notion, Slack, and Google Drive simultaneously is genuinely a category-different capability — the closest thing to a unified learning + knowledge layer currently available.
+    </p>
+  </div>
+
+  <footer>
+    <p>Pricing estimates based on publicly available data as of April 2026. Annual billing assumed where applicable. All prices in USD. Custom platform pricing (CYPHER Learning) requires direct vendor quote. Sana Learn minimum 300-seat commitment applies regardless of actual headcount. Confluence pricing: Standard $4.89/user, Premium $8.15/user. Notion Business $16/user. All figures should be verified directly with vendors before purchase decisions. This comparison reflects general public knowledge and does not constitute a commercial endorsement.</p>
+  </footer>
+
+</div>
+</body>
+</html>
