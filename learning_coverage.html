@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Learning Methods Coverage</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-50: #EAF3DE; --green-800: #27500A;
+    --amber-50: #FAEEDA; --amber-800: #633806;
+    --coral-50: #FAECE7; --coral-800: #4A1B0C;
+    --purple-50: #EEEDFE; --purple-800: #26215C;
+    --teal-50: #E1F5EE; --teal-800: #04342C;
+    --gray-100: #F1EFE8; --gray-600: #5F5E5A; --gray-800: #2C2C2A;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #FAFAF8;
+    color: #1a1a18;
+    min-height: 100vh;
+    padding: 3rem 1.5rem;
+  }
+
+  .page { max-width: 900px; margin: 0 auto; }
+
+  .header { margin-bottom: 2.5rem; }
+
+  .header-eyebrow {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #888780;
+    margin-bottom: 0.5rem;
+  }
+
+  .header h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a18;
+    line-height: 1.2;
+    margin-bottom: 0.75rem;
+  }
+
+  .header p {
+    font-size: 15px;
+    color: #5F5E5A;
+    line-height: 1.6;
+    max-width: 560px;
+  }
+
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.25rem;
+    background: #fff;
+    border: 0.5px solid #e0ddd4;
+    border-radius: 10px;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: #5F5E5A;
+  }
+
+  .badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    font-weight: 500;
+    font-family: 'Syne', sans-serif;
+    padding: 3px 10px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+  }
+
+  .badge-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+
+  .b-full { background: var(--green-50); color: var(--green-800); }
+  .b-full .badge-dot { background: #3B6D11; }
+  .b-partial { background: var(--amber-50); color: var(--amber-800); }
+  .b-partial .badge-dot { background: #854F0B; }
+  .b-hard { background: var(--coral-50); color: var(--coral-800); }
+  .b-hard .badge-dot { background: #993C1D; }
+
+  .controls {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+  }
+
+  .filter-btn {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 400;
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 0.5px solid #d3d1c7;
+    background: #fff;
+    color: #5F5E5A;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .filter-btn:hover { background: #F1EFE8; color: #1a1a18; border-color: #b4b2a9; }
+  .filter-btn.active { background: #1a1a18; color: #F1EFE8; border-color: #1a1a18; }
+
+  .table-wrap {
+    background: #fff;
+    border: 0.5px solid #e0ddd4;
+    border-radius: 12px;
+    overflow: hidden;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+  }
+
+  thead tr {
+    background: #F1EFE8;
+  }
+
+  th {
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888780;
+    padding: 10px 16px;
+    text-align: left;
+    border-bottom: 0.5px solid #d3d1c7;
+  }
+
+  th:nth-child(1) { width: 22%; }
+  th:nth-child(2) { width: 13%; }
+  th:nth-child(3) { width: 32%; }
+  th:nth-child(4) { width: 33%; }
+
+  td {
+    padding: 12px 16px;
+    border-bottom: 0.5px solid #F1EFE8;
+    vertical-align: top;
+    font-size: 13px;
+    line-height: 1.55;
+    color: #1a1a18;
+  }
+
+  tr:last-child td { border-bottom: none; }
+
+  tr { transition: background 0.1s; }
+  tr:hover td { background: #FAFAF8; }
+
+  .method-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a18;
+    margin-bottom: 2px;
+  }
+
+  .method-sub {
+    font-size: 11px;
+    color: #888780;
+  }
+
+  .cover-text { color: #27500A; }
+  .gap-text { color: #5F5E5A; }
+
+  .highlight-row td { background: #EEEDFE10; }
+
+  .stats-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 1.5rem;
+  }
+
+  .stat-card {
+    flex: 1;
+    padding: 1rem;
+    border-radius: 10px;
+    border: 0.5px solid #e0ddd4;
+    background: #fff;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: #888780;
+    font-family: 'Syne', sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  .stat-value {
+    font-family: 'Syne', sans-serif;
+    font-size: 26px;
+    font-weight: 700;
+  }
+
+  .stat-value.green { color: #3B6D11; }
+  .stat-value.amber { color: #854F0B; }
+  .stat-value.coral { color: #993C1D; }
+
+  .row-hidden { display: none; }
+
+  .footer-note {
+    margin-top: 1.25rem;
+    font-size: 12px;
+    color: #888780;
+    line-height: 1.6;
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <div class="header">
+    <div class="header-eyebrow">Platform capability audit</div>
+    <h1>Learning methods coverage</h1>
+    <p>An overview of which educational approaches your online platform fully supports, partially covers, or cannot easily replicate.</p>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-card">
+      <div class="stat-label">Fully covered</div>
+      <div class="stat-value green" id="count-full">5</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Partial coverage</div>
+      <div class="stat-value amber" id="count-partial">6</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Hard online</div>
+      <div class="stat-value coral" id="count-hard">3</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-label">Total methods</div>
+      <div class="stat-value" style="color:#1a1a18;" id="count-total">14</div>
+    </div>
+  </div>
+
+  <div class="legend">
+    <div class="legend-item"><span class="badge b-full"><span class="badge-dot"></span>Covered</span> Fully supported on the platform</div>
+    <div class="legend-item"><span class="badge b-partial"><span class="badge-dot"></span>Partial</span> Supported with notable gaps</div>
+    <div class="legend-item"><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span> Difficult to replicate digitally</div>
+  </div>
+
+  <div class="controls">
+    <button class="filter-btn active" data-filter="all">All methods</button>
+    <button class="filter-btn" data-filter="full">Covered</button>
+    <button class="filter-btn" data-filter="partial">Partial</button>
+    <button class="filter-btn" data-filter="hard">Hard online</button>
+  </div>
+
+  <div class="table-wrap">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th>Method</th>
+          <th>Status</th>
+          <th>What you cover</th>
+          <th>Gap / what's missing</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr data-status="full">
+          <td><div class="method-name">Question answering</div><div class="method-sub">Search docs, get answers</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Document search with AI-generated answers + cited sources from a managed document library, so learners can verify every claim</td>
+          <td class="gap-text">Confidence scoring on answers; flagging low-certainty responses</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="method-name">Quiz-based learning</div><div class="method-sub">MCQ + open ended</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">MCQ, simple Q&amp;A, and open-ended responses — AI validates open-ended answers and asks follow-up questions based on each learner's response, enabling genuine dialogue</td>
+          <td class="gap-text">Rubric transparency for learners; exportable assessment reports</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="method-name">Socratic / adaptive</div><div class="method-sub">Problem by problem</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Self-paced adaptive progression + step-by-step math solver where learners submit every intermediate step — process is assessed, not just outcome. Confidence scores on each answer tell learners whether a result is reliable or likely wrong before they proceed</td>
+          <td class="gap-text">Misconception pattern library; visual step-diff feedback highlighting exactly where reasoning diverged</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="method-name">Real-world internships</div><div class="method-sub">Live customer projects</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Learners work with real customers configuring LMS systems — genuine experiential learning online</td>
+          <td class="gap-text">Structured reflection and portfolio capture around each engagement</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="method-name">Gamified learning</div><div class="method-sub">Points, badges, streaks</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Applied across all learning modes — XP, streaks, leaderboards</td>
+          <td class="gap-text">Live team tournaments and social competition features</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="method-name">Multimodal learning</div><div class="method-sub">Multiple content formats</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Video, text, audio, and interactive content all available</td>
+          <td class="gap-text">VR / AR and haptic formats not possible in browser</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="method-name">Simulation / experimentation</div><div class="method-sub">Physics, science labs</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Browser-based simulations for physics and science concepts</td>
+          <td class="gap-text">Complex chemistry and biology requiring physical apparatus</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="method-name">Spaced repetition</div><div class="method-sub">Review at intervals</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Quiz system can surface this depending on scheduling logic</td>
+          <td class="gap-text">Dedicated SRS engine with forgetting curve tracking per learner</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="method-name">Collaborative / peer learning</div><div class="method-sub">Learn with others</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Discussion forums and shared project spaces available</td>
+          <td class="gap-text">Real-time peer co-solving and live study groups</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="method-name">Mastery learning</div><div class="method-sub">Progress when ready</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Adaptive system can gate progression on performance scores</td>
+          <td class="gap-text">Explicit mastery thresholds and unlock logic need dedicated design</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="method-name">Inquiry-based learning</div><div class="method-sub">Student-driven exploration</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Open-ended Q&amp;A and document exploration supports this</td>
+          <td class="gap-text">Structured investigation workflows and hypothesis tracking tools</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="method-name">Project-based learning</div><div class="method-sub">Extended deliverables</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Project briefs and deliverable tracking possible online</td>
+          <td class="gap-text">Peer review workflows; rubric-based structured assessment</td>
+        </tr>
+        <tr data-status="hard">
+          <td><div class="method-name">Flipped classroom</div><div class="method-sub">Content home, practice in class</div></td>
+          <td><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span></td>
+          <td class="cover-text">Content delivery side covered well by existing platform</td>
+          <td class="gap-text">Requires a classroom teacher for the practice half — needs LMS integration</td>
+        </tr>
+        <tr data-status="hard">
+          <td><div class="method-name">Social-emotional learning</div><div class="method-sub">Empathy, self-regulation</div></td>
+          <td><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span></td>
+          <td class="cover-text">Awareness content and journaling prompts possible</td>
+          <td class="gap-text">Human relationship, mentorship, and group dynamics hard to replicate digitally</td>
+        </tr>
+        <tr data-status="hard">
+          <td><div class="method-name">Pure field / experiential</div><div class="method-sub">Physical immersion</div></td>
+          <td><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span></td>
+          <td class="cover-text">Real-world internships are the best available proxy online</td>
+          <td class="gap-text">Sensory, physical environment cannot be replicated digitally</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <p class="footer-note">Note: "Covered" reflects platform capability, not feature completeness. Gaps indicate enhancement opportunities rather than missing core support. Real-world internships with live customers represent a genuine differentiator that most online platforms cannot match.</p>
+
+</div>
+
+<script>
+  const rows = document.querySelectorAll('#main-table tbody tr');
+  const btns = document.querySelectorAll('.filter-btn');
+  const countFull = document.getElementById('count-full');
+  const countPartial = document.getElementById('count-partial');
+  const countHard = document.getElementById('count-hard');
+  const countTotal = document.getElementById('count-total');
+
+  function updateCounts(filter) {
+    let f = 0, p = 0, h = 0;
+    rows.forEach(r => {
+      const s = r.dataset.status;
+      const show = filter === 'all' || s === filter;
+      r.classList.toggle('row-hidden', !show);
+      if (show) {
+        if (s === 'full') f++;
+        else if (s === 'partial') p++;
+        else if (s === 'hard') h++;
+      }
+    });
+    countFull.textContent = f;
+    countPartial.textContent = p;
+    countHard.textContent = h;
+    countTotal.textContent = f + p + h;
+  }
+
+  btns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      btns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      updateCounts(btn.dataset.filter);
+    });
+  });
+</script>
+</body>
+</html>
