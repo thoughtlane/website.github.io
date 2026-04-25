@@ -37,11 +37,11 @@
     background: var(--bg);
     color: var(--text);
     min-height: 100vh;
-    padding: 2.5rem 2rem;
+    padding: clamp(1rem, 3vw, 2.5rem) clamp(0.875rem, 4vw, 2rem);
     transition: background 0.2s, color 0.2s;
   }
 
-  .page { max-width: 100%; margin: 0 auto; }
+  .page { width: min(100%, 1200px); margin: 0 auto; }
 
   .header {
     display: flex;
@@ -64,7 +64,7 @@
 
   .header h1 {
     font-family: 'Syne', sans-serif;
-    font-size: 26px;
+    font-size: clamp(1.35rem, 3.2vw, 1.625rem);
     font-weight: 700;
     color: var(--text);
     line-height: 1.2;
@@ -72,7 +72,7 @@
   }
 
   .header p {
-    font-size: 14px;
+    font-size: clamp(0.875rem, 2.2vw, 0.95rem);
     color: var(--text-muted);
     line-height: 1.6;
   }
@@ -292,6 +292,136 @@
     font-size: 12px;
     color: var(--text-hint);
     line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
+    .stats-row {
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .stat-card {
+      min-width: calc(50% - 5px);
+    }
+  }
+
+  @media (max-width: 700px) {
+    .header {
+      align-items: stretch;
+      margin-bottom: 1.25rem;
+    }
+
+    .theme-toggle {
+      align-self: flex-start;
+    }
+
+    .legend {
+      gap: 10px;
+      padding: 0.75rem 0.875rem;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .filter-btn {
+      width: 100%;
+      text-align: center;
+      padding: 8px 10px;
+    }
+
+    .stat-card {
+      min-width: 100%;
+    }
+
+    .table-wrap {
+      overflow: visible;
+      border: none;
+      background: transparent;
+    }
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+      display: block;
+      width: 100%;
+    }
+
+    thead {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      background: var(--bg-card);
+      border: 0.5px solid var(--border);
+      border-radius: 12px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+
+    .tier-divider td {
+      border-bottom: none;
+      padding: 8px 12px;
+      font-size: 9px;
+    }
+
+    tbody tr:not(.tier-divider) td {
+      border-bottom: 0.5px solid var(--border-light);
+      padding: 9px 12px 9px 46%;
+      position: relative;
+      min-height: 44px;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    tbody tr:not(.tier-divider) td:last-child {
+      border-bottom: none;
+    }
+
+    tbody tr:not(.tier-divider) td::before {
+      content: "";
+      position: absolute;
+      left: 12px;
+      top: 9px;
+      width: 40%;
+      font-family: 'Syne', sans-serif;
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-hint);
+      line-height: 1.4;
+    }
+
+    tbody tr:not(.tier-divider) td:nth-child(1)::before { content: "Rank"; }
+    tbody tr:not(.tier-divider) td:nth-child(2)::before { content: "Method"; }
+    tbody tr:not(.tier-divider) td:nth-child(3)::before { content: "Status"; }
+    tbody tr:not(.tier-divider) td:nth-child(4)::before { content: "What you cover"; }
+    tbody tr:not(.tier-divider) td:nth-child(5)::before { content: "Gap / missing"; }
+
+    .rank-cell {
+      align-items: center;
+      min-height: 24px;
+    }
+
+    .rank-num {
+      min-width: 16px;
+      font-size: 14px;
+    }
+
+    .tier-bar {
+      min-height: 24px;
+    }
   }
 </style>
 </head>
