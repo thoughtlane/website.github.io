@@ -186,10 +186,11 @@
     border-bottom: 0.5px solid var(--border-mid);
   }
 
-  th:nth-child(1) { width: 20%; }
-  th:nth-child(2) { width: 11%; }
-  th:nth-child(3) { width: 35%; }
-  th:nth-child(4) { width: 34%; }
+  th:nth-child(1) { width: 8%; }
+  th:nth-child(2) { width: 18%; }
+  th:nth-child(3) { width: 11%; }
+  th:nth-child(4) { width: 31%; }
+  th:nth-child(5) { width: 32%; }
 
   td {
     padding: 12px 16px;
@@ -246,6 +247,44 @@
   .stat-value.amber { color: var(--stat-amber); }
   .stat-value.coral { color: var(--stat-coral); }
 
+  .tier-divider td {
+    background: var(--bg-surface);
+    font-family: 'Syne', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--text-hint);
+    padding: 6px 16px;
+    border-bottom: 0.5px solid var(--border-mid);
+  }
+  .tier-divider:hover td { background: var(--bg-surface); }
+
+  .rank-cell {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .rank-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    min-width: 22px;
+    color: var(--text-hint);
+  }
+
+  .tier-bar {
+    width: 4px;
+    border-radius: 2px;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-height: 36px;
+  }
+  .t1 { background: #534AB7; }
+  .t2 { background: #1D9E75; }
+  .t3 { background: #BA7517; }
+  .t4 { background: #888780; }
   .row-hidden { display: none; }
 
   .footer-note {
@@ -291,9 +330,14 @@
   </div>
 
   <div class="legend">
-    <div class="legend-item"><span class="badge b-full"><span class="badge-dot"></span>Covered</span> Fully supported on the platform</div>
-    <div class="legend-item"><span class="badge b-partial"><span class="badge-dot"></span>Partial</span> Supported with notable gaps</div>
-    <div class="legend-item"><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span> Difficult to replicate digitally</div>
+    <div class="legend-item"><span class="badge b-full"><span class="badge-dot"></span>Covered</span> Fully supported</div>
+    <div class="legend-item"><span class="badge b-partial"><span class="badge-dot"></span>Partial</span> Notable gaps</div>
+    <div class="legend-item"><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span> Difficult digitally</div>
+    <div style="width:0.5px;background:var(--border-mid);margin:0 4px;"></div>
+    <div class="legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#534AB7;margin-right:4px;"></span>Tier 1</div>
+    <div class="legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#1D9E75;margin-right:4px;"></span>Tier 2</div>
+    <div class="legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#BA7517;margin-right:4px;"></span>Tier 3</div>
+    <div class="legend-item"><span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:#888780;margin-right:4px;"></span>Tier 4</div>
   </div>
 
   <div class="controls">
@@ -307,6 +351,7 @@
     <table id="main-table">
       <thead>
         <tr>
+          <th>Rank</th>
           <th>Method</th>
           <th>Status</th>
           <th>What you cover</th>
@@ -314,91 +359,113 @@
         </tr>
       </thead>
       <tbody>
+        <tr class="tier-divider"><td colspan="5">Tier 1 — Highest cognitive impact</td></tr>
         <tr data-status="full">
-          <td><div class="method-name">Question answering</div><div class="method-sub">Search docs, get answers</div></td>
+          <td><div class="rank-cell"><span class="rank-num">1</span><span class="tier-bar t1"></span></div></td>
+          <td><div class="method-name">Socratic / adaptive</div><div class="method-sub">Step-by-step solving</div></td>
           <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Document search with AI-generated answers, cited sources from a managed document library, and confidence scoring. All Q&amp;A sessions and reports fully exportable.</td>
-          <td class="gap-text" style="color:#888780;">—</td>
-        </tr>
-        <tr data-status="full">
-          <td><div class="method-name">Quiz-based learning</div><div class="method-sub">MCQ + open ended</div></td>
-          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">MCQ, simple Q&amp;A, and open-ended responses — AI validates open-ended answers using rubric-based evaluation and asks follow-up questions based on each learner's response. Learners see the criteria behind every score, turning evaluation into coaching. All reports exportable.</td>
-          <td class="gap-text" style="color:var(--text-hint);">—</td>
-        </tr>
-        <tr data-status="full">
-          <td><div class="method-name">Socratic / adaptive</div><div class="method-sub">Problem by problem</div></td>
-          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Self-paced adaptive progression + step-by-step math solver where learners submit every intermediate step. AI validates each step, highlights exactly where reasoning diverged, and provides targeted feedback at the point of error. Confidence scores show reliability per answer. All sessions and reports exportable.</td>
+          <td class="cover-text">Self-paced adaptive progression + step-by-step math solver. AI validates each step, highlights exactly where reasoning diverged, and provides targeted feedback at the point of error. Confidence scores per answer. All sessions exportable.</td>
           <td class="gap-text">Misconception pattern library — aggregating error trends across learners over time</td>
         </tr>
-        <tr data-status="full">
-          <td><div class="method-name">Real-world internships</div><div class="method-sub">Live customer projects</div></td>
-          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Learners work with real customers configuring LMS systems — genuine experiential learning online</td>
-          <td class="gap-text">Structured reflection and portfolio capture around each engagement</td>
-        </tr>
-        <tr data-status="full">
-          <td><div class="method-name">Gamified learning</div><div class="method-sub">Points, badges, streaks</div></td>
-          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Applied across all learning modes — XP, streaks, leaderboards</td>
-          <td class="gap-text">Live team tournaments and social competition features</td>
-        </tr>
-        <tr data-status="full">
-          <td><div class="method-name">Multimodal learning</div><div class="method-sub">Multiple content formats</div></td>
-          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Video, text, audio, and interactive content all available</td>
-          <td class="gap-text">VR / AR and haptic formats not possible in browser</td>
-        </tr>
         <tr data-status="partial">
-          <td><div class="method-name">Simulation / experimentation</div><div class="method-sub">Physics, science labs</div></td>
-          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
-          <td class="cover-text">Browser-based simulations for physics and science concepts</td>
-          <td class="gap-text">Complex chemistry and biology requiring physical apparatus</td>
-        </tr>
-        <tr data-status="partial">
-          <td><div class="method-name">Spaced repetition</div><div class="method-sub">Review at intervals</div></td>
-          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
-          <td class="cover-text">Quiz system can surface this depending on scheduling logic</td>
-          <td class="gap-text">Dedicated SRS engine with forgetting curve tracking per learner</td>
-        </tr>
-        <tr data-status="partial">
-          <td><div class="method-name">Collaborative / peer learning</div><div class="method-sub">Learn with others</div></td>
-          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
-          <td class="cover-text">Discussion forums and shared project spaces available</td>
-          <td class="gap-text">Real-time peer co-solving and live study groups</td>
-        </tr>
-        <tr data-status="partial">
-          <td><div class="method-name">Mastery learning</div><div class="method-sub">Progress when ready</div></td>
-          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
-          <td class="cover-text">Adaptive system can gate progression on performance scores</td>
-          <td class="gap-text">Explicit mastery thresholds and unlock logic need dedicated design</td>
-        </tr>
-        <tr data-status="partial">
+          <td><div class="rank-cell"><span class="rank-num">2</span><span class="tier-bar t1"></span></div></td>
           <td><div class="method-name">Inquiry-based learning</div><div class="method-sub">Student-driven exploration</div></td>
           <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
           <td class="cover-text">Open-ended Q&amp;A and document exploration supports this</td>
           <td class="gap-text">Structured investigation workflows and hypothesis tracking tools</td>
         </tr>
         <tr data-status="partial">
+          <td><div class="rank-cell"><span class="rank-num">3</span><span class="tier-bar t1"></span></div></td>
           <td><div class="method-name">Project-based learning</div><div class="method-sub">Extended deliverables</div></td>
           <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
           <td class="cover-text">Project briefs and deliverable tracking possible online</td>
           <td class="gap-text">Peer review workflows; rubric-based structured assessment</td>
         </tr>
+        <tr data-status="full">
+          <td><div class="rank-cell"><span class="rank-num">4</span><span class="tier-bar t1"></span></div></td>
+          <td><div class="method-name">Real-world internships</div><div class="method-sub">Live customer projects</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Learners work with real customers configuring LMS systems — genuine experiential learning online. Uncertainty and consequence force adaptive thinking.</td>
+          <td class="gap-text">Structured reflection and portfolio capture around each engagement</td>
+        </tr>
+
+        <tr class="tier-divider"><td colspan="5">Tier 2 — Strong cognitive impact</td></tr>
+        <tr data-status="partial">
+          <td><div class="rank-cell"><span class="rank-num">5</span><span class="tier-bar t2"></span></div></td>
+          <td><div class="method-name">Simulation / experimentation</div><div class="method-sub">Physics, science labs</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Browser-based simulations for physics and science concepts</td>
+          <td class="gap-text">Complex chemistry and biology requiring physical apparatus</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="rank-cell"><span class="rank-num">6</span><span class="tier-bar t2"></span></div></td>
+          <td><div class="method-name">Collaborative / peer learning</div><div class="method-sub">Learn with others</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Discussion forums and shared project spaces available</td>
+          <td class="gap-text">Real-time peer co-solving and live study groups</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="rank-cell"><span class="rank-num">7</span><span class="tier-bar t2"></span></div></td>
+          <td><div class="method-name">Quiz-based learning</div><div class="method-sub">MCQ + open ended</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">MCQ, simple Q&amp;A, and open-ended responses — AI validates using rubric-based evaluation and asks follow-up questions. Learners see criteria behind every score. All reports exportable.</td>
+          <td class="gap-text" style="color:var(--text-hint);">—</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="rank-cell"><span class="rank-num">8</span><span class="tier-bar t2"></span></div></td>
+          <td><div class="method-name">Question answering</div><div class="method-sub">Search docs, get answers</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Document search with AI-generated answers, cited sources from a managed document library, and confidence scoring. All Q&amp;A sessions and reports fully exportable.</td>
+          <td class="gap-text" style="color:var(--text-hint);">—</td>
+        </tr>
+
+        <tr class="tier-divider"><td colspan="5">Tier 3 — Moderate cognitive impact</td></tr>
+        <tr data-status="partial">
+          <td><div class="rank-cell"><span class="rank-num">9</span><span class="tier-bar t3"></span></div></td>
+          <td><div class="method-name">Mastery learning</div><div class="method-sub">Progress when ready</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Adaptive system can gate progression on performance scores</td>
+          <td class="gap-text">Explicit mastery thresholds and unlock logic need dedicated design</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="rank-cell"><span class="rank-num">10</span><span class="tier-bar t3"></span></div></td>
+          <td><div class="method-name">Gamified learning</div><div class="method-sub">Points, badges, streaks</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Applied across all learning modes — XP, streaks, leaderboards. Keeps learners engaged long enough for higher-tier methods to take effect.</td>
+          <td class="gap-text">Live team tournaments and social competition features</td>
+        </tr>
+        <tr data-status="partial">
+          <td><div class="rank-cell"><span class="rank-num">11</span><span class="tier-bar t3"></span></div></td>
+          <td><div class="method-name">Spaced repetition</div><div class="method-sub">Review at intervals</div></td>
+          <td><span class="badge b-partial"><span class="badge-dot"></span>Partial</span></td>
+          <td class="cover-text">Quiz system can surface this depending on scheduling logic</td>
+          <td class="gap-text">Dedicated SRS engine with forgetting curve tracking per learner</td>
+        </tr>
+        <tr data-status="full">
+          <td><div class="rank-cell"><span class="rank-num">12</span><span class="tier-bar t3"></span></div></td>
+          <td><div class="method-name">Multimodal learning</div><div class="method-sub">Multiple content formats</div></td>
+          <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
+          <td class="cover-text">Video, text, audio, and interactive content all available. Frees up working memory by matching format to content type.</td>
+          <td class="gap-text">VR / AR and haptic formats not possible in browser</td>
+        </tr>
+
+        <tr class="tier-divider"><td colspan="5">Tier 4 — Lower cognitive impact</td></tr>
         <tr data-status="hard">
+          <td><div class="rank-cell"><span class="rank-num">13</span><span class="tier-bar t4"></span></div></td>
           <td><div class="method-name">Flipped classroom</div><div class="method-sub">Content home, practice in class</div></td>
           <td><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span></td>
           <td class="cover-text">Content delivery side covered well by existing platform</td>
           <td class="gap-text">Requires a classroom teacher for the practice half — needs LMS integration</td>
         </tr>
         <tr data-status="hard">
+          <td><div class="rank-cell"><span class="rank-num">14</span><span class="tier-bar t4"></span></div></td>
           <td><div class="method-name">Social-emotional learning</div><div class="method-sub">Empathy, self-regulation</div></td>
           <td><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span></td>
           <td class="cover-text">Awareness content and journaling prompts possible</td>
           <td class="gap-text">Human relationship, mentorship, and group dynamics hard to replicate digitally</td>
         </tr>
         <tr data-status="hard">
+          <td><div class="rank-cell"><span class="rank-num">15</span><span class="tier-bar t4"></span></div></td>
           <td><div class="method-name">Pure field / experiential</div><div class="method-sub">Physical immersion</div></td>
           <td><span class="badge b-hard"><span class="badge-dot"></span>Hard online</span></td>
           <td class="cover-text">Real-world internships are the best available proxy online</td>
@@ -408,12 +475,69 @@
     </table>
   </div>
 
-  <p class="footer-note">Note: "Covered" reflects platform capability, not feature completeness. Gaps indicate enhancement opportunities rather than missing core support. All questions, answers, and reports are exportable across every learning mode. Real-world internships with live customers represent a genuine differentiator that most online platforms cannot match.</p>
+  <div style="margin-top:2rem;display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;">
+
+    <div style="background:var(--bg-card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:#534AB7;flex-shrink:0;"></span>
+        <span style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-hint);">Tier 1 — stress most</span>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Your Socratic step-by-step solver and real-world internships are your strongest cognitive assets. Inquiry and project-based methods are partially covered — investing here gives the highest return on learner development.</p>
+    </div>
+
+    <div style="background:var(--bg-card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:#1D9E75;flex-shrink:0;"></span>
+        <span style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-hint);">Tier 2 — strong foundation</span>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Quiz with AI follow-up, rubric feedback, and cited Q&amp;A are fully covered and well above industry standard. Peer learning and simulations are the gaps worth closing — real-time co-solving would meaningfully lift this tier.</p>
+    </div>
+
+    <div style="background:var(--bg-card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:#BA7517;flex-shrink:0;"></span>
+        <span style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-hint);">Tier 3 — support layer</span>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Gamification and multimodal are fully covered and keep learners engaged. Adding a proper spaced repetition engine is the single most contained investment here — it protects Tier 1 and 2 gains from decaying over time.</p>
+    </div>
+
+    <div style="background:var(--bg-card);border:0.5px solid var(--border);border-radius:12px;padding:1.25rem;">
+      <div style="display:flex;align-items:center;gap:8px;margin-bottom:0.75rem;">
+        <span style="width:10px;height:10px;border-radius:2px;background:#888780;flex-shrink:0;"></span>
+        <span style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-hint);">Tier 4 — limited online</span>
+      </div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.6;">Flipped classroom and social-emotional learning have inherent physical and human limits. Not worth prioritising for an online platform — energy is better spent deepening Tier 1 and 2 coverage.</p>
+    </div>
+
+  </div>
+
+  <div style="margin-top:1rem;padding:1rem 1.25rem;background:var(--bg-card);border:0.5px solid var(--border);border-radius:12px;">
+    <div style="font-family:'Syne',sans-serif;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:var(--text-hint);margin-bottom:0.5rem;">Top 2 investments to prioritise</div>
+    <div style="display:flex;gap:1.5rem;flex-wrap:wrap;">
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#534AB7;line-height:1;">1</span>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">Strengthen inquiry-based learning</div>
+          <div style="font-size:12px;color:var(--text-muted);">Add hypothesis tracking and structured investigation workflows on top of your existing Q&amp;A and document system — the foundation is already there.</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;align-items:flex-start;">
+        <span style="font-family:'Syne',sans-serif;font-size:18px;font-weight:700;color:#1D9E75;line-height:1;">2</span>
+        <div>
+          <div style="font-size:13px;font-weight:500;color:var(--text);margin-bottom:2px;">Add spaced repetition scheduling</div>
+          <div style="font-size:12px;color:var(--text-muted);">Your quiz engine already tracks right/wrong per learner — a forgetting curve scheduler on top is contained engineering work with outsized retention impact.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="margin-top:1rem;font-size:12px;color:var(--text-hint);line-height:1.6;">All questions, answers, and reports are exportable across every learning mode. Real-world internships with live customers are a genuine differentiator that most online platforms cannot match.</p>
 
 </div>
 
 <script>
-  const rows = document.querySelectorAll('#main-table tbody tr');
+  const rows = document.querySelectorAll('#main-table tbody tr:not(.tier-divider)');
+  const dividers = document.querySelectorAll('#main-table tbody tr.tier-divider');
   const btns = document.querySelectorAll('.filter-btn');
   const countFull = document.getElementById('count-full');
   const countPartial = document.getElementById('count-partial');
@@ -432,6 +556,7 @@
         else if (s === 'hard') h++;
       }
     });
+    dividers.forEach(d => d.classList.toggle('row-hidden', filter !== 'all'));
     countFull.textContent = f;
     countPartial.textContent = p;
     countHard.textContent = h;
