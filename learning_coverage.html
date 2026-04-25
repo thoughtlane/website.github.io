@@ -9,25 +9,48 @@
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
   :root {
-    --green-50: #EAF3DE; --green-800: #27500A;
-    --amber-50: #FAEEDA; --amber-800: #633806;
-    --coral-50: #FAECE7; --coral-800: #4A1B0C;
-    --purple-50: #EEEDFE; --purple-800: #26215C;
-    --teal-50: #E1F5EE; --teal-800: #04342C;
-    --gray-100: #F1EFE8; --gray-600: #5F5E5A; --gray-800: #2C2C2A;
+    --bg: #FAFAF8; --bg-card: #fff; --bg-surface: #F1EFE8; --bg-hover: #F6F5F2;
+    --text: #1a1a18; --text-muted: #5F5E5A; --text-hint: #888780;
+    --border: #e0ddd4; --border-light: #F1EFE8; --border-mid: #d3d1c7;
+    --green-fill: #EAF3DE; --green-text: #27500A; --green-dot: #3B6D11;
+    --amber-fill: #FAEEDA; --amber-text: #633806; --amber-dot: #854F0B;
+    --coral-fill: #FAECE7; --coral-text: #4A1B0C; --coral-dot: #993C1D;
+    --stat-green: #3B6D11; --stat-amber: #854F0B; --stat-coral: #993C1D;
+    --cover-text: #27500A;
+    --btn-active-bg: #1a1a18; --btn-active-text: #F1EFE8;
+  }
+
+  body.dark {
+    --bg: #111110; --bg-card: #1c1c1a; --bg-surface: #232320; --bg-hover: #252522;
+    --text: #F1EFE8; --text-muted: #B4B2A9; --text-hint: #888780;
+    --border: #2e2e2b; --border-light: #252522; --border-mid: #333330;
+    --green-fill: #172404; --green-text: #C0DD97; --green-dot: #639922;
+    --amber-fill: #412402; --amber-text: #FAC775; --amber-dot: #EF9F27;
+    --coral-fill: #2e1208; --coral-text: #F5C4B3; --coral-dot: #D85A30;
+    --stat-green: #97C459; --stat-amber: #EF9F27; --stat-coral: #F0997B;
+    --cover-text: #C0DD97;
+    --btn-active-bg: #F1EFE8; --btn-active-text: #1a1a18;
   }
 
   body {
     font-family: 'DM Sans', sans-serif;
-    background: #FAFAF8;
-    color: #1a1a18;
+    background: var(--bg);
+    color: var(--text);
     min-height: 100vh;
-    padding: 3rem 1.5rem;
+    padding: 2.5rem 2rem;
+    transition: background 0.2s, color 0.2s;
   }
 
-  .page { max-width: 900px; margin: 0 auto; }
+  .page { max-width: 100%; margin: 0 auto; }
 
-  .header { margin-bottom: 2.5rem; }
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
 
   .header-eyebrow {
     font-family: 'Syne', sans-serif;
@@ -35,34 +58,51 @@
     font-weight: 600;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #888780;
-    margin-bottom: 0.5rem;
+    color: var(--text-hint);
+    margin-bottom: 0.4rem;
   }
 
   .header h1 {
     font-family: 'Syne', sans-serif;
-    font-size: 28px;
+    font-size: 26px;
     font-weight: 700;
-    color: #1a1a18;
+    color: var(--text);
     line-height: 1.2;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
   }
 
   .header p {
-    font-size: 15px;
-    color: #5F5E5A;
+    font-size: 14px;
+    color: var(--text-muted);
     line-height: 1.6;
-    max-width: 560px;
   }
+
+  .theme-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--text-hint);
+    cursor: pointer;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 6px 14px;
+    white-space: nowrap;
+    transition: all 0.15s;
+    flex-shrink: 0;
+    margin-top: 4px;
+  }
+  .theme-toggle:hover { background: var(--bg-surface); color: var(--text); }
 
   .legend {
     display: flex;
     gap: 20px;
     flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    padding: 1rem 1.25rem;
-    background: #fff;
-    border: 0.5px solid #e0ddd4;
+    margin-bottom: 1.25rem;
+    padding: 0.875rem 1.25rem;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
     border-radius: 10px;
   }
 
@@ -71,7 +111,7 @@
     align-items: center;
     gap: 8px;
     font-size: 13px;
-    color: #5F5E5A;
+    color: var(--text-muted);
   }
 
   .badge {
@@ -93,12 +133,12 @@
     flex-shrink: 0;
   }
 
-  .b-full { background: var(--green-50); color: var(--green-800); }
-  .b-full .badge-dot { background: #3B6D11; }
-  .b-partial { background: var(--amber-50); color: var(--amber-800); }
-  .b-partial .badge-dot { background: #854F0B; }
-  .b-hard { background: var(--coral-50); color: var(--coral-800); }
-  .b-hard .badge-dot { background: #993C1D; }
+  .b-full { background: var(--green-fill); color: var(--green-text); }
+  .b-full .badge-dot { background: var(--green-dot); }
+  .b-partial { background: var(--amber-fill); color: var(--amber-text); }
+  .b-partial .badge-dot { background: var(--amber-dot); }
+  .b-hard { background: var(--coral-fill); color: var(--coral-text); }
+  .b-hard .badge-dot { background: var(--coral-dot); }
 
   .controls {
     display: flex;
@@ -113,32 +153,26 @@
     font-weight: 400;
     padding: 6px 14px;
     border-radius: 20px;
-    border: 0.5px solid #d3d1c7;
-    background: #fff;
-    color: #5F5E5A;
+    border: 0.5px solid var(--border-mid);
+    background: var(--bg-card);
+    color: var(--text-muted);
     cursor: pointer;
     transition: all 0.15s;
   }
 
-  .filter-btn:hover { background: #F1EFE8; color: #1a1a18; border-color: #b4b2a9; }
-  .filter-btn.active { background: #1a1a18; color: #F1EFE8; border-color: #1a1a18; }
+  .filter-btn:hover { background: var(--bg-surface); color: var(--text); }
+  .filter-btn.active { background: var(--btn-active-bg); color: var(--btn-active-text); border-color: var(--btn-active-bg); }
 
   .table-wrap {
-    background: #fff;
-    border: 0.5px solid #e0ddd4;
+    background: var(--bg-card);
+    border: 0.5px solid var(--border);
     border-radius: 12px;
     overflow: hidden;
   }
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-  }
+  table { width: 100%; border-collapse: collapse; table-layout: fixed; }
 
-  thead tr {
-    background: #F1EFE8;
-  }
+  thead tr { background: var(--bg-surface); }
 
   th {
     font-family: 'Syne', sans-serif;
@@ -146,48 +180,42 @@
     font-weight: 600;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #888780;
+    color: var(--text-hint);
     padding: 10px 16px;
     text-align: left;
-    border-bottom: 0.5px solid #d3d1c7;
+    border-bottom: 0.5px solid var(--border-mid);
   }
 
-  th:nth-child(1) { width: 22%; }
-  th:nth-child(2) { width: 13%; }
-  th:nth-child(3) { width: 32%; }
-  th:nth-child(4) { width: 33%; }
+  th:nth-child(1) { width: 20%; }
+  th:nth-child(2) { width: 11%; }
+  th:nth-child(3) { width: 35%; }
+  th:nth-child(4) { width: 34%; }
 
   td {
     padding: 12px 16px;
-    border-bottom: 0.5px solid #F1EFE8;
+    border-bottom: 0.5px solid var(--border-light);
     vertical-align: top;
     font-size: 13px;
     line-height: 1.55;
-    color: #1a1a18;
+    color: var(--text);
   }
 
   tr:last-child td { border-bottom: none; }
-
   tr { transition: background 0.1s; }
-  tr:hover td { background: #FAFAF8; }
+  tr:hover td { background: var(--bg-hover); }
 
   .method-name {
     font-family: 'Syne', sans-serif;
     font-size: 13px;
     font-weight: 600;
-    color: #1a1a18;
+    color: var(--text);
     margin-bottom: 2px;
   }
 
-  .method-sub {
-    font-size: 11px;
-    color: #888780;
-  }
+  .method-sub { font-size: 11px; color: var(--text-hint); }
 
-  .cover-text { color: #27500A; }
-  .gap-text { color: #5F5E5A; }
-
-  .highlight-row td { background: #EEEDFE10; }
+  .cover-text { color: var(--cover-text); }
+  .gap-text { color: var(--text-muted); }
 
   .stats-row {
     display: flex;
@@ -199,13 +227,13 @@
     flex: 1;
     padding: 1rem;
     border-radius: 10px;
-    border: 0.5px solid #e0ddd4;
-    background: #fff;
+    border: 0.5px solid var(--border);
+    background: var(--bg-card);
   }
 
   .stat-label {
     font-size: 11px;
-    color: #888780;
+    color: var(--text-hint);
     font-family: 'Syne', sans-serif;
     font-weight: 600;
     letter-spacing: 0.08em;
@@ -213,22 +241,17 @@
     margin-bottom: 4px;
   }
 
-  .stat-value {
-    font-family: 'Syne', sans-serif;
-    font-size: 26px;
-    font-weight: 700;
-  }
-
-  .stat-value.green { color: #3B6D11; }
-  .stat-value.amber { color: #854F0B; }
-  .stat-value.coral { color: #993C1D; }
+  .stat-value { font-family: 'Syne', sans-serif; font-size: 26px; font-weight: 700; }
+  .stat-value.green { color: var(--stat-green); }
+  .stat-value.amber { color: var(--stat-amber); }
+  .stat-value.coral { color: var(--stat-coral); }
 
   .row-hidden { display: none; }
 
   .footer-note {
     margin-top: 1.25rem;
     font-size: 12px;
-    color: #888780;
+    color: var(--text-hint);
     line-height: 1.6;
   }
 </style>
@@ -237,9 +260,15 @@
 <div class="page">
 
   <div class="header">
-    <div class="header-eyebrow">Platform capability audit</div>
-    <h1>Learning methods coverage</h1>
-    <p>An overview of which educational approaches your online platform fully supports, partially covers, or cannot easily replicate.</p>
+    <div class="header-left">
+      <div class="header-eyebrow">Platform capability audit</div>
+      <h1>Learning methods coverage</h1>
+      <p>Which educational approaches your online platform fully supports, partially covers, or cannot easily replicate.</p>
+    </div>
+    <button class="theme-toggle" id="theme-btn" onclick="toggleTheme()">
+      <span class="toggle-icon" id="toggle-icon">☾</span>
+      <span id="toggle-label">Dark mode</span>
+    </button>
   </div>
 
   <div class="stats-row">
@@ -257,7 +286,7 @@
     </div>
     <div class="stat-card">
       <div class="stat-label">Total methods</div>
-      <div class="stat-value" style="color:#1a1a18;" id="count-total">14</div>
+      <div class="stat-value" style="color:var(--text);" id="count-total">14</div>
     </div>
   </div>
 
@@ -288,20 +317,20 @@
         <tr data-status="full">
           <td><div class="method-name">Question answering</div><div class="method-sub">Search docs, get answers</div></td>
           <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Document search with AI-generated answers + cited sources from a managed document library, so learners can verify every claim</td>
-          <td class="gap-text">Confidence scoring on answers; flagging low-certainty responses</td>
+          <td class="cover-text">Document search with AI-generated answers, cited sources from a managed document library, and confidence scoring. All Q&amp;A sessions and reports fully exportable.</td>
+          <td class="gap-text" style="color:#888780;">—</td>
         </tr>
         <tr data-status="full">
           <td><div class="method-name">Quiz-based learning</div><div class="method-sub">MCQ + open ended</div></td>
           <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">MCQ, simple Q&amp;A, and open-ended responses — AI validates open-ended answers and asks follow-up questions based on each learner's response, enabling genuine dialogue</td>
-          <td class="gap-text">Rubric transparency for learners; exportable assessment reports</td>
+          <td class="cover-text">MCQ, simple Q&amp;A, and open-ended responses — AI validates open-ended answers using rubric-based evaluation and asks follow-up questions based on each learner's response. Learners see the criteria behind every score, turning evaluation into coaching. All reports exportable.</td>
+          <td class="gap-text" style="color:var(--text-hint);">—</td>
         </tr>
         <tr data-status="full">
           <td><div class="method-name">Socratic / adaptive</div><div class="method-sub">Problem by problem</div></td>
           <td><span class="badge b-full"><span class="badge-dot"></span>Covered</span></td>
-          <td class="cover-text">Self-paced adaptive progression + step-by-step math solver where learners submit every intermediate step — process is assessed, not just outcome. Confidence scores on each answer tell learners whether a result is reliable or likely wrong before they proceed</td>
-          <td class="gap-text">Misconception pattern library; visual step-diff feedback highlighting exactly where reasoning diverged</td>
+          <td class="cover-text">Self-paced adaptive progression + step-by-step math solver where learners submit every intermediate step. AI validates each step, highlights exactly where reasoning diverged, and provides targeted feedback at the point of error. Confidence scores show reliability per answer. All sessions and reports exportable.</td>
+          <td class="gap-text">Misconception pattern library — aggregating error trends across learners over time</td>
         </tr>
         <tr data-status="full">
           <td><div class="method-name">Real-world internships</div><div class="method-sub">Live customer projects</div></td>
@@ -379,7 +408,7 @@
     </table>
   </div>
 
-  <p class="footer-note">Note: "Covered" reflects platform capability, not feature completeness. Gaps indicate enhancement opportunities rather than missing core support. Real-world internships with live customers represent a genuine differentiator that most online platforms cannot match.</p>
+  <p class="footer-note">Note: "Covered" reflects platform capability, not feature completeness. Gaps indicate enhancement opportunities rather than missing core support. All questions, answers, and reports are exportable across every learning mode. Real-world internships with live customers represent a genuine differentiator that most online platforms cannot match.</p>
 
 </div>
 
@@ -416,6 +445,14 @@
       updateCounts(btn.dataset.filter);
     });
   });
+
+  let dark = false;
+  function toggleTheme() {
+    dark = !dark;
+    document.body.classList.toggle('dark', dark);
+    document.getElementById('toggle-icon').textContent = dark ? '○' : '☾';
+    document.getElementById('toggle-label').textContent = dark ? 'Light mode' : 'Dark mode';
+  }
 </script>
 </body>
 </html>
