@@ -1,1620 +1,388 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="dark light">
-    <title>Thoughtlane — AI-Ready EdTech Solutions</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;1,14..32,400&family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="shared/site-backdrop.css">
-    <style>
-        /* Editorial layout rhythm similar to marble.studio; cool turquoise / purple / pink accents */
-        :root {
-            --marble-ink: #0e1114;
-            --marble-paper: #eef6f4;
-            --marble-stone: #5c6b6a;
-            --marble-clay: #0d9488;
-            --marble-clay-bright: #2dd4bf;
-            --marble-honey: #a78bfa;
-            --marble-honey-light: #e9d5ff;
-            --primary: var(--marble-clay);
-            --primary-light: var(--marble-clay-bright);
-            --accent: var(--marble-honey);
-            --accent-light: var(--marble-honey-light);
-            --dark: var(--marble-ink);
-            --dark-soft: #3d4a48;
-            --light: var(--marble-paper);
-            --muted: var(--marble-stone);
-            --wave-fill: var(--marble-paper);
-            --surface-1: rgba(255, 255, 255, 0.72);
-            --surface-2: rgba(255, 255, 255, 0.55);
-            --glass-bg: var(--surface-1);
-            --glass-border: rgba(20, 19, 18, 0.08);
-            --glass-highlight: rgba(255, 255, 255, 0.9);
-            --glass-shadow: 0 8px 32px rgba(20, 19, 18, 0.06), 0 1px 0 rgba(255, 255, 255, 0.8) inset;
-        }
-        
-        * {
-            font-family: 'Inter', system-ui, sans-serif;
-        }
-        
-        h1, h2, h3, h4, .display-4, .display-5 {
-            font-family: 'Fraunces', Georgia, serif;
-        }
-        
-        html {
-            scroll-behavior: smooth;
-            scroll-padding-top: 5.5rem;
-        }
-        
-        body {
-            background-color: transparent;
-            color: var(--dark);
-            transition: background-color 0.4s ease, color 0.4s ease;
-            position: relative;
-            overflow-x: hidden;
-            isolation: isolate;
-        }
-        
-        main section[id],
-        .section-parallax[id] {
-            scroll-margin-top: 5rem;
-        }
-        
-        section[id].tl-jump-highlight {
-            animation: tlNavSectionZoom 0.95s cubic-bezier(0.22, 1, 0.36, 1);
-            transform-origin: center top;
-        }
-        
-        @keyframes tlNavSectionZoom {
-            0% { transform: scale(0.988); }
-            40% { transform: scale(1.008); }
-            100% { transform: scale(1); }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            section[id].tl-jump-highlight {
-                animation: none;
-            }
-        }
-        
-        /* Fluid / liquid ambient layer (Marble-inspired: soft motion, editorial calm) */
-        .liquid-mesh {
-            position: fixed;
-            inset: -15%;
-            z-index: -3;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 90% 70% at 12% 22%, rgba(13, 148, 136, 0.09) 0%, transparent 55%),
-                radial-gradient(ellipse 80% 60% at 88% 78%, rgba(167, 139, 250, 0.1) 0%, transparent 52%),
-                radial-gradient(ellipse 55% 45% at 50% 50%, rgba(236, 72, 153, 0.05) 0%, transparent 58%);
-            animation: liquidMeshDrift 28s ease-in-out infinite;
-            will-change: transform;
-        }
-        
-        @keyframes liquidMeshDrift {
-            0%, 100% { transform: translate(0, 0) rotate(0deg) scale(1); }
-            33% { transform: translate(2.5%, -2%) rotate(1.5deg) scale(1.04); }
-            66% { transform: translate(-2%, 2.5%) rotate(-1deg) scale(0.98); }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .liquid-mesh { animation: none; }
-            .btn-lg.btn-pill:hover { transform: none; box-shadow: none; }
-        }
-        
-        .page-backdrop {
-            position: fixed;
-            inset: 0;
-            z-index: -2;
-            pointer-events: none;
-            background:
-                radial-gradient(ellipse 120% 90% at 8% 15%, rgba(13, 148, 136, 0.07) 0%, transparent 52%),
-                radial-gradient(ellipse 100% 80% at 92% 78%, rgba(167, 139, 250, 0.09) 0%, transparent 48%),
-                radial-gradient(ellipse 70% 60% at 48% 48%, rgba(20, 19, 18, 0.04) 0%, transparent 55%),
-                var(--light);
-        }
-        
-        .parallax-blob {
-            position: fixed;
-            border-radius: 50%;
-            filter: blur(72px);
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: -1;
-            will-change: transform;
-        }
-        
-        .parallax-blob.blob-a {
-            width: min(44vw, 500px);
-            height: min(44vw, 500px);
-            top: -6%;
-            left: -10%;
-            background: radial-gradient(circle, rgba(13, 148, 136, 0.35) 0%, transparent 68%);
-            border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-            animation: liquidBlobShape 22s ease-in-out infinite;
-        }
-        
-        .parallax-blob.blob-b {
-            width: min(58vw, 640px);
-            height: min(58vw, 640px);
-            bottom: -18%;
-            right: -14%;
-            background: radial-gradient(circle, rgba(167, 139, 250, 0.32) 0%, transparent 62%);
-            border-radius: 40% 60% 55% 45% / 45% 55% 45% 55%;
-            animation: liquidBlobShape 26s ease-in-out infinite reverse;
-        }
-        
-        .parallax-blob.blob-c {
-            width: min(36vw, 400px);
-            height: min(36vw, 400px);
-            top: 38%;
-            right: 2%;
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.22) 0%, transparent 65%);
-            border-radius: 45% 55% 35% 65% / 55% 45% 65% 35%;
-            animation: liquidBlobShape 18s ease-in-out infinite;
-        }
-        
-        @keyframes liquidBlobShape {
-            0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; filter: blur(72px); }
-            50% { border-radius: 35% 65% 55% 45% / 50% 60% 40% 50%; filter: blur(80px); }
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .parallax-blob.blob-a,
-            .parallax-blob.blob-b,
-            .parallax-blob.blob-c { animation: none; border-radius: 50%; }
-        }
-        
-        .navbar {
-            background: rgba(238, 246, 244, 0.78) !important;
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border-bottom: 1px solid rgba(20, 19, 18, 0.06);
-            box-shadow: 0 4px 24px rgba(20, 19, 18, 0.05);
-            transition: background 0.4s ease, border-color 0.4s ease, box-shadow 0.4s ease;
-        }
-        
-        .navbar-brand img,
-        .nav-brand-logo {
-            height: clamp(40px, 5vw, 52px);
-            width: auto;
-        }
-        
-        /* Full-width top bar (clean editorial strip, not a floating pill) */
-        .navbar-site {
-            margin: 0;
-            width: 100%;
-            max-width: none;
-            border-radius: 0;
-            padding-top: 0.5rem;
-            padding-bottom: 0.5rem;
-        }
-        
-        @media (min-width: 992px) {
-            .navbar-nav.navbar-nav-main {
-                flex-wrap: nowrap;
-                align-items: center;
-                gap: 0.1rem;
-            }
-            
-            .navbar-nav-main .nav-link {
-                white-space: nowrap;
-                padding-left: 0.5rem;
-                padding-right: 0.5rem;
-                font-size: 0.8125rem;
-                letter-spacing: 0.01em;
-            }
-        }
-        
-        @media (min-width: 1200px) {
-            .navbar-nav-main .nav-link {
-                font-size: 0.875rem;
-                padding-left: 0.65rem;
-                padding-right: 0.65rem;
-            }
-        }
-        
-        .hero {
-            min-height: min(92vh, 900px);
-            display: flex;
-            align-items: center;
-            padding-top: 2rem;
-            padding-bottom: 3rem;
-            background: linear-gradient(160deg, rgba(13, 148, 136, 0.06) 0%, rgba(167, 139, 250, 0.07) 38%, transparent 88%);
-        }
-        
-        .hero-title-fluid {
-            font-family: 'Fraunces', serif;
-            font-weight: 700;
-            line-height: 1.05;
-            letter-spacing: -0.03em;
-            font-size: clamp(2.35rem, 6.5vw, 4.25rem);
-        }
-        
-        .hero-title-fluid .hero-title-line {
-            display: block;
-        }
-        
-        .hero-title-fluid .hero-title-accent {
-            background: linear-gradient(118deg, var(--primary-light) 0%, var(--accent) 42%, var(--accent-light) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            padding-bottom: 0.06em;
-        }
-        
-        body.light-theme .hero-title-fluid .hero-title-accent {
-            background: linear-gradient(118deg, var(--primary) 0%, var(--primary-light) 48%, var(--accent) 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-        }
-        
-        .hero .lead {
-            color: var(--muted);
-            font-size: clamp(1.05rem, 2.2vw, 1.3rem);
-            line-height: 1.65;
-            max-width: 36em;
-        }
-        
-        .hero .hero-title-fluid > .hero-title-line:not(.hero-title-accent) {
-            color: var(--dark);
-        }
-        
-        @keyframes heroRise {
-            from {
-                opacity: 0;
-                transform: translateY(22px);
-            }
-            to {
-                opacity: 1;
-                transform: none;
-            }
-        }
-        
-        @media (prefers-reduced-motion: no-preference) {
-            .hero-intro .parallax-hero-copy > * {
-                animation: heroRise 1s cubic-bezier(0.22, 1, 0.36, 1) backwards;
-            }
-            .hero-intro .parallax-hero-copy > *:nth-child(1) { animation-delay: 0.06s; }
-            .hero-intro .parallax-hero-copy > *:nth-child(2) { animation-delay: 0.12s; }
-            .hero-intro .parallax-hero-copy > *:nth-child(3) { animation-delay: 0.18s; }
-            .hero-intro .hero-visual-wrap {
-                animation: heroRise 1.05s cubic-bezier(0.22, 1, 0.36, 1) 0.16s backwards;
-            }
-        }
-        
-        .btn-lg.btn-pill {
-            border-radius: 999px;
-            padding-left: 1.85rem;
-            padding-right: 1.85rem;
-            transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.35s ease;
-        }
-        
-        .btn-lg.btn-pill:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(13, 148, 136, 0.25);
-        }
-        
-        .liquid-wave {
-            display: block;
-            width: 100%;
-            height: clamp(48px, 8vw, 88px);
-            line-height: 0;
-            margin-top: -1px;
-        }
-        
-        .liquid-wave svg {
-            display: block;
-            width: 100%;
-            height: clamp(48px, 8vw, 88px);
-        }
-        
-        .hero-visual-wrap {
-            position: relative;
-            perspective: 1200px;
-        }
-        
-        .parallax-hero-media {
-            will-change: transform;
-            transition: transform 0.05s linear;
-            filter: drop-shadow(0 24px 48px rgba(20, 19, 18, 0.12));
-        }
-        
-        .section-parallax {
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .section-parallax > .container,
-        .section-parallax > .container-fluid {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .parallax-decor {
-            position: absolute;
-            pointer-events: none;
-            z-index: 0;
-            will-change: transform;
-            border-radius: 50%;
-            filter: blur(52px);
-            opacity: 0.38;
-        }
-        
-        body:not(.light-theme) .parallax-decor {
-            opacity: 0.22;
-        }
-        
-        .parallax-decor--teal {
-            width: min(340px, 58vw);
-            height: min(340px, 58vw);
-            background: radial-gradient(circle, rgba(13, 148, 136, 0.38) 0%, transparent 68%);
-        }
-        
-        .parallax-decor--mint {
-            width: min(280px, 48vw);
-            height: min(280px, 48vw);
-            background: radial-gradient(circle, rgba(167, 139, 250, 0.35) 0%, transparent 65%);
-        }
-        
-        .parallax-decor--sky {
-            width: min(220px, 40vw);
-            height: min(220px, 40vw);
-            background: radial-gradient(circle, rgba(236, 72, 153, 0.28) 0%, transparent 62%);
-        }
-        
-        .parallax-decor-pos-tr { top: -12%; right: -6%; }
-        .parallax-decor-pos-bl { bottom: -18%; left: -8%; }
-        .parallax-decor-pos-br { bottom: -10%; right: -4%; }
-        .parallax-decor-pos-tl { top: -8%; left: -5%; }
-        .parallax-decor-pos-mr { top: 35%; right: -12%; }
-        .parallax-decor-pos-ml { top: 50%; left: -10%; }
-        
-        .parallax-hero-copy {
-            will-change: transform;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
-            border: none;
-            padding: 0.75rem 1.75rem;
-            font-weight: 600;
-        }
-        
-        .btn-primary:hover {
-            background: linear-gradient(135deg, var(--primary-light) 0%, var(--accent) 100%);
-            transform: translateY(-1px);
-        }
-        
-        .btn-outline-primary {
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-        
-        .btn-outline-primary:hover {
-            background: var(--primary);
-            color: white;
-        }
-        
-        .section-title {
-            color: var(--dark);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-        }
-        
-        .section-title.display-5 {
-            font-size: clamp(1.65rem, 4vw, 2.5rem);
-        }
-        
-        .card {
-            border: 1px solid var(--glass-border);
-            border-radius: 24px;
-            overflow: hidden;
-            background: var(--glass-bg);
-            backdrop-filter: blur(28px) saturate(165%);
-            -webkit-backdrop-filter: blur(28px) saturate(165%);
-            box-shadow: var(--glass-shadow);
-            transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.35s ease, background 0.4s ease, border-color 0.35s ease;
-        }
-        
-        .card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 28px 56px rgba(20, 19, 18, 0.1), 0 1px 0 rgba(255, 255, 255, 0.85) inset;
-            border-color: rgba(255, 255, 255, 0.75);
-        }
-        
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            border-radius: 14px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-        }
-        
-        .market-stat {
-            font-size: 2rem;
-            font-weight: 700;
-            color: var(--primary);
-            font-family: 'Fraunces', serif;
-        }
-        
-        .citation {
-            font-size: 0.8rem;
-            color: var(--muted);
-        }
-        
-        .citation a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-        
-        .citation a:hover {
-            text-decoration: underline;
-        }
-        
-        .product-card {
-            border-left: 4px solid var(--primary);
-        }
-        
-        .contact-section {
-            background: linear-gradient(135deg, rgba(13, 148, 136, 0.07) 0%, rgba(167, 139, 250, 0.09) 100%);
-        }
-        
-        .inquiry-form .form-control {
-            border-radius: 10px;
-            border: 1px solid rgba(20, 19, 18, 0.12);
-        }
-        
-        .inquiry-form .form-control:focus {
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(13, 148, 136, 0.18);
-        }
-        
-        .footer {
-            background: var(--dark);
-            color: rgba(255, 255, 255, 0.8);
-        }
-        
-        .footer a {
-            color: rgba(255, 255, 255, 0.9);
-        }
-        
-        .footer a:hover {
-            color: var(--accent-light);
-        }
-        
-        .nav-link {
-            font-weight: 500;
-            color: var(--dark-soft) !important;
-        }
-        
-        .nav-link:hover {
-            color: var(--primary) !important;
-        }
-        
-        .badge-market {
-            background: rgba(13, 148, 136, 0.12);
-            color: var(--primary);
-            font-weight: 600;
-        }
-        
-        /* Dark theme — warm editorial (Marble-adjacent) */
-        body:not(.light-theme) {
-            --glass-bg: rgba(28, 26, 24, 0.55);
-            --glass-border: rgba(242, 235, 226, 0.1);
-            --glass-highlight: rgba(255, 255, 255, 0.05);
-            --glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.05);
-            --wave-fill: #0a0908;
-            background-color: #0a0908;
-            color: #ebe6dc;
-        }
-        
-        body:not(.light-theme) .page-backdrop {
-            background:
-                radial-gradient(ellipse 120% 90% at 8% 15%, rgba(13, 148, 136, 0.14) 0%, transparent 52%),
-                radial-gradient(ellipse 100% 80% at 92% 78%, rgba(167, 139, 250, 0.12) 0%, transparent 48%),
-                radial-gradient(ellipse 70% 60% at 48% 48%, rgba(236, 72, 153, 0.06) 0%, transparent 55%),
-                #0a0908;
-        }
-        
-        body:not(.light-theme) .navbar {
-            background: rgba(10, 9, 8, 0.72) !important;
-            backdrop-filter: blur(28px) saturate(200%);
-            -webkit-backdrop-filter: blur(28px) saturate(200%);
-            border-bottom-color: rgba(242, 235, 226, 0.07);
-            box-shadow: 0 4px 28px rgba(0, 0, 0, 0.35);
-        }
-        
-        body:not(.light-theme) .navbar-site {
-            border-bottom: 1px solid rgba(242, 235, 226, 0.1);
-        }
-        
-        body:not(.light-theme) .navbar-brand span {
-            color: #f2ebe2 !important;
-        }
-        
-        body:not(.light-theme) .navbar-toggler {
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-        
-        body:not(.light-theme) .navbar-toggler-icon {
-            filter: invert(1);
-        }
-        
-        body:not(.light-theme) .nav-link {
-            color: rgba(235, 230, 220, 0.88) !important;
-        }
-        
-        body:not(.light-theme) .nav-link:hover {
-            color: var(--accent-light) !important;
-        }
-        
-        body:not(.light-theme) .hero {
-            background: linear-gradient(135deg, rgba(13, 148, 136, 0.09) 0%, rgba(167, 139, 250, 0.07) 50%, rgba(10, 9, 8, 0.5) 100%);
-        }
-        
-        body:not(.light-theme) .hero .hero-title-fluid > .hero-title-line:not(.hero-title-accent) {
-            color: #f2ebe2;
-        }
-        
-        body:not(.light-theme) .hero .lead {
-            color: #a8a198;
-        }
-        
-        body:not(.light-theme) .section-title {
-            color: #f2ebe2;
-        }
-        
-        body:not(.light-theme) .card {
-            background: var(--glass-bg);
-            backdrop-filter: blur(28px) saturate(165%);
-            -webkit-backdrop-filter: blur(28px) saturate(165%);
-            border: 1px solid var(--glass-border);
-            box-shadow: var(--glass-shadow);
-        }
-        
-        body:not(.light-theme) .card:hover {
-            box-shadow: 0 28px 56px rgba(0, 0, 0, 0.45), inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.14);
-        }
-        
-        body:not(.light-theme) .card h4,
-        body:not(.light-theme) .card .fw-bold {
-            color: #f2ebe2;
-        }
-
-        body:not(.light-theme) #mission .mission-pillar {
-            color: #e8e2d8 !important;
-        }
-        
-        body:not(.light-theme) .card .text-muted,
-        body:not(.light-theme) p.text-muted {
-            color: #a39d92 !important;
-        }
-        
-        body:not(.light-theme) .card .lead,
-        body:not(.light-theme) #about .lead,
-        body:not(.light-theme) #why-now .lead {
-            color: #b8b2a6 !important;
-        }
-        
-        body:not(.light-theme) .market-stat {
-            color: var(--accent-light);
-        }
-        
-        body:not(.light-theme) .citation {
-            color: #7a746a;
-        }
-        
-        body:not(.light-theme) .citation a {
-            color: var(--accent-light);
-        }
-        
-        body:not(.light-theme) .badge-market {
-            background: rgba(13, 148, 136, 0.2);
-            color: var(--accent-light);
-        }
-        
-        body:not(.light-theme) .product-card {
-            border-left-color: var(--accent);
-        }
-        
-        body:not(.light-theme) section.bg-white {
-            background-color: #0d0c0b !important;
-        }
-        
-        body:not(.light-theme) .badge.rounded-pill {
-            background: rgba(167, 139, 250, 0.18) !important;
-            color: var(--accent-light) !important;
-        }
-        
-        body:not(.light-theme) .contact-section {
-            background: linear-gradient(135deg, rgba(13, 148, 136, 0.1) 0%, rgba(167, 139, 250, 0.08) 100%);
-        }
-        
-        body:not(.light-theme) .inquiry-form .form-control,
-        body:not(.light-theme) .inquiry-form .form-select {
-            background: #141210;
-            border-color: rgba(242, 235, 226, 0.12);
-            color: #ebe6dc;
-        }
-        
-        body:not(.light-theme) .inquiry-form .form-control::placeholder {
-            color: #7a746a;
-        }
-        
-        body:not(.light-theme) .inquiry-form .form-control:focus,
-        body:not(.light-theme) .inquiry-form .form-select:focus {
-            background: #141210;
-            border-color: var(--accent);
-            color: #ebe6dc;
-        }
-        
-        body:not(.light-theme) .inquiry-form .form-label,
-        body:not(.light-theme) .inquiry-form label.form-label {
-            color: #f5f5f4 !important;
-        }
-        
-        body:not(.light-theme) a.text-dark {
-            color: #ebe6dc !important;
-        }
-        
-        body:not(.light-theme) a.text-dark:hover {
-            color: #f6f1e8 !important;
-        }
-        
-        body:not(.light-theme) #contact a[href^="mailto"] {
-            color: var(--accent-light) !important;
-        }
-        
-        body:not(.light-theme) .footer {
-            background: #060605;
-            border-top: 1px solid rgba(242, 235, 226, 0.06);
-        }
-        
-        
-        /* Scroll-driven section motion (Marble-style editorial reveals) */
-        .section-reveal {
-            --reveal-dur: 0.85s;
-            --reveal-ease: cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        
-        .section-reveal .reveal-stack > * {
-            opacity: 0;
-            transform: translateY(26px);
-            transition: opacity var(--reveal-dur) var(--reveal-ease), transform var(--reveal-dur) var(--reveal-ease);
-        }
-        
-        .section-reveal.is-inview .reveal-stack > * {
-            opacity: 1;
-            transform: none;
-        }
-        
-        .section-reveal.is-inview .reveal-stack > *:nth-child(1) { transition-delay: 0.04s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(2) { transition-delay: 0.1s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(3) { transition-delay: 0.16s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(4) { transition-delay: 0.22s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(5) { transition-delay: 0.28s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(6) { transition-delay: 0.34s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(7) { transition-delay: 0.4s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(8) { transition-delay: 0.46s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(9) { transition-delay: 0.52s; }
-        .section-reveal.is-inview .reveal-stack > *:nth-child(10) { transition-delay: 0.58s; }
-        
-        .product-spotlight {
-            position: relative;
-            padding: clamp(3.5rem, 10vw, 6.5rem) 0;
-            border-top: 1px solid rgba(20, 19, 18, 0.06);
-            overflow: hidden;
-        }
-        
-        body:not(.light-theme) .product-spotlight {
-            border-top-color: rgba(242, 235, 226, 0.08);
-        }
-        
-        .product-spotlight::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 1s ease;
-            background: radial-gradient(ellipse 80% 60% at 100% 20%, rgba(13, 148, 136, 0.09) 0%, transparent 55%);
-        }
-        
-        .product-spotlight.is-inview::before {
-            opacity: 1;
-        }
-        
-        .product-spotlight--alt::before {
-            background: radial-gradient(ellipse 75% 55% at 0% 80%, rgba(167, 139, 250, 0.1) 0%, transparent 50%);
-        }
-        
-        .product-spotlight-eyebrow {
-            font-size: 0.72rem;
-            font-weight: 600;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        
-        body:not(.light-theme) .product-spotlight-eyebrow {
-            color: var(--accent-light);
-        }
-        
-        .product-spotlight-title {
-            font-family: 'Fraunces', Georgia, serif;
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            line-height: 1.08;
-            font-size: clamp(2rem, 5vw, 3.25rem);
-            margin-bottom: 1.25rem;
-            color: var(--dark);
-        }
-        
-        body:not(.light-theme) .product-spotlight-title {
-            color: #f2ebe2;
-        }
-        
-        .product-spotlight-lead {
-            font-size: clamp(1.05rem, 2vw, 1.2rem);
-            line-height: 1.65;
-            max-width: 36em;
-            color: var(--muted);
-            margin-bottom: 1.5rem;
-        }
-        
-        body:not(.light-theme) .product-spotlight-lead {
-            color: #b0aaa0;
-        }
-        
-        .product-spotlight-meta {
-            font-size: 0.95rem;
-            line-height: 1.6;
-            color: var(--dark-soft);
-            max-width: 40em;
-            margin-bottom: 1.75rem;
-        }
-        
-        body:not(.light-theme) .product-spotlight-meta {
-            color: #c9c2b6;
-        }
-        
-        .product-spotlight-cta {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.35rem;
-            font-weight: 600;
-            color: var(--primary);
-            text-decoration: none;
-            border-bottom: 1px solid rgba(13, 148, 136, 0.35);
-            padding-bottom: 0.15rem;
-            transition: color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
-        }
-        
-        .product-spotlight-cta:hover {
-            color: var(--primary-light);
-            border-color: var(--primary-light);
-        }
-        
-        body:not(.light-theme) .product-spotlight-cta {
-            color: var(--accent-light);
-            border-bottom-color: rgba(196, 181, 253, 0.45);
-        }
-        
-        body:not(.light-theme) .product-spotlight-cta:hover {
-            color: #efe8dc;
-        }
-        
-        .product-spotlight-num {
-            font-family: 'Fraunces', Georgia, serif;
-            font-size: clamp(3rem, 8vw, 5rem);
-            font-weight: 600;
-            line-height: 1;
-            color: rgba(20, 19, 18, 0.06);
-            user-select: none;
-        }
-        
-        body:not(.light-theme) .product-spotlight-num {
-            color: rgba(255, 255, 255, 0.32);
-        }
-        
-        @media (prefers-reduced-motion: reduce) {
-            .section-reveal .reveal-stack > * {
-                opacity: 1;
-                transform: none;
-                transition: none;
-            }
-            .product-spotlight::before {
-                transition: none;
-                opacity: 1;
-            }
-        }
-        
-        .theme-toggle {
-            width: 44px;
-            height: 44px;
-            border-radius: 12px;
-            border: 1px solid rgba(20, 19, 18, 0.12);
-            background: rgba(13, 148, 136, 0.08);
-            color: var(--primary);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-            transition: all 0.2s ease;
-        }
-        
-        body:not(.light-theme) .theme-toggle {
-            border-color: rgba(242, 235, 226, 0.12);
-            background: rgba(13, 148, 136, 0.18);
-            color: var(--accent-light);
-        }
-        
-        .theme-toggle:hover {
-            background: rgba(13, 148, 136, 0.16);
-        }
-        
-        body:not(.light-theme) .theme-toggle:hover {
-            background: rgba(13, 148, 136, 0.28);
-        }
-        
-        body.light-theme .navbar-site {
-            border-bottom: 1px solid rgba(20, 19, 18, 0.08);
-            box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) inset;
-        }
-        
-        @media (max-width: 768px) {
-            .hero {
-                text-align: center;
-            }
-        }
-        
-        /* Marble.studio–style nav CTA + hero eyebrow */
-        .marble-eyebrow {
-            font-size: 0.75rem;
-            font-weight: 600;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--muted);
-            margin-bottom: 1.25rem;
-        }
-        body:not(.light-theme) .marble-eyebrow {
-            color: #8a9a98;
-        }
-        .navbar-btn-cta {
-            border-radius: 999px;
-            padding: 0.45rem 1.25rem !important;
-            font-weight: 600;
-            font-size: 0.875rem;
-        }
-        .product-logo-strip {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: center;
-            gap: clamp(1rem, 4vw, 2rem);
-            margin-top: 2rem;
-            opacity: 0.85;
-        }
-        .product-logo-strip img {
-            height: clamp(28px, 5vw, 40px);
-            width: auto;
-            object-fit: contain;
-            filter: grayscale(0.15);
-            transition: transform 0.35s ease, opacity 0.35s ease;
-        }
-        .product-logo-strip a:hover img {
-            transform: scale(1.06);
-            opacity: 1;
-        }
-        .product-spotlight.section-reveal {
-            transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.85s ease;
-        }
-        .product-spotlight.section-reveal:not(.is-inview) {
-            transform: scale(0.96);
-            opacity: 0.88;
-        }
-        .product-spotlight.section-reveal.is-inview {
-            transform: scale(1);
-            opacity: 1;
-        }
-        @media (prefers-reduced-motion: reduce) {
-            .product-spotlight.section-reveal:not(.is-inview) {
-                transform: none;
-                opacity: 1;
-            }
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000000" />
+  <meta name="description" content="Thoughtlane — AI that supports learning and maintains knowledge bases. EdTech for student cognition and teacher productivity; Docket for enterprise document knowledge." />
+  <title>Thoughtlane | Learning &amp; Knowledge AI</title>
+  <link rel="icon" href="assets/thoughtlane-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body class="tl-has-ambient">
-    <div class="page-backdrop" aria-hidden="true"></div>
-    <div class="liquid-mesh" aria-hidden="true"></div>
-    <div class="parallax-blob blob-a" aria-hidden="true"></div>
-    <div class="parallax-blob blob-b" aria-hidden="true"></div>
-    <div class="parallax-blob blob-c" aria-hidden="true"></div>
-    <div class="tl-corner-abstract d-none d-lg-block" aria-hidden="true">
-        <svg class="tl-corner-abstract__svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="presentation">
-            <defs>
-                <linearGradient id="tlCornerG1" x1="0%" y1="100%" x2="100%" y2="0%">
-                    <stop offset="0%" style="stop-color:#14b8a6;stop-opacity:0.55" />
-                    <stop offset="45%" style="stop-color:#a78bfa;stop-opacity:0.45" />
-                    <stop offset="100%" style="stop-color:#f472b6;stop-opacity:0.4" />
-                </linearGradient>
-                <linearGradient id="tlCornerG2" x1="100%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style="stop-color:#22d3ee;stop-opacity:0.35" />
-                    <stop offset="100%" style="stop-color:#7c3aed;stop-opacity:0.3" />
-                </linearGradient>
-            </defs>
-            <path fill="url(#tlCornerG1)" d="M380 400c40-120 20-240-80-320S80-20 0 120c60 100 180 200 380 280z" opacity="0.9" />
-            <path fill="url(#tlCornerG2)" d="M400 360c-100-40-200-100-260-200S80 40 200 0c80 80 160 200 200 360z" opacity="0.75" />
-            <ellipse cx="280" cy="220" rx="90" ry="110" fill="#2dd4bf" opacity="0.12" transform="rotate(-18 280 220)" />
-        </svg>
-    </div>
-    <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light sticky-top navbar-site">
-        <div class="container-fluid px-3 px-lg-4">
-            <a class="navbar-brand d-flex align-items-center py-1" href="#">
-                <img src="thoughtlanelogo.png" alt="Thoughtlane" class="me-2 nav-brand-logo" width="1024" height="1024">
-                <span class="fw-bold">Thoughtlane</span>
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto navbar-nav-main flex-lg-row">
-                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#market">Market</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#about" title="What we do">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#mission" title="Our mission">Mission</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#why-now" title="Why now">Why now</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#learning-approach" title="How Thoughtlane supports learning">Learning</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#platform">Platform</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#partners">Partners</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                    <li class="nav-item ms-lg-2 pt-2 pt-lg-0 d-flex align-items-center gap-2">
-                        <a class="btn btn-primary navbar-btn-cta" href="#contact">Get in Touch</a>
-                        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme" title="Toggle light/dark mode">☀️</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
+<body>
+  <header class="site-header" id="top">
+    <a class="logo" href="#top">
+      <img src="assets/thoughtlane-mark.svg" alt="Thoughtlane" width="112" height="112" />
+      <span>Thoughtlane</span>
+    </a>
+    <nav class="nav" id="nav">
+      <a href="#about">About</a>
+      <a href="#mission">Mission</a>
+      <a href="#why-now">Why Now</a>
+      <a href="#products">Products</a>
+      <a href="#partners">Partners</a>
+      <a href="#contact">Contact</a>
     </nav>
+    <button class="nav-toggle" id="navToggle" aria-label="Open menu">
+      <span></span><span></span>
+    </button>
+  </header>
 
+  <main>
     <!-- Hero -->
-    <section id="home" class="hero section-parallax hero-intro">
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tr" data-parallax-speed="0.14" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-ml" data-parallax-speed="0.22" aria-hidden="true"></span>
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-7 parallax-hero-copy" data-parallax-speed="0.06">
-                    <p class="marble-eyebrow mb-0">AI-native learning for real classrooms</p>
-                    <h1 class="hero-title-fluid mb-4">
-                        <span class="hero-title-line">Build learning</span>
-                        <span class="hero-title-line hero-title-accent">that keeps pace with AI</span>
-                    </h1>
-                    <p class="lead mb-4">We build AI-native EdTech to prepare the next generation for an AI-driven world: returning time to educators for meaningful student engagement, reducing time spent searching for solutions, and strengthening student cognition.</p>
-                    <div class="d-flex flex-wrap gap-3">
-                        <a href="#contact" class="btn btn-primary btn-lg btn-pill">Get in Touch</a>
-                        <a href="#products" class="btn btn-outline-primary btn-lg btn-pill">Explore Products</a>
-                    </div>
-                </div>
-                <div class="col-lg-5 mt-5 mt-lg-0 text-center hero-visual-wrap">
-                    <img src="thoughtlanelogo.png" alt="Thoughtlane" class="img-fluid parallax-hero-media" style="max-width: 560px; opacity: 0.95;" width="1024" height="1024" fetchpriority="high">
-                </div>
-            </div>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">Thoughtlane</p>
+        <h1>One Platform.<br />Every Stage of Learning.</h1>
+        <p class="hero-copy">
+          We support learning with AI that strengthens student cognition and reduces teacher
+          burden—and we maintain knowledge bases so organizations can keep documents current
+          and chat with everything they trust.
+        </p>
+        <p class="hero-sub">
+          Education products for schools and classrooms. Docket for mid to large companies across industries.
+          Built with private deployment, secure data residency, and institution-first infrastructure.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#products">Explore Products</a>
+          <a class="btn btn-ghost" href="#contact">Let's connect</a>
         </div>
+      </div>
+      <div class="hero-mark" aria-hidden="true">
+        <img src="assets/thoughtlane-mark.svg" alt="" width="520" height="520" />
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="orb orb-a"></div>
+        <div class="orb orb-b"></div>
+        <div class="hero-grid"></div>
+      </div>
     </section>
 
-    <div class="liquid-wave" aria-hidden="true">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 72" preserveAspectRatio="none" role="presentation">
-            <path fill="var(--wave-fill)" d="M0,28 C240,72 480,0 720,36 C960,72 1200,8 1440,44 L1440,72 L0,72 Z" />
-        </svg>
+    <!-- Partners marquee -->
+    <section class="partners" id="partners">
+      <div class="marquee" aria-label="Partners and collaborators">
+        <div class="marquee-track">
+          <span>Angel Investors</span>
+          <span>Durham</span>
+          <span>Whitby Rotary Sunrise Club</span>
+          <span>Rotary 7070 District Conference</span>
+          <span>Inflection 2026</span>
+          <span>Angel Investors</span>
+          <span>Durham</span>
+          <span>Whitby Rotary Sunrise Club</span>
+          <span>Rotary 7070 District Conference</span>
+          <span>Inflection 2026</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product demo -->
+    <section class="demo" id="demo">
+      <div class="section-head">
+        <p class="eyebrow">Product Demo</p>
+        <h2>See Thoughtlane in motion.</h2>
+      </div>
+      <div class="demo-stage">
+        <div class="demo-screen">
+          <div class="demo-chrome">
+            <span></span><span></span><span></span>
+          </div>
+          <div class="demo-body">
+            <div class="demo-sidebar">
+              <div class="demo-line w60"></div>
+              <div class="demo-line w40"></div>
+              <div class="demo-line w80"></div>
+              <div class="demo-pill"></div>
+            </div>
+            <div class="demo-main">
+              <div class="demo-card pulse"></div>
+              <div class="demo-row">
+                <div class="demo-tile"></div>
+                <div class="demo-tile delay"></div>
+                <div class="demo-tile delay2"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="demo-caption">Interactive learning, assessment, and institutional AI — in one secure platform.</p>
+      </div>
+    </section>
+
+    <!-- About / What we do -->
+    <section class="about" id="about">
+      <div class="about-grid">
+        <div>
+          <p class="eyebrow">What We Do</p>
+          <h2>We support learning—and we maintain knowledge bases.</h2>
+        </div>
+        <div class="about-copy">
+          <p>
+            Thoughtlane builds products that enhance student cognitive ability and reduce
+            teacher burden: personalized practice, open-ended reasoning, assessment, and
+            classroom-ready AI.
+          </p>
+          <p>
+            Apart from supporting learning, we also maintain knowledge bases. Organizations
+            in any industry can keep large document sets up to date and chat with their entire
+            knowledge base through our product suite, <strong>Docket</strong>—built for mid to
+            large companies that need authentic answers from their own sources.
+          </p>
+          <a class="btn btn-primary" href="#contact">Let's connect</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Capabilities horizontal scroll -->
+    <section class="capabilities" id="capabilities">
+      <div class="section-head inline">
+        <div>
+          <p class="eyebrow">Capabilities</p>
+          <h2>What we build</h2>
+        </div>
+        <div class="scroll-hint">Scroll →</div>
+      </div>
+      <div class="cap-rail" id="capRail">
+        <article class="cap-card">
+          <span class="cap-num">01</span>
+          <h3>Personalized Learning</h3>
+          <p>Adaptive AI tutors, intelligent feedback, STEM assistance, and interactive learning experiences that strengthen student cognition.</p>
+        </article>
+        <article class="cap-card">
+          <span class="cap-num">02</span>
+          <h3>AI for Schools &amp; Institutions</h3>
+          <p>Enterprise-ready AI platforms that streamline teaching, assessment, and administration—reducing teacher burden while integrating into existing systems.</p>
+        </article>
+        <article class="cap-card">
+          <span class="cap-num">03</span>
+          <h3>Career Readiness</h3>
+          <p>Helping students gain real-world experience before graduation through AI-powered internship opportunities, skill development, and career pathways.</p>
+        </article>
+        <article class="cap-card">
+          <span class="cap-num">04</span>
+          <h3>Secure AI Infrastructure</h3>
+          <p>Private deployments, regional data residency, and enterprise security that give organizations full control over their data.</p>
+        </article>
+        <article class="cap-card">
+          <span class="cap-num">05</span>
+          <h3>Enterprise Knowledge — Docket</h3>
+          <p>Help any mid to large organization manage, update, and chat with large document sets—across industries—with our Docket product suite.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Built for institutions -->
+    <section class="institutions" id="why-now">
+      <div class="section-head">
+        <p class="eyebrow">Why Now</p>
+        <h2>Built for the institutions shaping the future of learning.</h2>
+        <p class="lede">Thoughtlane partners with organizations looking to responsibly integrate AI into education.</p>
+      </div>
+      <div class="inst-grid">
+        <article class="inst-card">
+          <h3>Schools &amp; School Boards</h3>
+          <p>Deploy secure AI tools that support teachers, personalize student learning, and improve classroom outcomes.</p>
+        </article>
+        <article class="inst-card">
+          <h3>Universities &amp; Colleges</h3>
+          <p>Build AI-powered learning environments while maintaining control over institutional data and academic standards.</p>
+        </article>
+        <article class="inst-card">
+          <h3>Education Companies</h3>
+          <p>Enhance existing platforms with AI capabilities that improve engagement, content creation, and student support.</p>
+        </article>
+        <article class="inst-card">
+          <h3>Government &amp; Education Organizations</h3>
+          <p>Develop scalable AI infrastructure to modernize education systems.</p>
+        </article>
+        <article class="inst-card">
+          <h3>Mid to Large Enterprises</h3>
+          <p>Use <strong>Docket</strong> to keep large document sets current and chat with your entire knowledge base—efficient knowledge management for any industry.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Docket -->
+    <section class="bridge" id="docket">
+      <div class="bridge-inner">
+        <p class="eyebrow">Docket</p>
+        <h2>Knowledge management for every industry.</h2>
+        <p class="lede">
+          Mid to large companies that maintain large sets of documents can use Docket to keep
+          everything up to date—and chat with the entire knowledge base. Built for organizations
+          that need authentic answers from their own sources, regardless of industry.
+        </p>
+      </div>
+    </section>
+
+    <!-- Products -->
+    <section class="products" id="products">
+      <div class="section-head">
+        <p class="eyebrow">Our Products</p>
+        <h2>Tools for every stage of learning.</h2>
+      </div>
+      <div class="product-grid">
+        <a class="product-card" href="products/math-solver.html">
+          <div class="product-media tone-1">
+            <span class="product-icon">Σ</span>
+          </div>
+          <div class="product-body">
+            <span class="product-num">01</span>
+            <h3>Math Solver</h3>
+            <p>Solve complex math questions with step-by-step guidance and responses backed by accuracy guarantees.</p>
+          </div>
+        </a>
+        <a class="product-card" href="products/knowledge-hub.html">
+          <div class="product-media tone-3">
+            <span class="product-icon">◈</span>
+          </div>
+          <div class="product-body">
+            <span class="product-num">02</span>
+            <h3>KnowledgeHub</h3>
+            <p>Chat with all your documents and connect sources like Google Drive and SharePoint to get answers from authentic sources.</p>
+          </div>
+        </a>
+        <a class="product-card" href="products/socratic-system.html">
+          <div class="product-media tone-4">
+            <span class="product-icon">◎</span>
+          </div>
+          <div class="product-body">
+            <span class="product-num">03</span>
+            <h3>Socratic System</h3>
+            <p>Generate lesson plans and support adaptive open-ended learning through debate and reasoning—one step at a time, no multiple choice or fill-in-the-blank.</p>
+          </div>
+        </a>
+        <a class="product-card" href="products/test-quiz-generator.html">
+          <div class="product-media tone-5">
+            <span class="product-icon">?</span>
+          </div>
+          <div class="product-body">
+            <span class="product-num">04</span>
+            <h3>Test/Quiz Generator</h3>
+            <p>Generate questions for tests and quizzes from authentic sources your institution already trusts.</p>
+          </div>
+        </a>
+      </div>
+    </section>
+
+    <!-- Secure AI -->
+    <section class="secure" id="mission">
+      <div class="secure-grid">
+        <div class="secure-intro">
+          <p class="eyebrow">Mission</p>
+          <h2>Transform education with secure AI systems.</h2>
+          <p class="lede">AI is changing learning; institutions need AI they can trust.</p>
+          <p>
+            Thoughtlane helps schools, universities, and education organizations deploy
+            private, customizable AI solutions that personalize learning, empower educators,
+            and protect institutional data.
+          </p>
+        </div>
+        <div class="secure-cards">
+          <article class="secure-card">
+            <h3>AI-Powered Learning Systems</h3>
+            <p class="secure-tag">Built for the Future of Education</p>
+            <p>Purpose-built AI solutions designed for:</p>
+            <ul>
+              <li>Personalized student support</li>
+              <li>Intelligent tutoring</li>
+              <li>Automated feedback</li>
+              <li>Knowledge management</li>
+              <li>Educator productivity</li>
+            </ul>
+          </article>
+          <article class="secure-card accent">
+            <h3>Private AI Deployment</h3>
+            <p class="secure-tag">Your Data. Your Infrastructure. Your AI.</p>
+            <p>Secure AI environments with:</p>
+            <ul>
+              <li>Private deployment options</li>
+              <li>Data residency controls</li>
+              <li>Institutional data ownership</li>
+              <li>Custom AI integrations</li>
+              <li>Enterprise-grade security</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Bridge -->
+    <section class="bridge">
+      <div class="bridge-inner">
+        <p class="eyebrow">Career &amp; Talent</p>
+        <h2>We bridge the gap between education and industry.</h2>
+        <p class="lede">
+          Thoughtlane connects students with real-world AI opportunities, helping
+          organizations discover emerging talent while preparing the next generation of innovators.
+        </p>
+      </div>
+    </section>
+
+    <!-- Looking for -->
+    <section class="looking" id="contact">
+      <div class="section-head">
+        <p class="eyebrow">Partner With Us</p>
+        <h2>What we are looking for</h2>
+      </div>
+      <div class="looking-grid">
+        <article class="looking-card">
+          <h3>Customers</h3>
+          <p>
+            Institutions and educators seeking AI-ready learning tools—tutors, schools,
+            colleges, and universities.
+          </p>
+          <a class="text-link" href="mailto:info@thoughtlane.com">Get in touch →</a>
+        </article>
+        <article class="looking-card">
+          <h3>Investors</h3>
+          <p>
+            Partners who want to invest in the future of education—building AI-ready
+            solutions that prepare students for what’s next.
+          </p>
+          <a class="text-link" href="mailto:info@thoughtlane.com">Start a conversation →</a>
+        </article>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta">
+      <div class="cta-inner">
+        <h2>Ready to bring secure AI into your institution?</h2>
+        <p>Join forward-thinking schools and education organizations building with Thoughtlane.</p>
+        <ul class="cta-checks">
+          <li>Institution-first infrastructure</li>
+          <li>Private deployment &amp; data residency</li>
+          <li>Products for teaching, learning, and assessment</li>
+        </ul>
+        <a class="btn btn-primary" href="mailto:info@thoughtlane.com">Let's connect →</a>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-top">
+      <a class="logo" href="#top">
+        <img src="assets/thoughtlane-mark.svg" alt="Thoughtlane" width="96" height="96" />
+        <span>Thoughtlane</span>
+      </a>
+      <nav class="footer-nav">
+        <a href="#about">About</a>
+        <a href="#mission">Mission</a>
+        <a href="#why-now">Why Now</a>
+        <a href="#products">Products</a>
+        <a href="#partners">Partners</a>
+        <a href="#contact">Contact</a>
+      </nav>
     </div>
+    <div class="footer-bottom">
+      <p>© <span id="year"></span> Thoughtlane. All rights reserved.</p>
+      <p>Supporting learning. Maintaining knowledge bases.</p>
+    </div>
+  </footer>
 
-    <!-- EdTech Market Section -->
-    <section id="market" class="py-5 section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tr" data-parallax-speed="0.11" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-bl" data-parallax-speed="0.18" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-mr" data-parallax-speed="0.25" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-3">The EdTech Opportunity</h2>
-                <p class="text-muted mb-5 mx-auto" style="max-width: 700px;">North America leads global EdTech adoption. Below is the market landscape we serve.</p>
-            </div>
-            <div class="row g-4 reveal-stack">
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 p-4">
-                        <span class="badge badge-market mb-3">Global</span>
-                        <div class="market-stat">$108.2B</div>
-                        <p class="text-muted mb-1">2024 market size</p>
-                        <div class="market-stat" style="font-size: 1.25rem;">14.3% CAGR</div>
-                        <p class="text-muted mb-2">→ $411.6B by 2034</p>
-                        <p class="citation"><a href="https://www.globenewswire.com/en/news-release/2024/04/08/2859439/0/en/EdTech-Market-on-Path-to-Reach-US-411-566-Billion-by-2034-with-14-3-CAGR-Future-Market-Insights.html" target="_blank" rel="noopener">Future Market Insights</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 p-4">
-                        <span class="badge badge-market mb-3">North America</span>
-                        <div class="market-stat">35–37%</div>
-                        <p class="text-muted mb-1">of global EdTech market</p>
-                        <p class="small text-muted mb-2">Adaptive learning, gamification, AI/ML for personalized learning</p>
-                        <p class="citation"><a href="https://www.technavio.com/report/edtech-market-industry-analysis" target="_blank" rel="noopener">Technavio</a>, <a href="https://market.us/report/edtech-market/" target="_blank" rel="noopener">Market.us</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 p-4">
-                        <span class="badge badge-market mb-3">United States</span>
-                        <div class="market-stat">$74.3B</div>
-                        <p class="text-muted mb-1">2024 market size</p>
-                        <div class="market-stat" style="font-size: 1.25rem;">12.6% CAGR</div>
-                        <p class="text-muted mb-2">→ $236.1B by 2033</p>
-                        <p class="citation"><a href="https://www.imarcgroup.com/united-states-edtech-market" target="_blank" rel="noopener">IMARC Group</a></p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card h-100 p-4">
-                        <span class="badge badge-market mb-3">Canada</span>
-                        <div class="market-stat">$5.0B</div>
-                        <p class="text-muted mb-1">2024 market size</p>
-                        <div class="market-stat" style="font-size: 1.25rem;">~12% CAGR</div>
-                        <p class="text-muted mb-2">→ $13.8B+ by 2033</p>
-                        <p class="citation"><a href="https://www.imarcgroup.com/canada-edtech-market" target="_blank" rel="noopener">IMARC Group</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- What We Do -->
-    <section id="about" class="py-5 bg-white section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tl" data-parallax-speed="0.12" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-br" data-parallax-speed="0.2" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-5">What We Do</h2>
-                <div class="row justify-content-center">
-                    <div class="col-lg-8">
-                        <p class="lead mb-0" style="color: var(--dark-soft);">We develop AI-native solutions for the education sector. Our platforms help educators create, deliver, and assess learning with accuracy and reliability.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Our Mission -->
-    <section id="mission" class="py-5 section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tr" data-parallax-speed="0.1" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-bl" data-parallax-speed="0.17" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-3">Our Mission</h2>
-                <p class="text-muted mb-4 mx-auto" style="max-width: 680px;">We are transforming the education sector with AI across the full learning lifecycle:</p>
-            </div>
-            <div class="row g-3 justify-content-center reveal-stack">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3 d-flex align-items-center flex-row">
-                        <span class="card-icon me-3 flex-shrink-0" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">1</span>
-                        <span class="fw-semibold mission-pillar" style="color: var(--dark-soft);">Content creation & authoring</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3 d-flex align-items-center flex-row">
-                        <span class="card-icon me-3 flex-shrink-0" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">2</span>
-                        <span class="fw-semibold mission-pillar" style="color: var(--dark-soft);">Content storage & organization</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3 d-flex align-items-center flex-row">
-                        <span class="card-icon me-3 flex-shrink-0" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">3</span>
-                        <span class="fw-semibold mission-pillar" style="color: var(--dark-soft);">Retrieval, search & question-answering</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3 d-flex align-items-center flex-row">
-                        <span class="card-icon me-3 flex-shrink-0" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">4</span>
-                        <span class="fw-semibold mission-pillar" style="color: var(--dark-soft);">Content generation</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3 d-flex align-items-center flex-row">
-                        <span class="card-icon me-3 flex-shrink-0" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">5</span>
-                        <span class="fw-semibold mission-pillar" style="color: var(--dark-soft);">Assessment & evaluation</span>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-3 d-flex align-items-center flex-row">
-                        <span class="card-icon me-3 flex-shrink-0" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">6</span>
-                        <span class="fw-semibold mission-pillar" style="color: var(--dark-soft);">Cognitive development for students; less rote work for educators</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why Now -->
-    <section id="why-now" class="py-5 section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-mr" data-parallax-speed="0.13" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-ml" data-parallax-speed="0.21" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-5">Why Now</h2>
-            </div>
-            <div class="row justify-content-center reveal-stack">
-                <div class="col-lg-8">
-                    <div class="card p-5 border-0 shadow-sm">
-                        <p class="lead mb-0" style="color: var(--dark-soft);">AI is driving a fundamental shift across industries. <strong>Preparing students for an AI-driven future has never been more critical</strong>—so they can thrive in the years ahead.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Learning approach (pedagogy-aligned content; maps to product suite) -->
-    <section id="learning-approach" class="py-5 bg-white section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tr" data-parallax-speed="0.1" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-bl" data-parallax-speed="0.16" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-3">How Thoughtlane supports learning</h2>
-                <p class="text-muted mb-5 mx-auto" style="max-width: 720px;">The best-known learning platforms succeed because they combine <strong>explanation</strong>, <strong>deliberate practice</strong>, <strong>feedback</strong>, and <strong>visibility into progress</strong>. Thoughtlane brings that same arc to your institution—grounded in <em>your</em> curriculum and materials.</p>
-            </div>
-            <div class="row g-4 justify-content-center reveal-stack">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-4 border-0 product-card">
-                        <div class="card-icon mb-3" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">📖</div>
-                        <h3 class="h5 fw-bold mb-2">Concepts &amp; clarity first</h3>
-                        <p class="text-muted mb-2 small">Learners need to see <strong>why</strong> before they repeat drills. Trusted explanations and source-linked answers beat anonymous web search.</p>
-                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="knowledge-hub/index.html" class="text-decoration-none" style="color: var(--primary);">Knowledge Hub</a>, <a href="cognitivesolver/index.html" class="text-decoration-none" style="color: var(--primary);">STEM Solver</a> (full solutions when you want a model), <a href="matheditor/index.html" class="text-decoration-none" style="color: var(--primary);">Scientific Editor</a>.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-4 border-0 product-card">
-                        <div class="card-icon mb-3" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">🎯</div>
-                        <h3 class="h5 fw-bold mb-2">Practice at the right level</h3>
-                        <p class="text-muted mb-2 small">Mastery-style practice means enough reps <em>with the right help</em>—hints and steps—not just answer keys. Extra variants when a topic still feels shaky.</p>
-                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="cognitive-booster/index.html" class="text-decoration-none" style="color: var(--primary);">Cognitive Booster</a> (guided mode in STEM Solver), STEM Solver (similar questions).</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-4 border-0 product-card">
-                        <div class="card-icon mb-3" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">🔄</div>
-                        <h3 class="h5 fw-bold mb-2">Feedback that closes the loop</h3>
-                        <p class="text-muted mb-2 small">Improvement happens when students know what to fix <strong>while the work still matters</strong>—not weeks later.</p>
-                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="evaluation/index.html" class="text-decoration-none" style="color: var(--primary);">Evaluation &amp; Correction</a>.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row g-4 justify-content-center mt-1 reveal-stack">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-4 border-0 product-card">
-                        <div class="card-icon mb-3" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">💡</div>
-                        <h3 class="h5 fw-bold mb-2">Reasoning, not only recall</h3>
-                        <p class="text-muted mb-2 small">Short lectures and quizzes alone rarely build argument skills. Structured dialogue pushes “how” and “why”—especially in STEM and literacy-heavy subjects.</p>
-                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="socratic-dialogue/index.html" class="text-decoration-none" style="color: var(--primary);">Socratic Dialogue</a>.</p>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 p-4 border-0 product-card">
-                        <div class="card-icon mb-3" style="background: rgba(167, 139, 250, 0.22); color: var(--accent);">📈</div>
-                        <h3 class="h5 fw-bold mb-2">Everyone sees progress</h3>
-                        <p class="text-muted mb-2 small">Teachers need class-level signals; leaders need program health. Students benefit when adults share a clear picture of growth.</p>
-                        <p class="text-muted small mb-0"><strong>Products:</strong> <a href="platform/index.html" class="text-decoration-none" style="color: var(--primary);">Unified Platform</a> (analytics, KPIs, student progress over time).</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Target Market -->
-    <section id="target-market" class="py-5 section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-tr" data-parallax-speed="0.11" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-bl" data-parallax-speed="0.19" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-3">Target Market</h2>
-                <p class="text-muted mb-5">We serve the full spectrum of the education sector</p>
-            </div>
-            <div class="row justify-content-center reveal-stack">
-                <div class="col-lg-10">
-                    <div class="d-flex flex-wrap justify-content-center gap-3">
-                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">Individual Tutors</span>
-                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">Math Institutes</span>
-                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">Schools</span>
-                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">Colleges</span>
-                        <span class="badge rounded-pill px-4 py-3 fs-6" style="background: rgba(13, 148, 136, 0.12); color: var(--primary);">Universities</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Platform -->
-    <section id="platform" class="py-5 section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-tl" data-parallax-speed="0.1" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-br" data-parallax-speed="0.16" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-mr" data-parallax-speed="0.24" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-3">Unified Platform</h2>
-                <p class="text-muted mb-5 mx-auto" style="max-width: 760px;">One Thoughtlane experience ties our learning apps together: a single place to sign in, consistent access to your materials, and <strong>analytics</strong> that turn activity into insight—so leaders can monitor <strong>KPIs</strong>, see how tools are used, and follow <strong>student progress</strong> over time.</p>
-            </div>
-            <div class="row g-4 justify-content-center reveal-stack">
-                <div class="col-lg-11 col-xl-10">
-                    <div class="card p-4 p-md-5 border-0 product-card">
-                        <div class="row g-4 align-items-start">
-                            <div class="col-md-auto text-center text-md-start">
-                                <div class="card-icon mx-auto mx-md-0" style="background: rgba(167, 139, 250, 0.22); color: var(--accent);">📊</div>
-                            </div>
-                            <div class="col-md">
-                                <h4 class="fw-bold mb-2">What the platform gives you</h4>
-                                <p class="text-muted mb-3"><strong>Who it’s for:</strong> principals, district leaders, and instructional or technology leads rolling out digital learning across a school or system.</p>
-                                <p class="text-muted mb-3 mb-md-0"><strong>Benefits:</strong> one coherent experience for staff and students across Thoughtlane apps; reporting that helps you see usage and trends; visibility into student progress over time so teachers can support learners earlier; and materials that feel connected instead of scattered across tools.</p>
-                                <p class="mb-0"><a href="platform/index.html" class="fw-semibold" style="color: var(--accent);">Learn more about the platform →</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Products — full-bleed spotlight blocks (Marble-style company highlights) -->
-    <section id="products" class="section-parallax py-0">
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tr" data-parallax-speed="0.12" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-bl" data-parallax-speed="0.18" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-ml" data-parallax-speed="0.23" aria-hidden="true"></span>
-        <div class="container py-5 section-reveal">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-3">Our Products</h2>
-                <p class="text-muted mb-0 mx-auto" style="max-width: 680px;">Each app stands on its own—and connects on the Thoughtlane platform. Scroll to explore.</p>
-                <div class="product-logo-strip reveal-stack" aria-label="Product family">
-                    <a href="cognitivesolver/index.html" title="STEM Solver"><img src="logos/logo-06-neuron-river-brain.svg" alt=""></a>
-                    <a href="matheditor/index.html" title="Scientific Editor"><img src="logos/logo-07-pulse-lane-brain.svg" alt=""></a>
-                    <a href="knowledge-hub/index.html" title="Knowledge Hub"><img src="logos/logo-08-quantum-thought-brain.svg" alt=""></a>
-                    <a href="socratic-dialogue/index.html" title="Socratic Dialogue"><img src="logos/logo-04-spiral-thought-brain.svg" alt=""></a>
-                    <a href="evaluation/index.html" title="Evaluation"><img src="logos/logo-03-synapse-wave-brain.svg" alt=""></a>
-                    <a href="cognitive-booster/index.html" title="Cognitive Booster"><img src="logos/logo-05-dual-hemisphere-flow.svg" alt=""></a>
-                </div>
-            </div>
-        </div>
-
-        <article class="product-spotlight section-reveal" aria-labelledby="product-stem-solver">
-            <div class="container position-relative">
-                <div class="row align-items-start g-4 g-xl-5">
-                    <div class="col-auto d-none d-md-block pt-1">
-                        <span class="product-spotlight-num" aria-hidden="true">01</span>
-                    </div>
-                    <div class="col">
-                        <div class="reveal-stack">
-                            <p class="product-spotlight-eyebrow mb-0">STEM practice</p>
-                            <h3 id="product-stem-solver" class="product-spotlight-title">STEM Solver</h3>
-                            <p class="product-spotlight-lead mb-0">Turn real worksheets and PDFs into worked examples, guided practice, and exportable materials—in minutes.</p>
-                            <p class="product-spotlight-meta mb-0"><strong>Who it’s for:</strong> teachers, tutors, and content teams in math and STEM. <strong>Why it matters:</strong> full solutions when you want speed, guided mode when you want thinking first—plus variants, handouts, and records.</p>
-                            <a href="cognitivesolver/index.html" class="product-spotlight-cta">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="product-spotlight product-spotlight--alt section-reveal" aria-labelledby="product-scientific-editor">
-            <div class="container position-relative">
-                <div class="row align-items-start g-4 g-xl-5">
-                    <div class="col-auto d-none d-md-block pt-1">
-                        <span class="product-spotlight-num" aria-hidden="true">02</span>
-                    </div>
-                    <div class="col">
-                        <div class="reveal-stack">
-                            <p class="product-spotlight-eyebrow mb-0">Authoring</p>
-                            <h3 id="product-scientific-editor" class="product-spotlight-title">ScientificEditor</h3>
-                            <p class="product-spotlight-lead mb-0">Narrative and equations in one flow—without juggling Word, equation editors, and calculators.</p>
-                            <p class="product-spotlight-meta mb-0"><strong>Who it’s for:</strong> authors, departments, and publishers building math- and science-heavy documents together. <strong>Why it matters:</strong> simplify or check expressions in place; export to PDF with fewer handoffs.</p>
-                            <a href="matheditor/index.html" class="product-spotlight-cta">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="product-spotlight section-reveal" aria-labelledby="product-knowledge-hub">
-            <div class="container position-relative">
-                <div class="row align-items-start g-4 g-xl-5">
-                    <div class="col-auto d-none d-md-block pt-1">
-                        <span class="product-spotlight-num" aria-hidden="true">03</span>
-                    </div>
-                    <div class="col">
-                        <div class="reveal-stack">
-                            <p class="product-spotlight-eyebrow mb-0">Institutional memory</p>
-                            <h3 id="product-knowledge-hub" class="product-spotlight-title">Knowledge Hub</h3>
-                            <p class="product-spotlight-lead mb-0">One private search over <em>your</em> school’s documents and links—with answers that cite what you already trust.</p>
-                            <p class="product-spotlight-meta mb-0"><strong>Who it’s for:</strong> teachers, office staff, and families done hunting drives and inboxes. <strong>Why it matters:</strong> filters by grade, subject, and class; less duplicate email about policies and deadlines.</p>
-                            <a href="knowledge-hub/index.html" class="product-spotlight-cta">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="product-spotlight product-spotlight--alt section-reveal" aria-labelledby="product-socratic">
-            <div class="container position-relative">
-                <div class="row align-items-start g-4 g-xl-5">
-                    <div class="col-auto d-none d-md-block pt-1">
-                        <span class="product-spotlight-num" aria-hidden="true">04</span>
-                    </div>
-                    <div class="col">
-                        <div class="reveal-stack">
-                            <p class="product-spotlight-eyebrow mb-0">Classroom dialogue</p>
-                            <h3 id="product-socratic" class="product-spotlight-title">Socratic Dialogue</h3>
-                            <p class="product-spotlight-lead mb-0">Plan faster, teach richer discussions—reasoning and explanation, not only recall.</p>
-                            <p class="product-spotlight-meta mb-0"><strong>Who it’s for:</strong> teachers, curriculum leads, and coaches. <strong>Why it matters:</strong> structured prompts you still approve; activity ideas; complements your knowledge base and STEM practice.</p>
-                            <a href="socratic-dialogue/index.html" class="product-spotlight-cta">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="product-spotlight section-reveal" aria-labelledby="product-evaluation">
-            <div class="container position-relative">
-                <div class="row align-items-start g-4 g-xl-5">
-                    <div class="col-auto d-none d-md-block pt-1">
-                        <span class="product-spotlight-num" aria-hidden="true">05</span>
-                    </div>
-                    <div class="col">
-                        <div class="reveal-stack">
-                            <p class="product-spotlight-eyebrow mb-0">Feedback at scale</p>
-                            <h3 id="product-evaluation" class="product-spotlight-title">Evaluation &amp; Correction</h3>
-                            <p class="product-spotlight-lead mb-0">Return work faster with feedback students can act on—while it still matters.</p>
-                            <p class="product-spotlight-meta mb-0"><strong>Who it’s for:</strong> teachers and programs marking high volumes of written or structured work. <strong>Why it matters:</strong> consistency across classes; time back for coaching and planning.</p>
-                            <a href="evaluation/index.html" class="product-spotlight-cta">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-
-        <article class="product-spotlight product-spotlight--alt section-reveal" aria-labelledby="product-cognitive-booster">
-            <div class="container position-relative">
-                <div class="row align-items-start g-4 g-xl-5">
-                    <div class="col-auto d-none d-md-block pt-1">
-                        <span class="product-spotlight-num" aria-hidden="true">06</span>
-                    </div>
-                    <div class="col">
-                        <div class="reveal-stack">
-                            <p class="product-spotlight-eyebrow mb-0">Guided support</p>
-                            <h3 id="product-cognitive-booster" class="product-spotlight-title">Cognitive Booster</h3>
-                            <p class="product-spotlight-lead mb-0">Hints and step checking that build understanding—not just the answer key.</p>
-                            <p class="product-spotlight-meta mb-0"><strong>Who it’s for:</strong> students who need help without instant full solutions; teachers extending one-to-one support. <strong>Why it matters:</strong> visible progress; sessions resume across time—inside STEM Solver’s guided mode.</p>
-                            <a href="cognitive-booster/index.html" class="product-spotlight-cta">Learn more</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </article>
-    </section>
-
-    <!-- What We're Looking For -->
-    <section id="partners" class="py-5 bg-white section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-br" data-parallax-speed="0.11" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tl" data-parallax-speed="0.19" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-5">What We Are Looking For</h2>
-            </div>
-            <div class="row g-4 reveal-stack">
-                <div class="col-md-6">
-                    <div class="card h-100 p-4 text-center">
-                        <div class="card-icon mx-auto mb-3" style="background: rgba(167, 139, 250, 0.22); color: var(--accent);">👥</div>
-                        <h4 class="fw-bold">Customers</h4>
-                        <p class="text-muted mb-0">Institutions and educators seeking AI-ready learning tools—tutors, schools, colleges, and universities.</p>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="card h-100 p-4 text-center">
-                        <div class="card-icon mx-auto mb-3" style="background: rgba(167, 139, 250, 0.22); color: var(--accent);">🤝</div>
-                        <h4 class="fw-bold">Investors</h4>
-                        <p class="text-muted mb-0">Partners who want to invest in the future of education—building AI-ready solutions that prepare students for what’s next.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact -->
-    <section id="contact" class="py-5 contact-section section-parallax section-reveal">
-        <span class="parallax-decor parallax-decor--mint parallax-decor-pos-tr" data-parallax-speed="0.1" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--sky parallax-decor-pos-bl" data-parallax-speed="0.17" aria-hidden="true"></span>
-        <span class="parallax-decor parallax-decor--teal parallax-decor-pos-mr" data-parallax-speed="0.22" aria-hidden="true"></span>
-        <div class="container">
-            <div class="reveal-stack text-center">
-                <h2 class="section-title display-5 mb-2">Get in Touch</h2>
-                <p class="text-muted mb-5">For inquiries: <a href="mailto:info@thoughtlane.com" class="fw-semibold" style="color: var(--primary);">info@thoughtlane.com</a></p>
-            </div>
-            <div class="row justify-content-center reveal-stack">
-                <div class="col-lg-7">
-                    <div class="card shadow-sm border-0 overflow-hidden">
-                        <div class="card-body p-4 p-md-5">
-                            <form class="inquiry-form" id="inquiry-form">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <label for="name" class="form-label fw-semibold">Name</label>
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Your name" required>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <label for="email" class="form-label fw-semibold">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" placeholder="your@email.com" required>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="subject" class="form-label fw-semibold">Subject</label>
-                                        <select class="form-select" id="subject" name="subject">
-                                            <option value="Customer inquiry">Customer inquiry</option>
-                                            <option value="Investor inquiry">Investor inquiry</option>
-                                            <option value="General inquiry">General inquiry</option>
-                                        </select>
-                                    </div>
-                                    <div class="col-12">
-                                        <label for="message" class="form-label fw-semibold">Message</label>
-                                        <textarea class="form-control" id="message" name="message" rows="4" placeholder="Tell us about your needs..." required></textarea>
-                                    </div>
-                                    <div class="col-12">
-                                        <button type="submit" class="btn btn-primary btn-lg w-100">Send Inquiry</button>
-                                    </div>
-                                </div>
-                            </form>
-                            <p class="text-muted small mt-3 mb-0 text-center">All inquiries go to <strong>info@thoughtlane.com</strong></p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer py-5">
-        <div class="container">
-            <div class="row align-items-center">
-                <div class="col-md-6 mb-4 mb-md-0">
-                    <div class="d-flex align-items-center">
-                        <img src="thoughtlanelogo.png" alt="Thoughtlane" style="height: 72px; width: 72px; min-width: 72px; object-fit: contain; filter: brightness(0) invert(1);" class="me-2 flex-shrink-0" width="1024" height="1024">
-                        <span class="fw-bold">Thoughtlane</span>
-                    </div>
-                    <p class="mt-3 mb-0 opacity-75 small">AI-ready EdTech solutions for the future of education.</p>
-                </div>
-                <div class="col-md-6 text-md-end">
-                    <a href="mailto:info@thoughtlane.com" class="text-decoration-none">info@thoughtlane.com</a>
-                </div>
-            </div>
-            <hr class="my-4 opacity-25">
-            <div class="row">
-                <div class="col-md-6">
-                    <p class="mb-0 small opacity-75">© 2026 Thoughtlane. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
-    <script>
-        (function() {
-            const saved = localStorage.getItem('thoughtlane-theme');
-            const isLight = saved === 'light';
-            if (isLight) {
-                document.body.classList.add('light-theme');
-                document.getElementById('theme-toggle').textContent = '🌙';
-            } else {
-                document.body.classList.remove('light-theme');
-                document.getElementById('theme-toggle').textContent = '☀️';
-            }
-            document.getElementById('theme-toggle').addEventListener('click', function() {
-                const lightNow = document.body.classList.toggle('light-theme');
-                this.textContent = lightNow ? '🌙' : '☀️';
-                localStorage.setItem('thoughtlane-theme', lightNow ? 'light' : 'dark');
-            });
-        })();
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (!href || href === '#') return;
-                const target = document.querySelector(href);
-                if (!target) return;
-                e.preventDefault();
-                document.querySelectorAll('.tl-jump-highlight').forEach(function(el) {
-                    el.classList.remove('tl-jump-highlight');
-                });
-                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                document.querySelector('.navbar-collapse').classList.remove('show');
-                window.setTimeout(function() {
-                    target.classList.add('tl-jump-highlight');
-                    window.setTimeout(function() {
-                        target.classList.remove('tl-jump-highlight');
-                    }, 1000);
-                }, 560);
-            });
-        });
-        document.getElementById('inquiry-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-            const body = `Name: ${name}\nEmail: ${email}\n\n${message}`;
-            const mailto = `mailto:info@thoughtlane.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            window.location.href = mailto;
-        });
-        (function initParallax() {
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-            var blobs = document.querySelectorAll('.parallax-blob');
-            var heroImg = document.querySelector('.parallax-hero-media');
-            var ticking = false;
-            function updateSectionLayers() {
-                var vh = window.innerHeight || 1;
-                document.querySelectorAll('.section-parallax [data-parallax-speed]').forEach(function(el) {
-                    var section = el.closest('.section-parallax');
-                    if (!section) return;
-                    var rect = section.getBoundingClientRect();
-                    if (rect.bottom < -80 || rect.top > vh + 80) {
-                        el.style.transform = '';
-                        return;
-                    }
-                    var progress = (rect.top + rect.height * 0.5 - vh * 0.5) / vh;
-                    var speed = parseFloat(el.getAttribute('data-parallax-speed'));
-                    if (isNaN(speed)) speed = 0.12;
-                    var ty = -progress * 76 * speed;
-                    el.style.transform = 'translate3d(0,' + ty + 'px,0)';
-                });
-            }
-            function update() {
-                var y = window.scrollY || 0;
-                var factors = [0.045, 0.075, 0.055];
-                blobs.forEach(function(el, i) {
-                    var f = factors[i] || 0.05;
-                    el.style.transform = 'translate3d(0,' + (y * f) + 'px,0)';
-                });
-                if (heroImg) {
-                    var scale = 1 + Math.min(y * 0.00012, 0.06);
-                    heroImg.style.transform = 'translate3d(0,' + (y * 0.1) + 'px,0) scale(' + scale + ')';
-                }
-                updateSectionLayers();
-                ticking = false;
-            }
-            window.addEventListener('scroll', function() {
-                if (!ticking) {
-                    window.requestAnimationFrame(update);
-                    ticking = true;
-                }
-            }, { passive: true });
-            window.addEventListener('resize', function() {
-                window.requestAnimationFrame(update);
-            }, { passive: true });
-            update();
-        })();
-        (function initScrollReveals() {
-            var els = document.querySelectorAll('.section-reveal');
-            if (!els.length) return;
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                els.forEach(function(el) { el.classList.add('is-inview'); });
-                return;
-            }
-            var io = new IntersectionObserver(function(entries) {
-                entries.forEach(function(en) {
-                    if (en.isIntersecting) {
-                        en.target.classList.add('is-inview');
-                        io.unobserve(en.target);
-                    }
-                });
-            }, { threshold: 0.08, rootMargin: '0px 0px -5% 0px' });
-            els.forEach(function(el) { io.observe(el); });
-        })();
-    </script>
+  <script src="js/main.js"></script>
 </body>
 </html>
