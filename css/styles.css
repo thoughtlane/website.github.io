@@ -653,7 +653,7 @@ ul {
   margin: 0 auto;
   padding: 0 clamp(1.25rem, 4vw, 3rem);
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 1.5rem;
 }
 
