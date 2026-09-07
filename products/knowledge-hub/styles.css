@@ -75,7 +75,7 @@ body::before {
   top: 1rem;
 }
 
-/* ——— Top bar ——— */
+/* --- Top bar --- */
 .top {
   position: sticky;
   top: 0;
@@ -189,7 +189,7 @@ body::before {
   border-bottom: 1px solid var(--line);
 }
 
-/* ——— Buttons ——— */
+/* --- Buttons --- */
 .btn {
   display: inline-flex;
   align-items: center;
@@ -229,7 +229,7 @@ body::before {
   font-size: 1.02rem;
 }
 
-/* ——— Hero ——— */
+/* --- Hero --- */
 .hero {
   position: relative;
   z-index: 1;
@@ -431,7 +431,7 @@ body::before {
   font-weight: 600;
 }
 
-/* ——— Strip ——— */
+/* --- Strip --- */
 .strip {
   position: relative;
   z-index: 2;
@@ -451,7 +451,7 @@ body::before {
   font-weight: 600;
 }
 
-/* ——— Sections ——— */
+/* --- Sections --- */
 .section {
   position: relative;
   z-index: 1;
