@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Practical guide for teachers and students using Thoughtlane: Mathwise, Knowledge Hub, and Socratic Dialogue." />
+  <title>Classroom usage guide | Thoughtlane</title>
+  <link rel="icon" href="../assets/thoughtlane-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b2e2b;
+      --ink-soft: #1a4541;
+      --text: #1c2f2c;
+      --muted: #4a635f;
+      --paper: #f4f7f5;
+      --card: #ffffff;
+      --line: #d5e0dc;
+      --accent: #8fbf2e;
+      --accent-soft: #e8f2c8;
+      --olive: #3d5c2e;
+      --warn: #8a5a10;
+      --warn-bg: #fff6e5;
+      --max: 52rem;
+      --side: 14rem;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5rem; }
+    body {
+      margin: 0;
+      font-family: "Outfit", "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--paper);
+      line-height: 1.55;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--olive); }
+    a:hover { color: var(--ink); }
+    .top {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      padding: 0.85rem clamp(1rem, 3vw, 2rem);
+      background: rgba(244, 247, 245, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      text-decoration: none;
+      color: var(--ink);
+      font-weight: 650;
+      letter-spacing: -0.02em;
+    }
+    .brand-dot {
+      width: 0.7rem;
+      height: 0.7rem;
+      border-radius: 50%;
+      background: #b8e05a;
+      box-shadow: 0 0 0 4px rgba(184, 224, 90, 0.25);
+    }
+    .top-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.85rem 1.1rem;
+      font-size: 0.9rem;
+    }
+    .top-nav a { text-decoration: none; color: var(--muted); font-weight: 500; }
+    .top-nav a:hover { color: var(--ink); }
+    .layout {
+      display: grid;
+      grid-template-columns: var(--side) minmax(0, 1fr);
+      gap: 2rem;
+      max-width: calc(var(--max) + var(--side) + 4rem);
+      margin: 0 auto;
+      padding: 1.5rem clamp(1rem, 3vw, 2rem) 4rem;
+    }
+    .toc {
+      position: sticky;
+      top: 4.5rem;
+      align-self: start;
+      font-size: 0.82rem;
+      color: var(--muted);
+    }
+    .toc strong {
+      display: block;
+      margin-bottom: 0.6rem;
+      color: var(--ink-soft);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .toc a {
+      display: block;
+      padding: 0.28rem 0;
+      text-decoration: none;
+      color: var(--muted);
+      border-left: 2px solid transparent;
+      padding-left: 0.65rem;
+    }
+    .toc a:hover { color: var(--ink); border-left-color: var(--accent); }
+    .doc { max-width: var(--max); }
+    .kicker {
+      margin: 0 0 0.4rem;
+      font-size: 0.75rem;
+      font-weight: 650;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--olive);
+    }
+    h1 {
+      margin: 0 0 0.75rem;
+      font-family: "Fraunces", Georgia, serif;
+      font-size: clamp(2rem, 4.5vw, 2.75rem);
+      font-weight: 650;
+      letter-spacing: -0.03em;
+      line-height: 1.12;
+      color: var(--ink);
+    }
+    .lede {
+      margin: 0 0 1.75rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 40rem;
+    }
+    h2 {
+      margin: 2.75rem 0 0.85rem;
+      padding-top: 0.5rem;
+      border-top: 1px solid var(--line);
+      font-family: "Fraunces", Georgia, serif;
+      font-size: 1.55rem;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+    }
+    h2:first-of-type { border-top: 0; padding-top: 0; }
+    h3 {
+      margin: 1.6rem 0 0.45rem;
+      font-size: 1.08rem;
+      font-weight: 650;
+      color: var(--ink-soft);
+    }
+    h4 {
+      margin: 1.15rem 0 0.35rem;
+      font-size: 0.95rem;
+      font-weight: 650;
+      color: var(--text);
+    }
+    p { margin: 0 0 0.9rem; }
+    ul, ol { margin: 0 0 1.1rem; padding-left: 1.25rem; }
+    li { margin-bottom: 0.4rem; color: var(--muted); }
+    li strong { color: var(--text); }
+    .callout {
+      margin: 1.25rem 0;
+      padding: 0.9rem 1rem;
+      background: var(--accent-soft);
+      border-left: 3px solid var(--accent);
+      border-radius: 0 10px 10px 0;
+      font-size: 0.95rem;
+    }
+    .callout.warn {
+      background: var(--warn-bg);
+      border-left-color: #e0a84a;
+      color: var(--warn);
+    }
+    .callout p:last-child { margin-bottom: 0; }
+    .role-tag {
+      display: inline-block;
+      margin: 0 0.25rem 0.25rem 0;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      background: var(--card);
+      border: 1px solid var(--line);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 1.25rem;
+      font-size: 0.92rem;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 0.65rem 0.75rem;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+    }
+    th {
+      background: #eaf0ed;
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+    }
+    tr:last-child td { border-bottom: 0; }
+    td { color: var(--muted); }
+    td strong { color: var(--text); }
+    .foot {
+      margin-top: 3rem;
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--line);
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
+    .foot nav { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; margin-top: 0.75rem; }
+    @media (max-width: 900px) {
+      .layout { grid-template-columns: 1fr; }
+      .toc { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.15rem 1rem; margin-bottom: 0.5rem; }
+      .toc strong { grid-column: 1 / -1; }
+    }
+    @media (max-width: 560px) {
+      .top-nav { display: none; }
+      .toc { grid-template-columns: 1fr; }
+    }
+    @media print {
+      .top, .toc { display: none; }
+      .layout { display: block; max-width: none; }
+      body { background: #fff; }
+      h2 { break-before: page; }
+      h2:first-of-type { break-before: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="../index.html"><span class="brand-dot" aria-hidden="true"></span>Thoughtlane</a>
+    <nav class="top-nav" aria-label="Guide">
+      <a href="#start-here">Start here</a>
+      <a href="#teachers">Teachers</a>
+      <a href="#students">Students</a>
+      <a href="#mathwise">Mathwise</a>
+      <a href="#knowledge-hub">Knowledge Hub</a>
+      <a href="#socratic">Socratic</a>
+      <a href="#trouble">Troubleshooting</a>
+    </nav>
+  </header>
+
+  <div class="layout">
+    <nav class="toc" aria-label="On this page">
+      <strong>On this page</strong>
+      <a href="#start-here">Start here</a>
+      <a href="#who-sees-what">Who sees what</a>
+      <a href="#portal">Home portal</a>
+      <a href="#admin-once">One-time school setup</a>
+      <a href="#teachers">For teachers</a>
+      <a href="#students">For students</a>
+      <a href="#mathwise">Mathwise in depth</a>
+      <a href="#knowledge-hub">Knowledge Hub in depth</a>
+      <a href="#socratic">Socratic Dialogue in depth</a>
+      <a href="#drives">School drives</a>
+      <a href="#announcements">Announcements</a>
+      <a href="#help">Help button</a>
+      <a href="#cheat">Cheat sheet</a>
+      <a href="#trouble">If something breaks</a>
+    </nav>
+
+    <main class="doc" id="main">
+      <p class="kicker">Schools</p>
+      <h1>Classroom usage guide</h1>
+      <p class="lede">
+        This is the day-to-day guide for teachers and students. It covers Mathwise, Knowledge Hub,
+        and Socratic Dialogue the way people actually use them after the school IT person has
+        signed everyone in.
+      </p>
+      <p>
+        If you are setting up the stack, OIDC, or backups, that lives in the ops docs. This page
+        assumes you can already open the school portal and land inside an app.
+      </p>
+
+      <h2 id="start-here">Start here</h2>
+      <p>
+        Thoughtlane is one sign-in that opens a few classroom apps. You pick an app from the
+        portal home page. You can jump between apps; your school account follows you.
+      </p>
+      <ul>
+        <li><strong>Mathwise</strong> for worksheets, step-by-step solutions, and guided practice.</li>
+        <li><strong>Knowledge Hub</strong> for the school library, cited search, quizzes, and courses.</li>
+        <li><strong>Socratic Dialogue</strong> for level-based lessons where students write answers in their own words.</li>
+      </ul>
+      <p>
+        Classes and sections are shared. When a teacher assigns work to “Period 3,” that same
+        section shows up wherever the product needs a class list. Students do not manage that.
+        Teachers usually do not either, unless your school gave them permission. Rosters are
+        maintained under <strong>Administration → Classes</strong>.
+      </p>
+      <div class="callout">
+        <p>
+          <strong>Tip:</strong> In every classroom app there is a <strong>Help</strong> button in
+          the header. It walks the screen you are on. Use it once on a new tab. It saves a lot of
+          “where did that button go” moments.
+        </p>
+      </div>
+
+      <h2 id="who-sees-what">Who sees what</h2>
+      <p>
+        What you see depends on your role. Schools map emails to roles like student, teacher,
+        or admin. If a tab is missing, it is almost always permissions, not a bug.
+      </p>
+      <table>
+        <thead>
+          <tr><th>Role</th><th>Typical access</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Student</strong></td>
+            <td>My assignments / Assignments, practice, lessons, Study (private). Not class-wide assign screens.</td>
+          </tr>
+          <tr>
+            <td><strong>Teacher</strong></td>
+            <td>Upload and organize materials, assign to a section, review progress, publish lessons, course assignments.</td>
+          </tr>
+          <tr>
+            <td><strong>School admin</strong></td>
+            <td>Users, roles, Classes, External drives, Announcements, and usually Analytics.</td>
+          </tr>
+        </tbody>
+      </table>
+      <p>
+        <span class="role-tag">Teachers</span>
+        <span class="role-tag">Students</span>
+        Both can open the portal. Teachers get more tabs inside each product.
+      </p>
+
+      <h2 id="portal">Home portal</h2>
+      <p>
+        After sign-in you land on the Thoughtlane home page. Cards open each app. There is also
+        Management (Administration) and Analytics if your role allows them.
+      </p>
+      <p>
+        Students also see a <strong>Continue</strong> strip and <strong>Due this week</strong> list when
+        they have open work. Example: Continue opens “Grade 9 Algebra — Week 3 Linear equations”
+        in Mathwise Cognitive Booster; Due this week might list that same practice plus
+        “Fractions reading quiz” (Knowledge Hub) due Friday.
+        Open <strong>Class calendar</strong> for a printable month or list of deadlines and school events
+        (paste emoji marks on days if you like).
+        <span class="role-tag">Teachers</span>
+        <span class="role-tag">Admins</span>
+        can <strong>Add event</strong> for the whole school, a grade, or a section
+        (teachers: sections they teach). Students see school-wide events plus those for their grade or section.
+      </p>
+      <p>
+        Content Manager appears on the portal under <strong>School tools</strong> as an optional
+        ops browser for school drives. Teachers still use <strong>Open from drive</strong> inside each
+        product once an admin has registered the drive under Administration → External drives.
+      </p>
+      <p>
+        Thoughtlane sits <strong>beside your LMS</strong> (Canvas, Moodle, and so on). Pilots use school SSO
+        and Administration → Classes. LTI launch is prepared under Administration → Integrations and stays off
+        until you enable it after the first pilots.
+      </p>
+
+      <h2 id="admin-once">One-time school setup (someone has to do this first)</h2>
+      <p>
+        Teachers cannot assign to a section that does not exist. Before the first real class:
+      </p>
+      <ol>
+        <li>An admin opens <strong>Administration → Classes</strong>.</li>
+        <li>Create a class such as <strong>Grade 9 Algebra</strong>, then add sections (for example Period 1, Period 2).</li>
+        <li>Set the section teacher email.</li>
+        <li>Enroll student emails on each section.</li>
+      </ol>
+      <p>
+        Optional but useful: register school drives under <strong>External drives</strong>, and
+        post a short welcome notice under <strong>Announcements</strong> so it shows up as a
+        banner in the apps.
+      </p>
+      <div class="callout warn">
+        <p>
+          If <strong>Assign to class</strong> shows “No sections,” the roster is empty or you are
+          not listed as the section teacher. Fix that in Administration before retrying.
+        </p>
+      </div>
+
+      <h2 id="teachers">For teachers (the loops that matter)</h2>
+      <p>
+        Most weeks you will do one of three things: assign math practice, assign a Hub course,
+        or publish a Socratic lesson. You do not need every product every week.
+      </p>
+      <p>
+        Mid-week, open <strong>Administration → Weekly review</strong> to see who has not finished
+        “Week 3 Linear equations” or who is stuck mid-practice. Use
+        <strong>Progress board</strong> on Period 1 to compare Hub / Mathwise / Socratic status in one grid.
+        (Email or Slack digests are planned later; the tab is the review surface for now.)
+      </p>
+
+      <h3>Assign math practice for a section</h3>
+      <ol>
+        <li>Open <strong>Mathwise</strong>.</li>
+        <li>Upload a worksheet (image or PDF), open one from <strong>File Manager</strong>, or use <strong>Open from drive</strong>.</li>
+        <li>Let extraction finish so questions appear. When it completes, a <strong>Assign to class</strong> shortcut appears for teachers.</li>
+        <li>Go to <strong>Assign to class</strong> (or use that shortcut).</li>
+        <li>Title students will recognize, for example <strong>Grade 9 Algebra — Week 3 Linear equations</strong>.</li>
+        <li>Pick the worksheet by <strong>name</strong> from the dropdown (for example “linear-eq-worksheet.pdf”).</li>
+        <li>Check one or more sections (Period 1 and Period 2), or use <strong>All my sections</strong>.</li>
+        <li>Due defaults to <strong>Friday 5:00 PM</strong>; change it if you need another deadline.</li>
+        <li>Optional: <strong>Copy last week</strong> to reuse the previous worksheet and title pattern, then tweak the week number.</li>
+        <li><strong>Assign</strong>. Later, open <strong>Progress</strong> on that assignment to see who finished Cognitive questions.</li>
+      </ol>
+      <p>
+        File Manager is for files and folders. Assign to class is for sending practice to people.
+        Mixing those two up is the most common teacher confusion, so we say it plainly here.
+      </p>
+
+      <h3>Assign a Knowledge Hub course</h3>
+      <ol>
+        <li>Make sure documents are uploaded and indexed.</li>
+        <li>Generate or review quiz items, then publish a course such as <strong>Grade 9 Algebra — Linear equations reading</strong>.</li>
+        <li>Open <strong>Course assignments</strong>.</li>
+        <li>Pick the published course, a learner <em>or</em> a whole section (Period 1), due window, attempt limits.</li>
+        <li>Assign. Students find it under <strong>My assignments</strong> in Knowledge Hub (and it also shows up in the shared inbox other apps can read).</li>
+      </ol>
+
+      <h3>Publish a Socratic lesson</h3>
+      <ol>
+        <li>On <strong>Grades</strong>, sync from Management once so people match your Classes list.</li>
+        <li>On <strong>Courses</strong>, import or open the course catalog. If you import, wait for the job to finish, then <strong>save only the courses you want</strong>. You do not have to keep every extracted line.</li>
+        <li>Attach materials under <strong>Your files</strong> for that course.</li>
+        <li>Use <strong>Make a lesson</strong>, edit the plan (for example “Discuss slope from a graph”), publish.</li>
+        <li>Set <strong>Who it’s for</strong> (grade to level mapping).</li>
+        <li>On the Dashboard, approve suggested scores when students finish.</li>
+      </ol>
+      <p>
+        Catalog import and “Make a lesson” keep running if you reload the page. Watch the job
+        strip at the top. You can cancel if you started the wrong file.
+      </p>
+
+      <h3>Learning paths (optional)</h3>
+      <p>
+        In Knowledge Hub, create a path such as <strong>Grade 9 Algebra — Linear equations unit</strong>:
+        Hub course “Linear equations reading” → Mathwise worksheet “linear-eq-worksheet.pdf” →
+        Socratic lesson “Discuss slope from a graph”. Pick each step by name (leave None until that piece exists).
+        Teachers can click <strong>Assign path to class</strong> to push every step into the student inbox for Period 1 / Period 2 in one action.
+      </p>
+
+      <h2 id="students">For students</h2>
+      <p>
+        You mostly open work that was assigned to you. You do not need to know how teachers
+        set sections up.
+      </p>
+
+      <h3>Finding your work</h3>
+      <ul>
+        <li><strong>Portal home</strong> — Continue / Due this week for the next thing (for example Week 3 Linear equations).</li>
+        <li><strong>Mathwise → My assignments</strong> for Cognitive practice and other inbox items.</li>
+        <li><strong>Knowledge Hub → My assignments</strong> for courses and quizzes assigned to you.</li>
+        <li><strong>Socratic Dialogue → Assignments</strong> for a mixed inbox (math, Hub, lessons).</li>
+        <li><strong>Socratic Dialogue → Lessons</strong> for dialogue work your teacher published to your grade/level.</li>
+      </ul>
+      <p>
+        If the same assignment shows up in more than one place, that is normal. The shared inbox
+        is trying to give you one place to look, while each product also keeps its own list.
+      </p>
+
+      <h3>Doing Cognitive practice (Mathwise)</h3>
+      <ol>
+        <li>Open the assignment.</li>
+        <li>Pick a question.</li>
+        <li>Write one step at a time in the work area.</li>
+        <li>Use <strong>Hint</strong> when you are stuck. It should give the next step, not dump the whole answer.</li>
+        <li>Check as you go. Progress is saved when you come back later.</li>
+      </ol>
+
+      <h3>Doing a Hub course</h3>
+      <ol>
+        <li>Open the course from My assignments.</li>
+        <li>Take the quizzes or practice tags your teacher included.</li>
+        <li>Watch attempt limits and due dates. If you are locked out, talk to your teacher; the software will not invent extra attempts.</li>
+      </ol>
+
+      <h3>Socratic lessons</h3>
+      <ol>
+        <li>Read the concept material for the level.</li>
+        <li>Answer in your own words. Paste is discouraged on purpose.</li>
+        <li>Finish the level. Your mark may wait until a teacher approves it.</li>
+        <li><strong>Study</strong> is private practice from your own notes. Teachers do not see Study sets.</li>
+      </ol>
+
+      <h3>Search in Knowledge Hub</h3>
+      <p>
+        Ask a question in Search when you need help from school materials. Read the citations.
+        If the answer looks off, open the source passage. The point of Hub search is that you can
+        check where it came from.
+      </p>
+
+      <h2 id="mathwise">Mathwise in depth</h2>
+
+      <h3>Tabs you will actually use</h3>
+      <table>
+        <thead>
+          <tr><th>Tab</th><th>What it is for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Mathwise</strong></td><td>Upload, extract, solve, generate similar sheets.</td></tr>
+          <tr><td><strong>File Manager</strong></td><td>Folders, uploads, documents, reopen old worksheets.</td></tr>
+          <tr><td><strong>Cognitive Booster</strong></td><td>Guided practice with hints and checks.</td></tr>
+          <tr><td><strong>Generated questions</strong></td><td>Edit similar-question sheets before you share them.</td></tr>
+          <tr><td><strong>My assignments</strong></td><td>Student inbox.</td></tr>
+          <tr><td><strong>Assign to class</strong></td><td>Teacher: send practice to a section and watch progress.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Upload and extract</h3>
+      <p>
+        Drop a PNG, JPG, or PDF. Wait for questions to appear. If a page is messy (scans, handwriting,
+        weird layouts), try re-extract from File Manager. Alternate PDF extractors show up in
+        advanced mode if your school turned that on.
+      </p>
+      <p>
+        New uploads keep the original file name in the list. Older files that were stored under
+        long id-looking names may still show that way until you re-upload. Internally the system
+        still uses ids. You should not have to type them.
+      </p>
+
+      <h3>Solve vs practice</h3>
+      <p>
+        <strong>Solve All</strong> (or solve one question) is for getting a worked solution with
+        clear steps you can review and export. <strong>Cognitive Booster</strong> is for students
+        writing steps themselves. Same worksheet can feed both.
+      </p>
+
+      <h3>File Manager habits that help</h3>
+      <ul>
+        <li>Put contest or unit sheets in folders with names people understand (for example PascalContest).</li>
+        <li>Use search and sort when the list gets long.</li>
+        <li>Open from drive when the school already has the PDF in Google Drive, OneDrive, or S3.</li>
+        <li>ReExtract if the question list looks incomplete after a first pass.</li>
+      </ul>
+
+      <h3>Assign to class (teachers)</h3>
+      <p>
+        Fill title, worksheet name, section, optional due. Refresh roster if the section list looks
+        stale. Progress is per student Cognitive outcomes, not a gradebook for Solve All.
+      </p>
+
+      <h2 id="knowledge-hub">Knowledge Hub in depth</h2>
+
+      <h3>Tabs</h3>
+      <table>
+        <thead>
+          <tr><th>Tab</th><th>What it is for</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><strong>Dashboard</strong></td><td>Quick counts; widgets follow your permissions.</td></tr>
+          <tr><td><strong>Documents</strong></td><td>Library, folders, tags, generate quiz items from a doc.</td></tr>
+          <tr><td><strong>Search</strong></td><td>Ask questions; answers come with sources.</td></tr>
+          <tr><td><strong>Practice / Test</strong></td><td>Take quizzes by tag.</td></tr>
+          <tr><td><strong>Review Quiz / Test</strong></td><td>Edit and publish quiz banks.</td></tr>
+          <tr><td><strong>Courses</strong></td><td>Bundle tags into a course; move Draft toward Published.</td></tr>
+          <tr><td><strong>Course assignments</strong></td><td>Assign a published course to a user or section.</td></tr>
+          <tr><td><strong>My assignments</strong></td><td>Take what was assigned to you.</td></tr>
+          <tr><td><strong>Learning paths</strong></td><td>Chain Hub → Mathwise → Socratic steps.</td></tr>
+          <tr><td><strong>Settings</strong></td><td>Search/index options, skills, tags, study-insights opt-in.</td></tr>
+        </tbody>
+      </table>
+
+      <h3>Teacher workflow that usually works</h3>
+      <ol>
+        <li>Upload curriculum PDFs under Documents. Wait until indexing finishes before you rely on Search.</li>
+        <li>Generate quiz items from a document, then open Review and clean anything weird.</li>
+        <li>Publish only when the bank looks classroom-ready.</li>
+        <li>Build a course from those tags, publish the course, then assign it.</li>
+      </ol>
+      <p>
+        Students should not meet raw generated items. Review exists for a reason.
+      </p>
+
+      <h3>Search tips</h3>
+      <ul>
+        <li>Ask in plain language about what the school uploaded.</li>
+        <li>Always glance at the cited passage.</li>
+        <li>If Search is empty or nonsense, indexing may still be running, or the doc never made it into the library.</li>
+      </ul>
+
+      <h2 id="socratic">Socratic Dialogue in depth</h2>
+
+      <h3>Teacher side</h3>
+      <p>
+        Think of it as: course exists → files attached → lesson generated and edited → published →
+        students mapped by grade/level → you approve scores.
+      </p>
+      <ul>
+        <li><strong>Courses</strong>: import catalogs carefully. Save selected courses. Reopen drafts if you left mid-import.</li>
+        <li><strong>Your files</strong>: materials for that course. Open from drive works here too.</li>
+        <li><strong>Lesson plan</strong>: edit levels and questions before students see them.</li>
+        <li><strong>Who it’s for</strong>: which grade hits which level.</li>
+        <li><strong>Dashboard</strong>: progress and score approval.</li>
+        <li><strong>Grades / People</strong>: sync from Management so you are not maintaining two rosters.</li>
+        <li><strong>Assignments</strong>: inbox that can include Mathwise and Hub work.</li>
+      </ul>
+
+      <h3>Student side</h3>
+      <ul>
+        <li><strong>Lessons</strong>: the main path.</li>
+        <li><strong>Assignments</strong>: open linked work in other products.</li>
+        <li><strong>Study</strong>: private. Good for extra practice without teacher eyes on it.</li>
+      </ul>
+      <p>
+        Optional <strong>Hear lesson</strong> / <strong>Hear question</strong> only run when the
+        student asks. Nothing should autoplay at them.
+      </p>
+
+      <h2 id="drives">School drives</h2>
+      <p>
+        Admins register connectors (Google Drive, OneDrive, S3, and similar) under Administration.
+        Teachers then use <strong>Open from drive</strong> inside Mathwise, Knowledge Hub, or
+        Socratic Dialogue. The product keeps a reference and fetches the file when it needs to
+        process it. This is not a live shared disk between products, and it is not “copy everything
+        into Knowledge Hub forever.”
+      </p>
+      <p>
+        If Open from drive fails for everyone, Content Manager is probably not running, or the
+        connector was never registered. That is an IT fix, not something students can solve.
+      </p>
+
+      <h2 id="announcements">Announcements</h2>
+      <p>
+        School notices are scheduled in Administration. When one is active for a product, you see
+        a banner at the top. Dismiss if you have read it; new notices can still appear later.
+        You can leave targeting open to everyone, or narrow by role, class tags,
+        <strong>grade</strong> (for example Grade 9), and/or <strong>section</strong>
+        (for example Grade 9 Algebra / Period 1). Students and teachers tied to that class or section see the banner; others do not.
+      </p>
+
+      <h2 id="help">Help, accessibility, and feedback</h2>
+      <ul>
+        <li><strong>Help</strong> opens a coach for the current screen. In the first week you may see a soft tip inviting you to open Help; dismiss anytime.</li>
+        <li>Status messages stay on screen. Important results are not sound-only.</li>
+        <li>Use <strong>Feedback</strong> in the header when something is wrong or confusing. Replies show under your name when support answers.</li>
+        <li>Skip links jump to main content for keyboard users.</li>
+      </ul>
+
+      <h2 id="cheat">Cheat sheet</h2>
+      <table>
+        <thead>
+          <tr><th>I want to…</th><th>Go here</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Store or reopen a worksheet</td><td>Mathwise → File Manager</td></tr>
+          <tr><td>Send Cognitive practice to a class</td><td>Mathwise → Assign to class</td></tr>
+          <tr><td>See my math practice</td><td>Mathwise → My assignments</td></tr>
+          <tr><td>Assign a Hub course to a section</td><td>Knowledge Hub → Course assignments</td></tr>
+          <tr><td>Take a Hub course</td><td>Knowledge Hub → My assignments</td></tr>
+          <tr><td>Chain Hub → Math → Socratic</td><td>Knowledge Hub → Learning paths</td></tr>
+          <tr><td>Sync classes into Socratic</td><td>Socratic → Grades → Sync from Management</td></tr>
+          <tr><td>Import / curate the course catalog</td><td>Socratic → Courses → Import → Save selected</td></tr>
+          <tr><td>See mixed homework</td><td>Socratic → Assignments</td></tr>
+          <tr><td>Post a school notice (all or Grade 9 / Period 1)</td><td>Administration → Announcements</td></tr>
+          <tr><td>See incomplete / stuck students this week</td><td>Administration → Weekly review</td></tr>
+          <tr><td>Generate / review weekly digest (files; email off)</td><td>Administration → Weekly review → Weekly digests</td></tr>
+          <tr><td>See Hub + Mathwise + Socratic status for a section</td><td>Administration → Progress board</td></tr>
+          <tr><td>Printable deadlines calendar / list</td><td>Portal → Class calendar, or Administration → Calendar</td></tr>
+          <tr><td>Add or edit a school / grade / section calendar event</td><td>Class calendar → Add event (admin or teacher)</td></tr>
+          <tr><td>See LTI / LMS integration status (beside LMS)</td><td>Administration → Integrations</td></tr>
+          <tr><td>Continue / due soon as a student</td><td>Portal home</td></tr>
+          <tr><td>Fix sections / enrollments</td><td>Administration → Classes</td></tr>
+          <tr><td>Register a school drive</td><td>Administration → External drives</td></tr>
+        </tbody>
+      </table>
+
+      <h2 id="trouble">If something breaks</h2>
+      <h4>I do not see Assign to class</h4>
+      <p>Your account is probably missing teacher permissions. Ask an admin to check roles.</p>
+
+      <h4>Section dropdown is empty or says Forbidden</h4>
+      <p>
+        Roster issue. Confirm the section exists, has a teacher email that matches you, and that
+        students are enrolled. Hit Refresh roster after the admin saves.
+      </p>
+
+      <h4>Students do not see the assignment</h4>
+      <p>
+        Check that you assigned the right section, that their email is enrolled there, and that
+        they are looking in My assignments / Assignments (not File Manager). Due dates do not hide
+        the row in most cases, but expired attempt limits can block taking a Hub quiz again.
+      </p>
+
+      <h4>Extraction or lesson generation seems stuck</h4>
+      <p>
+        In Socratic Dialogue, catalog import and Make a lesson are background jobs. Reload and look
+        at the job strip; use Cancel if needed. Mathwise extraction progress is more tied to the
+        open page today, so keep that tab open until questions appear, or re-run from File Manager.
+      </p>
+
+      <h4>Search cannot find a document I just uploaded</h4>
+      <p>Wait for indexing. Large PDFs take longer. Confirm the file is in Documents and finished processing.</p>
+
+      <h4>Open from drive errors</h4>
+      <p>
+        Admin: confirm External drives entry and that Content Manager is up. Teacher: try another
+        file; if every file fails, escalate to IT.
+      </p>
+
+      <h4>I still see weird id-looking file names in Mathwise</h4>
+      <p>
+        Those are older uploads from before friendly names. Re-upload the PDF, or live with the
+        old label on that one file. New uploads should show the real name.
+      </p>
+
+      <div class="callout">
+        <p>
+          Still stuck? Use in-app <strong>Feedback</strong>, or email
+          <a href="mailto:info@thoughtlane.com">info@thoughtlane.com</a> with the school name,
+          the app, and what you clicked. Screenshots help.
+        </p>
+      </div>
+
+      <footer class="foot">
+        <p>Thoughtlane classroom usage guide for teachers and students. Ops setup, privacy, and backup notes are separate documents.</p>
+        <nav aria-label="Footer">
+          <a href="../index.html">Thoughtlane home</a>
+          <a href="../products/mathwise/getting-started.html">Mathwise quick start</a>
+          <a href="../products/knowledge-hub/getting-started.html">Knowledge Hub quick start</a>
+          <a href="../products/socratic-dialogue/getting-started.html">Socratic quick start</a>
+          <a href="mailto:info@thoughtlane.com">Contact</a>
+        </nav>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
