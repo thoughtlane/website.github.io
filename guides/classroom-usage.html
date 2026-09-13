@@ -272,9 +272,10 @@
       <p class="kicker">Schools</p>
       <h1>Classroom usage guide</h1>
       <p class="lede">
-        This is the day-to-day guide for teachers and students. It covers Mathwise, Knowledge Hub,
-        and Socratic Dialogue the way people actually use them after the school IT person has
-        signed everyone in.
+        This is the day-to-day guide for teachers and students. Thoughtlane puts AI on the
+        worksheet, reading, or lesson this class was assigned. The teacher sees the proposed
+        score and a source they can open. A stuck student shows up on weekly review before Friday.
+        It is not a chatbot, and it is not a second gradebook.
       </p>
       <p>
         If you are setting up the stack, OIDC, or backups, that lives in the ops docs. This page
@@ -358,9 +359,10 @@
         product once an admin has registered the drive under Administration → External drives.
       </p>
       <p>
-        Thoughtlane sits <strong>beside your LMS</strong> (Canvas, Moodle, and so on). Pilots use school SSO
-        and Administration → Classes. LTI launch is prepared under Administration → Integrations and stays off
-        until you enable it after the first pilots.
+        Thoughtlane sits <strong>beside your LMS</strong>. Pilots use school SSO and Administration → Classes.
+        Canvas is the launch path the product is written for. It stays off until your school turns it on.
+        A score can land in that gradebook only after a teacher releases it, and only if a line item and a token exist.
+        Until then the official grade stays here. This is not an LTI or SIS certification.
       </p>
 
       <h2 id="admin-once">One-time school setup (someone has to do this first)</h2>
@@ -392,9 +394,10 @@
       </p>
       <p>
         Mid-week, open <strong>Administration → Weekly review</strong> to see who has not finished
-        “Week 3 Linear equations” or who is stuck mid-practice. Use
-        <strong>Progress board</strong> on Period 1 to compare Hub / Mathwise / Socratic status in one grid.
-        (Email or Slack digests are planned later; the tab is the review surface for now.)
+        “Week 3 Linear equations” or who is stuck mid-practice. Each stuck row says why: the sheet or lesson,
+        the last step, and the hint or score the model proposed. It does not use the student’s history or a SIS record.
+        Use <strong>Progress board</strong> on Period 1 to compare Hub / Mathwise / Socratic status in one grid.
+        Email or Slack digests stay off until an admin turns delivery on.
       </p>
 
       <h3>Assign math practice for a section</h3>
@@ -431,7 +434,7 @@
         <li>Attach materials under <strong>Your files</strong> for that course.</li>
         <li>Use <strong>Make a lesson</strong>, edit the plan (for example “Discuss slope from a graph”), publish.</li>
         <li>Set <strong>Who it’s for</strong> (grade to level mapping).</li>
-        <li>On the Dashboard, approve suggested scores when students finish.</li>
+        <li>On the Dashboard, release scores when students finish. A written or AI-scored result does not count until you release it. Keyed multiple-choice and fill-in wait too, unless that lesson opts in. Use <strong>Release keyed scores</strong> for a whole set.</li>
       </ol>
       <p>
         Catalog import and “Make a lesson” keep running if you reload the page. Watch the job
@@ -485,7 +488,7 @@
       <ol>
         <li>Read the concept material for the level.</li>
         <li>Answer in your own words. Paste is discouraged on purpose.</li>
-        <li>Finish the level. Your mark may wait until a teacher approves it.</li>
+        <li>Finish the level. You will not see a score until your teacher releases it, including multiple-choice, unless that lesson was set to auto-release.</li>
         <li><strong>Study</strong> is private practice from your own notes. Teachers do not see Study sets.</li>
       </ol>
 
@@ -590,14 +593,14 @@
       <h3>Teacher side</h3>
       <p>
         Think of it as: course exists → files attached → lesson generated and edited → published →
-        students mapped by grade/level → you approve scores.
+        students mapped by grade/level → you release scores. Nothing counts until you do, unless that lesson opts keyed questions out of review.
       </p>
       <ul>
         <li><strong>Courses</strong>: import catalogs carefully. Save selected courses. Reopen drafts if you left mid-import.</li>
         <li><strong>Your files</strong>: materials for that course. Open from drive works here too.</li>
         <li><strong>Lesson plan</strong>: edit levels and questions before students see them.</li>
         <li><strong>Who it’s for</strong>: which grade hits which level.</li>
-        <li><strong>Dashboard</strong>: progress and score approval.</li>
+        <li><strong>Dashboard</strong>: pending scores. Release one, or release a keyed set in one action. Students do not see the mark until then.</li>
         <li><strong>Grades / People</strong>: sync from Management so you are not maintaining two rosters.</li>
         <li><strong>Assignments</strong>: inbox that can include Mathwise and Hub work.</li>
       </ul>
@@ -659,7 +662,7 @@
           <tr><td>Import / curate the course catalog</td><td>Socratic → Courses → Import → Save selected</td></tr>
           <tr><td>See mixed homework</td><td>Socratic → Assignments</td></tr>
           <tr><td>Post a school notice (all or Grade 9 / Period 1)</td><td>Administration → Announcements</td></tr>
-          <tr><td>See incomplete / stuck students this week</td><td>Administration → Weekly review</td></tr>
+          <tr><td>See who is stuck, and why (sheet, last step, proposed hint or score)</td><td>Administration → Weekly review</td></tr>
           <tr><td>Generate / review weekly digest (files; email off)</td><td>Administration → Weekly review → Weekly digests</td></tr>
           <tr><td>See Hub + Mathwise + Socratic status for a section</td><td>Administration → Progress board</td></tr>
           <tr><td>Printable deadlines calendar / list</td><td>Portal → Class calendar, or Administration → Calendar</td></tr>

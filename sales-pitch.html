@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Thoughtlane helps students practice the worksheet, reading, and lesson you already assigned. Teachers see the suggested score and who is stuck before Friday. It sits beside the school system you already use." />
+  <title>Why schools buy Thoughtlane</title>
+  <link rel="icon" href="assets/thoughtlane-mark.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,520;9..144,640&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --ink: #0b2e2b;
+      --text: #1c2f2c;
+      --muted: #4a635f;
+      --paper: #f3f6f4;
+      --card: #fff;
+      --line: #d5e0dc;
+      --lime: #b8e05a;
+      --olive: #3d5c2e;
+      --warn: #8a5a10;
+      --warn-bg: #fff6e5;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Outfit, "Segoe UI", sans-serif;
+      color: var(--text);
+      background: var(--paper);
+      line-height: 1.6;
+    }
+    a { color: var(--olive); }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.9rem 1.4rem;
+      border-bottom: 1px solid var(--line);
+      background: rgba(243, 246, 244, 0.94);
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.55rem;
+      color: var(--ink);
+      text-decoration: none;
+      font-weight: 650;
+    }
+    .brand img { width: 1.7rem; height: 1.7rem; }
+    .top nav { display: flex; flex-wrap: wrap; gap: 0.9rem; font-size: 0.92rem; }
+    .top nav a { color: var(--muted); text-decoration: none; font-weight: 550; }
+    .wrap { max-width: 46rem; margin: 0 auto; padding: 0 1.25rem 4rem; }
+    .hero { padding: 2.8rem 0 1.2rem; }
+    .kicker {
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--olive);
+      margin: 0 0 0.7rem;
+    }
+    h1, h2, h3 { font-family: Fraunces, Georgia, serif; color: var(--ink); letter-spacing: -0.03em; line-height: 1.15; }
+    h1 { font-size: clamp(2.05rem, 5vw, 3.1rem); margin: 0 0 1rem; }
+    h2 { font-size: clamp(1.55rem, 3vw, 2rem); margin: 2.6rem 0 0.55rem; }
+    h3 { font-size: 1.28rem; margin: 0 0 0.4rem; }
+    .lede { font-size: 1.15rem; margin: 0 0 1rem; }
+    p { margin: 0 0 0.85rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 0.7rem; margin-top: 1.1rem; }
+    .btn {
+      display: inline-block;
+      text-decoration: none;
+      border-radius: 999px;
+      padding: 0.7rem 1.1rem;
+      font-weight: 650;
+    }
+    .btn-primary { background: var(--ink); color: #fff; }
+    .btn-ghost { border: 1px solid var(--line); color: var(--ink); background: #fff; }
+    .story, .card, .person, .limit {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 1rem;
+      padding: 1.15rem 1.25rem;
+      margin: 0.85rem 0;
+    }
+    .story { background: #fff; }
+    .who { color: var(--olive); font-weight: 700; font-size: 0.82rem; letter-spacing: 0.04em; text-transform: uppercase; margin: 0 0 0.25rem; }
+    ul { margin: 0.3rem 0 0.4rem; padding-left: 1.15rem; }
+    li { margin: 0.4rem 0; }
+    .buy { margin-top: 0.7rem; padding-top: 0.7rem; border-top: 1px solid var(--line); }
+    .buy strong { color: var(--ink); }
+    .warn { background: var(--warn-bg); }
+    .ask {
+      margin-top: 2rem;
+      padding: 1.4rem 1.3rem;
+      border-radius: 1rem;
+      background: var(--ink);
+      color: #e7efe4;
+    }
+    .ask h2, .ask p { color: #fff; }
+    .ask a { color: var(--lime); }
+    footer { color: var(--muted); font-size: 0.9rem; margin-top: 1.4rem; }
+    @media print {
+      .top, .hero-actions { display: none; }
+      body { background: #fff; }
+      .story, .card, .person, .limit, .ask { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="top">
+    <a class="brand" href="index.html"><img src="assets/thoughtlane-mark.svg" alt="" />Thoughtlane</a>
+    <nav aria-label="On this page">
+      <a href="#why">Why buy it</a>
+      <a href="#week">A normal week</a>
+      <a href="#you">If you are…</a>
+      <a href="#honest">Please ask us</a>
+    </nav>
+  </header>
+
+  <main class="wrap">
+    <section class="hero">
+      <p class="kicker">For teachers, tutors, principals, boards, and professors</p>
+      <h1>Students practice the work you already assigned. You still decide what counts.</h1>
+      <p class="lede">
+        Most schools already have a login, a class list, and a gradebook. What they do not have is a
+        safe place for a student to work this week’s worksheet, reading, or lesson with help —
+        and for the teacher to see, mid-week, who is stuck and why.
+      </p>
+      <p>
+        That is what Thoughtlane is for. It does not replace the school system you already use.
+        Students sign in once, open the work their teacher assigned, and get help on that work.
+        A score does not become official until a teacher says so.
+      </p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#why">Why someone buys this</a>
+        <a class="btn btn-ghost" href="#you">Find your role</a>
+      </div>
+    </section>
+
+    <h2 id="why">Why buy it</h2>
+    <p>
+      People do not buy Thoughtlane because it has “AI.” They buy it because the AI is attached
+      to a real class, and a person can still stop a bad score.
+    </p>
+
+    <article class="card">
+      <h3>The student is working your materials, not a random chat.</h3>
+      <p>
+        A student can already open a public chatbot and paste in a question. That chatbot does not
+        know you assigned “Week 3 linear equations,” or which reading the class is on, or which
+        lesson you published. Thoughtlane does. Math practice happens on the worksheet you uploaded.
+        Reading questions point back to a page in your library that the student can open. Written
+        answers are about the lesson you published.
+      </p>
+      <p class="buy"><strong>Why that matters:</strong> you can stand beside a student and say “this is the sheet we are on,” instead of hoping they used the right source.</p>
+    </article>
+
+    <article class="card">
+      <h3>You see the suggested score before the student does.</h3>
+      <p>
+        When a student writes an answer, the system can suggest a score and a short comment.
+        That suggestion stays private until a teacher approves it, changes it, or sends the student
+        back to try again. Multiple-choice and fill-in questions wait the same way, unless that
+        particular lesson was set to release those scores automatically. The usual setting is:
+        wait for the teacher.
+      </p>
+      <p>
+        If a whole set of multiple-choice questions already has a correct answer key, the teacher
+        can release that set in one click, instead of opening every question. Written work still
+        needs a person to look at it. A long pasted answer is rejected, so the student has to
+        write in their own words.
+      </p>
+      <p class="buy"><strong>Why that matters:</strong> a principal can tell a board, “AI may coach and suggest. A teacher still releases the mark.” That is a rule you can explain in one sentence. It is not a promise that marking gets shorter. Looking at the suggestion is the work. The point is that a wrong suggestion does not quietly become the student’s grade.</p>
+    </article>
+
+    <article class="card">
+      <h3>You find the stuck student on Wednesday, not when the grade is already late.</h3>
+      <p>
+        Every week there is a review list of work that is unfinished or stuck. Each row tells you
+        the student’s name, the assignment, and why they are on the list: which sheet or lesson,
+        which step they last reached, and the hint or score the system suggested. It does not
+        build a hidden profile of the student, and it does not pull their record from the student
+        information system. It is this assignment, this attempt.
+      </p>
+      <p class="buy"><strong>Why that matters:</strong> a tutor or teacher can open one list and know who to sit with, instead of waiting for Friday and a pile of blanks.</p>
+    </article>
+
+    <article class="card">
+      <h3>One login. One class list. You assign by the name of the work, not a code.</h3>
+      <p>
+        Teachers and students use the school login. Classes and sections live in one place.
+        When you assign “linear equations worksheet” to Period 1, you pick that file and that
+        class by name. Students see it under “due this week” when they sign in. The same class
+        list is used for math practice, reading, and the written lesson, so you are not keeping
+        three separate rosters.
+      </p>
+      <p class="buy"><strong>Why that matters:</strong> the first week is “upload the sheet, assign it to Period 1,” not a training course on product codes.</p>
+    </article>
+
+    <h2 id="week">What a normal week looks like</h2>
+    <p>Here is Grade 9 Algebra, week 3, told the way a teacher would actually use it.</p>
+    <div class="story">
+      <ol>
+        <li>Monday, the teacher uploads the linear equations worksheet and assigns it to Period 1. The title students see is “Week 3 linear equations.” The due date defaults to Friday at 5.</li>
+        <li>Students open it from the home page. On a hard question they can ask for the next hint. The hint coaches the step. It does not dump the finished answer. They still write the work.</li>
+        <li>A student working the reading asks a question in the library. The answer points to a page they can open, so the teacher can check the source too.</li>
+        <li>A student writing in the lesson gets a suggested score. They do not see that score yet. The teacher does, along with the student’s answer.</li>
+        <li>Wednesday, the teacher opens the weekly review. Maya is stuck on question 3 of the worksheet, with two hints used and a suggested score of 0. That is enough to pull a chair over, without reading a dashboard full of charts.</li>
+        <li>Friday, the teacher releases the written scores, and releases the multiple-choice set in one action. Students then see their marks. Until the school turns on a connection to Canvas, those marks live here. The official gradebook is still the one the school already uses.</li>
+      </ol>
+    </div>
+
+    <h2 id="you">If you are…</h2>
+
+    <article class="person">
+      <p class="who">A classroom teacher</p>
+      <h3>You buy it so help is on the work you set, and you can still change the mark.</h3>
+      <ul>
+        <li>Assign a worksheet, a reading, or a lesson by name. Students find it under “due this week.”</li>
+        <li>See a suggested score and the student’s answer before you release it. Change the score if the suggestion is wrong.</li>
+        <li>See who is stuck mid-week, with the sheet and the last step, not a mystery percentage.</li>
+      </ul>
+      <p>You should not buy it if you want marking to disappear. You will still look at written work. You should buy it if you are tired of students practicing in a chat that has never seen your sheet.</p>
+    </article>
+
+    <article class="person">
+      <p class="who">A tutor or learning-center owner</p>
+      <h3>You buy it so a cohort has one path, and you still own the conversation.</h3>
+      <ul>
+        <li>Create a class, add emails, and assign the same sequence to the group: reading, then practice, then a written lesson.</li>
+        <li>Open a file from the drive you already use, turn it into practice, and assign it when it is ready.</li>
+        <li>Each tutor sees their own groups. A parent conversation can start from “this is the sheet, this is the step they stopped on,” not a generic progress report.</li>
+      </ul>
+      <p>You should buy it if your tutors are already coaching from PDFs and you want the help, the class list, and the review list in one place.</p>
+    </article>
+
+    <article class="person">
+      <p class="who">A principal</p>
+      <h3>You buy it so AI use has a rule you can defend, and so a quiet miss shows up before the marking period.</h3>
+      <ul>
+        <li>The rule fits on one page: AI may coach and suggest. A person publishes what students see. A score does not count until a teacher releases it.</li>
+        <li>Teachers assign by name to a section. You can see, for one class, who has finished practice, reading, and the lesson — without asking three vendors for a spreadsheet.</li>
+        <li>Announcements can go to one grade or one period, so Grade 9 Period 1 does not get a notice meant for Grade 12.</li>
+      </ul>
+      <p>You should not buy it to replace the student information system, the timetable, or the official gradebook. You should buy it if the board has asked “where is AI allowed to touch student work?” and you want a product that matches the careful answer.</p>
+    </article>
+
+    <article class="person">
+      <p class="who">A school admin or board member</p>
+      <h3>You buy it as a classroom tool beside the systems you already paid for.</h3>
+      <ul>
+        <li>Students and staff use the school login. Roles decide who can assign, who can only do the work, and who can manage users.</li>
+        <li>Class lists are maintained in one administration area. Teachers do not keep a second spreadsheet of emails inside each app.</li>
+        <li>Support staff can look at the product the way a named user sees it, and that look is recorded. Passwords and extra login checks stay with the school’s identity provider.</li>
+      </ul>
+      <p>
+        Boards should also hear what this is not. It is not a certified connection to PowerSchool,
+        Infinite Campus, Banner, or Workday. It is not a claim that we passed an official learning-tool
+        audit. Canvas is the school system we have prepared a launch for. That launch stays off
+        until you turn it on. Even then, a mark is sent only after a teacher releases it, and only
+        if Canvas has given us a place to put that mark. If that connection is not set up, the mark
+        stays in Thoughtlane and the official grade stays in the school’s gradebook. We would rather
+        say that plainly than have a board minute that over-claims.
+      </p>
+    </article>
+
+    <article class="person">
+      <p class="who">A university professor or teaching assistant</p>
+      <h3>You buy it so one section can read, practice, and write, and you still own the released mark.</h3>
+      <ul>
+        <li>The same section roster covers the reading, the problem set, and the discussion lesson. Students are not hunting three sites after one lecture.</li>
+        <li>Answers from the reading cite a page. Written work stays unseen as a score until you or a teaching assistant release it.</li>
+        <li>Weekly review is the “who has not done the reading or the set” list, without exporting three files on Thursday night.</li>
+      </ul>
+      <p>You should buy it for a course that already mixes reading, problems, and written response. You should not buy it as a replacement for the university gradebook or the learning system the registrar already requires.</p>
+    </article>
+
+    <h2>What you are actually comparing it to</h2>
+    <article class="card">
+      <h3>A public chatbot</h3>
+      <p>
+        Useful for a teacher drafting a worksheet at home. Useless as the place students do the
+        assigned work, because it does not know the class, does not show you the suggested score,
+        and does not put Maya on a list on Wednesday. Thoughtlane is for the assigned work.
+        It is not trying to be the teacher’s personal writing assistant.
+      </p>
+    </article>
+    <article class="card">
+      <h3>The school’s existing learning system</h3>
+      <p>
+        Keep it. That is where the official grade should live until you deliberately connect a
+        released score. Thoughtlane is the place students practice and write, with a teacher
+        still in front of the mark. After login, math practice, reading, and the written lesson
+        share the same “what is due” list. We do not replace video class, the room, or the
+        master timetable.
+      </p>
+    </article>
+
+    <h2 id="honest">Please ask us these questions</h2>
+    <p>A careful buyer should. Here are the honest answers.</p>
+    <article class="limit warn">
+      <ul>
+        <li><strong>Does this save marking time?</strong> Not as a promise. Written work still waits for a person. Multiple-choice can be released as a set, which is faster than one question at a time. The reason to buy is a mark you can defend, not an empty queue.</li>
+        <li><strong>Does the official grade go back to Canvas or the student information system today?</strong> Not unless you turn that connection on, and not until a teacher has released the score. Until then, Thoughtlane holds the suggested and released mark, and the school gradebook stays the official one.</li>
+        <li><strong>Are you certified with our student information system, or as an official learning tool?</strong> No. Do not write that in a board paper.</li>
+        <li><strong>Does it work offline, or meet a formal accessibility certification?</strong> No. That is still the school’s existing tools and a separate accessibility review.</li>
+        <li><strong>Does the computer read the student’s whole history to decide the next question?</strong> No. Help and the weekly list use this assignment and this attempt.</li>
+      </ul>
+    </article>
+
+    <section class="ask">
+      <h2>A fair first meeting</h2>
+      <p>
+        Bring one class and one week of real materials. We will assign the worksheet by name,
+        show a suggested score the student cannot see yet, and open the mid-week list of who is
+        stuck. If those three things are not useful to the teacher in the room, we should not
+        start a pilot.
+      </p>
+      <p><a href="guides/classroom-usage.html">How teachers and students use it day to day</a></p>
+    </section>
+    <footer>
+      Written for people who have to explain a purchase to a teacher, a tutor, a principal, or a board.
+      Nothing on this page says the product replaces the school’s gradebook, timetable, or student information system.
+    </footer>
+  </main>
+</body>
+</html>
