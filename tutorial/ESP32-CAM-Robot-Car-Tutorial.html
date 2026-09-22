@@ -1,0 +1,1563 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build Your Own Robot Car — Full Tutorial</title>
+<style>
+  :root {
+    --bg: #fdfaf3;
+    --text: #2b2b2b;
+    --heading: #1a4d2e;
+    --accent: #ff7a00;
+    --code-bg: #1e1e1e;
+    --code-text: #e6e6e6;
+    --table-header: #1a4d2e;
+    --table-header-text: #ffffff;
+    --border: #d8d0bd;
+    --callout-bg: #fff3e0;
+    --callout-border: #ff7a00;
+    --link: #1a4d2e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.65;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 40px 24px 80px;
+  }
+  h1 {
+    color: var(--heading);
+    font-size: 2.1rem;
+    border-bottom: 4px solid var(--accent);
+    padding-bottom: 12px;
+    margin-top: 0;
+  }
+  h3 {
+    color: var(--accent);
+    margin-top: -8px;
+    font-weight: 600;
+  }
+  h2 {
+    color: var(--heading);
+    margin-top: 48px;
+    padding: 10px 16px;
+    background: #eef3ec;
+    border-left: 6px solid var(--heading);
+    border-radius: 4px;
+  }
+  h3:not(:first-of-type) {
+    color: var(--heading);
+    margin-top: 28px;
+  }
+  a { color: var(--link); }
+  hr {
+    border: none;
+    border-top: 2px dashed var(--border);
+    margin: 40px 0;
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 20px 0;
+    font-size: 0.95rem;
+    overflow-x: auto;
+    display: block;
+  }
+  @media (min-width: 700px) { table { display: table; } }
+  th {
+    background: var(--table-header);
+    color: var(--table-header-text);
+    padding: 10px 12px;
+    text-align: left;
+  }
+  td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  tr:nth-child(even) { background: #f5f1e6; }
+  pre {
+    background: var(--code-bg);
+    color: var(--code-text);
+    padding: 16px;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+  code {
+    background: #eee3d3;
+    color: #7a3e00;
+    padding: 2px 5px;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+  pre code {
+    background: none;
+    color: inherit;
+    padding: 0;
+  }
+  blockquote {
+    background: var(--callout-bg);
+    border-left: 5px solid var(--callout-border);
+    margin: 20px 0;
+    padding: 12px 18px;
+    border-radius: 4px;
+  }
+  ul, ol { padding-left: 1.4em; }
+  li { margin: 4px 0; }
+  input[type="checkbox"] { margin-right: 6px; }
+  img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+  }
+  .toc-fixed {
+    position: fixed;
+    top: 0; right: 0; bottom: 0;
+    width: 220px;
+    overflow-y: auto;
+    background: #f5f1e6;
+    border-left: 1px solid var(--border);
+    padding: 20px 16px;
+    font-size: 0.85rem;
+  }
+  .toc-fixed a { display: block; margin: 4px 0; color: var(--heading); text-decoration: none; }
+  .toc-fixed a:hover { text-decoration: underline; }
+  @media (max-width: 1100px) { .toc-fixed { display: none; } }
+</style>
+</head>
+<body>
+<h1 id="build-your-own-robot-car-full-tutorial">Build Your Own Robot Car
+— Full Tutorial</h1>
+<h3
+id="autonomous-obstacle-avoidance-phone-control-over-wifi">Autonomous
+Obstacle Avoidance + Phone Control over WiFi</h3>
+<p>Welcome! By the end of this tutorial, your robot car will be able to:
+1. <strong>Drive itself</strong> around a room, using ultrasonic “ears”
+to avoid bumping into things. 2. <strong>Be controlled from your
+phone</strong> through a webpage — you can grab the wheel any time and
+steer it yourself. 3. Switch smoothly between the two: if you’re not
+sending commands, the car drives itself again.</p>
+<hr />
+<h2 id="part-1-understanding-electricity-before-we-touch-anything">Part
+1: Understanding Electricity (Before We Touch Anything!)</h2>
+<p>Before we plug anything in, let’s understand what’s actually
+happening inside the wires. Electricity is invisible, so we’re going to
+imagine something we <em>can</em> see: <strong>water being pushed around
+a closed loop by a pump</strong> — think of a lazy river at a water
+park, or the circulating pump in a fountain. Not a river running from a
+mountain to the ocean (that water leaves forever) — this is water that
+goes in a circle, over and over, pushed by the same pump the whole
+time.</p>
+<h3 id="why-a-loop-and-not-a-river">Why a Loop, and Not a River?</h3>
+<p>A river has an endless supply (rain, snowmelt) and an endless
+destination (the ocean). A battery is nothing like that — it only has a
+fixed, limited amount of “stuff” (electrons) to push around, and there’s
+no infinite ocean for them to disappear into. So instead, picture a
+<strong>pump-driven loop</strong>: the pump pushes water out through a
+pipe, the water does some work (spins a wheel), and then <strong>the
+exact same water has to flow all the way back to the pump</strong> to be
+pushed around again. If that return pipe is cut, the pump just stalls —
+it can’t push out new water if the old water has nowhere to return
+from.</p>
+<p>Keep that “closed loop, same water going around and around” picture
+in mind for everything below.</p>
+<h3 id="voltage-how-hard-the-pump-pushes">Voltage = How Hard the Pump
+Pushes</h3>
+<p>The <strong>pump</strong> is your battery. The harder it pushes, the
+faster/more forcefully water moves through the loop. That “push” is
+exactly what <strong>voltage</strong> is in an electrical circuit — it’s
+measured in <strong>Volts (V)</strong>.</p>
+<ul>
+<li>A strong pump = <strong>high voltage</strong> (like a 12V battery) —
+strong push.</li>
+<li>A weak pump = <strong>low voltage</strong> (like a 3.3V pin on the
+ESP32) — gentle push.</li>
+</ul>
+<p>Just like water only flows around the loop because the pump is
+actively pushing it, electricity only flows because the battery is
+actively pushing electrons — remove the pump (disconnect the battery)
+and everything in the loop just sits still.</p>
+<h3 id="current-how-much-water-is-flowing-past-a-point">Current = How
+Much Water is Flowing Past a Point</h3>
+<p><strong>Current</strong> (measured in Amps, or milliamps — mA) is
+<em>how much</em> water is actually moving past any given point in the
+loop per second. A wide, fast-moving section of the loop has huge
+current. A thin trickle through a narrow section has tiny current.</p>
+<ul>
+<li>Your ultrasonic sensor sips a <em>tiny</em> trickle of current
+(about 2 mA — like sipping through a coffee stirrer).</li>
+<li>Your motors gulp a <em>lot</em> of current (hundreds of mA — like a
+garden hose) — which is exactly why motors need their own driver board
+instead of plugging straight into the ESP32!</li>
+</ul>
+<h3 id="resistance-a-narrow-section-of-pipe-or-a-paddlewheel">Resistance
+= A Narrow Section of Pipe or a Paddlewheel</h3>
+<p><strong>Resistance</strong> is anything built into the loop that
+makes it <em>harder</em> for water to keep moving — like a section of
+pipe that suddenly narrows, or a paddlewheel placed in the flow that the
+water has to push against. The narrower the pipe (or the harder the
+paddlewheel is to turn), the less water manages to flow past that point
+per second, even with the same pump strength.</p>
+<p>Electrical components called <strong>resistors</strong> do the exact
+same job on purpose — they deliberately narrow the “electrical pipe” so
+only a safe, controlled amount of current flows, protecting delicate
+parts like LEDs from getting “flooded” and burning out.</p>
+<h3 id="putting-it-together-ohms-law">Putting It Together: Ohm’s
+Law</h3>
+<p>Electrical engineers describe this relationship with a simple
+rule:</p>
+<pre><code>Voltage = Current × Resistance
+   (V)   =   (I)   ×    (R)</code></pre>
+<p>In our loop analogy: <strong>how hard the pump pushes (voltage)
+determines how much water flows (current), and that depends on how
+narrow the pipes or paddlewheels in the loop are (resistance).</strong>
+Push harder (more voltage) → more flow. Add more narrow sections (more
+resistance) → less flow.</p>
+<h3 id="the-loop-must-be-complete">The Loop Must Be Complete</h3>
+<p>This is the part we unpacked in detail already: water only flows if
+the pipe forms a complete loop back to the pump — there’s no “flowing
+into nowhere,” because there’s no infinite ocean to drain into, only a
+fixed amount of water circulating. Electricity is the same: current only
+flows if there’s a complete path from the battery’s <strong>positive
+(+)</strong> terminal, through your components, and back to the
+<strong>negative/ground (GND)</strong> terminal, which leads back into
+the battery — completing the loop, just like the return pipe leading
+back to the pump. If that loop is broken anywhere (a loose wire, an
+unconnected GND), the whole thing stalls — nothing flows, anywhere in
+the loop, even in sections that look perfectly wired.</p>
+<p><strong>This is why every single part on your robot must share a
+common GND (ground)</strong> — think of GND as the shared “return pipe”
+that leads every component’s used-up flow back to the pump (battery), no
+matter which part of the loop it came from. Skip connecting one part’s
+GND, and you’ve cut its return pipe — that part (and often the whole
+circuit) simply won’t work.</p>
+<h3 id="see-it-in-action">See It In Action</h3>
+<p>Here’s the closed loop, animated. Little dots of “water” circulate
+continuously around the loop, get pushed by the pump, pass through a
+narrow pipe (a resistor), and spin a paddlewheel (a motor) — then head
+back to the pump to do it all again. Click the switch to break the loop
+and watch the flow stop dead, everywhere, instantly.</p>
+<div style="max-width:680px; margin: 20px auto; padding: 16px; background: #fffdf7; border: 1px solid #d8d0bd; border-radius: 12px;">
+<style>
+  @keyframes loopwheelspin { to { transform: rotate(360deg); } }
+  .loopwheel { animation: loopwheelspin 2.5s linear infinite; transform-origin: 560px 200px; }
+  .loopwheel.loopoff { animation-play-state: paused; opacity: .35; }
+  .loopflow { opacity: 1; transition: opacity .4s; }
+  .loopflow.loopoff { opacity: 0; }
+  .looptoggletrack { position: relative; width: 36px; height: 20px; background: #b9b09a; border-radius: 10px; transition: background .2s; display: inline-block; }
+  .looptoggletrack:has(input:checked) { background: #ff7a00; }
+  .looptoggledot { position: absolute; top: 2px; left: 2px; width: 16px; height: 16px; background: #fff; border-radius: 50%; transition: transform .2s; pointer-events: none; }
+  #loop-toggle:checked ~ .looptoggledot { transform: translateX(16px); }
+</style>
+<svg width="100%" viewBox="0 0 680 300" role="img" style="display:block;">
+<title>Closed loop water circuit analogy for electricity</title>
+<desc>A pump pushes water around a closed loop, through a narrow pipe representing resistance and a paddlewheel representing a motor, back to the pump. A switch can open the loop to show flow stopping.</desc>
+
+<path id="loopBottomPath" d="M560,220 L120,220" fill="none" stroke="#d8d0bd" stroke-width="10" stroke-linecap="round"/>
+<path d="M120,60 L120,220" fill="none" stroke="#d8d0bd" stroke-width="10" stroke-linecap="round"/>
+<path d="M560,60 L560,220" fill="none" stroke="#d8d0bd" stroke-width="10" stroke-linecap="round"/>
+<path d="M120,60 L560,60" fill="none" stroke="#d8d0bd" stroke-width="10" stroke-linecap="round"/>
+
+<rect x="70" y="100" width="100" height="80" rx="10" fill="#eef3ec" stroke="#1a4d2e" stroke-width="1"/>
+<text x="120" y="132" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#1a4d2e">Pump</text>
+<text x="120" y="152" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#3c5a45">(battery)</text>
+
+<rect x="270" y="35" width="140" height="30" rx="6" fill="#fff3e0" stroke="#ff7a00" stroke-width="1"/>
+<text x="340" y="50" text-anchor="middle" dominant-baseline="central" font-size="14" font-weight="600" fill="#a34e00">Narrow pipe</text>
+<text x="340" y="67" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#a34e00">(resistor)</text>
+
+<circle cx="560" cy="140" r="45" fill="#e3f0ea" stroke="#1a4d2e" stroke-width="1"/>
+<g class="loopwheel" id="loopwheel">
+  <line x1="560" y1="105" x2="560" y2="175" stroke="#1a4d2e" stroke-width="3"/>
+  <line x1="525" y1="140" x2="595" y2="140" stroke="#1a4d2e" stroke-width="3"/>
+  <line x1="535" y1="115" x2="585" y2="165" stroke="#1a4d2e" stroke-width="3"/>
+  <line x1="535" y1="165" x2="585" y2="115" stroke="#1a4d2e" stroke-width="3"/>
+</g>
+<text x="560" y="202" text-anchor="middle" font-size="12" fill="#2b2b2b">Motor</text>
+
+<g class="loopflow" id="loopflowgroup">
+<circle r="5" fill="#ff7a00"><animateMotion dur="3s" repeatCount="indefinite" path="M120,220 L120,60 L560,60 L560,220 L120,220"/></circle>
+<circle r="5" fill="#ff7a00"><animateMotion dur="3s" repeatCount="indefinite" begin="-0.75s" path="M120,220 L120,60 L560,60 L560,220 L120,220"/></circle>
+<circle r="5" fill="#ff7a00"><animateMotion dur="3s" repeatCount="indefinite" begin="-1.5s" path="M120,220 L120,60 L560,60 L560,220 L120,220"/></circle>
+<circle r="5" fill="#ff7a00"><animateMotion dur="3s" repeatCount="indefinite" begin="-2.25s" path="M120,220 L120,60 L560,60 L560,220 L120,220"/></circle>
+</g>
+
+<g id="loopgapmarker" style="display:none">
+  <rect x="320" y="210" width="40" height="20" fill="#fffdf7"/>
+  <text x="340" y="220" text-anchor="middle" dominant-baseline="central" font-size="12" fill="#a34e00">gap!</text>
+</g>
+</svg>
+<div style="display:flex; align-items:center; gap:10px; margin-top:10px; font-size:13px; color:#5a5a55;">
+  <label style="display:flex; align-items:center; gap:8px; cursor:pointer; user-select:none; position:relative;">
+    <span class="looptoggletrack">
+      <input type="checkbox" id="loop-toggle" checked onchange="toggleLoopCircuit(this.checked)" style="position:absolute; opacity:0; width:100%; height:100%; cursor:pointer; margin:0;">
+      <span class="looptoggledot"></span>
+    </span>
+    Loop connected (click to break it)
+  </label>
+</div>
+</div>
+<script>
+function toggleLoopCircuit(closed) {
+  document.getElementById('loopflowgroup').classList.toggle('loopoff', !closed);
+  document.getElementById('loopwheel').classList.toggle('loopoff', !closed);
+  document.getElementById('loopBottomPath').style.opacity = closed ? '1' : '0';
+  document.getElementById('loopgapmarker').style.display = closed ? 'none' : 'block';
+}
+</script>
+<hr />
+<h2 id="part-2-meet-your-parts">Part 2: Meet Your Parts</h2>
+<p>Quick overview table first, then a detailed explanation of each part
+below.</p>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>What it does</th>
+<th>Water analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>ESP32-CAM</strong></td>
+<td>The “brain” — runs your code, has WiFi + a camera</td>
+<td>The control room that opens/closes the locks</td>
+</tr>
+<tr class="even">
+<td><strong>L293D Motor Driver</strong></td>
+<td>Takes weak signals from the brain and switches the <em>strong</em>
+current that actually spins the motors</td>
+<td>A big valve operated by a small handle</td>
+</tr>
+<tr class="odd">
+<td><strong>HC-SR04 Ultrasonic Sensor</strong></td>
+<td>“Bounces” a sound wave off objects and times how long the echo
+takes, to measure distance</td>
+<td>Like echo-sounding the depth of a lock</td>
+</tr>
+<tr class="even">
+<td><strong>2WD Chassis (motors + wheels)</strong></td>
+<td>The physical car body</td>
+<td>The boat itself</td>
+</tr>
+<tr class="odd">
+<td><strong>Breadboard</strong></td>
+<td>Lets you connect wires without soldering</td>
+<td>A pegboard for connecting pipes temporarily</td>
+</tr>
+<tr class="even">
+<td><strong>Jumper wires</strong></td>
+<td>The actual “pipes” carrying electricity between parts</td>
+<td>The pipes!</td>
+</tr>
+</tbody>
+</table>
+<h3 id="esp32-cam-the-brain">ESP32-CAM — The Brain</h3>
+<p>This is a tiny computer, smaller than a matchbox, that can run your
+code, connect to WiFi, and talk to a camera all at once. It has two main
+jobs in this project: - <strong>Run your program in an endless
+loop</strong> — reading sensors, deciding what to do, and moving motors,
+over and over, many times per second. - <strong>Host a tiny
+website</strong> that your phone connects to, so tapping a button on
+your phone actually sends a message across WiFi to this chip.</p>
+<p>It has rows of metal pins along its edges called <strong>GPIO
+pins</strong> (General Purpose Input/Output) — think of these as the
+chip’s fingers and ears, each one able to either send out a signal
+(output) or listen for one (input).</p>
+<h3 id="l293d-motor-driver-the-muscle-translator">L293D Motor Driver —
+The Muscle Translator</h3>
+<p>The ESP32-CAM’s pins are weak — they can only safely handle a tiny
+trickle of current (a few mA), nowhere near enough to spin a motor. The
+L293D solves this: the ESP32 sends it a <em>weak</em> signal saying
+“spin forward,” and the L293D uses that as a <em>trigger</em> to switch
+a much <em>stronger</em> current (from the battery) into the motor.</p>
+<p>Think of it like the small button on a TV remote controlling
+something huge — you press gently, but a whole chain of things happens
+on the other end that requires way more power than your finger
+provides.</p>
+<h3 id="hc-sr04-the-ears-well-echo-locator">HC-SR04 — The Ears (well,
+echo-locator!)</h3>
+<p><img src="https://docs.sunfounder.com/projects/elite-explorer-kit/fr/latest/_images/ultrasonic_pic.png" alt="HC-SR04 ultrasonic sensor" style="max-width:320px; display:block; margin: 10px 0;"></p>
+<p>This sensor has two round “eyes” on its face — one speaker that
+clicks out a sound pulse too high-pitched for humans to hear, and one
+microphone that listens for that same click bouncing back off a nearby
+object. By timing how long the echo takes, it calculates distance —
+exactly like a bat, or a submarine’s sonar.</p>
+<h3 id="wd-chassis-the-body">2WD Chassis — The Body</h3>
+<p>The plastic/acrylic base, two motors with wheels, and (usually) one
+small swivel “caster” wheel that just drags along for balance. This is
+the physical car that everything else gets bolted or stuck onto.</p>
+<h3 id="breadboard-the-reusable-connector-board">Breadboard — The
+Reusable Connector Board</h3>
+<p>A plastic board full of tiny holes that let you plug components and
+wires together <strong>without any soldering</strong>, so you can build,
+test, and completely rewire your circuit as many times as you want.
+We’ll cover exactly how its holes are connected in Part 2B below — it’s
+not as obvious as it looks!</p>
+<h3 id="jumper-wires-the-pipes">Jumper Wires — The Pipes</h3>
+<p><img src="https://docs.sunfounder.com/projects/elite-explorer-kit/fr/latest/_images/Jumper_Wires.png" alt="Male-to-male, male-to-female, and female-to-female jumper wires" style="max-width:420px; display:block; margin: 10px 0;"></p>
+<p>Simple wires with solid pins on each end, made to push into
+breadboard holes or component pin headers. They come in three flavors
+based on their end connectors: - <strong>Male-to-Male (M-M):</strong>
+both ends are solid pins — use these for breadboard-to-breadboard
+connections. - <strong>Male-to-Female (M-F):</strong> one solid pin end,
+one socket end — use these to connect a breadboard to a component that
+has its own pins sticking out (like the HC-SR04). -
+<strong>Female-to-Female (F-F):</strong> both ends are sockets — use
+these to connect two components that both already have pins, with no
+breadboard involved.</p>
+<hr />
+<h2 id="part-2b-how-to-use-a-breadboard">Part 2B: How to Use a
+Breadboard</h2>
+<p>A breadboard looks like it’s just a grid of holes, but the holes are
+secretly wired together in <strong>hidden strips underneath the
+plastic</strong>. Understanding this pattern is the single most useful
+skill for building any of these circuits.</p>
+<p><img src="https://docs.sunfounder.com/projects/elite-explorer-kit/fr/latest/_images/breadboard.png" alt="A solderless breadboard" style="max-width:420px; display:block; margin: 10px 0;"></p>
+<p>Here’s what’s actually happening underneath the surface — the
+colored/highlighted strips show which holes are secretly connected to
+each other:</p>
+<p><img src="https://docs.sunfounder.com/projects/elite-explorer-kit/fr/latest/_images/breadboard_internal.png" alt="Breadboard internal wiring diagram showing connected rows and power rails" style="max-width:500px; display:block; margin: 10px 0;"></p>
+<p>The same idea, drawn out simply:</p>
+<pre><code>   + - - - - - - - - - - - - - - - - - - - - - - -  +   &lt;- Top power rail (+)
+   - - - - - - - - - - - - - - - - - - - - - - - -  -   &lt;- Top power rail (-)
+
+   a b c d e   f g h i j
+ 1 o o o o o   o o o o o
+ 2 o o o o o   o o o o o          &lt;- Each numbered ROW (1, 2, 3...) of 5 holes
+ 3 o o o o o   o o o o o             (a-e or f-j) is connected together
+ 4 o o o o o   o o o o o             internally, but NOT across the middle gap!
+ 5 o o o o o   o o o o o
+   ...
+
+   + - - - - - - - - - - - - - - - - - - - - - - -  +   &lt;- Bottom power rail (+)
+   - - - - - - - - - - - - - - - - - - - - - - - -  -   &lt;- Bottom power rail (-)</code></pre>
+<h3 id="the-two-kinds-of-connections">The two kinds of connections</h3>
+<ol type="1">
+<li><p><strong>Power rails</strong> (the long strips along the top
+and/or bottom edges, usually marked with red <code>+</code> and blue
+<code>-</code> lines): every hole along a <code>+</code> line is
+connected to every other hole on that same <code>+</code> line, running
+the <strong>entire length</strong> of the board. Same for
+<code>-</code>. These are for spreading power and ground to many
+components at once — think of them as the “main water pipes” running
+along the edges.</p></li>
+<li><p><strong>Terminal strips</strong> (the main grid in the middle):
+each <strong>row</strong> of 5 holes (a-b-c-d-e, or f-g-h-i-j) is
+connected together internally — but a row is <strong>NOT</strong>
+connected to the row above or below it, and the two halves (a-e vs f-j)
+are <strong>NOT</strong> connected to each other across the center gap.
+This center gap exists specifically so you can straddle a chip across
+it, with each leg landing in its own separate row.</p></li>
+</ol>
+<h3 id="the-golden-rule">The golden rule</h3>
+<p><strong>Two things plugged into the same row are automatically
+connected — no wire needed.</strong> Two things plugged into different
+rows are NOT connected unless you add a jumper wire between them. This
+trips up almost everyone at first — if your circuit doesn’t work, this
+is one of the first things to double-check.</p>
+<h3 id="practical-tips-for-building-your-cars-circuit">Practical tips
+for building your car’s circuit</h3>
+<ul>
+<li>Plug your L293D driver so its pins straddle the center gap, giving
+each pin its own isolated row to wire from.</li>
+<li>Run one jumper wire from the ESP32-CAM’s GND pin to the breadboard’s
+<code>-</code> power rail once — then every other component can just
+plug a wire into that same rail instead of running separate wires all
+the way back to the ESP32 each time.</li>
+<li>Keep wires reasonably short and tidy — long crossing wires make it
+much harder to spot mistakes later.</li>
+</ul>
+<hr />
+<h2 id="part-2c-how-resistor-color-codes-work">Part 2C: How Resistor
+Color Codes Work</h2>
+<p><img src="https://docs.sunfounder.com/projects/elite-explorer-kit/fr/latest/_images/resistor.png" alt="Photo of resistors with colored bands" style="max-width:420px; display:block; margin: 10px 0;"></p>
+<p>You won’t need loose resistors for the exact wiring in this tutorial
+(the sensors, driver, and camera board all come as ready-made modules),
+but resistors show up in almost every other electronics project, and
+reading their colors is a classic “real engineer” skill worth teaching
+alongside this build.</p>
+<h3 id="why-resistors-dont-have-numbers-printed-on-them">Why resistors
+don’t have numbers printed on them</h3>
+<p>Resistors are tiny, and printing tiny numbers that could rub off or
+be hard to read at any angle is impractical. Instead, manufacturers
+paint <strong>colored bands</strong> around the resistor’s body — a code
+that can be read from any angle, in any lighting, even by robots on an
+assembly line.</p>
+<h3 id="the-standard-4-band-code">The standard 4-band code</h3>
+<p><img src="https://docs.sunfounder.com/projects/elite-explorer-kit/fr/latest/_images/resistance_card.jpg" alt="Resistor color code reference card" style="max-width:500px; display:block; margin: 10px 0;"></p>
+<pre><code>  [Band 1] [Band 2] [Band 3]  [Band 4]
+     |         |        |         |
+   1st       2nd    Multiplier  Tolerance
+   digit     digit   (x 10^n)   (+/- %)</code></pre>
+<p>Each color stands for a digit, 0 through 9:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Color</th>
+<th>Digit</th>
+<th>Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Black</td>
+<td>0</td>
+<td>×1</td>
+</tr>
+<tr class="even">
+<td>Brown</td>
+<td>1</td>
+<td>×10</td>
+</tr>
+<tr class="odd">
+<td>Red</td>
+<td>2</td>
+<td>×100</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>3</td>
+<td>×1,000</td>
+</tr>
+<tr class="odd">
+<td>Yellow</td>
+<td>4</td>
+<td>×10,000</td>
+</tr>
+<tr class="even">
+<td>Green</td>
+<td>5</td>
+<td>×100,000</td>
+</tr>
+<tr class="odd">
+<td>Blue</td>
+<td>6</td>
+<td>×1,000,000</td>
+</tr>
+<tr class="even">
+<td>Violet</td>
+<td>7</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Grey</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>White</td>
+<td>9</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Gold</td>
+<td>—</td>
+<td>×0.1 (tolerance ±5%)</td>
+</tr>
+<tr class="even">
+<td>Silver</td>
+<td>—</td>
+<td>×0.01 (tolerance ±10%)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="worked-example">Worked example</h3>
+<p>Say a resistor has the bands: <strong>Yellow, Violet, Red,
+Gold</strong></p>
+<ol type="1">
+<li>Yellow = 4 (first digit)</li>
+<li>Violet = 7 (second digit) → so far we have “47”</li>
+<li>Red = ×100 (multiplier) → 47 × 100 = <strong>4,700 Ω</strong> (also
+written as 4.7kΩ)</li>
+<li>Gold = ±5% tolerance (how close to exactly 4,700Ω it’s guaranteed to
+be)</li>
+</ol>
+<p>A fun memory trick some students like: <em>“Big Brown Rabbits Only
+Yield Great Big Vocal Groans, When Gold-Silver”</em> — the first letter
+of each word matches the color order (Black, Brown, Red, Orange, Yellow,
+Green, Blue, Violet, Grey, White). Feel free to invent a sillier one as
+a class!</p>
+<blockquote>
+<p>🎓 <strong>Teaching moment:</strong> hand around a few loose
+resistors (even ones not used in this project) and have students decode
+them using the table above, then check their answer with a multimeter
+set to resistance mode. It’s a great “does the theory match reality?”
+moment.</p>
+</blockquote>
+<hr />
+<h2 id="part-3-wiring-it-all-together">Part 3: Wiring It All
+Together</h2>
+<p>Keep this pinout diagram handy for the whole wiring section — it
+shows every labeled pin on the AI-Thinker ESP32-CAM board, which you’ll
+need to match against the pin tables below:</p>
+<p><img src="https://randomnerdtutorials.com/wp-content/uploads/2020/03/ESP32-CAM-pinout-guide-gpios-pins-explained-1024x576.jpg" alt="ESP32-CAM AI-Thinker pinout diagram showing all labeled GPIO, power, and ground pins" style="max-width:600px; display:block; margin: 10px 0;"></p>
+<p>⚠️ <strong>Always disconnect power before wiring or rewiring
+anything.</strong></p>
+<h3 id="step-1-mount-the-chassis">Step 1: Mount the chassis</h3>
+<p>Follow the instructions included with your 2WD chassis kit to attach
+the two motors and wheels to the plastic/acrylic base. Add the caster
+wheel (the little swivel wheel) at the front or back for balance.</p>
+<h3 id="step-2-wire-the-l293d-motor-driver-to-the-motors">Step 2: Wire
+the L293D Motor Driver to the motors</h3>
+<table>
+<thead>
+<tr class="header">
+<th>L293D Pin</th>
+<th>Connects to</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>OUT1, OUT2</td>
+<td>Left motor wires</td>
+</tr>
+<tr class="even">
+<td>OUT3, OUT4</td>
+<td>Right motor wires</td>
+</tr>
+<tr class="odd">
+<td>VCC1 (logic power)</td>
+<td>ESP32-CAM 3.3V</td>
+</tr>
+<tr class="even">
+<td>VCC2 (motor power)</td>
+<td>Battery positive (6-9V)</td>
+</tr>
+<tr class="odd">
+<td>GND</td>
+<td>Battery negative <strong>AND</strong> ESP32-CAM GND (shared
+ground!)</td>
+</tr>
+<tr class="even">
+<td>IN1, IN2</td>
+<td>ESP32-CAM GPIO pins (left motor control)</td>
+</tr>
+<tr class="odd">
+<td>IN3, IN4</td>
+<td>ESP32-CAM GPIO pins (right motor control)</td>
+</tr>
+<tr class="even">
+<td>ENA</td>
+<td>ESP32-CAM GPIO — <strong>PWM speed control for left
+motor</strong></td>
+</tr>
+<tr class="odd">
+<td>ENB</td>
+<td>ESP32-CAM GPIO — <strong>PWM speed control for right
+motor</strong></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>What are ENA/ENB?</strong> On the L293D, IN1-IN4 only tell
+the motor which <em>direction</em> to spin — full on or full off. ENA
+and ENB are separate pins that control <em>how much</em> power gets
+through, using a trick called <strong>PWM (Pulse Width
+Modulation)</strong> — explained in Part 5B below. Some L293D breakout
+boards tie ENA/ENB permanently to 5V with a jumper cap; if yours does,
+<strong>remove that jumper cap</strong> so you can control speed from
+code instead.</p>
+</blockquote>
+<h3 id="step-3-wire-the-4-hc-sr04-sensors-front-back-left-right">Step 3:
+Wire the 4 HC-SR04 sensors (front, back, left, right)</h3>
+<p>Each HC-SR04 has 4 pins: <strong>VCC, Trig, Echo, GND</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>Sensor</th>
+<th>VCC</th>
+<th>GND</th>
+<th>Trig (GPIO)</th>
+<th>Echo (GPIO)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Front</td>
+<td>5V</td>
+<td>GND</td>
+<td>GPIO 12</td>
+<td>GPIO 13</td>
+</tr>
+<tr class="even">
+<td>Back</td>
+<td>5V</td>
+<td>GND</td>
+<td>GPIO 14</td>
+<td>GPIO 15</td>
+</tr>
+<tr class="odd">
+<td>Left</td>
+<td>5V</td>
+<td>GND</td>
+<td>GPIO 2</td>
+<td>GPIO 4</td>
+</tr>
+<tr class="even">
+<td>Right</td>
+<td>5V</td>
+<td>GND</td>
+<td>GPIO 16</td>
+<td>GPIO 17</td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<p>💡 <strong>Note:</strong> The ESP32-CAM has limited free GPIO pins
+because many are used internally for the camera. If you find a pin
+conflict, check the ESP32-CAM pinout diagram (search “ESP32-CAM
+AI-Thinker pinout”) and swap to any free GPIO — just update the pin
+numbers in the code in Part 5 to match.</p>
+</blockquote>
+<h3 id="step-4-double-check-your-grounds">Step 4: Double-check your
+grounds!</h3>
+<p>Every GND pin (ESP32-CAM, L293D, all 4 sensors, and the battery
+negative) must connect to the <strong>same</strong> ground rail on your
+breadboard. This is the shared “return pipe” we talked about — if even
+one part’s ground is disconnected, that part’s loop is broken and it
+simply won’t work, even though everything looks wired up.</p>
+<hr />
+<h2 id="part-4-setting-up-the-software">Part 4: Setting Up the
+Software</h2>
+<p>You have two ways to compile and upload code: the <strong>Arduino
+IDE</strong> (a graphical app — easier for first-timers) or
+<strong>arduino-cli</strong> (a command-line tool — faster once set up,
+and great if you’re on a Mac and want to script the upload process for
+multiple cars). Pick whichever fits your class better; both produce
+identical results.</p>
+<h3 id="first-physically-connect-the-board-needed-either-way">First,
+physically connect the board (needed either way)</h3>
+<p>Plug the ESP32-CAM into the MB programmer board, then plug the MB
+board into your computer’s USB port. No jumper wires needed — that’s the
+whole point of the “-MB” version!</p>
+<h3 id="option-a-arduino-ide-graphical-app">Option A: Arduino IDE
+(graphical app)</h3>
+<p><strong>Step 1: Install Arduino IDE</strong> Download and install the
+free Arduino IDE from arduino.cc (search “Arduino IDE download”).</p>
+<p><strong>Step 2: Add ESP32 board support</strong> 1. Open Arduino IDE
+→ <strong>File → Preferences</strong> 2. In “Additional Boards Manager
+URLs,” paste:
+<code>https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json</code>
+3. Go to <strong>Tools → Board → Boards Manager</strong>, search
+“esp32,” and install the package by Espressif.</p>
+<p><strong>Step 3: Select your board</strong> - <strong>Tools → Board →
+AI Thinker ESP32-CAM</strong> - <strong>Tools → Port →</strong> select
+the port your USB programmer shows up as</p>
+<p><strong>Step 4: Click Upload</strong> (the right-arrow button in the
+toolbar)</p>
+<hr />
+<h3 id="option-b-command-line-on-mac-arduino-cli">Option B: Command Line
+on Mac (arduino-cli)</h3>
+<p>If you’d rather skip the IDE entirely, Arduino’s official
+command-line tool does everything the IDE does, just typed instead of
+clicked. This is a great option for a classroom because you can write
+<strong>one script</strong> that every kid runs the same way.</p>
+<p><strong>Step 1: Install arduino-cli via Homebrew</strong></p>
+<pre class="bash"><code>brew install arduino-cli</code></pre>
+<p><strong>Step 2: Set up the ESP32 board support (one-time
+setup)</strong></p>
+<pre class="bash"><code>arduino-cli config init
+arduino-cli config add board_manager.additional_urls https://raw.githubusercontent.com/espressif/arduino-esp32/gh-pages/package_esp32_index.json
+arduino-cli core update-index
+arduino-cli core install esp32:esp32</code></pre>
+<p><strong>Step 3: Organize your sketch folder correctly</strong></p>
+<p>arduino-cli (like the IDE) requires your code file to be named
+exactly the same as its containing folder:</p>
+<pre><code>RobotCar/
+└── RobotCar.ino      &lt;- your code from Part 5 goes here</code></pre>
+<p><strong>Step 4: Find your board’s port</strong></p>
+<p>Plug in the ESP32-CAM-MB programmer, then run:</p>
+<pre class="bash"><code>arduino-cli board list</code></pre>
+<p>Look for something like <code>/dev/cu.usbserial-1420</code> or
+<code>/dev/cu.wchusbserial1420</code> — that’s your <code>PORT</code>
+for the next step. Every USB cable/hub combination can show a slightly
+different name, so re-run this command if a different kid’s laptop shows
+something else.</p>
+<p><strong>Step 5: Compile and upload</strong></p>
+<pre class="bash"><code>arduino-cli compile --fqbn esp32:esp32:esp32cam RobotCar
+arduino-cli upload -p /dev/cu.usbserial-XXXX --fqbn esp32:esp32:esp32cam RobotCar</code></pre>
+<p>(Replace <code>/dev/cu.usbserial-XXXX</code> with whatever
+<code>board list</code> showed you.)</p>
+<blockquote>
+<p>⚠️ <strong>If upload fails or times out:</strong> hold the
+ESP32-CAM’s <strong>BOOT/IO0</strong> button the moment you run the
+upload command, and release it once you see “Connecting…” appear in the
+terminal. This is a hardware quirk of the ESP32-CAM chip itself, not
+something specific to using the command line — it happens in the IDE
+too.</p>
+</blockquote>
+<h3 id="one-script-to-compile-and-upload">One script to compile
+<em>and</em> upload</h3>
+<p>To make this genuinely one-command-simple for a classroom (kids just
+plug in and run one thing), save this as <code>upload.sh</code> inside
+your project folder:</p>
+<pre class="bash"><code>#!/bin/bash
+# upload.sh - compiles and uploads RobotCar.ino to a connected ESP32-CAM
+
+SKETCH_DIR=&quot;RobotCar&quot;
+FQBN=&quot;esp32:esp32:esp32cam&quot;
+
+echo &quot;🔍 Looking for connected board...&quot;
+PORT=$(arduino-cli board list | grep -i &quot;cu.usb&quot; | awk &#39;{print $1}&#39; | head -n 1)
+
+if [ -z &quot;$PORT&quot; ]; then
+  echo &quot;❌ No board found! Is it plugged in?&quot;
+  exit 1
+fi
+
+echo &quot;✅ Found board on $PORT&quot;
+echo &quot;🛠  Compiling...&quot;
+arduino-cli compile --fqbn $FQBN $SKETCH_DIR
+
+if [ $? -ne 0 ]; then
+  echo &quot;❌ Compile failed — check your code for errors.&quot;
+  exit 1
+fi
+
+echo &quot;📤 Uploading... (hold BOOT button now if it doesn&#39;t connect!)&quot;
+arduino-cli upload -p &quot;$PORT&quot; --fqbn $FQBN $SKETCH_DIR
+
+echo &quot;🎉 Done! Disconnect USB and power your car from its battery.&quot;</code></pre>
+<p>Make it runnable once:</p>
+<pre class="bash"><code>chmod +x upload.sh</code></pre>
+<p>Then every time a student wants to upload their code, they just plug
+in and run:</p>
+<pre class="bash"><code>./upload.sh</code></pre>
+<p>This automatically finds the port, compiles, and uploads — no menus,
+no guessing which port is theirs.</p>
+<hr />
+<h2 id="part-5-the-code">Part 5: The Code</h2>
+<p>This code does three things at once: 1. <strong>Reads all 4
+ultrasonic sensors</strong> continuously. 2. <strong>Runs a small WiFi
+webpage</strong> with drive buttons your phone can tap. 3.
+<strong>Decides who’s in charge</strong>: if a phone command arrived in
+the last 500 milliseconds, follow it. Otherwise, drive autonomously and
+avoid obstacles.</p>
+<pre class="cpp"><code>#include &lt;WiFi.h&gt;
+#include &lt;WebServer.h&gt;
+
+// ---------- WiFi Settings ----------
+const char* ssid = &quot;RobotCar1&quot;;       // Each car should get a UNIQUE name!
+const char* password = &quot;drivemebot&quot;;  // At least 8 characters
+
+WebServer server(80);
+
+// ---------- Motor Driver Pins (L293D) ----------
+const int IN1 = 25, IN2 = 26;   // Left motor direction
+const int IN3 = 27, IN4 = 33;   // Right motor direction
+const int ENA = 32;             // Left motor SPEED (PWM)
+const int ENB = 21;             // Right motor SPEED (PWM)
+
+// ---------- PWM channel setup (ESP32-specific way of doing analogWrite) ----------
+const int PWM_CHANNEL_A = 0;
+const int PWM_CHANNEL_B = 1;
+const int PWM_FREQ = 1000;      // 1000 Hz
+const int PWM_RESOLUTION = 8;   // 8-bit = values from 0-255
+
+// ---------- Ultrasonic Sensor Pins ----------
+const int TRIG_FRONT = 12, ECHO_FRONT = 13;
+const int TRIG_BACK  = 14, ECHO_BACK  = 15;
+const int TRIG_LEFT  = 2,  ECHO_LEFT  = 4;
+const int TRIG_RIGHT = 16, ECHO_RIGHT = 17;
+
+// ---------- Control state ----------
+unsigned long lastPhoneCommand = 0;
+const unsigned long PHONE_TIMEOUT = 500; // ms - how long a phone command &quot;wins&quot;
+
+int currentSpeed = 150;   // 0 (stopped) to 255 (full speed) -- this is our &quot;accelerator&quot;
+const int MIN_SPEED = 80; // below this, the motors don&#39;t have enough push to actually move
+const int MAX_SPEED = 255;
+const int SPEED_STEP = 25; // how much each &quot;accelerate&quot; tap adds
+
+// ================= SETUP =================
+void setup() {
+  Serial.begin(115200);
+
+  pinMode(IN1, OUTPUT); pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT); pinMode(IN4, OUTPUT);
+
+  // Set up PWM (&quot;speed control&quot;) channels and attach them to ENA/ENB
+  ledcSetup(PWM_CHANNEL_A, PWM_FREQ, PWM_RESOLUTION);
+  ledcSetup(PWM_CHANNEL_B, PWM_FREQ, PWM_RESOLUTION);
+  ledcAttachPin(ENA, PWM_CHANNEL_A);
+  ledcAttachPin(ENB, PWM_CHANNEL_B);
+
+  pinMode(TRIG_FRONT, OUTPUT); pinMode(ECHO_FRONT, INPUT);
+  pinMode(TRIG_BACK,  OUTPUT); pinMode(ECHO_BACK,  INPUT);
+  pinMode(TRIG_LEFT,  OUTPUT); pinMode(ECHO_LEFT,  INPUT);
+  pinMode(TRIG_RIGHT, OUTPUT); pinMode(ECHO_RIGHT, INPUT);
+
+  stopMotors();
+
+  // Start WiFi as its own access point (phone connects directly to the car)
+  WiFi.softAP(ssid, password);
+  Serial.print(&quot;Car WiFi IP address: &quot;);
+  Serial.println(WiFi.softAPIP());
+
+  // Web routes -- each button on the phone calls one of these
+  server.on(&quot;/&quot;, handleRoot);
+  server.on(&quot;/forward&quot;,  []() { manualDrive(FORWARD); });
+  server.on(&quot;/backward&quot;, []() { manualDrive(BACKWARD); });
+  server.on(&quot;/left&quot;,     []() { manualDrive(LEFT); });
+  server.on(&quot;/right&quot;,    []() { manualDrive(RIGHT); });
+  server.on(&quot;/stop&quot;,     []() { manualDrive(STOPCMD); });      // full stop, engine off
+  server.on(&quot;/brake&quot;,    []() { manualDrive(BRAKECMD); });     // sudden stop, like slamming brakes
+  server.on(&quot;/accelerate&quot;, []() { manualDrive(ACCELERATE); }); // press+hold to speed up
+  server.on(&quot;/decelerate&quot;, []() { manualDrive(DECELERATE); }); // press+hold to slow down
+  server.on(&quot;/setspeed&quot;, handleSetSpeed);                      // slider sends an exact number
+
+  server.begin();
+}
+
+// ================= MAIN LOOP =================
+void loop() {
+  server.handleClient();  // check if the phone sent a button press
+
+  bool phoneInControl = (millis() - lastPhoneCommand) &lt; PHONE_TIMEOUT;
+
+  if (!phoneInControl) {
+    autonomousDrive();  // nobody&#39;s driving -&gt; the car drives itself
+  }
+  // if phoneInControl is true, we do nothing here --
+  // the manualDrive() function (called by the web routes above) is already
+  // controlling the motors directly.
+}
+
+// ================= AUTONOMOUS LOGIC =================
+void autonomousDrive() {
+  long distFront = getDistance(TRIG_FRONT, ECHO_FRONT);
+  long distLeft  = getDistance(TRIG_LEFT, ECHO_LEFT);
+  long distRight = getDistance(TRIG_RIGHT, ECHO_RIGHT);
+
+  const int SAFE_DISTANCE = 20; // cm
+  const int AUTONOMOUS_SPEED = 150; // a fixed, gentle speed for self-driving mode
+
+  if (distFront &gt; SAFE_DISTANCE) {
+    moveForward(AUTONOMOUS_SPEED);
+  } else if (distLeft &gt; distRight) {
+    turnLeft(AUTONOMOUS_SPEED);
+    delay(300);
+  } else {
+    turnRight(AUTONOMOUS_SPEED);
+    delay(300);
+  }
+}
+
+// ================= DISTANCE MEASUREMENT =================
+long getDistance(int trigPin, int echoPin) {
+  digitalWrite(trigPin, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trigPin, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trigPin, LOW);
+
+  long duration = pulseIn(echoPin, HIGH, 30000); // 30ms timeout
+  long distanceCm = duration * 0.034 / 2;        // speed of sound math!
+  if (distanceCm == 0) distanceCm = 400;         // no echo = treat as &quot;far away&quot;
+  return distanceCm;
+}
+
+// ================= MOTOR CONTROL (now with a speed argument!) =================
+void setMotorSpeed(int speed) {
+  ledcWrite(PWM_CHANNEL_A, speed);
+  ledcWrite(PWM_CHANNEL_B, speed);
+}
+
+void moveForward(int speed) {
+  digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH); digitalWrite(IN4, LOW);
+  setMotorSpeed(speed);
+}
+void moveBackward(int speed) {
+  digitalWrite(IN1, LOW); digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW); digitalWrite(IN4, HIGH);
+  setMotorSpeed(speed);
+}
+void turnLeft(int speed) {
+  digitalWrite(IN1, LOW); digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH); digitalWrite(IN4, LOW);
+  setMotorSpeed(speed);
+}
+void turnRight(int speed) {
+  digitalWrite(IN1, HIGH); digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW); digitalWrite(IN4, HIGH);
+  setMotorSpeed(speed);
+}
+
+// A gentle stop -- speed fades to 0, like coasting to a stop
+void stopMotors() {
+  setMotorSpeed(0);
+  digitalWrite(IN1, LOW); digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW); digitalWrite(IN4, LOW);
+}
+
+// A HARD stop -- briefly reverses the motors for an instant, then cuts power.
+// This is what real &quot;regenerative braking&quot; is loosely inspired by: fighting
+// the car&#39;s own momentum for a split second instead of just letting it coast.
+void brakeMotors() {
+  digitalWrite(IN1, LOW); digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, LOW); digitalWrite(IN4, HIGH);
+  setMotorSpeed(currentSpeed);
+  delay(80);              // brief reverse pulse
+  stopMotors();
+}
+
+// ================= PHONE (MANUAL) CONTROL =================
+enum Command { FORWARD, BACKWARD, LEFT, RIGHT, STOPCMD, BRAKECMD, ACCELERATE, DECELERATE };
+
+void manualDrive(Command cmd) {
+  lastPhoneCommand = millis(); // &quot;I&#39;m in control now!&quot;
+
+  switch (cmd) {
+    case FORWARD:    moveForward(currentSpeed);  break;
+    case BACKWARD:   moveBackward(currentSpeed); break;
+    case LEFT:       turnLeft(currentSpeed);     break;
+    case RIGHT:      turnRight(currentSpeed);    break;
+    case STOPCMD:    stopMotors();               break;
+    case BRAKECMD:   brakeMotors();               break;
+    case ACCELERATE:
+      currentSpeed = min(currentSpeed + SPEED_STEP, MAX_SPEED);
+      setMotorSpeed(currentSpeed);
+      break;
+    case DECELERATE:
+      currentSpeed = max(currentSpeed - SPEED_STEP, MIN_SPEED);
+      setMotorSpeed(currentSpeed);
+      break;
+  }
+  server.send(200, &quot;text/plain&quot;, String(currentSpeed));
+}
+
+// The slider on the webpage sends an exact number (0-255) instead of &quot;step&quot; commands
+void handleSetSpeed() {
+  if (server.hasArg(&quot;value&quot;)) {
+    currentSpeed = server.arg(&quot;value&quot;).toInt();
+    currentSpeed = constrain(currentSpeed, 0, MAX_SPEED);
+    lastPhoneCommand = millis();
+    setMotorSpeed(currentSpeed);
+  }
+  server.send(200, &quot;text/plain&quot;, String(currentSpeed));
+}
+
+// ================= WEB PAGE (sent to phone browser) =================
+void handleRoot() {
+  String html = R&quot;rawliteral(
+  &lt;!DOCTYPE html&gt;
+  &lt;html&gt;
+  &lt;head&gt;
+    &lt;title&gt;Robot Car Control&lt;/title&gt;
+    &lt;style&gt;
+      body { font-family: sans-serif; text-align: center; background: #222; color: white; }
+      button {
+        width: 100px; height: 100px; font-size: 22px; margin: 5px;
+        border-radius: 12px; border: none; background: #4CAF50; color: white;
+      }
+      button:active { background: #388E3C; }
+      .row { display: flex; justify-content: center; }
+      .small { width: 70px; height: 70px; font-size: 16px; }
+      .brake { background: #f44336; }
+      .stop { background: #b71c1c; }
+      input[type=range] { width: 80%; margin: 10px; }
+    &lt;/style&gt;
+  &lt;/head&gt;
+  &lt;body&gt;
+    &lt;h1&gt;My Robot Car&lt;/h1&gt;
+
+    &lt;p&gt;Speed: &lt;span id=&quot;speedLabel&quot;&gt;150&lt;/span&gt; / 255&lt;/p&gt;
+    &lt;input type=&quot;range&quot; min=&quot;0&quot; max=&quot;255&quot; value=&quot;150&quot; id=&quot;speedSlider&quot;
+           oninput=&quot;setSpeed(this.value)&quot;&gt;
+
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;button class=&quot;small&quot; onclick=&quot;send(&#39;decelerate&#39;)&quot;&gt;- SLOW&lt;/button&gt;
+      &lt;button class=&quot;small&quot; onclick=&quot;send(&#39;accelerate&#39;)&quot;&gt;+ FAST&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;div class=&quot;row&quot;&gt;&lt;button onclick=&quot;send(&#39;forward&#39;)&quot;&gt;FORWARD&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;button onclick=&quot;send(&#39;left&#39;)&quot;&gt;LEFT&lt;/button&gt;
+      &lt;button class=&quot;brake&quot; onclick=&quot;send(&#39;brake&#39;)&quot;&gt;BRAKE&lt;/button&gt;
+      &lt;button onclick=&quot;send(&#39;right&#39;)&quot;&gt;RIGHT&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;button onclick=&quot;send(&#39;backward&#39;)&quot;&gt;BACK&lt;/button&gt;&lt;/div&gt;
+    &lt;div class=&quot;row&quot;&gt;&lt;button class=&quot;stop&quot; onclick=&quot;send(&#39;stop&#39;)&quot;&gt;FULL STOP&lt;/button&gt;&lt;/div&gt;
+
+    &lt;p&gt;Not tapping a button? The car drives itself and avoids obstacles!&lt;/p&gt;
+    &lt;img src=&quot;/stream&quot; style=&quot;width:90%; margin-top:10px; border-radius:10px;&quot;&gt;
+
+    &lt;script&gt;
+      function send(cmd) {
+        fetch(&#39;/&#39; + cmd).then(r =&gt; r.text()).then(speed =&gt; {
+          document.getElementById(&#39;speedLabel&#39;).innerText = speed;
+          document.getElementById(&#39;speedSlider&#39;).value = speed;
+        });
+      }
+      function setSpeed(val) {
+        document.getElementById(&#39;speedLabel&#39;).innerText = val;
+        fetch(&#39;/setspeed?value=&#39; + val);
+      }
+    &lt;/script&gt;
+  &lt;/body&gt;
+  &lt;/html&gt;
+  )rawliteral&quot;;
+  server.send(200, &quot;text/html&quot;, html);
+}</code></pre>
+<hr />
+<h2
+id="part-5b-understanding-accelerate-brake-and-pwm-back-to-the-water-analogy">Part
+5B: Understanding Accelerate, Brake, and PWM (Back to the Water
+Analogy!)</h2>
+<p>Remember our pump pushing water around a closed loop? Let’s use it
+again to understand <strong>speed control</strong>.</p>
+<p>So far, our motors have only been <strong>fully on or fully
+off</strong> — like a valve that’s either wide open or completely shut.
+But real cars don’t work that way — you can press the gas pedal a
+<em>little</em> or a <em>lot</em>. How do we get that same fine control
+from a microcontroller that can technically only output ON or OFF?</p>
+<h3 id="the-trick-blink-really-really-fast">The Trick: Blink Really,
+Really Fast</h3>
+<p>Imagine a valve that can only be <strong>fully open</strong> or
+<strong>fully closed</strong> — but it can slam open and shut
+<em>hundreds of times per second</em>. If it’s open 80% of the time and
+closed 20% of the time, on average, almost as much water flows through
+as if it were just sitting 80% open!</p>
+<p>This is exactly what <strong>PWM (Pulse Width Modulation)</strong>
+does with electricity. The ESP32 flips the motor’s power pin on and off
+thousands of times per second. By changing the <em>percentage of time
+it’s ON</em> (called the <strong>duty cycle</strong>), we control the
+<em>average</em> amount of power the motor receives — which feels to us
+like smooth speed control, even though electrically it’s just very fast
+on/off flickering.</p>
+<p>In our code: - <code>currentSpeed = 255</code> → the valve is open
+~100% of the time → <strong>full speed</strong> -
+<code>currentSpeed = 128</code> → the valve is open ~50% of the time →
+<strong>half speed</strong> - <code>currentSpeed = 0</code> → the valve
+never opens → <strong>stopped</strong></p>
+<h3 id="accelerate-decelerate">Accelerate &amp; Decelerate</h3>
+<p>Tapping “+ FAST” or “- SLOW” doesn’t instantly teleport the car to a
+new speed — it nudges <code>currentSpeed</code> up or down by a small
+step (25 out of 255), just like gently pressing the gas pedal a little
+more.</p>
+<h3 id="brake-vs.-stop-whats-the-difference">Brake vs. Stop — What’s the
+Difference?</h3>
+<p>We gave the car <strong>two</strong> different ways to stop, and it’s
+worth explaining why:</p>
+<ul>
+<li><strong><code>stopMotors()</code></strong> — just cuts power
+completely (valve slams shut). The car <strong>coasts</strong> to a stop
+because of its own momentum, the same way a bicycle keeps rolling after
+you stop pedaling.</li>
+<li><strong><code>brakeMotors()</code></strong> — briefly reverses the
+motors for a fraction of a second <em>before</em> cutting power. This
+actively fights the car’s forward momentum, stopping it faster — similar
+in spirit to how a real car’s brakes convert your motion into heat (or,
+in an electric car, back into stored energy — called “regenerative
+braking”!).</li>
+</ul>
+<blockquote>
+<p>🎓 <strong>Teaching moment:</strong> ask students to test both and
+<em>feel</em> the difference — tap FULL STOP vs. BRAKE while the car is
+moving at full speed and watch how much further it slides with a plain
+stop.</p>
+</blockquote>
+<hr />
+<h2 id="part-5c-adding-live-camera-video">Part 5C: Adding Live Camera
+Video</h2>
+<p>Now let’s get the camera streaming to the phone’s webpage. The
+ESP32-CAM’s camera needs its own setup code and, because streaming video
+is a large continuous flow of data, it runs on a <strong>separate mini
+web server (port 81)</strong> so it doesn’t slow down your button
+presses on the main control page (port 80).</p>
+<h3 id="step-1-add-these-includes-to-the-very-top-of-your-sketch">Step
+1: Add these includes to the very top of your sketch</h3>
+<pre class="cpp"><code>#include &quot;esp_camera.h&quot;
+#include &quot;esp_http_server.h&quot;</code></pre>
+<h3
+id="step-2-add-the-camera-pin-definitions-standard-for-ai-thinker-esp32-cam-boards">Step
+2: Add the camera pin definitions (standard for AI-Thinker ESP32-CAM
+boards)</h3>
+<pre class="cpp"><code>// ---------- Camera Pins (AI-Thinker ESP32-CAM board) ----------
+#define PWDN_GPIO_NUM     32
+#define RESET_GPIO_NUM    -1
+#define XCLK_GPIO_NUM      0
+#define SIOD_GPIO_NUM     26
+#define SIOC_GPIO_NUM     27
+#define Y9_GPIO_NUM       35
+#define Y8_GPIO_NUM       34
+#define Y7_GPIO_NUM       39
+#define Y6_GPIO_NUM       36
+#define Y5_GPIO_NUM       21
+#define Y4_GPIO_NUM       19
+#define Y3_GPIO_NUM       18
+#define Y2_GPIO_NUM        5
+#define VSYNC_GPIO_NUM    25
+#define HREF_GPIO_NUM     23
+#define PCLK_GPIO_NUM     22</code></pre>
+<p>⚠️ <strong>Pin conflict alert!</strong> Notice GPIO 32 and GPIO 21
+are used by the camera above — but we also used GPIO 32 for
+<code>ENA</code> and GPIO 21 for <code>ENB</code> in our motor code! On
+the ESP32-CAM, almost every free pin is already claimed by either the
+camera or the microSD slot, so you have very few pins left for motors
+and sensors.</p>
+<p><strong>The fix:</strong> move <code>ENA</code> and <code>ENB</code>
+to two of the few remaining free pins — for example
+<code>ENA = 33</code> and pick another free GPIO for <code>ENB</code>
+(GPIO 3, the RX pin, can sometimes work if you’re not using Serial for
+debugging — but it’s finicky). This is genuinely one of the trickiest
+parts of using an ESP32-CAM for robotics, and it’s a great real-world
+lesson: <strong>hardware has limits, and engineers constantly have to
+make trade-offs.</strong> If you regularly hit pin shortages, consider
+using a simple <strong>I/O expander chip</strong> (like a PCF8574) — an
+advanced extension for older/more confident students.</p>
+<h3 id="step-3-add-the-camera-setup-function">Step 3: Add the camera
+setup function</h3>
+<pre class="cpp"><code>bool initCamera() {
+  camera_config_t config;
+  config.ledc_channel = LEDC_CHANNEL_2; // uses a different channel than our motors!
+  config.ledc_timer = LEDC_TIMER_2;
+  config.pin_d0 = Y2_GPIO_NUM; config.pin_d1 = Y3_GPIO_NUM;
+  config.pin_d2 = Y4_GPIO_NUM; config.pin_d3 = Y5_GPIO_NUM;
+  config.pin_d4 = Y6_GPIO_NUM; config.pin_d5 = Y7_GPIO_NUM;
+  config.pin_d6 = Y8_GPIO_NUM; config.pin_d7 = Y9_GPIO_NUM;
+  config.pin_xclk = XCLK_GPIO_NUM;
+  config.pin_pclk = PCLK_GPIO_NUM;
+  config.pin_vsync = VSYNC_GPIO_NUM;
+  config.pin_href = HREF_GPIO_NUM;
+  config.pin_sscb_sda = SIOD_GPIO_NUM;
+  config.pin_sscb_scl = SIOC_GPIO_NUM;
+  config.pin_pwdn = PWDN_GPIO_NUM;
+  config.pin_reset = RESET_GPIO_NUM;
+  config.xclk_freq_hz = 20000000;
+  config.pixel_format = PIXFORMAT_JPEG;
+  config.frame_size = FRAMESIZE_QVGA;   // small = fast streaming, good for WiFi
+  config.jpeg_quality = 12;             // lower number = higher quality, bigger file
+  config.fb_count = 1;
+
+  esp_err_t err = esp_camera_init(&amp;config);
+  return (err == ESP_OK);
+}</code></pre>
+<h3 id="step-4-add-the-streaming-server-runs-on-port-81">Step 4: Add the
+streaming server (runs on port 81)</h3>
+<pre class="cpp"><code>httpd_handle_t streamServer = NULL;
+
+static esp_err_t streamHandler(httpd_req_t *req) {
+  camera_fb_t *fb = NULL;
+  char part_buf[64];
+  static const char* STREAM_CONTENT_TYPE = &quot;multipart/x-mixed-replace;boundary=frame&quot;;
+  static const char* STREAM_BOUNDARY = &quot;\r\n--frame\r\n&quot;;
+  static const char* STREAM_PART = &quot;Content-Type: image/jpeg\r\nContent-Length: %u\r\n\r\n&quot;;
+
+  httpd_resp_set_type(req, STREAM_CONTENT_TYPE);
+
+  while (true) {
+    fb = esp_camera_fb_get();
+    if (!fb) { break; }
+
+    size_t hlen = snprintf(part_buf, 64, STREAM_PART, fb-&gt;len);
+    httpd_resp_send_chunk(req, STREAM_BOUNDARY, strlen(STREAM_BOUNDARY));
+    httpd_resp_send_chunk(req, part_buf, hlen);
+    httpd_resp_send_chunk(req, (const char*)fb-&gt;buf, fb-&gt;len);
+
+    esp_camera_fb_return(fb);
+  }
+  return ESP_OK;
+}
+
+void startCameraServer() {
+  httpd_config_t config = HTTPD_DEFAULT_CONFIG();
+  config.server_port = 81;
+
+  httpd_uri_t stream_uri = {
+    .uri = &quot;/stream&quot;,
+    .method = HTTP_GET,
+    .handler = streamHandler,
+    .user_ctx = NULL
+  };
+
+  if (httpd_start(&amp;streamServer, &amp;config) == ESP_OK) {
+    httpd_register_uri_handler(streamServer, &amp;stream_uri);
+  }
+}</code></pre>
+<h3 id="step-5-call-both-from-setup">Step 5: Call both from
+<code>setup()</code></h3>
+<p>Add these two lines inside <code>setup()</code>, right after
+<code>WiFi.softAP(...)</code>:</p>
+<pre class="cpp"><code>if (initCamera()) {
+  startCameraServer();
+  Serial.println(&quot;Camera stream ready!&quot;);
+} else {
+  Serial.println(&quot;Camera init FAILED - check wiring/pins&quot;);
+}</code></pre>
+<h3
+id="step-6-point-the-webpage-at-the-cameras-stream-port-81-not-80">Step
+6: Point the webpage at the camera’s stream (port 81, not 80!)</h3>
+<p>In the HTML from Part 5, the <code>&lt;img&gt;</code> tag needs the
+car’s IP address <strong>with <code>:81</code></strong> added, since the
+camera runs on a separate port from the button server. Replace this
+line:</p>
+<pre class="html"><code>&lt;img src=&quot;/stream&quot; style=&quot;width:90%; margin-top:10px; border-radius:10px;&quot;&gt;</code></pre>
+<p>with (using JavaScript to build the correct address
+automatically):</p>
+<pre class="html"><code>&lt;img id=&quot;camStream&quot; style=&quot;width:90%; margin-top:10px; border-radius:10px;&quot;&gt;
+&lt;script&gt;
+  document.getElementById(&#39;camStream&#39;).src =
+    &#39;http://&#39; + window.location.hostname + &#39;:81/stream&#39;;
+&lt;/script&gt;</code></pre>
+<blockquote>
+<p>🎓 <strong>Teaching moment:</strong> this is a good moment to explain
+<strong>ports</strong> — think of the car’s IP address as a building’s
+street address, and the port number as which specific door/room inside
+that building you’re knocking on. Port 80 = “the control room,” port 81
+= “the camera room.” Same building, different doors!</p>
+</blockquote>
+<h3 id="camera-streaming-checklist">Camera streaming checklist</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Serial Monitor shows “Camera stream
+ready!” after upload</label></li>
+<li><label><input type="checkbox" />Opening
+<code>http://&lt;car-IP&gt;:81/stream</code> directly in a browser shows
+a live video feed</label></li>
+<li><label><input type="checkbox" />The video appears inside the main
+control webpage</label></li>
+<li><label><input type="checkbox" />Motors still respond correctly
+(confirms no pin conflicts between camera and motor driver)</label></li>
+</ul>
+<hr />
+<h2 id="part-6-how-the-phone-control-page-works">Part 6: How the Phone
+Control Page Works</h2>
+<ol type="1">
+<li>The ESP32-CAM creates its <strong>own WiFi network</strong> (an
+“access point”) named something like <code>RobotCar1</code>.</li>
+<li>On your phone, go to <strong>WiFi Settings</strong>, connect to
+<code>RobotCar1</code>, and enter the password
+<code>drivemebot</code>.</li>
+<li>Open any web browser on your phone and type in the car’s IP address
+— it will print this in the Serial Monitor the first time you upload the
+code (usually <code>192.168.4.1</code>).</li>
+<li>You’ll see big colorful buttons: FORWARD, BACK, LEFT, RIGHT,
+STOP.</li>
+<li>Tap a button → your phone sends a tiny web request → the car
+receives it and drives that direction for the next half-second, then
+automatically resumes obstacle avoidance if you stop tapping.</li>
+</ol>
+<blockquote>
+<p>🎓 <strong>Teaching moment:</strong> ask the students — <em>why does
+the car keep driving itself again after just half a second of no
+input?</em> This introduces the idea of a <strong>timeout</strong> — a
+really common concept in real software (think: your phone locking itself
+after being idle).</p>
+</blockquote>
+<hr />
+<h2 id="part-7-uploading-and-testing">Part 7: Uploading and Testing</h2>
+<ol type="1">
+<li>Connect the ESP32-CAM-MB to your computer’s USB port.</li>
+<li>In Arduino IDE, click <strong>Upload</strong>.</li>
+<li><strong>Important:</strong> the ESP32-CAM needs to be in “upload
+mode” — most MB programmer boards handle this automatically, but if the
+upload fails, hold the onboard <strong>BOOT/IO0</strong> button while
+clicking upload, and release it once you see “Connecting…” in the
+console.</li>
+<li>Once uploaded, open the <strong>Serial Monitor</strong> (set to
+115200 baud) to see the car’s WiFi IP address print out.</li>
+<li>Disconnect USB, power the car from its battery pack, and test!</li>
+</ol>
+<h3 id="testing-checklist">Testing checklist</h3>
+<ul class="task-list">
+<li><label><input type="checkbox" />Car drives forward when nothing is
+in front of it</label></li>
+<li><label><input type="checkbox" />Car turns away when you put your
+hand in front of the front sensor</label></li>
+<li><label><input type="checkbox" />Connect phone to car’s WiFi, open
+the control page, confirm all direction buttons work</label></li>
+<li><label><input type="checkbox" />Move the speed slider and confirm
+the car visibly speeds up / slows down</label></li>
+<li><label><input type="checkbox" />Tap “+ FAST” / “- SLOW” a few times
+and confirm the speed label changes each tap</label></li>
+<li><label><input type="checkbox" />Compare BRAKE vs. FULL STOP while
+driving — brake should stop noticeably faster</label></li>
+<li><label><input type="checkbox" />Confirm live camera video appears on
+the page (see Part 5C checklist for camera-specific tests)</label></li>
+<li><label><input type="checkbox" />Confirm the car returns to
+autonomous driving ~0.5 seconds after you stop pressing phone
+buttons</label></li>
+</ul>
+<hr />
+<h2 id="part-8-troubleshooting-common-classroom-issues">Part 8:
+Troubleshooting (Common Classroom Issues)</h2>
+<table>
+<colgroup>
+<col style="width: 33%" />
+<col style="width: 33%" />
+<col style="width: 33%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Symptom</th>
+<th>Likely cause</th>
+<th>Fix</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Nothing powers on</td>
+<td>Loose ground wire</td>
+<td>Recheck <strong>every</strong> GND connection — remember, it’s all
+one shared return pipe back to the battery!</td>
+</tr>
+<tr class="even">
+<td>Car drives in circles</td>
+<td>Motor wires swapped, or one motor wired backward</td>
+<td>Swap that motor’s two wires</td>
+</tr>
+<tr class="odd">
+<td>Sensor always reads 400cm (“nothing detected”)</td>
+<td>Trig/Echo pins swapped, or bad wiring</td>
+<td>Double-check pin numbers match the code</td>
+</tr>
+<tr class="even">
+<td>Upload fails / “Failed to connect”</td>
+<td>Board not in upload mode</td>
+<td>Hold BOOT button during upload (see Part 4)</td>
+</tr>
+<tr class="odd">
+<td><code>arduino-cli board list</code> shows nothing</td>
+<td>Bad USB cable (charge-only cables don’t carry data!) or driver not
+installed</td>
+<td>Try a different USB cable; on some Macs you may need the CP2102 or
+CH340 USB driver installed separately — search the exact chip name
+printed on your programmer board</td>
+</tr>
+<tr class="even">
+<td><code>arduino-cli compile</code> says “esp32cam: no such board”</td>
+<td>ESP32 core not installed or index not added</td>
+<td>Re-run the <code>arduino-cli core install esp32:esp32</code> step
+from Part 4</td>
+</tr>
+<tr class="odd">
+<td>Can’t find car’s WiFi network</td>
+<td>Code didn’t upload correctly, or car not powered</td>
+<td>Re-upload, check Serial Monitor for the IP printout</td>
+</tr>
+<tr class="even">
+<td>Webpage loads but buttons don’t move car</td>
+<td>Phone not on car’s WiFi network</td>
+<td>Reconnect phone WiFi to the car’s specific network name</td>
+</tr>
+<tr class="odd">
+<td>Motors stopped working after adding camera code</td>
+<td>GPIO pin conflict between camera and ENA/ENB</td>
+<td>Move ENA/ENB to different free pins (see Part 5C pin conflict
+note)</td>
+</tr>
+<tr class="even">
+<td>Camera image is blank/gray or doesn’t load</td>
+<td>Wrong pin definitions, or camera not seated properly on board</td>
+<td>Reseat the ribbon cable/camera module; double check pin numbers for
+your exact ESP32-CAM variant</td>
+</tr>
+<tr class="odd">
+<td>Video is very laggy / freezes often</td>
+<td>WiFi congestion (common with multiple cars in one room) or frame
+size too large</td>
+<td>Lower <code>FRAMESIZE</code> (e.g. <code>FRAMESIZE_QQVGA</code>) and
+raise <code>jpeg_quality</code> number (means lower quality, less
+data)</td>
+</tr>
+<tr class="even">
+<td>Speed slider doesn’t change car speed</td>
+<td>ENA/ENB not wired, or jumper cap still on the L293D board</td>
+<td>Remove the ENA/ENB jumper caps on the driver board so PWM can
+control them (see Part 3 wiring note)</td>
+</tr>
+<tr class="odd">
+<td>Car won’t move at low speed slider values</td>
+<td>Speed below <code>MIN_SPEED</code> — not enough power to overcome
+motor friction</td>
+<td>This is expected! Real motors need a minimum “push” to start moving,
+just like a stuck door needs a minimum shove</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="part-9-next-steps-extension-ideas-once-the-basics-work">Part 9:
+Next Steps / Extension Ideas (once the basics work)</h2>
+<ul>
+<li><strong>Give each car a unique name and password</strong> so
+multiple cars in the same classroom don’t interfere with each other’s
+phones.</li>
+<li><strong>Color/shape detection:</strong> train a simple image
+classifier with Edge Impulse (free, beginner-friendly, no coding needed
+for the training part) using the live camera feed you just added.</li>
+<li><strong>Race mode:</strong> add a “boost” button that temporarily
+disables obstacle avoidance for a set number of seconds — kids can race
+head-to-head, weaving around obstacles by grabbing manual control at the
+right moment.</li>
+<li><strong>Different speeds for different turns:</strong> have the car
+automatically slow down (lower <code>currentSpeed</code>) right before
+an autonomous turn, and speed back up once going straight again — a nice
+next step once PWM speed control feels familiar.</li>
+<li><strong>A “black box” speed graph:</strong> log
+<code>currentSpeed</code> over time to the Serial Monitor and have kids
+graph it by hand — a fun bridge into data/graphing lessons.</li>
+</ul>
+<hr />
+<h2 id="quick-reference-the-water-analogy-cheat-sheet">Quick Reference:
+The Water Analogy Cheat Sheet</h2>
+<p>Post this on the wall for kids to glance at during the build:</p>
+<table>
+<colgroup>
+<col style="width: 50%" />
+<col style="width: 50%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Electrical term</th>
+<th>Water analogy</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Voltage (V)</td>
+<td>How hard the pump pushes</td>
+</tr>
+<tr class="even">
+<td>Current (A / mA)</td>
+<td>How much water flows past a point per second</td>
+</tr>
+<tr class="odd">
+<td>Resistance (Ω)</td>
+<td>A narrow pipe or paddlewheel — slows the flow</td>
+</tr>
+<tr class="even">
+<td>Circuit</td>
+<td>A complete closed loop — the same water has to make it back to the
+pump</td>
+</tr>
+<tr class="odd">
+<td>Ground (GND)</td>
+<td>The shared return pipe every component’s flow drains back into,
+leading to the pump</td>
+</tr>
+<tr class="even">
+<td>Short circuit</td>
+<td>Water skipping straight from the pump’s outlet back to its inlet,
+bypassing all the “useful” parts — very fast, often damaging flow!</td>
+</tr>
+</tbody>
+</table>
+<p>Good luck, and have fun watching your students’ robots come to life!
+🚗⚡</p>
+
+</body>
+</html>
