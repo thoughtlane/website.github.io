@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Practical guide for teachers and students using Thoughtlane: Mathwise, Knowledge Hub, and Socratic Dialogue." />
+  <meta name="description" content="Day-to-day guide for teachers and students using Thoughtlane: Mathwise, the school library, and Adaptive Classroom." />
   <title>Classroom usage guide | Thoughtlane</title>
   <link rel="icon" href="../assets/thoughtlane-mark.svg" type="image/svg+xml" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -243,8 +243,8 @@
       <a href="#teachers">Teachers</a>
       <a href="#students">Students</a>
       <a href="#mathwise">Mathwise</a>
-      <a href="#knowledge-hub">Knowledge Hub</a>
-      <a href="#socratic">Socratic</a>
+      <a href="#knowledge-hub">School library</a>
+      <a href="#socratic">Adaptive Classroom</a>
       <a href="#trouble">Troubleshooting</a>
     </nav>
   </header>
@@ -259,8 +259,8 @@
       <a href="#teachers">For teachers</a>
       <a href="#students">For students</a>
       <a href="#mathwise">Mathwise in depth</a>
-      <a href="#knowledge-hub">Knowledge Hub in depth</a>
-      <a href="#socratic">Socratic Dialogue in depth</a>
+      <a href="#knowledge-hub">School library in depth</a>
+      <a href="#socratic">Adaptive Classroom in depth</a>
       <a href="#drives">School drives</a>
       <a href="#announcements">Announcements</a>
       <a href="#help">Help button</a>
@@ -272,12 +272,10 @@
       <p class="kicker">Schools</p>
       <h1>Classroom usage guide</h1>
       <p class="lede">
-        This is the day-to-day guide for teachers and students. Thoughtlane puts AI on the
-        worksheet, reading, or lesson this class was assigned. The teacher sees the proposed
-        score and a source they can open. A student can say they are stuck on the question they are on.
-        Weekly review then shows that sheet, that step, and the hint already given. While a score waits,
-        the student sees “Your teacher will look at this before you see a mark.”
-        It is not a chatbot, and it is not a second gradebook.
+        Day-to-day use for teachers and students. Help stays on the worksheet, reading, or lesson
+        this class was assigned. Teachers see suggested scores first. Students can say they are stuck
+        on the question they are on. While a mark waits, they see that a teacher will look before a
+        score appears. It is not a public chatbot, and it is not a second gradebook.
       </p>
       <p>
         If you are setting up the stack, OIDC, or backups, that lives in the ops docs. This page
@@ -291,8 +289,8 @@
       </p>
       <ul>
         <li><strong>Mathwise</strong> for worksheets, step-by-step solutions, and guided practice.</li>
-        <li><strong>Knowledge Hub</strong> for the school library, cited search, quizzes, and courses.</li>
-        <li><strong>Socratic Dialogue</strong> for level-based lessons where students write answers in their own words.</li>
+        <li><strong>School library</strong> for cited search, reading, and courses.</li>
+        <li><strong>Adaptive Classroom</strong> for lessons where students write answers in their own words, with weekly review.</li>
       </ul>
       <p>
         Classes and sections are shared. When a teacher assigns work to “Period 3,” that same
@@ -324,7 +322,7 @@
           </tr>
           <tr>
             <td><strong>Teacher</strong></td>
-            <td>Upload and organize materials, assign to a section, weekly review (open the answer, a one-line note, release or send back, copy a conference paragraph), publish lessons, course assignments. A teaching assistant can release a mark the same way. There is no parent login.</td>
+            <td>Upload materials, assign to a section, weekly review, publish lessons. A teaching assistant can release a mark the same way. There is no parent login.</td>
           </tr>
           <tr>
             <td><strong>School admin</strong></td>
@@ -347,7 +345,7 @@
         Students also see a <strong>Continue</strong> strip and <strong>Due this week</strong> list when
         they have open work. Example: Continue opens “Grade 9 Algebra — Week 3 Linear equations”
         in Mathwise Cognitive Booster; Due this week might list that same practice plus
-        “Fractions reading quiz” (Knowledge Hub) due Friday.
+        “Fractions reading quiz” (school library) due Friday.
         Open <strong>Class calendar</strong> for a printable month or list of deadlines and school events
         (paste emoji marks on days if you like).
         <span class="role-tag">Teachers</span>
@@ -361,10 +359,8 @@
         product once an admin has registered the drive under Administration → External drives.
       </p>
       <p>
-        Thoughtlane sits <strong>beside your LMS</strong>. Pilots use school SSO and Administration → Classes.
-        Canvas is the launch path the product is written for. It stays off until your school turns it on.
-        A score can land in that gradebook only after a teacher releases it, and only if a line item and a token exist.
-        Until then the official grade stays here. This is not an LTI or SIS certification.
+        Thoughtlane sits <strong>beside your LMS</strong>. Pilots use school sign-in and Administration → Classes.
+        Gradebook connections stay off until your school turns them on. Until then the official grade stays in the system you already use.
       </p>
 
       <h2 id="admin-once">One-time school setup (someone has to do this first)</h2>
@@ -391,19 +387,14 @@
 
       <h2 id="teachers">For teachers (the loops that matter)</h2>
       <p>
-        Most weeks you will do one of three things: assign math practice, assign a Hub course,
-        or publish a Socratic lesson. You do not need every product every week.
+        Most weeks you will do one of three things: assign math practice, assign library work,
+        or publish an Adaptive Classroom lesson. You do not need every product every week.
       </p>
       <p>
-        Mid-week, open <strong>Administration → Weekly review</strong> to see who has not finished
-        “Week 3 Linear equations” or who tapped I’m stuck. Each stuck row says why: the sheet or lesson,
-        the last step, and the hint or score the model proposed. It does not use the student’s history or a SIS record.
-        On that row you can open the answer, leave a one-line note the student sees, release or send it back,
-        and copy a conference paragraph. There is no parent login. A principal uses
-        <strong>Staff meeting</strong> for three counts: classes that assigned work this week, students stuck,
-        and marks still waiting. That is not a dropout predictor.
-        Use <strong>Progress board</strong> on Period 1 to compare Hub / Mathwise / Socratic status in one grid.
-        Email or Slack digests stay off until an admin turns delivery on.
+        Mid-week, open <strong>Adaptive Classroom → Weekly review</strong> to see who has not finished
+        or who tapped I’m stuck. Open the answer, leave a short note, release or send it back.
+        Principals use <strong>Staff meeting</strong> for simple counts (work assigned, stuck students,
+        marks waiting) — not a risk score. There is no parent login.
       </p>
 
       <h3>Assign math practice for a section</h3>
@@ -413,7 +404,7 @@
         <li>Let extraction finish so questions appear. When it completes, a <strong>Assign to class</strong> shortcut appears for teachers.</li>
         <li>Go to <strong>Assign to class</strong> (or use that shortcut).</li>
         <li>Title students will recognize, for example <strong>Grade 9 Algebra — Week 3 Linear equations</strong>.</li>
-        <li>Pick the worksheet or a <strong>generated question sheet</strong> from the dropdown. To assign the sheet you are looking at, use <strong>Generated questions → Assign to section</strong> instead.</li>
+        <li>Pick the worksheet <strong>by name</strong> (not an id). To assign the sheet you are looking at, use <strong>Generated questions → Assign to section</strong>.</li>
         <li>Check one or more sections (Period 1 and Period 2), or use <strong>All my sections</strong>.</li>
         <li>Due defaults to <strong>Friday 5:00 PM</strong>; change it if you need another deadline.</li>
         <li>Optional: <strong>Copy last week</strong> to reuse the previous worksheet and title pattern, then tweak the week number.</li>
@@ -426,19 +417,19 @@
 
       <h3>Assign a class quiz or lesson</h3>
       <ol>
-        <li>Knowledge Hub is self-study chat only. Do not generate a quiz there.</li>
-        <li>Open <strong>Teacher's Assistant (Socratic Dialogue) → Files</strong> and upload the class file.</li>
+        <li>The school library is self-study chat only. Do not generate a quiz there.</li>
+        <li>Open <strong>Adaptive Classroom → Files</strong> and upload the class file.</li>
         <li>From that file, use <strong>Make a lesson</strong>, <strong>Multiple choice</strong>, or <strong>Fill-in</strong>, then <strong>Assign to section</strong>.</li>
-        <li>Students open the assigned lesson in Socratic Dialogue and answer there.</li>
+        <li>Students open the assigned lesson in Adaptive Classroom and answer there.</li>
       </ol>
 
-      <h3>Publish a Socratic lesson</h3>
+      <h3>Publish an Adaptive Classroom lesson</h3>
       <ol>
         <li>On <strong>Courses</strong>, import or open the course catalog. If you import, wait for the job to finish, then <strong>save only the courses you want</strong>. You do not have to keep every extracted line.</li>
-        <li>Upload the class file in <strong>Socratic Dialogue → Files</strong>. Make a lesson, multiple choice, or fill-in, then assign the section. Knowledge Hub is only for chatting with a file.</li>
-        <li>Review the plan on <strong>Lesson</strong> (Socratic levels, multiple choice, fill-in), then publish.</li>
-        <li>Assign the lesson on <strong>Assignments</strong> to a class section. The lesson list includes every published lesson, not only ones already on a course. Enrolled students can open it. <strong>Who it’s for</strong> uses that same lesson list and is optional — it only sets which level completes the class. You do not type a new grade name.</li>
-        <li>On the Dashboard, release scores when students finish. We suggest you look at an AI mark before it counts. An organization can turn on fully automated marking; that switch is off unless an admin turns it on. A lesson can still auto-release keyed questions. Use <strong>Release keyed scores</strong> for a whole set.</li>
+        <li>Upload the class file in <strong>Adaptive Classroom → Files</strong>. Make a lesson, multiple choice, or fill-in, then assign the section. The school library is only for chatting with a file.</li>
+        <li>Review the plan on <strong>Lesson</strong>, then publish.</li>
+        <li>Assign the lesson on <strong>Assignments</strong> to a class section by name. Enrolled students can open it.</li>
+        <li>Release scores when students finish. Suggested marks wait unless your school turns on automated marking. Keyed sets can be released together when you are ready.</li>
       </ol>
       <p>
         Catalog import and “Make a lesson” keep running if you reload the page. Watch the job
@@ -447,9 +438,8 @@
 
       <h3>Learning paths (optional)</h3>
       <p>
-        In Knowledge Hub, create a path such as <strong>Grade 9 Algebra — Linear equations unit</strong>:
-        Hub course “Linear equations reading” → Mathwise worksheet “linear-eq-worksheet.pdf” →
-        Socratic lesson “Discuss slope from a graph”. Pick each step by name (leave None until that piece exists).
+        In the school library, create a path such as <strong>Grade 9 Algebra — Linear equations unit</strong>:
+        Hub reading → Mathwise worksheet → Adaptive Classroom lesson. Pick each step by name.
         Teachers can click <strong>Assign path to class</strong> to push every step into the student inbox for Period 1 / Period 2 in one action.
       </p>
 
@@ -463,9 +453,9 @@
       <ul>
         <li><strong>Portal home</strong> — Continue / Due this week for the next thing (for example Week 3 Linear equations).</li>
         <li><strong>Mathwise → My assignments</strong> for Cognitive practice and other inbox items.</li>
-        <li><strong>Knowledge Hub → My assignments</strong> for courses and quizzes assigned to you.</li>
-        <li><strong>Socratic Dialogue → Assignments</strong> for a mixed inbox (math, Hub, lessons).</li>
-        <li><strong>Socratic Dialogue → Lessons</strong> for dialogue work your teacher published to your grade/level.</li>
+        <li><strong>School library → My assignments</strong> for courses and quizzes assigned to you.</li>
+        <li><strong>Adaptive Classroom → Assignments</strong> for a mixed inbox (math, Hub, lessons).</li>
+        <li><strong>Adaptive Classroom → Lessons</strong> for lesson work your teacher published.</li>
       </ul>
       <p>
         If the same assignment shows up in more than one place, that is normal. The shared inbox
@@ -493,7 +483,7 @@
         <li>Watch attempt limits and due dates. If you are locked out, talk to your teacher; the software will not invent extra attempts.</li>
       </ol>
 
-      <h3>Socratic lessons</h3>
+      <h3>Adaptive Classroom lessons</h3>
       <ol>
         <li>Read the concept material for the level.</li>
         <li>Answer in your own words. Paste is discouraged on purpose.</li>
@@ -501,7 +491,7 @@
         <li><strong>Study</strong> is private practice from your own notes. Teachers do not see Study sets.</li>
       </ol>
 
-      <h3>Search in Knowledge Hub</h3>
+      <h3>Search in the school library</h3>
       <p>
         Ask a question in Search when you need help from school materials. Read the citations.
         If the answer looks off, open the source passage. The point of Hub search is that you can
@@ -558,7 +548,7 @@
         stale. Progress is per student Cognitive outcomes, not a gradebook for Solve All.
       </p>
 
-      <h2 id="knowledge-hub">Knowledge Hub in depth</h2>
+      <h2 id="knowledge-hub">School library in depth</h2>
 
       <h3>Tabs</h3>
       <table>
@@ -576,10 +566,10 @@
       <h3>Teacher workflow that usually works</h3>
       <ol>
         <li>Upload a reading under Documents. The row says Waiting, then Reading, Splitting into chunks, and Saving. Chat or search only after it says <strong>Ready to search</strong>. You can leave the page.</li>
-        <li>Class lessons, multiple choice, and fill-in are in Teacher's Assistant, not on this page.</li>
+        <li>Class lessons, multiple choice, and fill-in are in Adaptive Classroom, not on this page.</li>
       </ol>
       <p>
-        Knowledge Hub does not generate class quizzes. Review those in Teacher's Assistant before students see them.
+        The school library does not generate class quizzes. Review those in Adaptive Classroom before students see them.
       </p>
 
       <h3>Search tips</h3>
@@ -589,7 +579,7 @@
         <li>If Search is empty or nonsense, the row may still say Waiting, Reading, or Saving. It is not searchable until Ready to search.</li>
       </ul>
 
-      <h2 id="socratic">Socratic Dialogue in depth</h2>
+      <h2 id="socratic">Adaptive Classroom in depth</h2>
 
       <h3>Teacher side</h3>
       <p>
@@ -598,11 +588,11 @@
       </p>
       <ul>
         <li><strong>Courses</strong>: import catalogs carefully. Save selected courses. Reopen drafts if you left mid-import.</li>
-        <li><strong>Class files</strong>: Socratic Dialogue → Files. Lesson, multiple choice, fill-in, then assign. Knowledge Hub is chat only.</li>
+        <li><strong>Class files</strong>: Adaptive Classroom → Files. Lesson, multiple choice, fill-in, then assign. The school library is chat only.</li>
         <li><strong>Lesson plan</strong>: edit levels and questions before students see them.</li>
-        <li><strong>Who it’s for</strong>: optional. Assigning a section already opens the lesson. This page only records which level completes an Administration class. You do not type a grade name.</li>
+        <li><strong>Who it’s for</strong>: optional. Assigning a section is enough for most classes.</li>
         <li><strong>Dashboard</strong>: pending scores. Release one, or release a keyed set in one action. Students do not see the mark until then.</li>
-        <li><strong>Assignments</strong>: assign a lesson to an Administration section. The list below is work assigned to you (same inbox as Mathwise and Knowledge Hub).</li>
+        <li><strong>Assignments</strong>: assign a lesson to an Administration section. The list below is work assigned to you (same inbox as Mathwise and the school library).</li>
       </ul>
 
       <h3>Student side</h3>
@@ -619,10 +609,10 @@
       <h2 id="drives">School drives</h2>
       <p>
         Admins register connectors (Google Drive, OneDrive, S3, and similar) under Administration.
-        Teachers then use <strong>Open from drive</strong> inside Mathwise, Knowledge Hub, or
-        Socratic Dialogue. The product keeps a reference and fetches the file when it needs to
+        Teachers then use <strong>Open from drive</strong> inside Mathwise, the school library, or
+        Adaptive Classroom. The product keeps a reference and fetches the file when it needs to
         process it. This is not a live shared disk between products, and it is not “copy everything
-        into Knowledge Hub forever.”
+        into the school library forever.”
       </p>
       <p>
         If Open from drive fails for everyone, Content Manager is probably not running, or the
@@ -654,18 +644,18 @@
         <tbody>
           <tr><td>Store or reopen a worksheet</td><td>Mathwise → File Manager</td></tr>
           <tr><td>Send Cognitive practice or a generated sheet to a class</td><td>Mathwise → Assign to class, or Generated questions → Assign to section</td></tr>
-          <tr><td>Assign a lesson, multiple choice, or fill-in to a section</td><td>Socratic Dialogue → Files → Assign to section</td></tr>
+          <tr><td>Assign a lesson, multiple choice, or fill-in to a section</td><td>Adaptive Classroom → Files → Assign to section</td></tr>
           <tr><td>See my math practice</td><td>Mathwise → My assignments</td></tr>
-          <tr><td>Chat with a file</td><td>Knowledge Hub → Files</td></tr>
-          <tr><td>Sync classes into Socratic</td><td>Socratic → Grades → Sync from Management</td></tr>
-          <tr><td>Import / curate the course catalog</td><td>Socratic → Courses → Import → Save selected</td></tr>
-          <tr><td>See mixed homework</td><td>Socratic → Assignments</td></tr>
+          <tr><td>Chat with a file</td><td>School library → Files</td></tr>
+          <tr><td>Sync classes into Adaptive Classroom</td><td>Adaptive Classroom → Grades → Sync from Management</td></tr>
+          <tr><td>Import / curate the course catalog</td><td>Adaptive Classroom → Courses → Import → Save selected</td></tr>
+          <tr><td>See mixed homework</td><td>Adaptive Classroom → Assignments</td></tr>
           <tr><td>Post a school notice (all or Grade 9 / Period 1)</td><td>Administration → Announcements</td></tr>
-          <tr><td>See who is stuck, open the answer, leave a note, release or send back, copy a conference paragraph</td><td>Administration → Weekly review</td></tr>
-          <tr><td>Staff meeting: classes assigned this week, students stuck, marks waiting (counts only)</td><td>Administration → Staff meeting</td></tr>
+          <tr><td>See who is stuck; release or send back</td><td>Adaptive Classroom → Weekly review</td></tr>
+          <tr><td>Staff meeting counts (assigned / stuck / waiting)</td><td>Administration → Staff meeting</td></tr>
           <tr><td>Tell the teacher you are stuck on this question (not your history)</td><td>I’m stuck, on the question or on your classwork card</td></tr>
-          <tr><td>Generate / review weekly digest (files; email off)</td><td>Administration → Weekly review → Weekly digests</td></tr>
-          <tr><td>See Hub + Mathwise + Socratic status for a section</td><td>Administration → Progress board</td></tr>
+          <tr><td>Weekly digests (optional)</td><td>Adaptive Classroom → Weekly review</td></tr>
+          <tr><td>See Hub + Mathwise + Adaptive Classroom status for a section</td><td>Administration → Progress board</td></tr>
           <tr><td>Printable deadlines calendar / list</td><td>Portal → Class calendar, or Administration → Calendar</td></tr>
           <tr><td>Add or edit a school / grade / section calendar event</td><td>Class calendar → Add event (admin or teacher)</td></tr>
           <tr><td>See LTI / LMS integration status (beside LMS)</td><td>Administration → Integrations</td></tr>
@@ -694,7 +684,7 @@
 
       <h4>Extraction or lesson generation seems stuck</h4>
       <p>
-        In Socratic Dialogue, catalog import and Make a lesson are background jobs. Reload and look
+        In Adaptive Classroom, catalog import and Make a lesson are background jobs. Reload and look
         at the job strip; use Cancel if needed. Mathwise extraction progress is more tied to the
         open page today, so keep that tab open until questions appear, or re-run from File Manager.
       </p>
@@ -727,8 +717,8 @@
         <nav aria-label="Footer">
           <a href="../index.html">Thoughtlane home</a>
           <a href="../products/mathwise/getting-started.html">Mathwise quick start</a>
-          <a href="../products/knowledge-hub/getting-started.html">Knowledge Hub quick start</a>
-          <a href="../products/socratic-dialogue/getting-started.html">Socratic quick start</a>
+          <a href="../products/knowledge-hub/getting-started.html">School library quick start</a>
+          <a href="../products/socratic-dialogue/getting-started.html">Adaptive Classroom quick start</a>
           <a href="mailto:info@thoughtlane.com">Contact</a>
         </nav>
       </footer>
